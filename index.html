@@ -4,109 +4,136 @@
   <meta charset="UTF-8" />
   <title>1WISE</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <!-- Telegram Web App SDK -->
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
 
   <style>
-    body {
-      margin: 0;
-      background: #050b16;
-      color: #ffffff;
+    :root{
+      --bg:#050b16;
+      --card:#0b1426;
+      --stroke: rgba(255,255,255,.08);
+      --text:#ffffff;
+      --muted: rgba(255,255,255,.78);
+      --blue:#2F80ED;
+      --btn2:#1a2540;
+    }
+    body{
+      margin:0;
+      background: radial-gradient(1200px 600px at 50% -10%, rgba(47,128,237,.18), transparent 60%), var(--bg);
+      color:var(--text);
       font-family: Arial, Helvetica, sans-serif;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
+      min-height:100vh;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      padding:18px;
     }
-
-    .app {
-      width: 100%;
-      max-width: 420px;
-      padding: 20px;
+    .app{width:100%; max-width:420px;}
+    .logo{
+      text-align:center;
+      font-size:32px;
+      font-weight:900;
+      letter-spacing:.6px;
+      margin-bottom:16px;
     }
-
-    .logo {
-      text-align: center;
-      font-size: 32px;
-      font-weight: bold;
-      margin-bottom: 20px;
-    }
-
-    .logo span {
-      color: #2f80ed;
-    }
-
-    .card {
-      background: #0b1426;
+    .logo span{color:var(--blue)}
+    .card{
+      background: var(--card);
+      border: 1px solid var(--stroke);
       border-radius: 16px;
       padding: 16px;
-      margin-bottom: 16px;
+      margin-bottom: 14px;
+      box-shadow: 0 10px 30px rgba(0,0,0,.28);
     }
-
-    .banner {
+    .banner{
       background: linear-gradient(135deg, rgba(47,128,237,0.25), rgba(255,255,255,0.03));
       border-radius: 14px;
       padding: 14px;
       font-size: 14px;
+      line-height: 1.35;
     }
-
-    .user {
+    .user{
       font-size: 14px;
-      opacity: 0.85;
-      line-height: 1.4;
+      color: var(--muted);
+      white-space: pre-line;
+      line-height: 1.35;
     }
-
-    button {
-      width: 100%;
-      border: none;
+    button{
+      width:100%;
+      border:none;
       border-radius: 14px;
       padding: 14px;
       font-size: 16px;
-      font-weight: bold;
-      cursor: pointer;
+      font-weight: 800;
+      cursor:pointer;
     }
-
-    .primary {
-      background: #2f80ed;
-      color: #fff;
-      margin-bottom: 10px;
-    }
-
-    .secondary {
-      background: #1a2540;
-      color: #fff;
-    }
-
-    .status {
-      margin-top: 12px;
+    .primary{background: var(--blue); color:#fff; margin-bottom:10px;}
+    .secondary{background: var(--btn2); color:#fff; border:1px solid var(--stroke);}
+    .status{
+      margin-top:12px;
       font-size: 14px;
       white-space: pre-line;
-      display: none;
-      opacity: 0.9;
+      display:none;
+      color: var(--muted);
+      border-top: 1px solid var(--stroke);
+      padding-top: 12px;
+    }
+    .small{
+      margin-top: 10px;
+      font-size: 12px;
+      color: rgba(255,255,255,.55);
+      line-height: 1.35;
+      text-align:center;
+    }
+
+    /* Language modal */
+    #langModal{
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,.65);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding:18px;
+      z-index:9999;
+    }
+    #langBox{
+      width:100%;
+      max-width:420px;
+      background: var(--card);
+      border: 1px solid var(--stroke);
+      border-radius: 16px;
+      padding: 16px;
+      box-shadow: 0 10px 30px rgba(0,0,0,.38);
+    }
+    #langTitle{
+      font-weight:900;
+      font-size:16px;
+      margin-bottom:10px;
+    }
+    .langBtn{
+      width:100%;
+      padding:12px;
+      border-radius:12px;
+      border:1px solid var(--stroke);
+      background:#111c35;
+      color:#fff;
+      font-weight:800;
+      margin-top:10px;
     }
   </style>
 </head>
 
 <body>
-  <!-- Language Modal -->
-<div id="langTitle" 
-  style="font-weight:800; 
-  font-size:16px; 
-  margin-bottom:10px;">Choose language
-</div>
-
   <div class="app">
-
     <div class="logo"><span>1</span>WISE</div>
 
-    <div class="card banner">
+    <div class="card banner" id="bannerText">
       🎉 <b>7 DAYS FREE</b><br>
       Opening week — free IQ duels, earn points and rank up.
     </div>
 
     <div class="card">
-      <div id="userInfo" class="user">Loading user...</div>
+      <div id="userInfo" class="user">Loading...</div>
     </div>
 
     <div class="card">
@@ -115,136 +142,134 @@
       <div id="status" class="status"></div>
     </div>
 
+    <div class="small">
+      Privacy: we only use your Telegram ID to create your profile.
+    </div>
   </div>
 
-<script>
-  const tg = window.Telegram.WebApp;
-  tg.ready();
-  tg.expand();
+  <!-- Language Modal -->
+  <div id="langModal">
+    <div id="langBox">
+      <div id="langTitle">Choose language</div>
+      <button class="langBtn" id="langEN">🇬🇧 English</button>
+      <button class="langBtn" id="langUZ">🇺🇿 O‘zbekcha</button>
+      <button class="langBtn" id="langRU">🇷🇺 Русский</button>
+    </div>
+  </div>
 
-  const user = tg.initDataUnsafe?.user;
+  <script>
+    const tg = window.Telegram.WebApp;
+    tg.ready();
+    tg.expand();
 
-  // ====== i18n strings ======
-  const STR = {
-    en: {
-      chooseLang: "Choose language",
-      opening: "Opening week — free IQ duels, earn points and rank up.",
-      welcome: (name) => `Welcome, ${name}`,
-      outside: "Opened outside Telegram",
-      start: "Searching for opponent...\n(Demo mode)",
-      needTG: "Please open via Telegram bot.",
-      rules:
-        "Rules:\n" +
-        "• 1 vs 1 IQ duel\n" +
-        "• 10 questions\n" +
-        "• Fast & correct wins\n" +
-        "• Daily leaderboard resets 00:00"
-    },
-    uz: {
-      chooseLang: "Tilni tanlang",
-      opening: "Ochilish haftasi — tekin IQ duellar, ball to‘plang va reytingga chiqing.",
-      welcome: (name) => `Xush kelibsiz, ${name}`,
-      outside: "Telegram orqali oching",
-      start: "Raqib qidirilmoqda...\n(Demo rejim)",
-      needTG: "Iltimos, Telegram bot orqali oching.",
-      rules:
-        "Qoidalar:\n" +
-        "• 1 vs 1 IQ duel\n" +
-        "• 10 ta savol\n" +
-        "• Tez va to‘g‘ri yutadi\n" +
-        "• Reyting har kuni 00:00 da yangilanadi"
-    },
-    ru: {
-      chooseLang: "Выберите язык",
-      opening: "Открытие — бесплатные IQ-дуэли, набирайте очки и поднимайтесь в рейтинге.",
-      welcome: (name) => `Добро пожаловать, ${name}`,
-      outside: "Откройте через Telegram",
-      start: "Ищем соперника...\n(Демо режим)",
-      needTG: "Пожалуйста, откройте через Telegram-бот.",
-      rules:
-        "Правила:\n" +
-        "• 1 vs 1 IQ дуэль\n" +
-        "• 10 вопросов\n" +
-        "• Быстрее и точнее — победа\n" +
-        "• Рейтинг сбрасывается в 00:00"
+    const user = tg.initDataUnsafe?.user;
+
+    // ====== strings ======
+    const STR = {
+      en: {
+        banner: "🎉 <b>7 DAYS FREE</b><br>Opening week — free IQ duels, earn points and rank up.",
+        welcome: (name) => `Welcome, ${name}`,
+        outside: "Opened outside Telegram",
+        start: "Searching for opponent...\n(Demo mode)",
+        needTG: "Please open via @onewise_bot",
+        rules:
+          "Rules:\n" +
+          "• 1 vs 1 IQ duel\n" +
+          "• 10 questions\n" +
+          "• Fast & correct wins\n" +
+          "• Daily leaderboard resets 00:00"
+      },
+      uz: {
+        banner: "🎉 <b>7 KUN TEKIN</b><br>Ochilish haftasi — tekin IQ duellar, ball to‘plang va reytingga chiqing.",
+        welcome: (name) => `Xush kelibsiz, ${name}`,
+        outside: "Telegram orqali oching",
+        start: "Raqib qidirilmoqda...\n(Demo rejim)",
+        needTG: "Iltimos, @onewise_bot orqali oching",
+        rules:
+          "Qoidalar:\n" +
+          "• 1 vs 1 IQ duel\n" +
+          "• 10 ta savol\n" +
+          "• Tez va to‘g‘ri yutadi\n" +
+          "• Reyting har kuni 00:00 da yangilanadi"
+      },
+      ru: {
+        banner: "🎉 <b>7 ДНЕЙ БЕСПЛАТНО</b><br>Открытие — бесплатные IQ-дуэли, набирайте очки и поднимайтесь в рейтинге.",
+        welcome: (name) => `Добро пожаловать, ${name}`,
+        outside: "Откройте через Telegram",
+        start: "Ищем соперника...\n(Демо режим)",
+        needTG: "Откройте через @onewise_bot",
+        rules:
+          "Правила:\n" +
+          "• 1 vs 1 IQ дуэль\n" +
+          "• 10 вопросов\n" +
+          "• Быстрее и точнее — победа\n" +
+          "• Рейтинг сбрасывается в 00:00"
+      }
+    };
+
+    // Default is ALWAYS English (global)
+    let lang = localStorage.getItem("onewise_lang") || "en";
+
+    const bannerEl = document.getElementById("bannerText");
+    const userInfo = document.getElementById("userInfo");
+    const statusBox = document.getElementById("status");
+
+    const startBtn = document.getElementById("startBtn");
+    const rulesBtn = document.getElementById("rulesBtn");
+
+    const langModal = document.getElementById("langModal");
+    const langEN = document.getElementById("langEN");
+    const langUZ = document.getElementById("langUZ");
+    const langRU = document.getElementById("langRU");
+
+    function showStatus(text){
+      statusBox.style.display = "block";
+      statusBox.textContent = text;
     }
-  };
 
-  // ====== pick default language ======
-  function defaultLang() {
-    const code = (tg.initDataUnsafe?.user?.language_code || "").toLowerCase();
-    if (code.startsWith("uz")) return "uz";
-    if (code.startsWith("ru")) return "ru";
-    return "en";
-  }
+    function applyLang(){
+      const s = STR[lang];
 
-  let lang = localStorage.getItem("onewise_lang") || "en";
+      // banner uses innerHTML for <b> + <br>
+      bannerEl.innerHTML = s.banner;
 
-  // ====== elements ======
-  const userInfo = document.getElementById("userInfo");
-  const statusBox = document.getElementById("status");
-  const startBtn = document.getElementById("startBtn");
-  const rulesBtn = document.getElementById("rulesBtn");
+      if (user) userInfo.textContent = s.welcome(user.first_name);
+      else userInfo.textContent = s.outside;
+    }
 
-  const langModal = document.getElementById("langModal");
-  const langEN = document.getElementById("langEN");
-  const langUZ = document.getElementById("langUZ");
-  const langRU = document.getElementById("langRU");
+    function openLangModal(){
+      // Title always English (global)
+      document.getElementById("langTitle").textContent = "Choose language";
+      langModal.style.display = "flex";
+    }
 
-  function showStatus(text) {
-    statusBox.style.display = "block";
-    statusBox.textContent = text;
-  }
+    function setLang(newLang){
+      lang = newLang;
+      localStorage.setItem("onewise_lang", lang);
+      langModal.style.display = "none";
+      applyLang();
+    }
 
-  function applyLang() {
-    // bu yerda xohlasang banner matnini ham almashtirasan
-    const s = STR[lang];
+    langEN.onclick = () => setLang("en");
+    langUZ.onclick = () => setLang("uz");
+    langRU.onclick = () => setLang("ru");
 
-    if (user) userInfo.textContent = s.welcome(user.first_name);
-    else userInfo.textContent = s.outside;
+    // show once, first entry
+    if (!localStorage.getItem("onewise_lang")) openLangModal();
 
-    // modal title
-    langModal.querySelector("div").textContent = s.chooseLang;
-  }
-
-  // ====== Language modal logic ======
-  function openLangModal() {
-    langModal.style.display = "flex";
-  }
-  function setLang(newLang) {
-    lang = newLang;
-    localStorage.setItem("onewise_lang", lang);
-    langModal.style.display = "none";
+    // apply now
     applyLang();
-  }
 
-  langEN.onclick = () => setLang("en");
-  langUZ.onclick = () => setLang("uz");
-  langRU.onclick = () => setLang("ru");
+    // buttons (demo)
+    startBtn.onclick = () => {
+      const s = STR[lang];
+      if (!user) return showStatus(s.needTG);
+      showStatus(s.start);
+    };
 
-  // Show language modal only first time (or if user wants later)
-  if (!localStorage.getItem("onewise_lang")) {
-    openLangModal();
-  }
-
-  // Apply language now
-  applyLang();
-
-  // ====== Buttons ======
-  startBtn.onclick = () => {
-    const s = STR[lang];
-    if (!user) return showStatus(s.needTG);
-    showStatus(s.start);
-  };
-
-  rulesBtn.onclick = () => {
-    showStatus(STR[lang].rules);
-  };
-  document.getElementById("langTitle").textContent = "Choose language";
-
-</script>
-
+    rulesBtn.onclick = () => {
+      showStatus(STR[lang].rules);
+    };
+  </script>
 </body>
 </html>
-
-
