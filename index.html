@@ -89,6 +89,22 @@
 </head>
 
 <body>
+  <!-- Language Modal -->
+<div id="langModal" style="
+  position:fixed; inset:0; background:rgba(0,0,0,.65);
+  display:none; align-items:center; justify-content:center; padding:18px; z-index:9999;">
+  <div style="
+    width:100%; max-width:420px; background:#0b1426; border:1px solid rgba(255,255,255,.08);
+    border-radius:16px; padding:16px;">
+    <div style="font-weight:800; font-size:16px; margin-bottom:10px;">Choose language</div>
+    <div style="display:flex; flex-direction:column; gap:10px;">
+      <button id="langEN" style="padding:12px; border-radius:12px; border:1px solid rgba(255,255,255,.08); background:#111c35; color:#fff; font-weight:700;">🇬🇧 English</button>
+      <button id="langUZ" style="padding:12px; border-radius:12px; border:1px solid rgba(255,255,255,.08); background:#111c35; color:#fff; font-weight:700;">🇺🇿 O‘zbekcha</button>
+      <button id="langRU" style="padding:12px; border-radius:12px; border:1px solid rgba(255,255,255,.08); background:#111c35; color:#fff; font-weight:700;">🇷🇺 Русский</button>
+    </div>
+  </div>
+</div>
+
   <div class="app">
 
     <div class="logo"><span>1</span>WISE</div>
@@ -110,48 +126,131 @@
 
   </div>
 
-  <script>
-    // Telegram init
-    const tg = window.Telegram.WebApp;
-    tg.ready();
-    tg.expand();
+<script>
+  const tg = window.Telegram.WebApp;
+  tg.ready();
+  tg.expand();
 
-    const user = tg.initDataUnsafe?.user;
+  const user = tg.initDataUnsafe?.user;
 
-    const userInfo = document.getElementById("userInfo");
-    const statusBox = document.getElementById("status");
-    const startBtn = document.getElementById("startBtn");
-    const rulesBtn = document.getElementById("rulesBtn");
-
-    function showStatus(text) {
-      statusBox.style.display = "block";
-      statusBox.textContent = text;
-    }
-
-    if (user) {
-      userInfo.textContent = `Welcome, ${user.first_name}\nTelegram ID: ${user.id}`;
-    } else {
-      userInfo.textContent = "Opened outside Telegram";
-    }
-
-    // Start duel (hozircha demo)
-    startBtn.onclick = () => {
-      if (!user) {
-        showStatus("Please open via Telegram bot.");
-        return;
-      }
-      showStatus("Searching for opponent...\n(Demo mode)");
-    };
-
-    rulesBtn.onclick = () => {
-      showStatus(
+  // ====== i18n strings ======
+  const STR = {
+    en: {
+      chooseLang: "Choose language",
+      opening: "Opening week — free IQ duels, earn points and rank up.",
+      welcome: (name) => `Welcome, ${name}`,
+      outside: "Opened outside Telegram",
+      start: "Searching for opponent...\n(Demo mode)",
+      needTG: "Please open via Telegram bot.",
+      rules:
         "Rules:\n" +
         "• 1 vs 1 IQ duel\n" +
         "• 10 questions\n" +
         "• Fast & correct wins\n" +
         "• Daily leaderboard resets 00:00"
-      );
-    };
-  </script>
+    },
+    uz: {
+      chooseLang: "Tilni tanlang",
+      opening: "Ochilish haftasi — tekin IQ duellar, ball to‘plang va reytingga chiqing.",
+      welcome: (name) => `Xush kelibsiz, ${name}`,
+      outside: "Telegram orqali oching",
+      start: "Raqib qidirilmoqda...\n(Demo rejim)",
+      needTG: "Iltimos, Telegram bot orqali oching.",
+      rules:
+        "Qoidalar:\n" +
+        "• 1 vs 1 IQ duel\n" +
+        "• 10 ta savol\n" +
+        "• Tez va to‘g‘ri yutadi\n" +
+        "• Reyting har kuni 00:00 da yangilanadi"
+    },
+    ru: {
+      chooseLang: "Выберите язык",
+      opening: "Открытие — бесплатные IQ-дуэли, набирайте очки и поднимайтесь в рейтинге.",
+      welcome: (name) => `Добро пожаловать, ${name}`,
+      outside: "Откройте через Telegram",
+      start: "Ищем соперника...\n(Демо режим)",
+      needTG: "Пожалуйста, откройте через Telegram-бот.",
+      rules:
+        "Правила:\n" +
+        "• 1 vs 1 IQ дуэль\n" +
+        "• 10 вопросов\n" +
+        "• Быстрее и точнее — победа\n" +
+        "• Рейтинг сбрасывается в 00:00"
+    }
+  };
+
+  // ====== pick default language ======
+  function defaultLang() {
+    const code = (tg.initDataUnsafe?.user?.language_code || "").toLowerCase();
+    if (code.startsWith("uz")) return "uz";
+    if (code.startsWith("ru")) return "ru";
+    return "en";
+  }
+
+  let lang = localStorage.getItem("onewise_lang") || defaultLang();
+
+  // ====== elements ======
+  const userInfo = document.getElementById("userInfo");
+  const statusBox = document.getElementById("status");
+  const startBtn = document.getElementById("startBtn");
+  const rulesBtn = document.getElementById("rulesBtn");
+
+  const langModal = document.getElementById("langModal");
+  const langEN = document.getElementById("langEN");
+  const langUZ = document.getElementById("langUZ");
+  const langRU = document.getElementById("langRU");
+
+  function showStatus(text) {
+    statusBox.style.display = "block";
+    statusBox.textContent = text;
+  }
+
+  function applyLang() {
+    // bu yerda xohlasang banner matnini ham almashtirasan
+    const s = STR[lang];
+
+    if (user) userInfo.textContent = s.welcome(user.first_name);
+    else userInfo.textContent = s.outside;
+
+    // modal title
+    langModal.querySelector("div").textContent = s.chooseLang;
+  }
+
+  // ====== Language modal logic ======
+  function openLangModal() {
+    langModal.style.display = "flex";
+  }
+  function setLang(newLang) {
+    lang = newLang;
+    localStorage.setItem("onewise_lang", lang);
+    langModal.style.display = "none";
+    applyLang();
+  }
+
+  langEN.onclick = () => setLang("en");
+  langUZ.onclick = () => setLang("uz");
+  langRU.onclick = () => setLang("ru");
+
+  // Show language modal only first time (or if user wants later)
+  if (!localStorage.getItem("onewise_lang")) {
+    openLangModal();
+  }
+
+  // Apply language now
+  applyLang();
+
+  // ====== Buttons ======
+  startBtn.onclick = () => {
+    const s = STR[lang];
+    if (!user) return showStatus(s.needTG);
+    showStatus(s.start);
+  };
+
+  rulesBtn.onclick = () => {
+    showStatus(STR[lang].rules);
+  };
+</script>
+
 </body>
 </html>
+
