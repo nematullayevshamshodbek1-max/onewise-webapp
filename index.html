@@ -90,19 +90,10 @@
 
 <body>
   <!-- Language Modal -->
-<div id="langModal" style="
-  position:fixed; inset:0; background:rgba(0,0,0,.65);
-  display:none; align-items:center; justify-content:center; padding:18px; z-index:9999;">
-  <div style="
-    width:100%; max-width:420px; background:#0b1426; border:1px solid rgba(255,255,255,.08);
-    border-radius:16px; padding:16px;">
-    <div style="font-weight:800; font-size:16px; margin-bottom:10px;">Choose language</div>
-    <div style="display:flex; flex-direction:column; gap:10px;">
-      <button id="langEN" style="padding:12px; border-radius:12px; border:1px solid rgba(255,255,255,.08); background:#111c35; color:#fff; font-weight:700;">🇬🇧 English</button>
-      <button id="langUZ" style="padding:12px; border-radius:12px; border:1px solid rgba(255,255,255,.08); background:#111c35; color:#fff; font-weight:700;">🇺🇿 O‘zbekcha</button>
-      <button id="langRU" style="padding:12px; border-radius:12px; border:1px solid rgba(255,255,255,.08); background:#111c35; color:#fff; font-weight:700;">🇷🇺 Русский</button>
-    </div>
-  </div>
+<div id="langTitle" 
+  style="font-weight:800; 
+  font-size:16px; 
+  margin-bottom:10px;">Choose language
 </div>
 
   <div class="app">
@@ -187,7 +178,7 @@
     return "en";
   }
 
-  let lang = localStorage.getItem("onewise_lang") || defaultLang();
+  let lang = localStorage.getItem("onewise_lang") || "en";
 
   // ====== elements ======
   const userInfo = document.getElementById("userInfo");
@@ -249,8 +240,11 @@
   rulesBtn.onclick = () => {
     showStatus(STR[lang].rules);
   };
+  document.getElementById("langTitle").textContent = "Choose language";
+
 </script>
 
 </body>
 </html>
+
 
