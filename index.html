@@ -1,58 +1,157 @@
-<!DOCTYPE html> TEST123
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <title>1WISE</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+  <!-- Telegram Web App SDK -->
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
 
   <style>
     body {
       margin: 0;
-      background: #000;
-      color: #fff;
-      font-family: Arial, sans-serif;
+      background: #050b16;
+      color: #ffffff;
+      font-family: Arial, Helvetica, sans-serif;
       display: flex;
-      align-items: center;
       justify-content: center;
+      align-items: center;
       height: 100vh;
+    }
+
+    .app {
+      width: 100%;
+      max-width: 420px;
+      padding: 20px;
+    }
+
+    .logo {
       text-align: center;
-    }
-    .box {
-      max-width: 400px;
-    }
-    .title {
       font-size: 32px;
       font-weight: bold;
       margin-bottom: 20px;
     }
-    .info {
-      opacity: 0.8;
+
+    .logo span {
+      color: #2f80ed;
+    }
+
+    .card {
+      background: #0b1426;
+      border-radius: 16px;
+      padding: 16px;
+      margin-bottom: 16px;
+    }
+
+    .banner {
+      background: linear-gradient(135deg, rgba(47,128,237,0.25), rgba(255,255,255,0.03));
+      border-radius: 14px;
+      padding: 14px;
+      font-size: 14px;
+    }
+
+    .user {
+      font-size: 14px;
+      opacity: 0.85;
+      line-height: 1.4;
+    }
+
+    button {
+      width: 100%;
+      border: none;
+      border-radius: 14px;
+      padding: 14px;
       font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .primary {
+      background: #2f80ed;
+      color: #fff;
+      margin-bottom: 10px;
+    }
+
+    .secondary {
+      background: #1a2540;
+      color: #fff;
+    }
+
+    .status {
+      margin-top: 12px;
+      font-size: 14px;
+      white-space: pre-line;
+      display: none;
+      opacity: 0.9;
     }
   </style>
 </head>
+
 <body>
-  <div class="box">
-    <div class="title">1WISE</div>
-    <div id="info" class="info">Loading...</div>
+  <div class="app">
+
+    <div class="logo"><span>1</span>WISE</div>
+
+    <div class="card banner">
+      🎉 <b>7 DAYS FREE</b><br>
+      Opening week — free IQ duels, earn points and rank up.
+    </div>
+
+    <div class="card">
+      <div id="userInfo" class="user">Loading user...</div>
+    </div>
+
+    <div class="card">
+      <button id="startBtn" class="primary">⚔️ Start Duel</button>
+      <button id="rulesBtn" class="secondary">📄 Rules</button>
+      <div id="status" class="status"></div>
+    </div>
+
   </div>
 
   <script>
+    // Telegram init
     const tg = window.Telegram.WebApp;
     tg.ready();
+    tg.expand();
 
     const user = tg.initDataUnsafe?.user;
 
-    if (user) {
-      document.getElementById("info").innerText =
-        `Welcome, ${user.first_name}\nTelegram ID: ${user.id}`;
-    } else {
-      document.getElementById("info").innerText =
-        "Opened outside Telegram";
+    const userInfo = document.getElementById("userInfo");
+    const statusBox = document.getElementById("status");
+    const startBtn = document.getElementById("startBtn");
+    const rulesBtn = document.getElementById("rulesBtn");
+
+    function showStatus(text) {
+      statusBox.style.display = "block";
+      statusBox.textContent = text;
     }
+
+    if (user) {
+      userInfo.textContent = `Welcome, ${user.first_name}\nTelegram ID: ${user.id}`;
+    } else {
+      userInfo.textContent = "Opened outside Telegram";
+    }
+
+    // Start duel (hozircha demo)
+    startBtn.onclick = () => {
+      if (!user) {
+        showStatus("Please open via Telegram bot.");
+        return;
+      }
+      showStatus("Searching for opponent...\n(Demo mode)");
+    };
+
+    rulesBtn.onclick = () => {
+      showStatus(
+        "Rules:\n" +
+        "• 1 vs 1 IQ duel\n" +
+        "• 10 questions\n" +
+        "• Fast & correct wins\n" +
+        "• Daily leaderboard resets 00:00"
+      );
+    };
   </script>
 </body>
 </html>
-
