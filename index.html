@@ -1,306 +1,553 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>1WISE</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
 
   <style>
     :root{
-      --bg:#050b16;
-      --card:#0b1426;
-      --stroke: rgba(255,255,255,.08);
+      --bg:#000000;
+      --panel: rgba(20, 20, 28, 0.68);
+      --stroke: rgba(255,255,255,0.12);
       --text:#ffffff;
-      --muted: rgba(255,255,255,.78);
+      --muted: rgba(255,255,255,0.72);
+      --purple1:#6a4bff;
+      --purple2:#4a2bff;
+      --card:#0b0f18;
       --blue:#2F80ED;
-      --btn2:#1a2540;
-    }
-    body{
-      margin:0;
-      background: radial-gradient(1200px 600px at 50% -10%, rgba(47,128,237,.18), transparent 60%), var(--bg);
-      color:var(--text);
-      font-family: Arial, Helvetica, sans-serif;
-      min-height:100vh;
-      display:flex;
-      justify-content:center;
-      align-items:center;
-      padding:18px;
-    }
-    .app{width:100%; max-width:420px;}
-    .logo{
-      text-align:center;
-      font-size:32px;
-      font-weight:900;
-      letter-spacing:.6px;
-      margin-bottom:16px;
-    }
-    .logo span{color:var(--blue)}
-    .card{
-      background: var(--card);
-      border: 1px solid var(--stroke);
-      border-radius: 16px;
-      padding: 16px;
-      margin-bottom: 14px;
-      box-shadow: 0 10px 30px rgba(0,0,0,.28);
-    }
-    .banner{
-      background: linear-gradient(135deg, rgba(47,128,237,0.25), rgba(255,255,255,0.03));
-      border-radius: 14px;
-      padding: 14px;
-      font-size: 14px;
-      line-height: 1.35;
-    }
-    .user{
-      font-size: 14px;
-      color: var(--muted);
-      white-space: pre-line;
-      line-height: 1.35;
-    }
-    button{
-      width:100%;
-      border:none;
-      border-radius: 14px;
-      padding: 14px;
-      font-size: 16px;
-      font-weight: 800;
-      cursor:pointer;
-    }
-    .primary{background: var(--blue); color:#fff; margin-bottom:10px;}
-    .secondary{background: var(--btn2); color:#fff; border:1px solid var(--stroke);}
-    .status{
-      margin-top:12px;
-      font-size: 14px;
-      white-space: pre-line;
-      display:none;
-      color: var(--muted);
-      border-top: 1px solid var(--stroke);
-      padding-top: 12px;
-    }
-    .small{
-      margin-top: 10px;
-      font-size: 12px;
-      color: rgba(255,255,255,.55);
-      line-height: 1.35;
-      text-align:center;
     }
 
-    /* Language modal */
-    #langModal{
-      position:fixed;
-      inset:0;
-      background:rgba(0,0,0,.65);
-      display:none;
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      background: radial-gradient(1200px 700px at 50% 20%, rgba(90,60,255,.08), transparent 55%),
+                  radial-gradient(900px 600px at 20% 80%, rgba(47,128,237,.06), transparent 60%),
+                  var(--bg);
+      color:var(--text);
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      min-height:100vh;
+      overflow:hidden;
+    }
+
+    /* ---------- shared ---------- */
+    .center{
+      min-height:100vh;
+      display:flex;
       align-items:center;
       justify-content:center;
-      padding:18px;
-      z-index:9999;
+      padding:24px;
     }
-    #langBox{
+
+    .glass{
       width:100%;
       max-width:420px;
-      background: var(--card);
+      border-radius:22px;
+      padding:18px;
+      background: var(--panel);
       border: 1px solid var(--stroke);
-      border-radius: 16px;
-      padding: 16px;
-      box-shadow: 0 10px 30px rgba(0,0,0,.38);
+      box-shadow: 0 20px 60px rgba(0,0,0,.55);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
     }
-    #langTitle{
-      font-weight:900;
+
+    .title{
+      font-size:22px;
+      font-weight:800;
+      text-align:center;
+      margin:6px 0 14px;
+      letter-spacing:.2px;
+    }
+
+    .btn{
+      width:100%;
+      border:none;
+      border-radius:14px;
+      padding:14px 14px;
+      font-weight:800;
       font-size:16px;
+      cursor:pointer;
+    }
+
+    .btn-primary{
+      color:#fff;
+      background: linear-gradient(180deg, var(--purple1), var(--purple2));
+      box-shadow: 0 10px 30px rgba(90,60,255,.35);
+    }
+
+    .btn-ghost{
+      background: rgba(255,255,255,.06);
+      border:1px solid var(--stroke);
+      color:#fff;
+    }
+
+    /* ---------- language screen ---------- */
+    #langScreen{
+      position:fixed; inset:0;
+      display:none;
+    }
+
+    .langItem{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      padding:14px 14px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,0.10);
+      background: rgba(0,0,0,0.18);
+      cursor:pointer;
+      user-select:none;
+      transition: transform .08s ease, border-color .08s ease;
       margin-bottom:10px;
     }
-    .langBtn{
-      width:100%;
+    .langItem:active{ transform: scale(0.99); }
+    .langItem.selected{
+      border-color: rgba(106,75,255,0.75);
+      background: rgba(106,75,255,0.10);
+      box-shadow: 0 0 0 3px rgba(106,75,255,0.14) inset;
+    }
+    .flag{
+      width:28px; height:20px;
+      border-radius:4px;
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,0.14);
+      display:flex; align-items:center; justify-content:center;
+      font-size:14px;
+      background: rgba(255,255,255,0.08);
+    }
+    .langName{
+      font-size:16px;
+      font-weight:700;
+    }
+
+    .hint{
+      text-align:center;
+      color: var(--muted);
+      font-size:12px;
+      margin-top:12px;
+      line-height:1.35;
+    }
+
+    /* ---------- app screen ---------- */
+    #appScreen{
+      position:fixed; inset:0;
+      display:none;
+      overflow:auto;
+    }
+
+    .appWrap{
+      max-width:460px;
+      margin:0 auto;
+      padding:16px 16px 28px;
+    }
+
+    .topbar{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      margin:10px 2px 14px;
+    }
+    .brand{
+      font-weight:900;
+      font-size:22px;
+      letter-spacing:.5px;
+    }
+    .brand .one{ color: var(--blue); }
+    .pill{
+      padding:8px 10px;
+      border-radius:999px;
+      border:1px solid var(--stroke);
+      background: rgba(255,255,255,0.05);
+      color: rgba(255,255,255,0.75);
+      font-size:12px;
+      white-space:nowrap;
+    }
+
+    .hero{
+      border-radius:18px;
+      padding:16px;
+      border:1px solid var(--stroke);
+      background: linear-gradient(135deg, rgba(106,75,255,0.18), rgba(255,255,255,0.03));
+      box-shadow: 0 14px 40px rgba(0,0,0,.45);
+      margin-bottom:12px;
+    }
+    .heroTitle{ font-weight:900; font-size:16px; margin:0 0 6px; }
+    .heroSub{ margin:0; color:var(--muted); font-size:13px; line-height:1.35; }
+
+    .grid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:12px;
+      margin-top:12px;
+    }
+
+    .card{
+      border-radius:16px;
+      padding:14px;
+      border:1px solid var(--stroke);
+      background: rgba(255,255,255,0.04);
+      min-height:92px;
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+      cursor:pointer;
+      user-select:none;
+      transition: transform .08s ease;
+    }
+    .card:active{ transform: scale(0.99); }
+    .cardTitle{
+      font-weight:800;
+      font-size:14px;
+      margin:0;
+    }
+    .cardSub{
+      margin:6px 0 0;
+      color:var(--muted);
+      font-size:12px;
+      line-height:1.35;
+    }
+
+    .fullCard{
+      margin-top:12px;
+      border-radius:16px;
+      padding:14px;
+      border:1px solid var(--stroke);
+      background: rgba(255,255,255,0.04);
+    }
+
+    .row{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      margin-top:10px;
+    }
+
+    .smallBtn{
+      flex:1;
       padding:12px;
       border-radius:12px;
       border:1px solid var(--stroke);
-      background:#111c35;
+      background: rgba(255,255,255,0.06);
       color:#fff;
       font-weight:800;
-      margin-top:10px;
+      cursor:pointer;
     }
+
+    .toast{
+      margin-top:10px;
+      padding:10px 12px;
+      border-radius:12px;
+      border:1px dashed rgba(106,75,255,0.40);
+      background: rgba(106,75,255,0.10);
+      color: rgba(255,255,255,0.92);
+      font-size:13px;
+      white-space:pre-line;
+      display:none;
+    }
+
+    /* simple bottom spacing */
+    .sp{ height:14px; }
   </style>
 </head>
 
 <body>
-  <div class="app">
-    <div class="logo"><span>1</span>WISE</div>
 
-    <div class="card banner" id="bannerText">
-      🎉 <b>7 DAYS FREE</b><br>
-      Opening week — free IQ duels, earn points and rank up.
-    </div>
+  <!-- LANGUAGE SCREEN -->
+  <div id="langScreen" class="center">
+    <div class="glass">
+      <div class="title" id="chooseTitle">Choose language</div>
 
-    <div class="card">
-      <div id="userInfo" class="user">Loading...</div>
-    </div>
+      <div class="langItem" data-lang="en" id="li_en">
+        <div class="flag">🇺🇸</div>
+        <div class="langName">English</div>
+      </div>
 
-    <div class="card">
-      <button id="startBtn" class="primary">⚔️ Start Duel</button>
-      <button id="rulesBtn" class="secondary">📄 Rules</button>
-      <div id="status" class="status"></div>
-    </div>
+      <div class="langItem" data-lang="uz" id="li_uz">
+        <div class="flag">🇺🇿</div>
+        <div class="langName">O‘zbekcha</div>
+      </div>
 
-    <div class="small">
-      Privacy: we only use your Telegram ID to create your profile.
+      <div class="langItem" data-lang="ru" id="li_ru">
+        <div class="flag">🇷🇺</div>
+        <div class="langName">Русский</div>
+      </div>
+
+      <button class="btn btn-primary" id="continueBtn">Continue</button>
+
+      <div class="hint">
+        Language is asked only once. You can change it later in Settings.
+      </div>
     </div>
   </div>
 
-  <!-- Language Modal -->
-  <div id="langModal">
-    <div id="langBox">
-      <div id="langTitle">Choose language</div>
-      <button class="langBtn" id="langEN">🇬🇧 English</button>
-      <button class="langBtn" id="langUZ">🇺🇿 O‘zbekcha</button>
-      <button class="langBtn" id="langRU">🇷🇺 Русский</button>
+  <!-- APP SCREEN -->
+  <div id="appScreen">
+    <div class="appWrap">
+      <div class="topbar">
+        <div class="brand"><span class="one">1</span>WISE</div>
+        <div class="pill" id="langPill">EN</div>
+      </div>
+
+      <div class="hero">
+        <div class="heroTitle" id="heroTitle">Home</div>
+        <p class="heroSub" id="heroSub">
+          Skill-based IQ duels. Earn points and climb the leaderboard.
+        </p>
+      </div>
+
+      <div class="grid">
+        <div class="card" id="duelCard">
+          <div>
+            <p class="cardTitle" id="duelTitle">⚔️ Duels</p>
+            <p class="cardSub" id="duelSub">Start a 1v1 IQ match</p>
+          </div>
+          <div style="color:rgba(255,255,255,.65); font-size:12px;">Open</div>
+        </div>
+
+        <div class="card" id="leaderCard">
+          <div>
+            <p class="cardTitle" id="leadTitle">🏆 Leaderboard</p>
+            <p class="cardSub" id="leadSub">Daily top players</p>
+          </div>
+          <div style="color:rgba(255,255,255,.65); font-size:12px;">Open</div>
+        </div>
+
+        <div class="card" id="walletCard">
+          <div>
+            <p class="cardTitle" id="walletTitle">💼 Wallet</p>
+            <p class="cardSub" id="walletSub">Balance & payouts</p>
+          </div>
+          <div style="color:rgba(255,255,255,.65); font-size:12px;">Open</div>
+        </div>
+
+        <div class="card" id="settingsCard">
+          <div>
+            <p class="cardTitle" id="setTitle">⚙️ Settings</p>
+            <p class="cardSub" id="setSub">Language & account</p>
+          </div>
+          <div style="color:rgba(255,255,255,.65); font-size:12px;">Open</div>
+        </div>
+      </div>
+
+      <div class="fullCard">
+        <div style="font-weight:900;" id="quickTitle">Quick actions</div>
+        <div class="row">
+          <button class="smallBtn" id="btnStartDuel">Start Duel</button>
+          <button class="smallBtn" id="btnChangeLang">Language</button>
+        </div>
+        <div class="toast" id="toast"></div>
+      </div>
+
+      <div class="sp"></div>
     </div>
   </div>
 
   <script>
-    const tg = window.Telegram.WebApp;
-    tg.ready();
-    tg.expand();
+    // Telegram init (safe even if opened in browser)
+    const tg = window.Telegram?.WebApp;
+    try { tg?.ready(); tg?.expand(); } catch(e) {}
 
-    const user = tg.initDataUnsafe?.user;
-
-    // ====== strings ======
+    // --- language strings (minimal for now) ---
     const STR = {
       en: {
-        banner: "🎉 <b>7 DAYS FREE</b><br>Opening week — free IQ duels, earn points and rank up.",
-        welcome: (name) => `Welcome, ${name}`,
-        outside: "Opened outside Telegram",
-        start: "Searching for opponent...\n(Demo mode)",
-        needTG: "Please open via @onewise_bot",
-        rules:
-          "Rules:\n" +
-          "• 1 vs 1 IQ duel\n" +
-          "• 10 questions\n" +
-          "• Fast & correct wins\n" +
-          "• Daily leaderboard resets 00:00"
+        choose: "Choose language",
+        cont: "Continue",
+        hint: "Language is asked only once. You can change it later in Settings.",
+        home: "Home",
+        hero: "Skill-based IQ duels. Earn points and climb the leaderboard.",
+        duels: "⚔️ Duels",
+        duelsSub: "Start a 1v1 IQ match",
+        lead: "🏆 Leaderboard",
+        leadSub: "Daily top players",
+        wallet: "💼 Wallet",
+        walletSub: "Balance & payouts",
+        settings: "⚙️ Settings",
+        settingsSub: "Language & account",
+        quick: "Quick actions",
+        startDuel: "Start Duel",
+        lang: "Language",
+        demo: "Demo: UI is ready.\nNext step: connect real duel + API."
       },
       uz: {
-        banner: "🎉 <b>7 KUN TEKIN</b><br>Ochilish haftasi — tekin IQ duellar, ball to‘plang va reytingga chiqing.",
-        welcome: (name) => `Xush kelibsiz, ${name}`,
-        outside: "Telegram orqali oching",
-        start: "Raqib qidirilmoqda...\n(Demo rejim)",
-        needTG: "Iltimos, @onewise_bot orqali oching",
-        rules:
-          "Qoidalar:\n" +
-          "• 1 vs 1 IQ duel\n" +
-          "• 10 ta savol\n" +
-          "• Tez va to‘g‘ri yutadi\n" +
-          "• Reyting har kuni 00:00 da yangilanadi"
+        choose: "Tilni tanlang",
+        cont: "Davom etish",
+        hint: "Til faqat bir marta so‘raladi. Keyin Settings’da o‘zgartirasiz.",
+        home: "Bosh sahifa",
+        hero: "IQ duellar (skill-based). Ball to‘plang va reytingga chiqing.",
+        duels: "⚔️ Duellar",
+        duelsSub: "1v1 IQ duelni boshlang",
+        lead: "🏆 Reyting",
+        leadSub: "Kunlik top o‘yinchilar",
+        wallet: "💼 Hamyon",
+        walletSub: "Balans va yechib olish",
+        settings: "⚙️ Sozlamalar",
+        settingsSub: "Til va akkaunt",
+        quick: "Tezkor amallar",
+        startDuel: "Duel boshlash",
+        lang: "Til",
+        demo: "Demo: UI tayyor.\nKeyingi qadam: real duel + API ulash."
       },
       ru: {
-        banner: "🎉 <b>7 ДНЕЙ БЕСПЛАТНО</b><br>Открытие — бесплатные IQ-дуэли, набирайте очки и поднимайтесь в рейтинге.",
-        welcome: (name) => `Добро пожаловать, ${name}`,
-        outside: "Откройте через Telegram",
-        start: "Ищем соперника...\n(Демо режим)",
-        needTG: "Откройте через @onewise_bot",
-        rules:
-          "Правила:\n" +
-          "• 1 vs 1 IQ дуэль\n" +
-          "• 10 вопросов\n" +
-          "• Быстрее и точнее — победа\n" +
-          "• Рейтинг сбрасывается в 00:00"
+        choose: "Выберите язык",
+        cont: "Продолжить",
+        hint: "Язык спрашивается один раз. Позже можно изменить в Settings.",
+        home: "Главная",
+        hero: "IQ-дуэли (skill-based). Набирайте очки и поднимайтесь в рейтинге.",
+        duels: "⚔️ Дуэли",
+        duelsSub: "Начать 1v1 IQ матч",
+        lead: "🏆 Рейтинг",
+        leadSub: "Топ игроков за день",
+        wallet: "💼 Кошелёк",
+        walletSub: "Баланс и вывод",
+        settings: "⚙️ Настройки",
+        settingsSub: "Язык и аккаунт",
+        quick: "Быстрые действия",
+        startDuel: "Начать дуэль",
+        lang: "Язык",
+        demo: "Демо: UI готов.\nДальше: подключаем дуэль + API."
       }
     };
 
-    // Default is ALWAYS English (global)
-    let lang = localStorage.getItem("onewise_lang") || "en";
+    const langScreen = document.getElementById("langScreen");
+    const appScreen  = document.getElementById("appScreen");
 
-    const bannerEl = document.getElementById("bannerText");
-    const userInfo = document.getElementById("userInfo");
-    const statusBox = document.getElementById("status");
+    const chooseTitle = document.getElementById("chooseTitle");
+    const continueBtn = document.getElementById("continueBtn");
 
-    const startBtn = document.getElementById("startBtn");
-    const rulesBtn = document.getElementById("rulesBtn");
+    const li_en = document.getElementById("li_en");
+    const li_uz = document.getElementById("li_uz");
+    const li_ru = document.getElementById("li_ru");
 
-    const langModal = document.getElementById("langModal");
-    const langEN = document.getElementById("langEN");
-    const langUZ = document.getElementById("langUZ");
-    const langRU = document.getElementById("langRU");
+    const langPill = document.getElementById("langPill");
 
-    function showStatus(text){
-      statusBox.style.display = "block";
-      statusBox.textContent = text;
+    const heroTitle = document.getElementById("heroTitle");
+    const heroSub   = document.getElementById("heroSub");
+
+    const duelTitle = document.getElementById("duelTitle");
+    const duelSub   = document.getElementById("duelSub");
+
+    const leadTitle = document.getElementById("leadTitle");
+    const leadSub   = document.getElementById("leadSub");
+
+    const walletTitle = document.getElementById("walletTitle");
+    const walletSub   = document.getElementById("walletSub");
+
+    const setTitle = document.getElementById("setTitle");
+    const setSub   = document.getElementById("setSub");
+
+    const quickTitle = document.getElementById("quickTitle");
+    const btnStartDuel = document.getElementById("btnStartDuel");
+    const btnChangeLang = document.getElementById("btnChangeLang");
+    const toast = document.getElementById("toast");
+
+    let selectedLang = "en";
+
+    function setSelected(lang){
+      selectedLang = lang;
+      [li_en, li_uz, li_ru].forEach(el => el.classList.remove("selected"));
+      if (lang === "en") li_en.classList.add("selected");
+      if (lang === "uz") li_uz.classList.add("selected");
+      if (lang === "ru") li_ru.classList.add("selected");
     }
 
-    function applyLang(){
-      const s = STR[lang];
+    function applyLang(lang){
+      const s = STR[lang] || STR.en;
 
-      // banner uses innerHTML for <b> + <br>
-      bannerEl.innerHTML = s.banner;
+      // language screen
+      chooseTitle.textContent = s.choose;
+      continueBtn.textContent = s.cont;
+      document.querySelector(".hint").textContent = s.hint;
 
-      if (user) userInfo.textContent = s.welcome(user.first_name);
-      else userInfo.textContent = s.outside;
+      // app screen
+      langPill.textContent = lang.toUpperCase();
+      heroTitle.textContent = s.home;
+      heroSub.textContent = s.hero;
+
+      duelTitle.textContent = s.duels;
+      duelSub.textContent = s.duelsSub;
+
+      leadTitle.textContent = s.lead;
+      leadSub.textContent = s.leadSub;
+
+      walletTitle.textContent = s.wallet;
+      walletSub.textContent = s.walletSub;
+
+      setTitle.textContent = s.settings;
+      setSub.textContent = s.settingsSub;
+
+      quickTitle.textContent = s.quick;
+      btnStartDuel.textContent = s.startDuel;
+      btnChangeLang.textContent = s.lang;
     }
 
-    function openLangModal(){
-      // Title always English (global)
-      document.getElementById("langTitle").textContent = "Choose language";
-      langModal.style.display = "flex";
+    function showToast(text){
+      toast.style.display = "block";
+      toast.textContent = text;
+      setTimeout(() => { toast.style.display = "none"; }, 1800);
     }
 
-    function setLang(newLang){
-      lang = newLang;
-      localStorage.setItem("onewise_lang", lang);
-      langModal.style.display = "none";
-      applyLang();
+    function showLanguageFirstRun(){
+      langScreen.style.display = "flex";
+      appScreen.style.display = "none";
+
+      // default selection (English)
+      setSelected(selectedLang);
+      applyLang(selectedLang);
     }
 
-    langEN.onclick = () => setLang("en");
-    langUZ.onclick = () => setLang("uz");
-    langRU.onclick = () => setLang("ru");
-
-    // show once, first entry
-    if (!localStorage.getItem("onewise_lang")) openLangModal();
-
-    // apply now
-    applyLang();
-
-startBtn.onclick = async () => {
-  const s = STR[lang];
-  if (!user) return showStatus(s.needTG);
-
-  showStatus("Connecting...");
-
-  try {
-    const r = await fetch("http://localhost:3000/api/use-free-duel", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ telegram_id: String(user.id) })
-    });
-    const data = await r.json();
-
-    if (!data.ok) return showStatus("Error: " + (data.error || "unknown"));
-
-    if (!data.allowed) {
-      return showStatus(`⛔ Limit ended.\nFree duels left: ${data.free_duels_left}`);
+    function showApp(){
+      langScreen.style.display = "none";
+      appScreen.style.display = "block";
+      applyLang(selectedLang);
     }
 
-    return showStatus(`✅ ${data.message}\nFree duels left: ${data.free_duels_left}`);
-  } catch (e) {
-    console.error(e);
-    showStatus("❌ API not reachable. Is onewise-api running?");
-  }
-};
+    // Click to select
+    li_en.onclick = () => { setSelected("en"); applyLang("en"); };
+    li_uz.onclick = () => { setSelected("uz"); applyLang("uz"); };
+    li_ru.onclick = () => { setSelected("ru"); applyLang("ru"); };
 
-    // register user to backend (once)
-if (user) {
-  fetch("http://localhost:3000/api/register", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      telegram_id: String(user.id),
-      first_name: user.first_name
-    })
-  }).catch(() => {});
-}
+    // Continue
+    continueBtn.onclick = () => {
+      localStorage.setItem("onewise_lang", selectedLang);
+      showApp();
+    };
 
+    // Settings -> change language
+    function openLanguageFromSettings(){
+      // confirm to prevent accidental changes
+      const ok = confirm("Change language?");
+      if (!ok) return;
+
+      // show language screen again
+      langScreen.style.display = "flex";
+      appScreen.style.display = "none";
+      applyLang(selectedLang);
+      setSelected(selectedLang);
+
+      // If user hits continue again, it saves new language
+    }
+
+    document.getElementById("settingsCard").onclick = openLanguageFromSettings;
+    btnChangeLang.onclick = openLanguageFromSettings;
+
+    // Demo actions
+    document.getElementById("duelCard").onclick = () => showToast(STR[selectedLang].demo);
+    document.getElementById("leaderCard").onclick = () => showToast(STR[selectedLang].demo);
+    document.getElementById("walletCard").onclick = () => showToast(STR[selectedLang].demo);
+    btnStartDuel.onclick = () => showToast(STR[selectedLang].demo);
+
+    // Boot logic:
+    const saved = localStorage.getItem("onewise_lang");
+    if (!saved) {
+      selectedLang = "en";
+      showLanguageFirstRun();
+    } else {
+      selectedLang = saved;
+      showApp();
+    }
   </script>
 </body>
 </html>
-
-
