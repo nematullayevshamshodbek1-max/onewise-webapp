@@ -270,6 +270,19 @@
     rulesBtn.onclick = () => {
       showStatus(STR[lang].rules);
     };
+    // register user to backend (once)
+if (user) {
+  fetch("http://localhost:3000/api/register", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      telegram_id: String(user.id),
+      first_name: user.first_name
+    })
+  }).catch(() => {});
+}
+
   </script>
 </body>
 </html>
+
