@@ -260,16 +260,33 @@
     // apply now
     applyLang();
 
-    // buttons (demo)
-    startBtn.onclick = () => {
-      const s = STR[lang];
-      if (!user) return showStatus(s.needTG);
-      showStatus(s.start);
-    };
+startBtn.onclick = async () => {
+  const s = STR[lang];
+  if (!user) return showStatus(s.needTG);
 
-    rulesBtn.onclick = () => {
-      showStatus(STR[lang].rules);
-    };
+  showStatus("Connecting...");
+
+  try {
+    const r = await fetch("http://localhost:3000/api/use-free-duel", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ telegram_id: String(user.id) })
+    });
+    const data = await r.json();
+
+    if (!data.ok) return showStatus("Error: " + (data.error || "unknown"));
+
+    if (!data.allowed) {
+      return showStatus(`⛔ Limit ended.\nFree duels left: ${data.free_duels_left}`);
+    }
+
+    return showStatus(`✅ ${data.message}\nFree duels left: ${data.free_duels_left}`);
+  } catch (e) {
+    console.error(e);
+    showStatus("❌ API not reachable. Is onewise-api running?");
+  }
+};
+
     // register user to backend (once)
 if (user) {
   fetch("http://localhost:3000/api/register", {
@@ -285,4 +302,5 @@ if (user) {
   </script>
 </body>
 </html>
+
 
