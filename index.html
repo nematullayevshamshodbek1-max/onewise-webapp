@@ -1,294 +1,839 @@
-<!DOCTYPE html>
-<html lang="uz">
+<!doctype html>
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>1WISE - Web App</title>
-    <script src="https://telegram.org/js/telegram-web-app.js"></script>
-    <style>
-        :root {
-            --bg-dark: #0f1218;
-            --card-bg: #1c222d;
-            --accent-blue: #0088cc;
-            --text-main: #ffffff;
-            --text-gray: #8e8e93;
-            --green-btn: #24b35d;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>1WISE</title>
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
 
-        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-            background-color: var(--bg-dark);
-            color: var(--text-main);
-            margin: 0;
-            padding: 0;
-            overflow-x: hidden;
-        }
+  <style>
+    :root{
+      --bg:#05070d;
+      --panel: rgba(18, 22, 35, 0.72);
+      --stroke: rgba(255,255,255,0.10);
+      --text:#ffffff;
+      --muted: rgba(255,255,255,0.72);
+      --blue:#2F80ED;
+      --blue2:#0b58ff;
+      --purple1:#6a4bff;
+      --purple2:#3c1cff;
+      --green:#35d07f;
+      --card: rgba(255,255,255,0.06);
+      --card2: rgba(255,255,255,0.045);
+    }
 
-        /* --- Til Tanlash Ekran --- */
-        #lang-screen {
-            position: fixed;
-            inset: 0;
-            z-index: 1000;
-            background: var(--bg-dark);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
+    *{ box-sizing:border-box; }
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(1100px 600px at 70% -5%, rgba(47,128,237,.16), transparent 55%),
+        radial-gradient(900px 520px at 10% 40%, rgba(106,75,255,.10), transparent 55%),
+        radial-gradient(900px 520px at 60% 110%, rgba(47,128,237,.08), transparent 60%),
+        var(--bg);
+      min-height:100vh;
+      overflow:hidden;
+    }
 
-        .lang-card {
-            background: var(--card-bg);
-            width: 100%;
-            max-width: 350px;
-            padding: 30px;
-            border-radius: 24px;
-            text-align: center;
-            border: 1px solid #2c3444;
-        }
+    /* ===== Language first-run screen ===== */
+    #langScreen{
+      position:fixed; inset:0;
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding:24px;
+      z-index:1000;
+    }
+    .langBox{
+      width:100%;
+      max-width:420px;
+      border-radius:22px;
+      padding:18px;
+      background: rgba(20, 20, 28, 0.62);
+      border:1px solid var(--stroke);
+      box-shadow: 0 20px 60px rgba(0,0,0,.55);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+    .langTitle{
+      text-align:center;
+      font-weight:900;
+      font-size:22px;
+      margin:6px 0 14px;
+    }
+    .langItem{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      padding:14px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,0.10);
+      background: rgba(0,0,0,0.18);
+      cursor:pointer;
+      user-select:none;
+      margin-bottom:10px;
+      transition: transform .08s ease, border-color .08s ease;
+    }
+    .langItem:active{ transform: scale(0.99); }
+    .langItem.selected{
+      border-color: rgba(106,75,255,0.75);
+      background: rgba(106,75,255,0.10);
+      box-shadow: 0 0 0 3px rgba(106,75,255,0.14) inset;
+    }
+    .flag{
+      width:28px; height:20px;
+      border-radius:5px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      border:1px solid rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.08);
+      font-size:14px;
+    }
+    .langName{ font-size:16px; font-weight:800; }
+    .btnPrimary{
+      width:100%;
+      border:none;
+      border-radius:14px;
+      padding:14px;
+      font-weight:900;
+      font-size:16px;
+      cursor:pointer;
+      color:#fff;
+      background: linear-gradient(180deg, var(--purple1), var(--purple2));
+      box-shadow: 0 10px 30px rgba(90,60,255,.35);
+      margin-top:6px;
+    }
+    .langHint{
+      text-align:center;
+      color: rgba(255,255,255,.62);
+      font-size:12px;
+      margin-top:12px;
+      line-height:1.35;
+    }
 
-        .lang-btn {
-            width: 100%;
-            padding: 15px;
-            margin: 10px 0;
-            border-radius: 12px;
-            border: 1px solid #3d4657;
-            background: #252c3a;
-            color: white;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-        }
+    /* ===== App screen ===== */
+    #app{
+      position:fixed; inset:0;
+      display:none;
+      overflow:auto;
+      padding-bottom: 86px; /* bottom nav space */
+    }
+    .wrap{
+      max-width:520px;
+      margin:0 auto;
+      padding: 14px 14px 0;
+    }
 
-        /* --- Asosiy Sahifa Dizayni --- */
-        #main-app { display: none; padding-bottom: 80px; }
+    /* top bar */
+    .topbar{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      padding: 4px 2px 10px;
+    }
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      font-weight:900;
+      letter-spacing:.4px;
+      font-size:20px;
+    }
+    .logoMark{
+      width:28px; height:28px;
+      border-radius:10px;
+      display:flex; align-items:center; justify-content:center;
+      background: rgba(47,128,237,.18);
+      border:1px solid rgba(47,128,237,.40);
+      box-shadow: 0 10px 24px rgba(47,128,237,.12);
+      color: var(--blue);
+      font-weight:900;
+    }
+    .walletPill{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      padding:10px 12px;
+      border-radius:999px;
+      border:1px solid var(--stroke);
+      background: rgba(255,255,255,0.05);
+      color: rgba(255,255,255,0.88);
+      font-size:14px;
+      white-space:nowrap;
+    }
+    .bellDot{
+      width:8px; height:8px; border-radius:50%;
+      background:#ff3b30;
+      box-shadow:0 0 0 3px rgba(255,59,48,.16);
+    }
 
-        header {
-            padding: 15px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+    /* cards */
+    .card{
+      border:1px solid var(--stroke);
+      background: var(--card);
+      border-radius:18px;
+      padding:14px;
+      box-shadow: 0 14px 40px rgba(0,0,0,.42);
+    }
+    .hero{
+      position:relative;
+      overflow:hidden;
+      padding:16px;
+      border-radius:20px;
+      background:
+        radial-gradient(700px 220px at 75% 30%, rgba(47,128,237,.26), transparent 55%),
+        linear-gradient(135deg, rgba(47,128,237,.18), rgba(255,255,255,0.03));
+      border:1px solid rgba(255,255,255,.10);
+      margin-bottom:12px;
+      min-height:120px;
+    }
+    .heroTitle{
+      font-weight:900;
+      font-size:18px;
+      margin:0 0 8px;
+    }
+    .bullet{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      color: rgba(255,255,255,.86);
+      font-size:14px;
+      margin:6px 0;
+    }
+    .dotIcon{
+      width:28px; height:28px;
+      border-radius:10px;
+      display:flex; align-items:center; justify-content:center;
+      background: rgba(255,255,255,0.06);
+      border:1px solid rgba(255,255,255,0.10);
+    }
+    .brainGlow{
+      position:absolute;
+      right:-20px;
+      top:-18px;
+      width:180px;
+      height:180px;
+      border-radius:50%;
+      background: radial-gradient(circle at 35% 35%, rgba(47,128,237,.55), rgba(47,128,237,.10) 55%, transparent 70%);
+      filter: blur(1px);
+      opacity:.9;
+      pointer-events:none;
+    }
 
-        .logo-text { font-weight: bold; font-size: 22px; color: var(--text-main); }
-        .logo-text span { color: var(--accent-blue); }
+    .grid2{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:12px;
+      margin-bottom:12px;
+    }
+    .miniCard{
+      border:1px solid var(--stroke);
+      background: var(--card2);
+      border-radius:18px;
+      padding:14px;
+      min-height:98px;
+    }
+    .miniTitle{
+      font-weight:900;
+      font-size:16px;
+      margin:0 0 8px;
+    }
+    .miniText{
+      margin:0;
+      color: var(--muted);
+      font-size:13px;
+      line-height:1.35;
+    }
 
-        .top-nav {
-            display: flex;
-            gap: 10px;
-            padding: 0 15px;
-            overflow-x: auto;
-            scrollbar-width: none;
-        }
-        .nav-pill {
-            padding: 8px 20px;
-            background: #252c3a;
-            border-radius: 20px;
-            font-size: 14px;
-            white-space: nowrap;
-        }
-        .nav-pill.active { background: var(--accent-blue); }
+    .duelCard{
+      position:relative;
+      overflow:hidden;
+      border-radius:20px;
+      border:1px solid rgba(255,255,255,.10);
+      background:
+        radial-gradient(700px 260px at 75% 50%, rgba(47,128,237,.24), transparent 55%),
+        linear-gradient(135deg, rgba(47,128,237,.14), rgba(255,255,255,0.03));
+      padding:16px;
+      margin-bottom:12px;
+    }
+    .duelTitle{
+      font-weight:900;
+      font-size:18px;
+      margin:0 0 8px;
+      letter-spacing:.2px;
+    }
+    .duelRow{
+      display:flex;
+      gap:14px;
+      flex-wrap:wrap;
+      color: rgba(255,255,255,.86);
+      font-size:13px;
+      margin:6px 0 12px;
+    }
+    .duelTag{
+      display:flex; align-items:center; gap:8px;
+      padding:8px 10px;
+      border-radius:999px;
+      background: rgba(255,255,255,0.06);
+      border:1px solid rgba(255,255,255,0.10);
+    }
+    .startBtn{
+      width:100%;
+      border:none;
+      border-radius:14px;
+      padding:14px;
+      font-weight:900;
+      font-size:16px;
+      cursor:pointer;
+      color:#fff;
+      background: linear-gradient(180deg, rgba(47,128,237,1), rgba(11,88,255,1));
+      box-shadow: 0 12px 30px rgba(47,128,237,.30);
+    }
+    .moneyGlow{
+      position:absolute;
+      right:-20px;
+      bottom:-30px;
+      width:200px;
+      height:200px;
+      border-radius:50%;
+      background: radial-gradient(circle at 35% 35%, rgba(255,255,255,.12), transparent 60%);
+      opacity:.55;
+      pointer-events:none;
+    }
 
-        .search-bar {
-            margin: 15px;
-            background: #1c222d;
-            padding: 12px;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            color: var(--text-gray);
-        }
+    .sectionHead{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding: 6px 4px 10px;
+      color: rgba(255,255,255,.88);
+      font-weight:900;
+      letter-spacing:.2px;
+    }
+    .seeAll{
+      color: rgba(255,255,255,.65);
+      font-size:13px;
+      font-weight:800;
+      cursor:pointer;
+      user-select:none;
+    }
 
-        /* 1vs1 Duel Banner */
-        .duel-banner {
-            margin: 0 15px;
-            background: linear-gradient(135deg, #1c222d 0%, #0d3b66 100%);
-            border-radius: 20px;
-            padding: 20px;
-            text-align: center;
-            position: relative;
-            border: 1px solid #2a5298;
-        }
+    .rankList{
+      border:1px solid var(--stroke);
+      border-radius:18px;
+      background: rgba(255,255,255,0.04);
+      overflow:hidden;
+      box-shadow: 0 14px 40px rgba(0,0,0,.35);
+    }
+    .rankRow{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:12px 14px;
+      border-top:1px solid rgba(255,255,255,.06);
+    }
+    .rankRow:first-child{ border-top:none; }
+    .left{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      min-width:0;
+    }
+    .medal{
+      width:28px; height:28px;
+      border-radius:10px;
+      display:flex; align-items:center; justify-content:center;
+      background: rgba(255,255,255,0.06);
+      border:1px solid rgba(255,255,255,0.10);
+      font-weight:900;
+    }
+    .avatar{
+      width:32px; height:32px;
+      border-radius:12px;
+      background: radial-gradient(circle at 30% 30%, rgba(47,128,237,.55), rgba(255,255,255,.05));
+      border:1px solid rgba(255,255,255,.12);
+    }
+    .name{
+      font-weight:900;
+      overflow:hidden;
+      text-overflow:ellipsis;
+      white-space:nowrap;
+    }
+    .pts{
+      color: rgba(255,255,255,.86);
+      font-weight:900;
+    }
+    .pts span{ color: rgba(255,255,255,.55); font-weight:800; }
 
-        .duel-avatars { display: flex; justify-content: space-around; align-items: center; margin-bottom: 15px; }
-        .avatar-box img { width: 60px; height: 60px; border-radius: 50%; border: 2px solid var(--accent-blue); }
-        
-        .vs-text { font-size: 24px; font-weight: 900; font-style: italic; }
+    /* bottom nav */
+    .bottomNav{
+      position:fixed;
+      left:0; right:0; bottom:0;
+      padding: 10px 12px 18px;
+      background: linear-gradient(180deg, rgba(5,7,13,0), rgba(5,7,13,0.88) 35%, rgba(5,7,13,0.96));
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      z-index:500;
+    }
+    .navBar{
+      max-width:520px;
+      margin:0 auto;
+      display:flex;
+      justify-content:space-between;
+      gap:10px;
+      border:1px solid rgba(255,255,255,.08);
+      background: rgba(18,22,35,.70);
+      border-radius:18px;
+      padding:10px;
+      box-shadow: 0 14px 40px rgba(0,0,0,.45);
+    }
+    .navItem{
+      flex:1;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap:6px;
+      padding:10px 6px;
+      border-radius:14px;
+      color: rgba(255,255,255,.65);
+      font-size:12px;
+      font-weight:800;
+      user-select:none;
+      cursor:pointer;
+    }
+    .navIcon{
+      width:34px; height:34px;
+      border-radius:14px;
+      display:flex; align-items:center; justify-content:center;
+      border:1px solid rgba(255,255,255,.08);
+      background: rgba(255,255,255,.04);
+    }
+    .navItem.active{
+      color:#fff;
+    }
+    .navItem.active .navIcon{
+      border-color: rgba(47,128,237,.55);
+      background: rgba(47,128,237,.18);
+      box-shadow: 0 10px 24px rgba(47,128,237,.16);
+    }
 
-        .start-btn {
-            background: var(--green-btn);
-            color: white;
-            border: none;
-            padding: 10px 25px;
-            border-radius: 10px;
-            font-weight: bold;
-            text-transform: uppercase;
-        }
-
-        /* Ro'yxat */
-        .list-container { padding: 15px; }
-        .user-card {
-            background: var(--card-bg);
-            margin-bottom: 12px;
-            padding: 12px;
-            border-radius: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-        .user-info { display: flex; align-items: center; gap: 12px; }
-        .user-info img { width: 45px; height: 45px; border-radius: 12px; }
-        
-        .duel-btn {
-            background: var(--green-btn);
-            color: white;
-            border: none;
-            padding: 6px 15px;
-            border-radius: 6px;
-            font-weight: bold;
-        }
-
-        /* Bottom Nav */
-        .bottom-menu {
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-            background: #1c222d;
-            display: flex;
-            justify-content: space-around;
-            padding: 10px 0;
-            border-top: 1px solid #2c3444;
-        }
-        .menu-item { text-align: center; font-size: 11px; color: var(--text-gray); }
-        .menu-item.active { color: var(--accent-blue); }
-        .menu-icon { font-size: 20px; display: block; margin-bottom: 4px; }
-    </style>
+    /* mini modal */
+    .toast{
+      position:fixed;
+      left:50%;
+      transform:translateX(-50%);
+      bottom:96px;
+      background: rgba(20,20,28,.78);
+      border:1px solid rgba(255,255,255,.12);
+      color:#fff;
+      padding:10px 12px;
+      border-radius:14px;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      box-shadow: 0 14px 40px rgba(0,0,0,.45);
+      max-width: 520px;
+      width: calc(100% - 28px);
+      display:none;
+      white-space:pre-line;
+      font-size:13px;
+      z-index:900;
+    }
+  </style>
 </head>
+
 <body>
 
-    <div id="lang-screen">
-        <div class="lang-card">
-            <h2 style="margin-top:0">Tilni tanlang</h2>
-            <p style="color:var(--text-gray); font-size:14px">Davom etish uchun tilni tanlang</p>
-            <button class="lang-btn" onclick="selectLang('uz')">O'zbekcha</button>
-            <button class="lang-btn" onclick="selectLang('ru')">Русский</button>
-            <button class="lang-btn" onclick="selectLang('en')">English</button>
-        </div>
+  <!-- 1) First-run language selection -->
+  <div id="langScreen">
+    <div class="langBox">
+      <div class="langTitle" id="langTitle">Choose language</div>
+
+      <div class="langItem" id="lang_en" data-lang="en">
+        <div class="flag">🇺🇸</div>
+        <div class="langName">English</div>
+      </div>
+
+      <div class="langItem" id="lang_uz" data-lang="uz">
+        <div class="flag">🇺🇿</div>
+        <div class="langName">O‘zbekcha</div>
+      </div>
+
+      <div class="langItem" id="lang_ru" data-lang="ru">
+        <div class="flag">🇷🇺</div>
+        <div class="langName">Русский</div>
+      </div>
+
+      <button class="btnPrimary" id="continueBtn">Continue</button>
+
+      <div class="langHint" id="langHint">
+        Language is asked only once. You can change it later in Support.
+      </div>
     </div>
+  </div>
 
-    <div id="main-app">
-        <header>
-            <div class="logo-text"><span>1</span>WISE</div>
-            <div>🔔</div>
-        </header>
+  <!-- 2) Main menu (like your image) -->
+  <div id="app">
+    <div class="wrap">
 
-        <div class="top-nav">
-            <div class="nav-pill active">Duellar</div>
-            <div class="nav-pill">Reyting</div>
-            <div class="nav-pill">Mukofot</div>
-            <div class="nav-pill">Referal</div>
+      <div class="topbar">
+        <div class="brand">
+          <div class="logoMark">🧠</div>
+          <div><span style="color:var(--blue);">1</span>WISE</div>
         </div>
 
-        <div class="search-bar">🔍 Qidirish...</div>
+        <div class="walletPill" id="balancePill">
+          <span id="balanceText">25 000 so‘m</span>
+          <span class="bellDot"></span>
+        </div>
+      </div>
 
-        <div class="duel-banner">
-            <div class="duel-avatars">
-                <div class="avatar-box">
-                    <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Felix" alt="Siz">
-                    <div style="font-size:12px; margin-top:5px">Siz</div>
-                    <div style="color:var(--green-btn); font-size:12px">+50 so'm</div>
-                </div>
-                <div class="vs-text">1 vs 1<br>DUEL</div>
-                <div class="avatar-box">
-                    <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Anvar" alt="Anvar">
-                    <div style="font-size:12px; margin-top:5px">Anvar</div>
-                    <div style="color:var(--green-btn); font-size:12px">+50 so'm</div>
-                </div>
-            </div>
-            <button class="start-btn">Duelni boshlash</button>
+      <!-- Hero banner -->
+      <div class="hero">
+        <div class="brainGlow"></div>
+        <div class="heroTitle" id="heroTitle">1WISE — IQ duels</div>
+        <div class="bullet"><div class="dotIcon">👥</div><div id="b1">1 vs 1 challenges</div></div>
+        <div class="bullet"><div class="dotIcon">🏆</div><div id="b2">Daily rewards</div></div>
+        <div class="bullet"><div class="dotIcon">🧪</div><div id="b3">Opening week</div></div>
+      </div>
+
+      <!-- Referral + Rewards row -->
+      <div class="grid2">
+        <div class="miniCard" id="refCard">
+          <div class="miniTitle" id="refTitle">Referal bonus</div>
+          <p class="miniText" id="refText">Invite friends — +1 duel for each referral</p>
         </div>
 
-        <div class="top-nav" style="margin-top:20px;">
-            <div class="nav-pill active">Ommabop</div>
-            <div class="nav-pill">Trenddagi</div>
-            <div class="nav-pill">Yangi</div>
+        <div class="miniCard" id="rewCard">
+          <div class="miniTitle" id="rewTitle">Mukofotlar</div>
+          <p class="miniText" id="rewText">Today’s 1st place: 2 000 000 so‘m</p>
         </div>
+      </div>
 
-        <div class="list-container">
-            <div class="user-card">
-                <div class="user-info">
-                    <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Qilichbek">
-                    <div>
-                        <div style="font-weight:bold; font-size:14px">Qilichbek</div>
-                        <div style="color:var(--green-btn); font-size:12px">Duelni yutdi!</div>
-                    </div>
-                </div>
-                <div style="text-align:right">
-                    <div style="font-size:14px">8 x 6</div>
-                    <button class="duel-btn">DUEL</button>
-                </div>
-            </div>
-
-            <div class="user-card">
-                <div class="user-info">
-                    <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Ali">
-                    <div>
-                        <div style="font-weight:bold; font-size:14px">Ali</div>
-                        <div style="color:var(--green-btn); font-size:12px">Duelni yutdi!</div>
-                    </div>
-                </div>
-                <div style="text-align:right">
-                    <div style="font-size:14px">9 x 7</div>
-                    <button class="duel-btn">DUEL</button>
-                </div>
-            </div>
+      <!-- IQ Duel card -->
+      <div class="duelCard">
+        <div class="moneyGlow"></div>
+        <div class="duelTitle" id="duelHead">IQ DUEL</div>
+        <div class="duelRow">
+          <div class="duelTag" id="t1">👥 1 vs 1</div>
+          <div class="duelTag" id="t2">🧠 10 questions</div>
         </div>
+        <button class="startBtn" id="startDuelBtn">▶️ Start Duel</button>
+      </div>
 
-        <div class="bottom-menu">
-            <div class="menu-item">
-                <span class="menu-icon">☰</span> Menyu
-            </div>
-            <div class="menu-item">
-                <span class="menu-icon">🏠</span> Bosh sahifa
-            </div>
-            <div class="menu-item active">
-                <span class="menu-icon">🔵</span> Duellar
-            </div>
-            <div class="menu-item">
-                <span class="menu-icon">🎁</span> Mukofot
-            </div>
-            <div class="menu-item">
-                <span class="menu-icon">👤</span> Yordam
-            </div>
+      <!-- Top 3 -->
+      <div class="sectionHead">
+        <div id="topTitle">🏆 Today TOP 3</div>
+        <div class="seeAll" id="seeAllBtn">All ›</div>
+      </div>
+
+      <div class="rankList">
+        <div class="rankRow">
+          <div class="left">
+            <div class="medal">1</div>
+            <div class="avatar"></div>
+            <div class="name">Ali</div>
+          </div>
+          <div class="pts">60 <span>pts</span></div>
         </div>
+        <div class="rankRow">
+          <div class="left">
+            <div class="medal">2</div>
+            <div class="avatar"></div>
+            <div class="name">Vali</div>
+          </div>
+          <div class="pts">45 <span>pts</span></div>
+        </div>
+        <div class="rankRow">
+          <div class="left">
+            <div class="medal">3</div>
+            <div class="avatar"></div>
+            <div class="name">Aziza</div>
+          </div>
+          <div class="pts">40 <span>pts</span></div>
+        </div>
+      </div>
+
+      <div style="height:18px;"></div>
     </div>
+  </div>
 
-    <script>
-        const tg = window.Telegram.WebApp;
-        tg.expand();
+  <!-- Bottom nav (Profile -> Support) -->
+  <div class="bottomNav" id="bottomNav" style="display:none;">
+    <div class="navBar">
+      <div class="navItem active" id="navHome">
+        <div class="navIcon">🏠</div>
+        <div id="navHomeTxt">Home</div>
+      </div>
+      <div class="navItem" id="navDuel">
+        <div class="navIcon">🧠</div>
+        <div id="navDuelTxt">Duel</div>
+      </div>
+      <div class="navItem" id="navReward">
+        <div class="navIcon">🏆</div>
+        <div id="navRewardTxt">Rewards</div>
+      </div>
+      <div class="navItem" id="navSupport">
+        <div class="navIcon">💬</div>
+        <div id="navSupportTxt">Support</div>
+      </div>
+    </div>
+  </div>
 
-        function selectLang(lang) {
-            // Tilni saqlash
-            localStorage.setItem('selected_language', lang);
-            startApp();
-        }
+  <div class="toast" id="toast"></div>
 
-        function startApp() {
-            document.getElementById('lang-screen').style.display = 'none';
-            document.getElementById('main-app').style.display = 'block';
-            
-            // Bu yerda tanlangan tilga qarab matnlarni o'zgartirish mumkin
-            const lang = localStorage.getItem('selected_language');
-            console.log("Tanlangan til:", lang);
-        }
+  <script>
+    // Telegram init (safe)
+    const tg = window.Telegram?.WebApp;
+    try { tg?.ready(); tg?.expand(); } catch(e){}
 
-        // Sahifa yuklanganda tekshirish
-        window.onload = () => {
-            if (localStorage.getItem('selected_language')) {
-                startApp();
-            }
-        };
-    </script>
+    // ===== i18n =====
+    const STR = {
+      en: {
+        choose: "Choose language",
+        cont: "Continue",
+        hint: "Language is asked only once. You can change it later in Support.",
+
+        heroTitle: "1WISE — IQ duels",
+        b1: "1 vs 1 challenges",
+        b2: "Daily rewards",
+        b3: "Opening week",
+
+        refTitle: "Referral bonus",
+        refText: "Invite friends — +1 duel for each referral",
+
+        rewTitle: "Rewards",
+        rewText: "Today’s 1st place: 2 000 000 so‘m",
+
+        duelHead: "IQ DUEL",
+        t1: "👥 1 vs 1",
+        t2: "🧠 10 questions",
+        startDuel: "▶️ Start Duel",
+
+        topTitle: "🏆 Today TOP 3",
+        all: "All ›",
+
+        navHome: "Home",
+        navDuel: "Duel",
+        navReward: "Rewards",
+        navSupport: "Support",
+
+        toastDemo: "Demo UI ✅\nNext: connect Duel + API"
+      },
+      uz: {
+        choose: "Tilni tanlang",
+        cont: "Davom etish",
+        hint: "Til faqat bir marta so‘raladi. Keyin Support bo‘limida o‘zgartirasiz.",
+
+        heroTitle: "1WISE — IQ duellar",
+        b1: "1 vs 1 bellashuv",
+        b2: "Har kuni mukofot",
+        b3: "Ochilish haftasi",
+
+        refTitle: "Referal bonus",
+        refText: "Do‘stlarni taklif qiling — har bir referal uchun +1 duel",
+
+        rewTitle: "Mukofotlar",
+        rewText: "Bugungi 1-o‘rin: 2 000 000 so‘m",
+
+        duelHead: "IQ DUEL",
+        t1: "👥 1 vs 1",
+        t2: "🧠 10 savol",
+        startDuel: "▶️ Duelni boshlash",
+
+        topTitle: "🏆 Bugungi TOP 3",
+        all: "Barchasi ›",
+
+        navHome: "Bosh sahifa",
+        navDuel: "Duel",
+        navReward: "Mukofot",
+        navSupport: "Yordam",
+
+        toastDemo: "Demo UI ✅\nKeyin: Duel + API ulanadi"
+      },
+      ru: {
+        choose: "Выберите язык",
+        cont: "Продолжить",
+        hint: "Язык спрашивается один раз. Потом можно изменить в Support.",
+
+        heroTitle: "1WISE — IQ дуэли",
+        b1: "1 vs 1 поединок",
+        b2: "Ежедневные награды",
+        b3: "Неделя открытия",
+
+        refTitle: "Реферальный бонус",
+        refText: "Приглашайте друзей — +1 дуэль за каждого",
+
+        rewTitle: "Награды",
+        rewText: "Сегодня 1 место: 2 000 000 сум",
+
+        duelHead: "IQ DUEL",
+        t1: "👥 1 vs 1",
+        t2: "🧠 10 вопросов",
+        startDuel: "▶️ Начать дуэль",
+
+        topTitle: "🏆 ТОП 3 сегодня",
+        all: "Все ›",
+
+        navHome: "Главная",
+        navDuel: "Дуэль",
+        navReward: "Награды",
+        navSupport: "Поддержка",
+
+        toastDemo: "Демо UI ✅\nДальше: подключаем дуэль + API"
+      }
+    };
+
+    // ===== DOM =====
+    const langScreen = document.getElementById("langScreen");
+    const app = document.getElementById("app");
+    const bottomNav = document.getElementById("bottomNav");
+    const toast = document.getElementById("toast");
+
+    const langTitle = document.getElementById("langTitle");
+    const langHint  = document.getElementById("langHint");
+    const continueBtn = document.getElementById("continueBtn");
+
+    const lang_en = document.getElementById("lang_en");
+    const lang_uz = document.getElementById("lang_uz");
+    const lang_ru = document.getElementById("lang_ru");
+
+    // app text nodes
+    const heroTitle = document.getElementById("heroTitle");
+    const b1 = document.getElementById("b1");
+    const b2 = document.getElementById("b2");
+    const b3 = document.getElementById("b3");
+
+    const refTitle = document.getElementById("refTitle");
+    const refText  = document.getElementById("refText");
+    const rewTitle = document.getElementById("rewTitle");
+    const rewText  = document.getElementById("rewText");
+
+    const duelHead = document.getElementById("duelHead");
+    const t1 = document.getElementById("t1");
+    const t2 = document.getElementById("t2");
+    const startDuelBtn = document.getElementById("startDuelBtn");
+
+    const topTitle = document.getElementById("topTitle");
+    const seeAllBtn = document.getElementById("seeAllBtn");
+
+    const navHomeTxt = document.getElementById("navHomeTxt");
+    const navDuelTxt = document.getElementById("navDuelTxt");
+    const navRewardTxt = document.getElementById("navRewardTxt");
+    const navSupportTxt = document.getElementById("navSupportTxt");
+
+    // nav items
+    const navHome = document.getElementById("navHome");
+    const navDuel = document.getElementById("navDuel");
+    const navReward = document.getElementById("navReward");
+    const navSupport = document.getElementById("navSupport");
+
+    // ===== State =====
+    let selectedLang = "en";
+    let lang = localStorage.getItem("onewise_lang");
+
+    function pickSelected(l){
+      selectedLang = l;
+      [lang_en, lang_uz, lang_ru].forEach(x => x.classList.remove("selected"));
+      if (l === "en") lang_en.classList.add("selected");
+      if (l === "uz") lang_uz.classList.add("selected");
+      if (l === "ru") lang_ru.classList.add("selected");
+    }
+
+    function applyLang(l){
+      const s = STR[l] || STR.en;
+
+      // language screen
+      langTitle.textContent = s.choose;
+      continueBtn.textContent = s.cont;
+      langHint.textContent = s.hint;
+
+      // main screen
+      heroTitle.textContent = s.heroTitle;
+      b1.textContent = s.b1;
+      b2.textContent = s.b2;
+      b3.textContent = s.b3;
+
+      refTitle.textContent = s.refTitle;
+      refText.textContent  = s.refText;
+      rewTitle.textContent = s.rewTitle;
+      rewText.textContent  = s.rewText;
+
+      duelHead.textContent = s.duelHead;
+      t1.textContent = s.t1;
+      t2.textContent = s.t2;
+      startDuelBtn.textContent = s.startDuel;
+
+      topTitle.textContent = s.topTitle;
+      seeAllBtn.textContent = s.all;
+
+      navHomeTxt.textContent = s.navHome;
+      navDuelTxt.textContent = s.navDuel;
+      navRewardTxt.textContent = s.navReward;
+      navSupportTxt.textContent = s.navSupport;
+    }
+
+    function showLangScreen(){
+      langScreen.style.display = "flex";
+      app.style.display = "none";
+      bottomNav.style.display = "none";
+
+      pickSelected("en");     // default English
+      applyLang("en");
+    }
+
+    function showApp(){
+      langScreen.style.display = "none";
+      app.style.display = "block";
+      bottomNav.style.display = "block";
+
+      applyLang(lang || "en");
+    }
+
+    function toastMsg(text){
+      toast.textContent = text;
+      toast.style.display = "block";
+      clearTimeout(window.__t);
+      window.__t = setTimeout(()=> toast.style.display = "none", 1700);
+    }
+
+    // ===== first-run logic =====
+    if (!lang) {
+      showLangScreen();
+    } else {
+      showApp();
+    }
+
+    // ===== language selection clicks =====
+    lang_en.onclick = () => { pickSelected("en"); applyLang("en"); };
+    lang_uz.onclick = () => { pickSelected("uz"); applyLang("uz"); };
+    lang_ru.onclick = () => { pickSelected("ru"); applyLang("ru"); };
+
+    continueBtn.onclick = () => {
+      lang = selectedLang;
+      localStorage.setItem("onewise_lang", lang);
+      showApp();
+    };
+
+    // ===== nav demo behavior =====
+    function setActive(el){
+      [navHome, navDuel, navReward, navSupport].forEach(x => x.classList.remove("active"));
+      el.classList.add("active");
+    }
+
+    navHome.onclick = () => { setActive(navHome); toastMsg(STR[lang||"en"].toastDemo); };
+    navDuel.onclick = () => { setActive(navDuel); toastMsg(STR[lang||"en"].toastDemo); };
+    navReward.onclick = () => { setActive(navReward); toastMsg(STR[lang||"en"].toastDemo); };
+    navSupport.onclick = () => { setActive(navSupport); toastMsg("Support: keyin ulaymiz ✅"); };
+
+    // cards demo
+    startDuelBtn.onclick = () => toastMsg(STR[lang||"en"].toastDemo);
+    document.getElementById("refCard").onclick = () => toastMsg("Referral: keyin ulaymiz ✅");
+    document.getElementById("rewCard").onclick = () => toastMsg("Rewards: keyin ulaymiz ✅");
+    seeAllBtn.onclick = () => toastMsg("Leaderboard: keyin ulaymiz ✅");
+
+  </script>
 </body>
 </html>
