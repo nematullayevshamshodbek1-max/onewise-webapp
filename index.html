@@ -441,9 +441,104 @@
       font-size:13px;
       z-index:900;
     }
+    /* ===== Drawer (Left menu) ===== */
+#drawerOverlay{
+  position:fixed; inset:0;
+  background: rgba(0,0,0,.55);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  z-index: 800;
+}
+
+#drawer{
+  position:fixed;
+  top:0; left:0;
+  height:100vh;
+  width: 72vw;
+  max-width: 360px;
+  min-width: 260px;
+  background: rgba(18,22,35,.92);
+  border-right: 1px solid rgba(255,255,255,.10);
+  box-shadow: 20px 0 60px rgba(0,0,0,.55);
+  transform: translateX(-105%);
+  transition: transform .22s ease;
+  z-index: 801;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  padding: 14px;
+}
+
+#drawer.open{
+  transform: translateX(0);
+}
+
+.drawerHeader{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom: 12px;
+}
+
+.drawerBrand{
+  font-weight: 900;
+  font-size: 18px;
+  letter-spacing: .3px;
+}
+.drawerBrand .one{ color: var(--blue); }
+
+.drawerClose{
+  border:1px solid rgba(255,255,255,.10);
+  background: rgba(255,255,255,.06);
+  color:#fff;
+  border-radius: 12px;
+  width: 38px;
+  height: 38px;
+  font-weight: 900;
+  cursor:pointer;
+}
+
+.drawerBody{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+
+.drawerItem{
+  padding: 12px 12px;
+  border-radius: 14px;
+  border:1px solid rgba(255,255,255,.08);
+  background: rgba(255,255,255,.04);
+  color: rgba(255,255,255,.90);
+  font-weight: 800;
+  cursor:pointer;
+  user-select:none;
+}
+.drawerItem:active{ transform: scale(.99); }
+
   </style>
 </head>
 
+<!-- Side Drawer Overlay -->
+<div id="drawerOverlay" style="display:none;"></div>
+
+<!-- Side Drawer -->
+<div id="drawer" aria-hidden="true">
+  <div class="drawerHeader">
+    <div class="drawerBrand"><span class="one">1</span>WISE</div>
+    <button id="drawerClose" class="drawerClose">✕</button>
+  </div>
+
+  <div class="drawerBody">
+    <!-- keyin shu yerga menu itemlarni yozamiz -->
+    <div class="drawerItem">📌 Tezkor</div>
+    <div class="drawerItem">🎁 Mukofotlar</div>
+    <div class="drawerItem">👥 Referal</div>
+    <div class="drawerItem">💬 Support</div>
+    <div class="drawerItem">🌐 Language</div>
+  </div>
+</div>
+
+  
 <body>
 
   <!-- 1) First-run language selection -->
@@ -563,6 +658,11 @@
   <!-- Bottom nav (Profile -> Support) -->
   <div class="bottomNav" id="bottomNav" style="display:none;">
     <div class="navBar">
+      <div class="navItem" id="navMenu">
+  <div class="navIcon">≡</div>
+  <div>Menyu</div>
+</div>
+
       <div class="navItem active" id="navHome">
         <div class="navIcon">🏠</div>
         <div id="navHomeTxt">Home</div>
@@ -834,6 +934,28 @@
     document.getElementById("rewCard").onclick = () => toastMsg("Rewards: keyin ulaymiz ✅");
     seeAllBtn.onclick = () => toastMsg("Leaderboard: keyin ulaymiz ✅");
 
+    // ===== Drawer logic =====
+const navMenu = document.getElementById("navMenu");
+const drawer = document.getElementById("drawer");
+const drawerOverlay = document.getElementById("drawerOverlay");
+const drawerClose = document.getElementById("drawerClose");
+
+function openDrawer(){
+  drawer.classList.add("open");
+  drawerOverlay.style.display = "block";
+  drawer.setAttribute("aria-hidden", "false");
+}
+function closeDrawer(){
+  drawer.classList.remove("open");
+  drawerOverlay.style.display = "none";
+  drawer.setAttribute("aria-hidden", "true");
+}
+
+navMenu.onclick = () => openDrawer();
+drawerOverlay.onclick = () => closeDrawer();
+drawerClose.onclick = () => closeDrawer();
+
   </script>
 </body>
 </html>
+
