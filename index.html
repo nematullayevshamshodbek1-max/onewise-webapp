@@ -2,155 +2,293 @@
 <html lang="uz">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Language Selection</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>1WISE - Web App</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <style>
         :root {
-            --primary-color: #2481cc;
-            --bg-color: #f5f7fa;
-            --text-color: #222;
-            --card-bg: #ffffff;
+            --bg-dark: #0f1218;
+            --card-bg: #1c222d;
+            --accent-blue: #0088cc;
+            --text-main: #ffffff;
+            --text-gray: #8e8e93;
+            --green-btn: #24b35d;
         }
 
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
             margin: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            overflow: hidden;
+            padding: 0;
+            overflow-x: hidden;
         }
 
-        .lang-container {
-            width: 90%;
-            max-width: 400px;
-            background: var(--card-bg);
-            padding: 30px;
-            border-radius: 20px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-            text-align: center;
-        }
-
-        .logo {
-            font-size: 50px;
-            margin-bottom: 20px;
-        }
-
-        h2 {
-            margin-bottom: 10px;
-            font-size: 22px;
-        }
-
-        p {
-            color: #666;
-            margin-bottom: 30px;
-            font-size: 14px;
-        }
-
-        .lang-options {
+        /* --- Til Tanlash Ekran --- */
+        #lang-screen {
+            position: fixed;
+            inset: 0;
+            z-index: 1000;
+            background: var(--bg-dark);
             display: flex;
             flex-direction: column;
-            gap: 15px;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .lang-card {
+            background: var(--card-bg);
+            width: 100%;
+            max-width: 350px;
+            padding: 30px;
+            border-radius: 24px;
+            text-align: center;
+            border: 1px solid #2c3444;
         }
 
         .lang-btn {
+            width: 100%;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 12px;
+            border: 1px solid #3d4657;
+            background: #252c3a;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        /* --- Asosiy Sahifa Dizayni --- */
+        #main-app { display: none; padding-bottom: 80px; }
+
+        header {
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-text { font-weight: bold; font-size: 22px; color: var(--text-main); }
+        .logo-text span { color: var(--accent-blue); }
+
+        .top-nav {
+            display: flex;
+            gap: 10px;
+            padding: 0 15px;
+            overflow-x: auto;
+            scrollbar-width: none;
+        }
+        .nav-pill {
+            padding: 8px 20px;
+            background: #252c3a;
+            border-radius: 20px;
+            font-size: 14px;
+            white-space: nowrap;
+        }
+        .nav-pill.active { background: var(--accent-blue); }
+
+        .search-bar {
+            margin: 15px;
+            background: #1c222d;
+            padding: 12px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            color: var(--text-gray);
+        }
+
+        /* 1vs1 Duel Banner */
+        .duel-banner {
+            margin: 0 15px;
+            background: linear-gradient(135deg, #1c222d 0%, #0d3b66 100%);
+            border-radius: 20px;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+            border: 1px solid #2a5298;
+        }
+
+        .duel-avatars { display: flex; justify-content: space-around; align-items: center; margin-bottom: 15px; }
+        .avatar-box img { width: 60px; height: 60px; border-radius: 50%; border: 2px solid var(--accent-blue); }
+        
+        .vs-text { font-size: 24px; font-weight: 900; font-style: italic; }
+
+        .start-btn {
+            background: var(--green-btn);
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 10px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        /* Ro'yxat */
+        .list-container { padding: 15px; }
+        .user-card {
+            background: var(--card-bg);
+            margin-bottom: 12px;
+            padding: 12px;
+            border-radius: 15px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 15px 20px;
-            border: 2px solid #eee;
-            border-radius: 12px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            background: none;
-            font-size: 16px;
-            font-weight: 600;
-            color: var(--text-color);
+        }
+        .user-info { display: flex; align-items: center; gap: 12px; }
+        .user-info img { width: 45px; height: 45px; border-radius: 12px; }
+        
+        .duel-btn {
+            background: var(--green-btn);
+            color: white;
+            border: none;
+            padding: 6px 15px;
+            border-radius: 6px;
+            font-weight: bold;
         }
 
-        .lang-btn:active, .lang-btn:hover {
-            border-color: var(--primary-color);
-            background-color: rgba(36, 129, 204, 0.05);
+        /* Bottom Nav */
+        .bottom-menu {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background: #1c222d;
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0;
+            border-top: 1px solid #2c3444;
         }
-
-        .flag {
-            font-size: 20px;
-        }
-
-        /* Asosiy menyu simulyatsiyasi */
-        #main-menu {
-            display: none;
-        }
+        .menu-item { text-align: center; font-size: 11px; color: var(--text-gray); }
+        .menu-item.active { color: var(--accent-blue); }
+        .menu-icon { font-size: 20px; display: block; margin-bottom: 4px; }
     </style>
 </head>
 <body>
 
-    <div id="lang-selection" class="lang-container">
-        <div class="logo">🌍</div>
-        <h2>Tilni tanlang</h2>
-        <p>Ilovadan foydalanish uchun o'zingizga qulay tilni tanlang</p>
-        
-        <div class="lang-options">
-            <button class="lang-btn" onclick="setLanguage('uz')">
-                <span>O'zbekcha</span>
-                <span class="flag">🇺🇿</span>
-            </button>
-            <button class="lang-btn" onclick="setLanguage('ru')">
-                <span>Русский</span>
-                <span class="flag">🇷🇺</span>
-            </button>
-            <button class="lang-btn" onclick="setLanguage('en')">
-                <span>English</span>
-                <span class="flag">🇺🇸</span>
-            </button>
+    <div id="lang-screen">
+        <div class="lang-card">
+            <h2 style="margin-top:0">Tilni tanlang</h2>
+            <p style="color:var(--text-gray); font-size:14px">Davom etish uchun tilni tanlang</p>
+            <button class="lang-btn" onclick="selectLang('uz')">O'zbekcha</button>
+            <button class="lang-btn" onclick="selectLang('ru')">Русский</button>
+            <button class="lang-btn" onclick="selectLang('en')">English</button>
         </div>
     </div>
 
-    <div id="main-menu" class="lang-container">
-        <h2 id="welcome-msg">Xush kelibsiz!</h2>
-        <p>Siz muvaffaqiyatli kirdingiz.</p>
-        <button class="lang-btn" onclick="resetLang()" style="border-color: #ff4d4d; color: #ff4d4d; justify-content: center;">
-            Tilni o'zgartirish
-        </button>
+    <div id="main-app">
+        <header>
+            <div class="logo-text"><span>1</span>WISE</div>
+            <div>🔔</div>
+        </header>
+
+        <div class="top-nav">
+            <div class="nav-pill active">Duellar</div>
+            <div class="nav-pill">Reyting</div>
+            <div class="nav-pill">Mukofot</div>
+            <div class="nav-pill">Referal</div>
+        </div>
+
+        <div class="search-bar">🔍 Qidirish...</div>
+
+        <div class="duel-banner">
+            <div class="duel-avatars">
+                <div class="avatar-box">
+                    <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Felix" alt="Siz">
+                    <div style="font-size:12px; margin-top:5px">Siz</div>
+                    <div style="color:var(--green-btn); font-size:12px">+50 so'm</div>
+                </div>
+                <div class="vs-text">1 vs 1<br>DUEL</div>
+                <div class="avatar-box">
+                    <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Anvar" alt="Anvar">
+                    <div style="font-size:12px; margin-top:5px">Anvar</div>
+                    <div style="color:var(--green-btn); font-size:12px">+50 so'm</div>
+                </div>
+            </div>
+            <button class="start-btn">Duelni boshlash</button>
+        </div>
+
+        <div class="top-nav" style="margin-top:20px;">
+            <div class="nav-pill active">Ommabop</div>
+            <div class="nav-pill">Trenddagi</div>
+            <div class="nav-pill">Yangi</div>
+        </div>
+
+        <div class="list-container">
+            <div class="user-card">
+                <div class="user-info">
+                    <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Qilichbek">
+                    <div>
+                        <div style="font-weight:bold; font-size:14px">Qilichbek</div>
+                        <div style="color:var(--green-btn); font-size:12px">Duelni yutdi!</div>
+                    </div>
+                </div>
+                <div style="text-align:right">
+                    <div style="font-size:14px">8 x 6</div>
+                    <button class="duel-btn">DUEL</button>
+                </div>
+            </div>
+
+            <div class="user-card">
+                <div class="user-info">
+                    <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Ali">
+                    <div>
+                        <div style="font-weight:bold; font-size:14px">Ali</div>
+                        <div style="color:var(--green-btn); font-size:12px">Duelni yutdi!</div>
+                    </div>
+                </div>
+                <div style="text-align:right">
+                    <div style="font-size:14px">9 x 7</div>
+                    <button class="duel-btn">DUEL</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="bottom-menu">
+            <div class="menu-item">
+                <span class="menu-icon">☰</span> Menyu
+            </div>
+            <div class="menu-item">
+                <span class="menu-icon">🏠</span> Bosh sahifa
+            </div>
+            <div class="menu-item active">
+                <span class="menu-icon">🔵</span> Duellar
+            </div>
+            <div class="menu-item">
+                <span class="menu-icon">🎁</span> Mukofot
+            </div>
+            <div class="menu-item">
+                <span class="menu-icon">👤</span> Yordam
+            </div>
+        </div>
     </div>
 
     <script>
         const tg = window.Telegram.WebApp;
-        tg.expand(); // WebAppni to'liq ekranga yoyish
+        tg.expand();
+
+        function selectLang(lang) {
+            // Tilni saqlash
+            localStorage.setItem('selected_language', lang);
+            startApp();
+        }
+
+        function startApp() {
+            document.getElementById('lang-screen').style.display = 'none';
+            document.getElementById('main-app').style.display = 'block';
+            
+            // Bu yerda tanlangan tilga qarab matnlarni o'zgartirish mumkin
+            const lang = localStorage.getItem('selected_language');
+            console.log("Tanlangan til:", lang);
+        }
 
         // Sahifa yuklanganda tekshirish
-        window.onload = function() {
-            const savedLang = localStorage.getItem('userLanguage');
-            if (savedLang) {
-                showMainMenu(savedLang);
+        window.onload = () => {
+            if (localStorage.getItem('selected_language')) {
+                startApp();
             }
         };
-
-        function setLanguage(lang) {
-            // Tanlovni saqlash
-            localStorage.setItem('userLanguage', lang);
-            showMainMenu(lang);
-        }
-
-        function showMainMenu(lang) {
-            document.getElementById('lang-selection').style.display = 'none';
-            document.getElementById('main-menu').style.display = 'block';
-            
-            // Tilga qarab matnni o'zgartirish (Misol uchun)
-            const msg = document.getElementById('welcome-msg');
-            if(lang === 'uz') msg.innerText = "Asosiy menyu";
-            if(lang === 'ru') msg.innerText = "Главное меню";
-            if(lang === 'en') msg.innerText = "Main Menu";
-        }
-
-        function resetLang() {
-            localStorage.removeItem('userLanguage');
-            location.reload();
-        }
     </script>
 </body>
 </html>
