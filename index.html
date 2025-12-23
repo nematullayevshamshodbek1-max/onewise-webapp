@@ -829,61 +829,61 @@ if (depositBtn {
 
 
 
-<canvas id="snowCanvas" style="position: fixed; pointer-events: none; z-index: 100000; top: 0; left: 0;"></canvas>
-
 <script>
 (function() {
-    const canvas = document.getElementById('snowCanvas');
+    // 1. Canvas yaratamiz va uni faqat logotip ichiga joylaymiz
+    const logoWrap = document.querySelector('.logoWrap');
+    if (!logoWrap) return;
+
+    // Logotip konteynerini tayyorlaymiz
+    logoWrap.style.position = 'relative';
+    logoWrap.style.overflow = 'visible'; // Qor tepadan tushishi uchun
+
+    const canvas = document.createElement('canvas');
+    canvas.id = 'snowCanvas';
+    // Canvas stili: tugmalarga xalaqit bermasligi uchun mutlaqo neytral
+    Object.assign(canvas.style, {
+        position: 'absolute',
+        top: '-50px', // Yozuvdan 50px tepadan boshlanadi
+        left: '0',
+        width: '100%',
+        height: (logoWrap.offsetHeight + 50) + 'px',
+        pointerEvents: 'none',
+        zIndex: '1' // Faqat yozuv atrofida turadi
+    });
+    
+    logoWrap.appendChild(canvas);
     const ctx = canvas.getContext('2d');
     
     let flakes = [];
     let staticFlakes = [];
-    let logoRect = null;
 
-    function getLogoPosition() {
-        // Klass nomlari orqali yozuvni topamiz
-        const logo = document.querySelector('.logoWrap') || document.querySelector('.logoOne');
-        if (logo) {
-            logoRect = logo.getBoundingClientRect();
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        }
+    function init() {
+        canvas.width = logoWrap.offsetWidth;
+        canvas.height = logoWrap.offsetHeight + 50;
     }
-
-    window.addEventListener('resize', getLogoPosition);
-    window.addEventListener('scroll', getLogoPosition);
-    getLogoPosition();
+    window.addEventListener('resize', init);
+    init();
 
     class Flake {
         constructor() { this.reset(); }
         reset() {
-            if (!logoRect) return;
-            // Faqat yozuvning eni bo'ylab (100%) tepadan paydo bo'ladi
-            this.x = logoRect.left + Math.random() * logoRect.width;
-            this.y = logoRect.top - 50; // Yozuvdan 50px tepada
-            this.size = Math.random() * 2 + 0.5;
-            this.speed = Math.random() * 0.4 + 0.2;
+            this.x = Math.random() * canvas.width;
+            this.y = 0; 
+            this.size = Math.random() * 1.5 + 0.5;
+            this.speed = Math.random() * 0.3 + 0.2;
             this.opacity = Math.random() * 0.5 + 0.5;
         }
         update() {
             this.y += this.speed;
-
-            // Yozuv ustiga kelganda to'xtash mantiqi
-            if (logoRect && this.y >= logoRect.top && this.y <= logoRect.top + 3) {
-                // 80% holatda yozuvda to'planadi
-                if (Math.random() > 0.2 && staticFlakes.length < 40) {
-                    staticFlakes.push({
-                        x: this.x, 
-                        y: logoRect.top + (Math.random() * 5), // Yozuv ustida biroz tartibsiz to'planish
-                        size: this.size,
-                        opacity: this.opacity
-                    });
+            // Yozuvning ustiga (50-pikselda) qo'nish mantiqi
+            if (this.y >= 50 && this.y <= 52) {
+                if (Math.random() > 0.4 && staticFlakes.length < 30) {
+                    staticFlakes.push({x: this.x, y: 50 + (Math.random()*3), size: this.size, opacity: this.opacity});
                     this.reset();
                 }
             }
-
-            // Agar yozuvdan pastga tushib ketsa yo'qoladi
-            if (logoRect && this.y > logoRect.bottom) this.reset();
+            if (this.y > canvas.height) this.reset();
         }
         draw() {
             ctx.fillStyle = `rgba(255, 255, 255, ${this.opacity})`;
@@ -893,36 +893,23 @@ if (depositBtn {
         }
     }
 
-    // 25 ta yog'ayotgan qor parchasi (siyrakroq)
-    for (let i = 0; i < 25; i++) flakes.push(new Flake());
+    for (let i = 0; i < 20; i++) flakes.push(new Flake());
 
     function loop() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-        if (!logoRect) {
-            getLogoPosition();
-            requestAnimationFrame(loop);
-            return;
-        }
-
         flakes.forEach(f => { f.update(); f.draw(); });
-
         staticFlakes.forEach(sf => {
             ctx.fillStyle = `rgba(255, 255, 255, ${sf.opacity})`;
             ctx.beginPath();
             ctx.arc(sf.x, sf.y, sf.size, 0, Math.PI * 2);
             ctx.fill();
         });
-
         requestAnimationFrame(loop);
     }
 
-    // Har 8 soniyada qorlarni sezilmasdan eritish
     setInterval(() => {
-        if (staticFlakes.length > 5) {
-            staticFlakes.splice(0, 5);
-        }
-        getLogoPosition();
-    }, 8000);
+        if (staticFlakes.length > 0) staticFlakes.splice(0, 3);
+    }, 10000);
 
     loop();
 })();
@@ -937,6 +924,7 @@ if (depositBtn {
 
 </body>
 </html>
+
 
 
 
