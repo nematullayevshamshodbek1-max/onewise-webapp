@@ -70,15 +70,28 @@
       align-items:center;
       gap: 10px;
     }
-    .deposit-btn{
-      background: linear-gradient(135deg,#00c853,#00e676);
-      border: none;
-      color: #003b1f;
-      font-weight: 1000;
-      padding: 8px 14px;
-      border-radius: 10px;
-      cursor: pointer;
-    }
+/* ===== Deposit button ===== */
+.deposit-btn{
+  background: linear-gradient(135deg,#00c853,#00e676);
+  border: none;
+  color: #ffffff !important;   /* OQ MATN */
+  font-weight: 800;
+  padding: 8px 14px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: transform .08s ease, box-shadow .08s ease, opacity .08s ease;
+  box-shadow: 0 6px 16px rgba(0,200,83,.35);
+}
+/* Bosilganda bilinishi */
+.deposit-btn:active{
+  transform: scale(0.96);
+  box-shadow: 0 3px 8px rgba(0,200,83,.35);
+  opacity: .9;
+}
+.deposit-btn:hover{
+  opacity: .95;
+}
+
     .bell{
       width: 34px;
       height: 34px;
@@ -782,6 +795,7 @@ if (bell){
   </script>
 </body>
 </html>
+
 
 
 
