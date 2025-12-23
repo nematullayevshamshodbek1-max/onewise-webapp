@@ -125,7 +125,24 @@
       max-width:520px;
       margin:0 auto;
       padding: 14px 14px 0;
-          <!-- ===== DUELS SCREEN ===== -->
+    }
+
+/* ===== TOP BAR ===== */
+.topbar{
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 64px;
+  padding: 0 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #0b0f1a;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  z-index: 1000;
+}
+    <!-- ===== DUELS SCREEN ===== -->
 <div id="screenDuels" class="screen">
 
   <!-- Top tabs -->
@@ -178,24 +195,7 @@
     <!-- JS render qiladi -->
   </div>
 </div>
-
-    }
-
-/* ===== TOP BAR ===== */
-.topbar{
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 64px;
-  padding: 0 14px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background: #0b0f1a;
-  border-bottom: 1px solid rgba(255,255,255,0.08);
-  z-index: 1000;
-}
+    
 
 /* chap tomoni */
 .topbar-left .logo{
@@ -1384,6 +1384,7 @@ renderDuels();
   </script>
 </body>
 </html>
+
 
 
 
