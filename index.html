@@ -90,10 +90,13 @@
     }
 
     /* ===== APP SCROLL CONTAINER ===== */
-    #app{
-      position:fixed; inset:0;
-      display:none;
-      overflow:auto;
+#app{
+  position:fixed; inset:0;
+  display:none;
+  overflow:auto;
+  padding-top: 74px;
+  padding-bottom: calc(140px + env(safe-area-inset-bottom));
+}
 
       /* topbar */
       padding-top: 74px;
@@ -208,55 +211,67 @@
     }
 
     /* ===== Bottom nav ===== */
-    .bottomNav{
-      position:fixed;
-      left:0; right:0; bottom:0;
-      padding: 8px 12px calc(10px + env(safe-area-inset-bottom));
-      background: linear-gradient(180deg, rgba(5,7,13,0), rgba(5,7,13,0.88) 35%, rgba(5,7,13,0.96));
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-      z-index:500;
-      display:none;
-    }
-    .navBar{
-      max-width:520px;
-      margin:0 auto;
-      display:flex;
-      justify-content:space-between;
-      gap:10px;
-      border:1px solid rgba(255,255,255,.08);
-      background: rgba(18,22,35,.70);
-      border-radius:18px;
-      padding:8px;
-      box-shadow: 0 14px 40px rgba(0,0,0,.45);
-    }
-    .navItem{
-      flex:1;
-      display:flex;
-      flex-direction:column;
-      align-items:center;
-      gap:6px;
-      padding:10px 6px;
-      border-radius:14px;
-      color: rgba(255,255,255,.65);
-      font-size:12px;
-      font-weight:900;
-      user-select:none;
-      cursor:pointer;
-    }
-    .navIcon{
-      width:34px; height:34px;
-      border-radius:14px;
-      display:flex; align-items:center; justify-content:center;
-      border:1px solid rgba(255,255,255,.08);
-      background: rgba(255,255,255,.04);
-    }
-    .navItem.active{ color:#fff; }
-    .navItem.active .navIcon{
-      border-color: rgba(47,128,237,.55);
-      background: rgba(47,128,237,.18);
-      box-shadow: 0 10px 24px rgba(47,128,237,.16);
-    }
+/* ===== Bottom bar (1win style) ===== */
+.bottomNav{
+  position:fixed;
+  left:0; right:0; bottom:0;
+  padding: 0 0 calc(env(safe-area-inset-bottom)); /* yonlarda 0 */
+  background: rgba(11,15,26,0.96);
+  border-top: 1px solid rgba(255,255,255,0.08);
+  z-index:500;
+}
+
+.navBar{
+  max-width:none;     /* old max-width:520px ni o‘chiradi */
+  margin:0;           /* yonlarda bo‘sh joy yo‘q */
+  display:flex;
+  justify-content:space-between;
+  gap:0;              /* tugmalar orasida bo‘shliq yo‘q */
+  border:none;        /* card border yo‘q */
+  background: transparent;
+  border-radius:0;    /* card shakl yo‘q */
+  padding: 6px 6px;   /* ichkarida ozgina joy */
+  box-shadow:none;    /* floating shadow yo‘q */
+}
+
+.navItem{
+  flex:1;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:4px;
+  padding: 10px 2px;
+  border-radius:12px;
+  color: rgba(255,255,255,.62);
+  font-size: 11px;
+  font-weight: 900;
+  user-select:none;
+  cursor:pointer;
+}
+
+.navIcon{
+  width:30px;
+  height:30px;
+  border-radius: 12px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border:1px solid rgba(255,255,255,.10);
+  background: rgba(255,255,255,.04);
+  font-size: 16px;
+}
+
+.navItem.active{
+  color:#fff;
+}
+
+.navItem.active .navIcon{
+  border-color: rgba(47,128,237,.55);
+  background: rgba(47,128,237,.18);
+  box-shadow: 0 10px 24px rgba(47,128,237,.10);
+}
+
 
     /* ===== Drawer ===== */
     #drawerOverlay{
@@ -344,6 +359,26 @@
       font-size:13px;
       z-index:900;
     }
+    /* ===== Topbar logo (1win vibe) ===== */
+.logoWrap{
+  display:flex;
+  align-items:center;
+  gap:2px;
+  font-weight:1000;
+  letter-spacing:.6px;
+  user-select:none;
+}
+.logoOne{
+  color: var(--blue);
+  font-size: 22px;
+  line-height: 1;
+}
+.logoText{
+  color:#fff;
+  font-size: 20px;
+  line-height: 1;
+}
+
   </style>
 </head>
 
@@ -352,7 +387,10 @@
   <!-- TOP BAR -->
   <div class="topbar">
     <div class="topbar-left">
-      <span class="logo">1WISE</span>
+      <div class="logoWrap">
+  <span class="logoOne">1</span><span class="logoText">WISE</span>
+</div>
+
     </div>
 
     <div class="topbar-center">
@@ -616,3 +654,4 @@
   </script>
 </body>
 </html>
+
