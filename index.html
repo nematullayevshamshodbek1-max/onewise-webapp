@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>1WISE</title>
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet" />
+      <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet" />
 
   <style>
     :root{
@@ -33,6 +33,7 @@
       overflow:hidden;
     }
 
+    /* ===== TOP BAR (ONE ONLY) ===== */
     .topbar{
       position: fixed;
       top: 0; left: 0; right: 0;
@@ -44,6 +45,11 @@
       background: #0b0f1a;
       border-bottom: 1px solid rgba(255,255,255,0.08);
       z-index: 900;
+    }
+    .logo{
+      font-weight: 1000;
+      font-size: 20px;
+      letter-spacing: .5px;
     }
     .topbar-center{
       display:flex;
@@ -63,60 +69,357 @@
       align-items:center;
       gap: 10px;
     }
-    .deposit-btn{
-      background: linear-gradient(135deg,#00c853,#00e676);
-      border: none;
-      color: #ffffff !important;
-      font-weight: 800;
-      padding: 8px 14px;
-      border-radius: 10px;
-      cursor: pointer;
-      box-shadow: 0 6px 16px rgba(0,200,83,.35);
-    }
-    .deposit-btn:active{ transform: scale(0.96); opacity: .9; }
+/* ===== Deposit button ===== */
+.deposit-btn{
+  background: linear-gradient(135deg,#00c853,#00e676);
+  border: none;
+  color: #ffffff !important;   /* OQ MATN */
+  font-weight: 800;
+  padding: 8px 14px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: transform .08s ease, box-shadow .08s ease, opacity .08s ease;
+  box-shadow: 0 6px 16px rgba(0,200,83,.35);
+}
+/* Bosilganda bilinishi */
+.deposit-btn:active{
+  transform: scale(0.96);
+  box-shadow: 0 3px 8px rgba(0,200,83,.35);
+  opacity: .9;
+}
+.deposit-btn:hover{
+  opacity: .95;
+}
 
     .bell{
-      width: 34px; height: 34px;
+      width: 34px;
+      height: 34px;
       background: rgba(255,255,255,.08);
       border-radius: 50%;
-      display:flex; align-items:center; justify-content:center;
-      cursor: pointer; color: rgba(255,255,255,.85);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size: 16px;
+      user-select:none;
     }
-    .bell.active{ color: var(--blue) !important; }
-    .bellIcon{ width: 22px; height: 22px; fill: currentColor; }
 
-    #app{
+    /* ===== APP SCROLL CONTAINER ===== */
+#app{
+  position:fixed; inset:0;
+  display:none;
+  overflow:auto;
+  padding-top: 74px;
+  padding-bottom: calc(140px + env(safe-area-inset-bottom));
+}
+
+    .wrap{
+      max-width: 520px;
+      margin: 0 auto;
+      padding: 14px 14px 120px; /* extra bottom room */
+    }
+
+    /* ===== Language first-run screen ===== */
+    #langScreen{
       position:fixed; inset:0;
       display:none;
-      overflow:auto;
-      padding-top: 74px;
-      padding-bottom: calc(140px + env(safe-area-inset-bottom));
+      align-items:center;
+      justify-content:center;
+      padding:24px;
+      z-index:1100;
     }
-    .wrap{ max-width: 520px; margin: 0 auto; padding: 14px; }
-
-    .logoWrap{
-      display:flex; align-items:center; gap:2px;
-      font-weight:1000; letter-spacing:.6px; user-select:none;
-      position: relative;
+    .langBox{
+      width:100%;
+      max-width:420px;
+      border-radius:22px;
+      padding:18px;
+      background: rgba(20, 20, 28, 0.62);
+      border:1px solid var(--stroke);
+      box-shadow: 0 20px 60px rgba(0,0,0,.55);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
     }
-    .logoOne{ color: var(--blue); font-size: 22px; }
-    .logoText{ color:#fff; font-size: 20px; }
+    .langTitle{
+      text-align:center;
+      font-weight:1000;
+      font-size:22px;
+      margin:6px 0 14px;
+    }
+    .langItem{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      padding:14px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,0.10);
+      background: rgba(0,0,0,0.18);
+      cursor:pointer;
+      user-select:none;
+      margin-bottom:10px;
+      transition: transform .08s ease, border-color .08s ease;
+    }
+    .langItem:active{ transform: scale(0.99); }
+    .langItem.selected{
+      border-color: rgba(106,75,255,0.75);
+      background: rgba(106,75,255,0.10);
+      box-shadow: 0 0 0 3px rgba(106,75,255,0.14) inset;
+    }
+    .flag{
+      width:28px; height:20px;
+      border-radius:5px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      border:1px solid rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.08);
+      font-size:14px;
+    }
+    .langName{ font-size:16px; font-weight:900; }
+    .btnPrimary{
+      width:100%;
+      border:none;
+      border-radius:14px;
+      padding:14px;
+      font-weight:1000;
+      font-size:16px;
+      cursor:pointer;
+      color:#fff;
+      background: linear-gradient(180deg, var(--purple1), var(--purple2));
+      box-shadow: 0 10px 30px rgba(90,60,255,.35);
+      margin-top:6px;
+    }
+    .langHint{
+      text-align:center;
+      color: rgba(255,255,255,.62);
+      font-size:12px;
+      margin-top:12px;
+      line-height:1.35;
+    }
 
-    #langScreen{ position:fixed; inset:0; display:none; align-items:center; justify-content:center; padding:24px; z-index:1100; }
-    .langBox{ width:100%; max-width:420px; border-radius:22px; padding:18px; background: rgba(20, 20, 28, 0.62); border:1px solid var(--stroke); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
-    .langItem{ display:flex; align-items:center; gap:12px; padding:14px; border-radius:14px; border:1px solid rgba(255,255,255,0.10); background: rgba(0,0,0,0.18); cursor:pointer; margin-bottom:10px; }
-    .langItem.selected{ border-color: var(--purple1); background: rgba(106,75,255,0.10); }
-
-    .bottomNav{ position:fixed; left:0; right:0; bottom:0; background: rgba(11,15,26,0.96); border-top: 1px solid rgba(255,255,255,0.08); z-index:500; padding-bottom: env(safe-area-inset-bottom); }
-    .navBar{ display:flex; justify-content:space-between; padding: 6px; }
-    .navItem{ flex:1; display:flex; flex-direction:column; align-items:center; gap:4px; padding: 10px 2px; color: rgba(255,255,255,.62); font-size: 11px; font-weight: 900; cursor:pointer; }
-    .navItem.active{ color: var(--blue) !important; }
-    .navIcon{ background: transparent; border: none; font-size: 16px; }
-
+    /* ===== Screens ===== */
     .screen{ display:block; }
     .hidden{ display:none !important; }
-    .card{ border:1px solid var(--stroke); background: var(--card); border-radius:18px; padding:14px; margin-bottom:10px; }
-    .toast{ position:fixed; left:50%; transform:translateX(-50%); bottom:96px; background: rgba(20,20,28,.78); border:1px solid rgba(255,255,255,.12); color:#fff; padding:10px 12px; border-radius:14px; display:none; z-index:900; }
+
+    /* ===== Simple cards for now ===== */
+    .card{
+      border:1px solid var(--stroke);
+      background: var(--card);
+      border-radius:18px;
+      padding:14px;
+      box-shadow: 0 14px 40px rgba(0,0,0,.35);
+    }
+    .h1{
+      font-weight:1000;
+      font-size:26px;
+      margin: 0 0 10px;
+    }
+    .p{
+      color: rgba(255,255,255,.75);
+      margin: 0;
+      line-height:1.45;
+      font-weight:700;
+    }
+
+    /* ===== Bottom nav ===== */
+.bottomNav{
+  position:fixed;
+  left:0; right:0; bottom:0;
+  padding: 0 0 calc(env(safe-area-inset-bottom)); 
+  background: rgba(11,15,26,0.96);
+  border-top: 1px solid rgba(255,255,255,0.08);
+  z-index:500;
+}
+
+.navBar{
+  max-width:none;
+  margin:0;
+  display:flex;
+  justify-content:space-between;
+  gap:0;
+  border:none;
+  background: transparent;
+  border-radius:0;
+  padding: 6px 6px;
+  box-shadow:none;
+}
+
+.navItem{
+  flex:1;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:4px;
+  padding: 10px 2px;
+  border-radius:12px;
+  color: rgba(255,255,255,.62);
+  font-size: 11px;
+  font-weight: 900;
+  user-select:none;
+  cursor:pointer;
+}
+
+.navIcon{
+  width:30px;
+  height:30px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background: transparent !important;
+  border: none !important;
+  font-size: 16px;
+}
+
+.navItem.active{
+  color: var(--blue) !important;
+}
+
+    /* ===== Drawer ===== */
+    #drawerOverlay{
+      position:fixed; inset:0;
+      background: rgba(0,0,0,.55);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      z-index: 2000;
+      display:none;
+    }
+    #drawer{
+      position:fixed; top:0; left:0;
+      height:100vh;
+      width: 72vw;
+      max-width: 360px;
+      min-width: 260px;
+      background: rgba(18,22,35,.92);
+      border-right: 1px solid rgba(255,255,255,.10);
+      box-shadow: 20px 0 60px rgba(0,0,0,.55);
+      transform: translateX(-105%);
+      transition: transform .22s ease;
+      z-index: 2001;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      padding: 14px;
+    }
+    #drawer.open{ transform: translateX(0); }
+    .drawerHeader{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      margin-bottom: 12px;
+    }
+    .drawerBrand{
+      font-weight: 1000;
+      font-size: 18px;
+      letter-spacing: .3px;
+    }
+    .drawerBrand .one{ color: var(--blue); }
+    .drawerClose{
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.06);
+      color:#fff;
+      border-radius: 12px;
+      width: 38px;
+      height: 38px;
+      font-weight: 1000;
+      cursor:pointer;
+    }
+    .drawerBody{
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+    }
+    .drawerItem{
+      padding: 12px 12px;
+      border-radius: 14px;
+      border:1px solid rgba(255,255,255,.08);
+      background: rgba(255,255,255,.04);
+      color: rgba(255,255,255,.90);
+      font-weight: 900;
+      cursor:pointer;
+      user-select:none;
+    }
+    .drawerItem:active{ transform: scale(.99); }
+
+    .toast{
+      position:fixed;
+      left:50%;
+      transform:translateX(-50%);
+      bottom:96px;
+      background: rgba(20,20,28,.78);
+      border:1px solid rgba(255,255,255,.12);
+      color:#fff;
+      padding:10px 12px;
+      border-radius:14px;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      box-shadow: 0 14px 40px rgba(0,0,0,.45);
+      max-width: 520px;
+      width: calc(100% - 28px);
+      display:none;
+      white-space:pre-line;
+      font-size:13px;
+      z-index:900;
+    }
+
+.logoWrap{
+  display:flex;
+  align-items:center;
+  gap:2px;
+  font-weight:1000;
+  letter-spacing:.6px;
+  user-select:none;
+}
+.logoOne{
+  color: var(--blue);
+  font-size: 22px;
+  line-height: 1;
+}
+.logoText{
+  color:#fff;
+  font-size: 20px;
+  line-height: 1;
+}
+
+.material-symbols-rounded{
+  font-family: "Material Symbols Rounded" !important;
+  font-weight: normal;
+  font-style: normal;
+  font-size: 22px;
+  line-height: 1;
+  display: inline-block;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+  -webkit-font-feature-settings: "liga";
+  -webkit-font-smoothing: antialiased;
+  font-variation-settings: 'FILL' 0, 'wght' 500, 'GRAD' 0, 'opsz' 24;
+}
+
+.navItem.active .material-symbols-rounded{
+  color: var(--blue) !important;
+  font-variation-settings: 'FILL' 1, 'wght' 600, 'GRAD' 0, 'opsz' 24;
+}
+
+.bell{
+  background: transparent !important;
+  border: 0 !important;
+  padding: 6px 8px;
+  cursor: pointer;
+  color: rgba(255,255,255,.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bellIcon{
+  width: 22px;
+  height: 22px;
+  fill: currentColor;
+}
+
+.bell:active{ transform: scale(0.98); }
+.bell.active{ color: var(--blue) !important; }
+
   </style>
 </head>
 
@@ -124,129 +427,125 @@
 
 <div class="topbar">
   <div class="topbar-left">
-    <div class="logoWrap" id="logoWrapper">
+    <div class="logoWrap">
       <span class="logoOne">1</span><span class="logoText">WISE</span>
     </div>
   </div>
+
   <div class="topbar-center">
     <span class="currency">UZS</span>
     <span class="balance" id="topBalance">0.00</span>
   </div>
+
   <div class="topbar-right">
     <button class="deposit-btn" id="depositBtn">Deposit</button>
     <div class="bell" id="bellBtn">
-      <svg class="bellIcon" viewBox="0 0 24 24"><path d="M12 22a2.5 2.5 0 0 0 2.45-2h-4.9A2.5 2.5 0 0 0 12 22Zm7-6V11a7 7 0 0 0-5-6.71V3a2 2 0 1 0-4 0v1.29A7 7 0 0 0 5 11v5l-1.8 1.8a1 1 0 0 0 .7 1.7h16.2a1 1 0 0 0 .7-1.7L19 16Z"/></svg>
+      <svg class="bellIcon" viewBox="0 0 24 24">
+        <path d="M12 22a2.5 2.5 0 0 0 2.45-2h-4.9A2.5 2.5 0 0 0 12 22Zm7-6V11a7 7 0 0 0-5-6.71V3a2 2 0 1 0-4 0v1.29A7 7 0 0 0 5 11v5l-1.8 1.8a1 1 0 0 0 .7 1.7h16.2a1 1 0 0 0 .7-1.7L19 16Z"/>
+      </svg>
     </div>
   </div>
 </div>
 
-<div id="langScreen">
-  <div class="langBox">
-    <div class="langItem" id="lang_en" data-lang="en">English</div>
-    <div class="langItem" id="lang_uz" data-lang="uz">O'zbekcha</div>
-    <div class="langItem" id="lang_ru" data-lang="ru">Русский</div>
-    <button class="deposit-btn" style="width:100%; margin-top:10px;" id="continueBtn">Continue</button>
-  </div>
-</div>
-
-<div id="app">
-  <div class="wrap">
-    <div id="screenHome" class="screen">
-      <div class="card"><h1>Home</h1><p>Hush kelibsiz!</p></div>
-    </div>
-    <div id="screenDuels" class="screen hidden">
-      <div class="card"><h1>Duels</h1><p>Tez kunda...</p></div>
+  <div id="langScreen">
+    <div class="langBox">
+      <div class="langTitle" id="langTitle">Choose language</div>
+      <div class="langItem" id="lang_en" data-lang="en"><div class="flag">🇺🇸</div><div class="langName">English</div></div>
+      <div class="langItem" id="lang_uz" data-lang="uz"><div class="flag">🇺🇿</div><div class="langName">O‘zbekcha</div></div>
+      <div class="langItem" id="lang_ru" data-lang="ru"><div class="flag">🇷🇺</div><div class="langName">Русский</div></div>
+      <button class="btnPrimary" id="continueBtn">Continue</button>
+      <div class="langHint" id="langHint">Language is asked only once.</div>
     </div>
   </div>
-</div>
 
-<div class="bottomNav">
+  <div id="drawerOverlay"></div>
+  <div id="drawer">
+    <div class="drawerHeader">
+      <div class="drawerBrand"><span class="one">1</span>WISE</div>
+      <button id="drawerClose" class="drawerClose">✕</button>
+    </div>
+    <div class="drawerBody">
+      <div class="drawerItem" id="drawerRewards">🎁 Mukofotlar</div>
+      <div class="drawerItem" id="drawerLang">🌐 Language</div>
+      <div class="drawerItem" id="drawerSupport">💬 Support</div>
+    </div>
+  </div>
+
+  <div id="app">
+    <div class="wrap">
+      <div id="screenHome" class="screen"><div class="card"><div class="h1">Home</div><p class="p">Bu bazaviy toza versiya. Endi xotirjam UI qo‘shamiz.</p></div></div>
+      <div id="screenDuels" class="screen hidden"><div class="card"><div class="h1">Duellar</div><p class="p">Bu yerga sening duel sahifangni joylaymiz.</p></div></div>
+      <div id="screenRewards" class="screen hidden"><div class="card"><div class="h1">Mukofotlar</div><p class="p">Bu yerga sening mukofot UI’ngni joylaymiz.</p></div></div>
+      <div id="screenSupport" class="screen hidden"><div class="card"><div class="h1">Support</div><p class="p">Keyin operator / chat ulaymiz.</p></div></div>
+    </div>
+  </div>
+
+<div class="bottomNav" id="bottomNav">
   <div class="navBar">
-    <div class="navItem active" id="navHome"><span class="material-symbols-rounded">home</span><div>Home</div></div>
-    <div class="navItem" id="navDuel"><span class="material-symbols-rounded">psychology</span><div>Duel</div></div>
-    <div class="navItem" id="navSupport"><span class="material-symbols-rounded">support_agent</span><div>Support</div></div>
+    <div class="navItem" id="navMenu"><div class="navIcon"><span class="material-symbols-rounded">menu</span></div><div>Menyu</div></div>
+    <div class="navItem active" id="navHome"><div class="navIcon"><span class="material-symbols-rounded">home</span></div><div id="navHomeTxt">Home</div></div>
+    <div class="navItem" id="navDuel"><div class="navIcon"><span class="material-symbols-rounded">psychology</span></div><div id="navDuelTxt">Duel</div></div>
+    <div class="navItem" id="navReward"><div class="navIcon"><span class="material-symbols-rounded">emoji_events</span></div><div id="navRewardTxt">Rewards</div></div>
+    <div class="navItem" id="navSupport"><div class="navIcon"><span class="material-symbols-rounded">support_agent</span></div><div id="navSupportTxt">Support</div></div>
   </div>
 </div>
 
 <div class="toast" id="toast"></div>
 
 <script>
-  // UI LOGIC
-  const tg = window.Telegram?.WebApp;
-  tg?.ready(); tg?.expand();
+    const tg = window.Telegram?.WebApp;
+    tg?.ready(); tg?.expand();
 
-  const app = document.getElementById("app");
-  const langScreen = document.getElementById("langScreen");
-  const depositBtn = document.getElementById("depositBtn");
-  const toast = document.getElementById("toast");
-
-  function toastMsg(msg){
-    toast.textContent = msg; toast.style.display = "block";
-    setTimeout(()=> toast.style.display="none", 2000);
-  }
-
-  depositBtn.onclick = () => toastMsg("Deposit keyin ulanadi ✅");
-  
-  // Simple Screen Switch
-  document.getElementById("navHome").onclick = () => {
-    document.getElementById("screenHome").classList.remove("hidden");
-    document.getElementById("screenDuels").classList.add("hidden");
-  };
-  document.getElementById("navDuel").onclick = () => {
-    document.getElementById("screenHome").classList.add("hidden");
-    document.getElementById("screenDuels").classList.remove("hidden");
-  };
-
-  // Check Lang
-  if(!localStorage.getItem("onewise_lang")){
-    langScreen.style.display = "flex";
-  } else {
-    app.style.display = "block";
-  }
-  document.getElementById("continueBtn").onclick = () => {
-    localStorage.setItem("onewise_lang", "uz");
-    langScreen.style.display = "none";
-    app.style.display = "block";
-  };
-
-  // === FAQAT 1WISE UCHUN QOR KODI ===
-  (function() {
-    const logo = document.getElementById('logoWrapper');
-    if(!logo) return;
-    const canvas = document.createElement('canvas');
-    Object.assign(canvas.style, { position: 'absolute', top: '-40px', left: '0', pointerEvents: 'none', zIndex: '10' });
-    logo.appendChild(canvas);
-    const ctx = canvas.getContext('2d');
-    let flakes = [], staticFlakes = [];
-    function resize() { canvas.width = logo.offsetWidth; canvas.height = logo.offsetHeight + 40; }
-    window.addEventListener('resize', resize); resize();
-
-    class Flake {
-      constructor() { this.reset(); }
-      reset() { this.x = Math.random()*canvas.width; this.y = 0; this.size = Math.random()*1.5+0.5; this.speed = Math.random()*0.3+0.2; }
-      update() {
-        this.y += this.speed;
-        if(this.y >= 38 && this.y <= 41 && Math.random()>0.5 && staticFlakes.length<20) {
-          staticFlakes.push({x:this.x, y:38+Math.random()*3, size:this.size});
-          this.reset();
-        }
-        if(this.y > canvas.height) this.reset();
-      }
-      draw() { ctx.fillStyle = "white"; ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI*2); ctx.fill(); }
+    const toast = document.getElementById("toast");
+    function toastMsg(text){
+      toast.textContent = text; toast.style.display = "block";
+      setTimeout(()=> toast.style.display = "none", 1600);
     }
-    for(let i=0; i<15; i++) flakes.push(new Flake());
-    function loop() {
-      ctx.clearRect(0,0,canvas.width, canvas.height);
-      flakes.forEach(f=>{ f.update(); f.draw(); });
-      staticFlakes.forEach(s=>{ ctx.fillStyle="white"; ctx.beginPath(); ctx.arc(s.x, s.y, s.size, 0, Math.PI*2); ctx.fill(); });
-      requestAnimationFrame(loop);
+
+    const STR = {
+      en:{ choose:"Choose language", cont:"Continue", hint:"Language is asked only once." },
+      uz:{ choose:"Tilni tanlang", cont:"Davom etish", hint:"Til faqat bir marta so‘raladi." },
+      ru:{ choose:"Выберите язык", cont:"Продолжить", hint:"Язык спрашивается один раз." }
+    };
+
+    const langScreen = document.getElementById("langScreen"), app = document.getElementById("app"), bottomNav = document.getElementById("bottomNav");
+    let selectedLang = "en", lang = localStorage.getItem("onewise_lang");
+
+    function pickSelected(l){
+      selectedLang = l;
+      [lang_en, lang_uz, lang_ru].forEach(x => x.classList.remove("selected"));
+      document.getElementById("lang_"+l).classList.add("selected");
+      const s = STR[l];
+      document.getElementById("langTitle").textContent = s.choose;
+      document.getElementById("continueBtn").textContent = s.cont;
+      document.getElementById("langHint").textContent = s.hint;
     }
-    setInterval(()=> { if(staticFlakes.length>0) staticFlakes.shift(); }, 10000);
-    loop();
-  })();
+
+    if(!lang) { langScreen.style.display = "flex"; pickSelected("en"); } else { app.style.display = "block"; bottomNav.style.display = "block"; }
+
+    document.getElementById("lang_en").onclick = () => pickSelected("en");
+    document.getElementById("lang_uz").onclick = () => pickSelected("uz");
+    document.getElementById("lang_ru").onclick = () => pickSelected("ru");
+    document.getElementById("continueBtn").onclick = () => { localStorage.setItem("onewise_lang", selectedLang); location.reload(); };
+
+    const screens = { home: document.getElementById("screenHome"), duels: document.getElementById("screenDuels"), rewards: document.getElementById("screenRewards"), support: document.getElementById("screenSupport") };
+    function showScreen(key){ Object.values(screens).forEach(s => s.classList.add("hidden")); screens[key].classList.remove("hidden"); }
+
+    const navs = [document.getElementById("navHome"), document.getElementById("navDuel"), document.getElementById("navReward"), document.getElementById("navSupport")];
+    function setActive(el){ navs.forEach(x => x.classList.remove("active")); el.classList.add("active"); }
+
+    document.getElementById("navHome").onclick = () => { setActive(document.getElementById("navHome")); showScreen("home"); };
+    document.getElementById("navDuel").onclick = () => { setActive(document.getElementById("navDuel")); showScreen("duels"); };
+    document.getElementById("navReward").onclick = () => { setActive(document.getElementById("navReward")); showScreen("rewards"); };
+    document.getElementById("navSupport").onclick = () => { setActive(document.getElementById("navSupport")); showScreen("support"); };
+
+    const drawer = document.getElementById("drawer"), overlay = document.getElementById("drawerOverlay");
+    document.getElementById("navMenu").onclick = () => { drawer.classList.add("open"); overlay.style.display = "block"; };
+    document.getElementById("drawerClose").onclick = () => { drawer.classList.remove("open"); overlay.style.display = "none"; };
+    overlay.onclick = () => { drawer.classList.remove("open"); overlay.style.display = "none"; };
+
+    document.getElementById("depositBtn").onclick = () => toastMsg("Deposit keyin ulanadi");
+    document.getElementById("bellBtn").onclick = () => document.getElementById("bellBtn").classList.toggle("active");
 </script>
-
 </body>
   </html>
-
-
