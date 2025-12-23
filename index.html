@@ -198,6 +198,61 @@
   padding-top: 74px; /* TOP BAR balandligi */
 }
 
+<!-- ===== DUELS SCREEN ===== -->
+<div id="screenDuels" class="screen">
+
+  <!-- Top tabs -->
+  <div class="topTabs">
+    <button class="tab active" data-tab="duels">Duellar</button>
+    <button class="tab" data-tab="rating">Reyting</button>
+    <button class="tab" data-tab="rewards">Mukofot</button>
+    <button class="tab" data-tab="ref">Referal</button>
+  </div>
+
+  <!-- Search + Filter -->
+  <div class="searchRow">
+    <div class="searchBox">
+      <span class="sIcon">🔎</span>
+      <input id="duelSearch" type="text" placeholder="Qidirish" />
+    </div>
+    <button id="btnFilter" class="filterBtn">⏷ Filter</button>
+  </div>
+
+  <!-- Big 1v1 banner -->
+  <div class="duelBanner">
+    <div class="bannerGlow"></div>
+    <div class="bannerTop">
+      <div class="avatarCircle">🙂</div>
+      <div class="bannerTitle">
+        <div class="vsText">1 vs 1</div>
+        <div class="duelText">DUEL</div>
+      </div>
+      <div class="avatarCircle">😎</div>
+    </div>
+
+    <div class="bannerNames">
+      <div class="bn">Siz</div>
+      <div class="bn">Anvar</div>
+    </div>
+
+    <button id="btnStartFromDuels" class="greenStart">DUELNI BOSHLASH</button>
+  </div>
+
+  <!-- Sub tabs -->
+  <div class="subTabs">
+    <button class="subtab active" data-sort="popular">Ommabop</button>
+    <button class="subtab" data-sort="trend">Trenddagi</button>
+    <button class="subtab" data-sort="new">Yangi</button>
+    <button class="subtab" data-sort="fast">Tezkor</button>
+  </div>
+
+  <!-- Duel list -->
+  <div id="duelList" class="duelList">
+    <!-- JS render qiladi -->
+  </div>
+</div>
+    
+
     .brand{
       display:flex;
       align-items:center;
@@ -581,6 +636,227 @@
 }
 .drawerItem:active{ transform: scale(.99); }
 
+/* ===== Screens ===== */
+.screen{ display:block; }
+.hidden{ display:none !important; }
+
+/* ===== Top Tabs ===== */
+.topTabs{
+  display:flex;
+  gap:10px;
+  padding: 6px 2px 12px;
+}
+.tab{
+  border:none;
+  cursor:pointer;
+  padding:10px 14px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.06);
+  border:1px solid rgba(255,255,255,0.08);
+  color: rgba(255,255,255,0.78);
+  font-weight: 900;
+}
+.tab.active{
+  background: rgba(47,128,237,0.22);
+  border-color: rgba(47,128,237,0.55);
+  color:#fff;
+}
+
+/* ===== Search row ===== */
+.searchRow{
+  display:flex;
+  gap:10px;
+  align-items:center;
+  margin-bottom: 12px;
+}
+.searchBox{
+  flex:1;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding: 12px 12px;
+  border-radius: 16px;
+  background: rgba(255,255,255,0.05);
+  border:1px solid rgba(255,255,255,0.08);
+}
+.searchBox input{
+  width:100%;
+  border:none;
+  outline:none;
+  background:transparent;
+  color:#fff;
+  font-weight:800;
+}
+.searchBox input::placeholder{ color: rgba(255,255,255,0.45); }
+.sIcon{ opacity:.75; }
+
+.filterBtn{
+  padding:12px 14px;
+  border-radius: 16px;
+  background: rgba(255,255,255,0.06);
+  border:1px solid rgba(255,255,255,0.08);
+  color:#fff;
+  font-weight:900;
+  cursor:pointer;
+  white-space:nowrap;
+}
+
+/* ===== Big banner ===== */
+.duelBanner{
+  position:relative;
+  overflow:hidden;
+  border-radius: 22px;
+  border:1px solid rgba(255,255,255,0.10);
+  background:
+    radial-gradient(900px 280px at 50% 40%, rgba(47,128,237,.25), transparent 55%),
+    linear-gradient(135deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
+  padding: 16px;
+  margin-bottom: 12px;
+  box-shadow: 0 14px 40px rgba(0,0,0,.42);
+}
+.bannerGlow{
+  position:absolute; inset:-40px;
+  background: radial-gradient(circle at 60% 30%, rgba(47,128,237,.22), transparent 55%);
+  filter: blur(1px);
+  opacity:.9;
+}
+.bannerTop{
+  position:relative;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+}
+.avatarCircle{
+  width:52px; height:52px;
+  border-radius: 999px;
+  display:flex; align-items:center; justify-content:center;
+  background: rgba(255,255,255,0.06);
+  border:1px solid rgba(255,255,255,0.12);
+  font-size:22px;
+}
+.bannerTitle{
+  text-align:center;
+  line-height:1.0;
+}
+.vsText{
+  font-weight:900;
+  font-size:16px;
+  opacity:.95;
+}
+.duelText{
+  font-weight:1000;
+  font-size:26px;
+  letter-spacing:1px;
+}
+.bannerNames{
+  position:relative;
+  display:flex;
+  justify-content:space-between;
+  margin-top:8px;
+  color: rgba(255,255,255,0.85);
+  font-weight:900;
+}
+.greenStart{
+  position:relative;
+  width:100%;
+  margin-top:12px;
+  border:none;
+  border-radius: 14px;
+  padding: 14px;
+  cursor:pointer;
+  font-weight:1000;
+  color:#042b16;
+  background: linear-gradient(180deg,#22c55e,#16a34a);
+  box-shadow: 0 12px 28px rgba(34,197,94,.25);
+}
+
+/* ===== Sub tabs ===== */
+.subTabs{
+  display:flex;
+  gap:10px;
+  padding: 4px 2px 10px;
+  overflow:auto;
+}
+.subtab{
+  border:none;
+  cursor:pointer;
+  padding:10px 14px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.05);
+  border:1px solid rgba(255,255,255,0.08);
+  color: rgba(255,255,255,0.78);
+  font-weight:900;
+  white-space:nowrap;
+}
+.subtab.active{
+  background: rgba(47,128,237,0.20);
+  border-color: rgba(47,128,237,0.55);
+  color:#fff;
+}
+
+/* ===== Duel list ===== */
+.duelList{ display:flex; flex-direction:column; gap:12px; padding-bottom: 8px; }
+.duelItem{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  padding: 14px;
+  border-radius: 18px;
+  background: rgba(255,255,255,0.04);
+  border:1px solid rgba(255,255,255,0.08);
+}
+.duelLeft{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  min-width:0;
+}
+.duelAv{
+  width:44px; height:44px;
+  border-radius: 16px;
+  background: radial-gradient(circle at 30% 30%, rgba(47,128,237,.55), rgba(255,255,255,.06));
+  border:1px solid rgba(255,255,255,.12);
+}
+.duelMeta{
+  min-width:0;
+}
+.duelName{
+  font-weight:1000;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+.duelSub{
+  margin-top:3px;
+  font-size:12px;
+  color: rgba(255,255,255,0.62);
+}
+.duelScore{
+  font-weight:1000;
+  font-size:22px;
+  letter-spacing:.5px;
+  color:#fff;
+  min-width:72px;
+  text-align:center;
+}
+.duelBtn{
+  border:none;
+  cursor:pointer;
+  padding: 10px 16px;
+  border-radius: 14px;
+  background: linear-gradient(180deg,#22c55e,#16a34a);
+  color:#052a16;
+  font-weight:1000;
+  white-space:nowrap;
+}
+.duelWin{
+  color:#3ddc84;
+  font-weight:1000;
+}
+
+    
   </style>
 </head>
 
@@ -1039,9 +1315,75 @@ navMenu.onclick = () => openDrawer();
 drawerOverlay.onclick = () => closeDrawer();
 drawerClose.onclick = () => closeDrawer();
 
+// ===== DUELS DATA (demo) =====
+const duelsData = [
+  { name:"Qilichbek", status:"Duelni yutdi!", time:"Yana 1 min oldin", score:"8×6", plus:"+50 so‘m", tag:"popular" },
+  { name:"Ali",       status:"Duelni yutdi!", time:"Yana 5 min oldin", score:"9×7", plus:"+30 so‘m", tag:"trend"   },
+  { name:"Aziza",     status:"Duelni yutdi!", time:"Yana 9 min oldin", score:"10×8", plus:"+80 so‘m", tag:"new"     },
+  { name:"Komiljon",  status:"Duelni yutdi!", time:"Yana 12 min oldin",score:"9×5", plus:"+60 so‘m", tag:"fast"    },
+];
+
+let currentSort = "popular";
+
+function renderDuels(){
+  const list = document.getElementById("duelList");
+  const q = (document.getElementById("duelSearch").value || "").toLowerCase();
+
+  const filtered = duelsData.filter(d => {
+    const matchName = d.name.toLowerCase().includes(q);
+    const matchTag = (currentSort === "popular") ? true : (d.tag === currentSort);
+    return matchName && matchTag;
+  });
+
+  list.innerHTML = filtered.map(d => `
+    <div class="duelItem">
+      <div class="duelLeft">
+        <div class="duelAv"></div>
+        <div class="duelMeta">
+          <div class="duelName">${d.name}</div>
+          <div class="duelWin">${d.status}</div>
+          <div class="duelSub">${d.time}</div>
+        </div>
+      </div>
+
+      <div class="duelScore">${d.score}<div class="duelSub">${d.plus}</div></div>
+
+      <button class="duelBtn">DUEL</button>
+    </div>
+  `).join("") || `<div style="color:rgba(255,255,255,.65);padding:8px 4px;">Topilmadi.</div>`;
+}
+
+// Search
+document.getElementById("duelSearch").addEventListener("input", renderDuels);
+
+// Subtabs
+document.querySelectorAll(".subtab").forEach(btn=>{
+  btn.addEventListener("click", ()=>{
+    document.querySelectorAll(".subtab").forEach(x=>x.classList.remove("active"));
+    btn.classList.add("active");
+    currentSort = btn.dataset.sort;
+    renderDuels();
+  });
+});
+
+// Filter (hozircha demo)
+document.getElementById("btnFilter").onclick = () => {
+  alert("Filter keyin qo‘shiladi ✅");
+};
+
+// Big start button (hozircha demo)
+document.getElementById("btnStartFromDuels").onclick = () => {
+  alert("Duel queue keyin ulanadi ✅");
+};
+
+// First render
+renderDuels();
+
+    
   </script>
 </body>
 </html>
+
 
 
 
