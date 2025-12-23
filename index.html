@@ -813,8 +813,104 @@ if (depositBtn) {
     showScreen("home");
   
   </script>
+
+<canvas id="snowCanvas" style="position: fixed; top: 0; left: 0; pointer-events: none; z-index: 99999;"></canvas>
+
+<script>
+(function() {
+    const canvas = document.getElementById('snowCanvas');
+    const ctx = canvas.getContext('2d');
+    
+    // Ikkala qismni ham tanlab olamiz
+    const part1 = document.querySelector('.logoOne');
+    const part2 = document.querySelector('.logoText');
+    
+    let width, height, rect1, rect2;
+    let flakes = [];
+    let staticFlakes = [];
+
+    function updateSize() {
+        width = canvas.width = window.innerWidth;
+        height = canvas.height = window.innerHeight;
+        if (part1) rect1 = part1.getBoundingClientRect();
+        if (part2) rect2 = part2.getBoundingClientRect();
+    }
+
+    window.addEventListener('resize', updateSize);
+    updateSize();
+
+    class Flake {
+        constructor() { this.reset(); }
+        reset() {
+            this.x = Math.random() * width;
+            this.y = -10;
+            this.size = Math.random() * 2 + 1;
+            this.speed = Math.random() * 0.6 + 0.4;
+            this.vX = Math.random() * 0.4 - 0.2;
+        }
+        update() {
+            this.y += this.speed;
+            this.x += this.vX;
+
+            // Logotipning birinchi yoki ikkinchi qismiga tushishni tekshirish
+            let hit = false;
+            [rect1, rect2].forEach(rect => {
+                if (rect && this.x > rect.left && this.x < rect.right &&
+                    this.y > rect.top && this.y < rect.top + 5) {
+                    hit = true;
+                }
+            });
+
+            if (hit && Math.random() > 0.8) { 
+                staticFlakes.push({x: this.x, y: this.y, size: this.size});
+                this.reset();
+            }
+
+            if (this.y > height) this.reset();
+        }
+        draw() {
+            ctx.fillStyle = "rgba(255, 255, 255, 0.8)";
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+            ctx.fill();
+        }
+    }
+
+    for (let i = 0; i < 150; i++) flakes.push(new Flake());
+
+    function loop() {
+        ctx.clearRect(0, 0, width, height);
+        flakes.forEach(f => { f.update(); f.draw(); });
+
+        staticFlakes.forEach(sf => {
+            ctx.fillStyle = "white";
+            ctx.beginPath();
+            ctx.arc(sf.x, sf.y, sf.size, 0, Math.PI * 2);
+            ctx.fill();
+        });
+
+        // Qor haddan tashqari ko'p bo'lib ketsa, eng eskilarini o'chirish
+        if (staticFlakes.length > 500) staticFlakes.splice(0, 5);
+        
+        requestAnimationFrame(loop);
+    }
+
+    // Har 7 soniyada qorni biroz "eritish" (tozalash) jarayoni
+    setInterval(() => {
+        if (staticFlakes.length > 0) {
+            staticFlakes.splice(0, Math.ceil(staticFlakes.length * 0.1));
+        }
+        // Logotip o'rni o'zgargan bo'lsa (masalan, sahifa aylantirilsa) qayta hisoblash
+        updateSize();
+    }, 7000);
+
+    loop();
+})();
+</script>
+ 
 </body>
 </html>
+
 
 
 
