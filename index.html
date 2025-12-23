@@ -445,6 +445,24 @@
 .bottomNav .navItem.active:not(#navMenu){
   color: var(--blue) !important;
 }
+/* TOPBAR bell: dumaloq fonni o‘chir */
+.bell{
+  width:auto !important;
+  height:auto !important;
+  background: transparent !important;
+  border-radius: 0 !important;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size: 18px;
+  padding: 6px 8px; /* bosish oson bo‘lsin */
+  opacity: .9;
+}
+
+/* Bell active (bosilganda) ko‘k */
+.bell.active{
+  color: var(--blue) !important;
+}
 
 
 
@@ -709,16 +727,21 @@
     const drawerOverlay = document.getElementById("drawerOverlay");
     const drawerClose = document.getElementById("drawerClose");
 
-    function openDrawer(){
-      drawer.classList.add("open");
-      drawerOverlay.style.display = "block";
-      drawer.setAttribute("aria-hidden","false");
-    }
-    function closeDrawer(){
-      drawer.classList.remove("open");
-      drawerOverlay.style.display = "none";
-      drawer.setAttribute("aria-hidden","true");
-    }
+function openDrawer(){
+  drawer.classList.add("open");
+  drawerOverlay.style.display = "block";
+  drawer.setAttribute("aria-hidden","false");
+
+  navMenu.classList.add("active"); // <-- shu
+}
+function closeDrawer(){
+  drawer.classList.remove("open");
+  drawerOverlay.style.display = "none";
+  drawer.setAttribute("aria-hidden","true");
+
+  navMenu.classList.remove("active"); // <-- shu
+}
+
 
     navMenu.onclick = openDrawer;
     drawerOverlay.onclick = closeDrawer;
@@ -731,11 +754,23 @@
     // deposit demo
     document.getElementById("depositBtn").onclick = () => toastMsg("Deposit: keyin ulaymiz ✅");
 
+    // bell (top right)
+const bell = document.querySelector(".bell");
+if (bell){
+  bell.onclick = () => {
+    bell.classList.toggle("active");   // ko‘k bo‘lib yoqilib/o‘chadi
+    toastMsg("Notifications: keyin ulaymiz ✅");
+  };
+}
+
+
     // default screen
     showScreen("home");
+  
   </script>
 </body>
 </html>
+
 
 
 
