@@ -814,74 +814,77 @@ if (depositBtn) {
   
   </script>
 
-<canvas id="snowCanvas" style="position: fixed; top: 0; left: 0; pointer-events: none; z-index: 99999;"></canvas>
+
+
+
+
+<canvas id="snowCanvas" style="position: fixed; pointer-events: none; z-index: 99999;"></canvas>
 
 <script>
 (function() {
     const canvas = document.getElementById('snowCanvas');
     const ctx = canvas.getContext('2d');
-    
-    // Ikkala qismni ham tanlab olamiz
     const part1 = document.querySelector('.logoOne');
     const part2 = document.querySelector('.logoText');
     
-    let width, height, rect1, rect2;
     let flakes = [];
     let staticFlakes = [];
+    let logoRect = { left: 0, top: 0, width: 0, height: 0 };
 
-    function updateSize() {
-        width = canvas.width = window.innerWidth;
-        height = canvas.height = window.innerHeight;
-        if (part1) rect1 = part1.getBoundingClientRect();
-        if (part2) rect2 = part2.getBoundingClientRect();
+    function updateLogoPosition() {
+        if (part1 && part2) {
+            const r1 = part1.getBoundingClientRect();
+            const r2 = part2.getBoundingClientRect();
+            // Ikkala qismni birlashtirgan umumiy maydonni hisoblaymiz
+            logoRect.left = Math.min(r1.left, r2.left);
+            logoRect.top = Math.min(r1.top, r2.top);
+            logoRect.right = Math.max(r1.right, r2.right);
+            logoRect.bottom = Math.max(r1.bottom, r2.bottom);
+            logoRect.width = logoRect.right - logoRect.left;
+            logoRect.height = logoRect.bottom - logoRect.top;
+
+            // Canvasni faqat logotip ustiga to'g'irlaymiz
+            canvas.style.left = logoRect.left + 'px';
+            canvas.style.top = (logoRect.top - 20) + 'px'; // Biroz teparoqdan boshlanishi uchun
+            canvas.width = logoRect.width;
+            canvas.height = logoRect.height + 20;
+        }
     }
 
-    window.addEventListener('resize', updateSize);
-    updateSize();
+    window.addEventListener('resize', updateLogoPosition);
+    updateLogoPosition();
 
     class Flake {
         constructor() { this.reset(); }
         reset() {
-            this.x = Math.random() * width;
-            this.y = -10;
-            this.size = Math.random() * 2 + 1;
-            this.speed = Math.random() * 0.6 + 0.4;
-            this.vX = Math.random() * 0.4 - 0.2;
+            this.x = Math.random() * canvas.width;
+            this.y = -5;
+            this.size = Math.random() * 1.5 + 0.5; // Kichikroq, chiroyli qorlar
+            this.speed = Math.random() * 0.4 + 0.2;
         }
         update() {
             this.y += this.speed;
-            this.x += this.vX;
-
-            // Logotipning birinchi yoki ikkinchi qismiga tushishni tekshirish
-            let hit = false;
-            [rect1, rect2].forEach(rect => {
-                if (rect && this.x > rect.left && this.x < rect.right &&
-                    this.y > rect.top && this.y < rect.top + 5) {
-                    hit = true;
-                }
-            });
-
-            if (hit && Math.random() > 0.8) { 
+            // Faqat yozuvning ustiga tushganda to'xtash (20px - bu tepadan olingan zaxira)
+            if (this.y > 18 && this.y < 23 && Math.random() > 0.8) {
                 staticFlakes.push({x: this.x, y: this.y, size: this.size});
                 this.reset();
             }
-
-            if (this.y > height) this.reset();
+            if (this.y > canvas.height) this.reset();
         }
         draw() {
-            ctx.fillStyle = "rgba(255, 255, 255, 0.8)";
+            ctx.fillStyle = "white";
             ctx.beginPath();
             ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
             ctx.fill();
         }
     }
 
-    for (let i = 0; i < 150; i++) flakes.push(new Flake());
+    // Kamroq qor (faqat logotip uchun 40 ta yetadi)
+    for (let i = 0; i < 40; i++) flakes.push(new Flake());
 
     function loop() {
-        ctx.clearRect(0, 0, width, height);
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
         flakes.forEach(f => { f.update(); f.draw(); });
-
         staticFlakes.forEach(sf => {
             ctx.fillStyle = "white";
             ctx.beginPath();
@@ -889,27 +892,29 @@ if (depositBtn) {
             ctx.fill();
         });
 
-        // Qor haddan tashqari ko'p bo'lib ketsa, eng eskilarini o'chirish
-        if (staticFlakes.length > 500) staticFlakes.splice(0, 5);
-        
+        if (staticFlakes.length > 200) staticFlakes.shift();
         requestAnimationFrame(loop);
     }
 
-    // Har 7 soniyada qorni biroz "eritish" (tozalash) jarayoni
+    // Har 10 soniyada tozalab turish
     setInterval(() => {
-        if (staticFlakes.length > 0) {
-            staticFlakes.splice(0, Math.ceil(staticFlakes.length * 0.1));
-        }
-        // Logotip o'rni o'zgargan bo'lsa (masalan, sahifa aylantirilsa) qayta hisoblash
-        updateSize();
-    }, 7000);
+        if (staticFlakes.length > 0) staticFlakes.splice(0, 5);
+        updateLogoPosition();
+    }, 10000);
 
     loop();
 })();
 </script>
- 
+
+
+
+
+
+  
+
 </body>
 </html>
+
 
 
 
