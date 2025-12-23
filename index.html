@@ -381,22 +381,37 @@
   font-size: 20px;
   line-height: 1;
 }
-    /* ===== Material Symbols style ===== */
+
+/* ===== Material Symbols FIX ===== */
 .material-symbols-rounded{
+  font-family: "Material Symbols Rounded" !important;
+  font-weight: normal;
+  font-style: normal;
+  font-size: 22px;
+  line-height: 1;
+  display: inline-block;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+
+  /* icon ligature ishlashi uchun */
+  -webkit-font-feature-settings: "liga";
+  -webkit-font-smoothing: antialiased;
+
   font-variation-settings:
     'FILL' 0,
     'wght' 500,
     'GRAD' 0,
     'opsz' 24;
-  font-size: 20px;
-  line-height: 1;
-  color: inherit;
 }
 
-/* icon active bo‘lganda */
+/* active bo‘lganda icon ko‘k */
 .navItem.active .material-symbols-rounded{
   color: var(--blue);
 }
+
 
 
   </style>
@@ -687,5 +702,6 @@
   </script>
 </body>
 </html>
+
 
 
