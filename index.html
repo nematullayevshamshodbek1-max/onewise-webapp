@@ -831,61 +831,100 @@ if (depositBtn) {
 
 
 
+
+
+
+
+
+  <canvas id="snowCanvas" style="position: absolute; pointer-events: none; z-index: 10;"></canvas>
+
 <script>
 (function() {
+    const canvas = document.getElementById('snowCanvas');
+    const ctx = canvas.getContext('2d');
     const logo = document.querySelector('.logoWrap');
-    if (!logo) return;
+    
+    let flakes = [];
+    let staticFlakes = [];
+    let logoRect;
 
-    // Qorlarni siyrakroq qilish uchun intervalni kattalashtirdik (600ms)
-    function snow() {
-        const flake = document.createElement('div');
-        const size = (Math.random() * 2 + 1) + 'px'; // Biroz kichikroq va chiroyli
+    function init() {
+        if (!logo) return;
+        logoRect = logo.getBoundingClientRect();
         
-        Object.assign(flake.style, {
-            position: 'absolute',
-            top: '-5px',
-            left: Math.random() * 100 + '%',
-            width: size,
-            height: size,
-            backgroundColor: '#ffffff', // Tiniq oppoq rang
-            borderRadius: '50%',
-            boxShadow: '0 0 2px white', // Porlash effekti
-            opacity: '1', // Siyrak lekin ko'rinadigan
-            pointerEvents: 'none',
-            zIndex: '10'
-        });
-
-        logo.appendChild(flake);
-
-        // Animatsiya: Qor yozuvning ustiga (taxminan 5-8px pastga) tushadi
-        const fallDistance = 8; // Bu masofani yozuvingizga qarab o'zgartirish mumkin
-        const duration = Math.random() * 2000 + 2000;
-        
-        const anim = flake.animate([
-            { transform: 'translateY(0)', opacity: 1 },
-            { transform: `translateY(${fallDistance}px)`, opacity: 1 }
-        ], { duration: duration, easing: 'ease-in' });
-
-        anim.onfinish = () => {
-            // Yozuv ustida to'planib qolish (faqat 15-20 ta qor parchasi)
-            if (logo.querySelectorAll('.s-flake').length < 20) {
-                flake.classList.add('s-flake');
-                flake.style.transform = `translateY(${fallDistance}px)`;
-                
-                // Sezilmasdan takrorlanishi uchun 10 soniyada o'chadi
-                setTimeout(() => {
-                    flake.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 2000 }).onfinish = () => flake.remove();
-                }, 10000);
-            } else {
-                flake.remove();
-            }
-        };
+        // Canvasni yozuvdan 50px teparoqqa joylashtiramiz
+        canvas.style.left = logo.offsetLeft + 'px';
+        canvas.style.top = (logo.offsetTop - 50) + 'px';
+        canvas.width = logo.offsetWidth;
+        canvas.height = logo.offsetHeight + 50;
     }
 
-    // Siyrakroq yog'ishi uchun vaqtni cho'zdik
-    setInterval(snow, 800); 
+    window.addEventListener('resize', init);
+    init();
+
+    class Flake {
+        constructor() { this.reset(); }
+        reset() {
+            this.x = Math.random() * canvas.width;
+            this.y = 0; // Tepadan paydo bo'ladi
+            this.size = Math.random() * 1.8 + 0.5;
+            this.speed = Math.random() * 0.5 + 0.3;
+        }
+        update() {
+            this.y += this.speed;
+
+            // Qor yozuv ustiga (canvasning 50-pikselidan keyin) tushganda
+            if (this.y > 48 && this.y < 53) {
+                // 70% holatda yozuv ustida to'planadi (koproq foizi yozuvda)
+                if (Math.random() > 0.3 && staticFlakes.length < 35) {
+                    staticFlakes.push({x: this.x, y: this.y, size: this.size});
+                    this.reset();
+                }
+            }
+
+            if (this.y > canvas.height) this.reset();
+        }
+        draw() {
+            ctx.fillStyle = "white";
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+            ctx.fill();
+        }
+    }
+
+    for (let i = 0; i < 30; i++) flakes.push(new Flake());
+
+    function loop() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        
+        flakes.forEach(f => { f.update(); f.draw(); });
+
+        staticFlakes.forEach(sf => {
+            ctx.fillStyle = "white";
+            ctx.shadowBlur = 2;
+            ctx.shadowColor = "white";
+            ctx.beginPath();
+            ctx.arc(sf.x, sf.y, sf.size, 0, Math.PI * 2);
+            ctx.fill();
+        });
+
+        requestAnimationFrame(loop);
+    }
+
+    // Sezilmasdan takrorlanish (qorlarni eritish)
+    setInterval(() => {
+        if (staticFlakes.length > 5) {
+            staticFlakes.splice(0, 3);
+        }
+        init(); // Yozuv o'rni o'zgarsa yangilab turadi
+    }, 6000);
+
+    loop();
 })();
-</script>
+  </script>
+
+
+  
 
 
 
@@ -896,6 +935,7 @@ if (depositBtn) {
 
 </body>
 </html>
+
 
 
 
