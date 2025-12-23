@@ -804,6 +804,169 @@
   font-weight:1000;
 }
 
+/* ===== Rewards ===== */
+.pageTitle{
+  font-weight: 1000;
+  font-size: 28px;
+  margin: 4px 2px 14px;
+  letter-spacing: .2px;
+}
+
+.rewardHero{
+  position:relative;
+  overflow:hidden;
+  border-radius: 22px;
+  border:1px solid rgba(255,255,255,0.10);
+  background:
+    radial-gradient(900px 280px at 65% 30%, rgba(47,128,237,.20), transparent 55%),
+    radial-gradient(700px 240px at 20% 90%, rgba(106,75,255,.10), transparent 60%),
+    linear-gradient(135deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
+  padding: 16px;
+  box-shadow: 0 14px 40px rgba(0,0,0,.42);
+  margin-bottom: 14px;
+}
+.rewardGlow{
+  position:absolute; inset:-40px;
+  background: radial-gradient(circle at 75% 35%, rgba(47,128,237,.25), transparent 55%);
+  opacity:.9;
+}
+.rewardHead{
+  position:relative;
+  display:flex;
+  gap:12px;
+  align-items:flex-start;
+}
+.cup{
+  width:44px; height:44px;
+  border-radius: 16px;
+  display:flex; align-items:center; justify-content:center;
+  background: rgba(255,255,255,0.06);
+  border:1px solid rgba(255,255,255,0.12);
+  font-size:20px;
+}
+.rewardSmall{ color: rgba(255,255,255,.72); font-weight:900; }
+.rewardBig{
+  font-size: 22px;
+  font-weight: 1000;
+  margin-top: 4px;
+}
+.rewardDesc{
+  color: rgba(255,255,255,.70);
+  margin-top: 6px;
+  font-weight: 700;
+  font-size: 13px;
+  max-width: 340px;
+}
+
+.timerRow{
+  position:relative;
+  margin-top: 12px;
+  display:flex;
+  gap:10px;
+  align-items:center;
+  padding: 12px;
+  border-radius: 16px;
+  background: rgba(0,0,0,0.18);
+  border:1px solid rgba(255,255,255,0.10);
+}
+.timerIcon{ opacity:.9; }
+.timerLabel{ color: rgba(255,255,255,.70); font-weight:800; font-size:12px; }
+.timerValue{ font-weight: 1000; font-size: 18px; letter-spacing:.8px; }
+
+.rewardStartBtn{
+  position:relative;
+  width:100%;
+  margin-top: 12px;
+  border:none;
+  border-radius: 16px;
+  padding: 14px;
+  cursor:pointer;
+  font-weight:1000;
+  color:#042b16;
+  background: linear-gradient(180deg,#22c55e,#16a34a);
+  box-shadow: 0 12px 28px rgba(34,197,94,.22);
+}
+
+/* tabs */
+.rwTabs{
+  display:flex;
+  gap:10px;
+  overflow:auto;
+  padding: 4px 2px 12px;
+}
+.rwTab{
+  border:none;
+  cursor:pointer;
+  padding:10px 14px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.05);
+  border:1px solid rgba(255,255,255,0.08);
+  color: rgba(255,255,255,0.78);
+  font-weight: 900;
+  white-space: nowrap;
+}
+.rwTab.active{
+  background: rgba(47,128,237,0.20);
+  border-color: rgba(47,128,237,0.55);
+  color:#fff;
+}
+
+/* board */
+.rwListHead{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding: 6px 4px 10px;
+}
+.rwListTitle{ font-weight: 1000; color: rgba(255,255,255,.88); }
+.rwListLink{ color: rgba(255,255,255,.55); font-weight:800; cursor:pointer; }
+
+.rwBoard{
+  border:1px solid rgba(255,255,255,0.08);
+  border-radius: 18px;
+  background: rgba(255,255,255,0.04);
+  overflow:hidden;
+  box-shadow: 0 14px 40px rgba(0,0,0,.35);
+}
+.rwRow{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  padding: 12px 14px;
+  border-top:1px solid rgba(255,255,255,0.06);
+}
+.rwRow:first-child{ border-top:none; }
+.rwLeft{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  min-width:0;
+}
+.rwMedal{
+  width:28px; height:28px;
+  border-radius: 10px;
+  display:flex; align-items:center; justify-content:center;
+  border:1px solid rgba(255,255,255,0.12);
+  font-weight:1000;
+}
+.rwMedal.gold{ background: rgba(255,199,0,.14); }
+.rwMedal.silver{ background: rgba(200,200,200,.14); }
+.rwMedal.bronze{ background: rgba(205,127,50,.14); }
+
+.rwAvatar{
+  width:36px; height:36px;
+  border-radius: 14px;
+  background: radial-gradient(circle at 30% 30%, rgba(47,128,237,.55), rgba(255,255,255,.05));
+  border:1px solid rgba(255,255,255,.12);
+}
+.rwNameBlock{ min-width:0; }
+.rwName{ font-weight:1000; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.rwId{ color: rgba(255,255,255,.55); font-weight:800; font-size:12px; margin-top:2px; }
+
+.rwScore{ font-weight:1000; color:#fff; white-space:nowrap; }
+.rwScore span{ color: rgba(255,255,255,.55); font-weight:800; }
+
     
   </style>
 </head>
@@ -999,7 +1162,118 @@
 
   </div>
 </div>
+<!-- REWARDS SCREEN -->
+<div id="screenRewards" class="screen hidden">
 
+  <div class="pageTitle" id="rw_pageTitle">Mukofotlar</div>
+
+  <!-- Big reward banner -->
+  <div class="rewardHero">
+    <div class="rewardGlow"></div>
+
+    <div class="rewardHead">
+      <div class="cup">🏆</div>
+      <div>
+        <div class="rewardSmall" id="rw_today">Bugungi mukofot</div>
+        <div class="rewardBig" id="rw_prizeLine">1-o‘rin — 2 000 000 so‘m</div>
+        <div class="rewardDesc" id="rw_desc">Kunlik 1-o‘rinni oling va mukofotni yutib oling!</div>
+      </div>
+    </div>
+
+    <div class="timerRow">
+      <div class="timerIcon">🕒</div>
+      <div class="timerText">
+        <div class="timerLabel" id="rw_left">Qolgan vaqt</div>
+        <div class="timerValue" id="rw_timer">--:--:--</div>
+      </div>
+    </div>
+
+    <button class="rewardStartBtn" id="rw_startBtn">DUELNI BOSHLASH</button>
+  </div>
+
+  <!-- Tabs -->
+  <div class="rwTabs">
+    <button class="rwTab active" data-rwtab="daily" id="rw_tab_daily">Kunlik</button>
+    <button class="rwTab" data-rwtab="weekly" id="rw_tab_weekly">Haftalik</button>
+    <button class="rwTab" data-rwtab="winners" id="rw_tab_winners">So‘nggi g‘oliblar</button>
+    <button class="rwTab" data-rwtab="rules" id="rw_tab_rules">Qoidalar</button>
+  </div>
+
+  <!-- Daily content -->
+  <div id="rw_daily" class="rwPane">
+    <div class="rwListHead">
+      <div class="rwListTitle" id="rw_top3">1-o‘rin uchun TOP 3</div>
+      <div class="rwListLink" id="rw_full" style="display:none;">To‘liq reyting ›</div>
+    </div>
+
+    <div class="rwBoard">
+      <div class="rwRow">
+        <div class="rwLeft">
+          <div class="rwMedal gold">1</div>
+          <div class="rwAvatar"></div>
+          <div class="rwNameBlock">
+            <div class="rwName">Shamshodbek</div>
+            <div class="rwId">#19335011</div>
+          </div>
+        </div>
+        <div class="rwScore">31 <span>Ball</span></div>
+      </div>
+
+      <div class="rwRow">
+        <div class="rwLeft">
+          <div class="rwMedal silver">2</div>
+          <div class="rwAvatar"></div>
+          <div class="rwNameBlock">
+            <div class="rwName">Ulug‘bek</div>
+            <div class="rwId">#19336247</div>
+          </div>
+        </div>
+        <div class="rwScore">23 <span>Ball</span></div>
+      </div>
+
+      <div class="rwRow">
+        <div class="rwLeft">
+          <div class="rwMedal bronze">3</div>
+          <div class="rwAvatar"></div>
+          <div class="rwNameBlock">
+            <div class="rwName">Saida</div>
+            <div class="rwId">#19338214</div>
+          </div>
+        </div>
+        <div class="rwScore">18 <span>Ball</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Weekly content -->
+  <div id="rw_weekly" class="rwPane hidden">
+    <div class="card" style="padding:16px; color:rgba(255,255,255,.8);">
+      Haftalik mukofotlar keyingi bosqichda qo‘shiladi ✅
+    </div>
+  </div>
+
+  <!-- Winners content -->
+  <div id="rw_winners" class="rwPane hidden">
+    <div class="card" style="padding:16px; color:rgba(255,255,255,.8);">
+      So‘nggi g‘oliblar ro‘yxati keyin ulanadi ✅
+    </div>
+  </div>
+
+  <!-- Rules content -->
+  <div id="rw_rules" class="rwPane hidden">
+    <div class="card" style="padding:16px; color:rgba(255,255,255,.86); line-height:1.45;">
+      <b>Qoidalar (MVP):</b><br/>
+      • Ball faqat duelni yutganda beriladi.<br/>
+      • Teng bo‘lsa: qo‘shimcha savollar bilan birinchi topgan yutadi.<br/>
+      • Kun yakunida TOP reyting bo‘yicha g‘olib aniqlanadi.<br/>
+      • Firib / multi-akkaunt aniqlansa — bloklanadi.<br/>
+      • Mukofotlar keyingi bosqichda avtomatlashtiriladi.
+    </div>
+  </div>
+
+</div>
+
+  
   <!-- Bottom nav (Profile -> Support) -->
   <div class="bottomNav" id="bottomNav" style="display:none;">
     <div class="navBar">
@@ -1272,6 +1546,7 @@
 const screens = {
   home: document.getElementById("screenHome"),
   duels: document.getElementById("screenDuels"),
+  rewards: document.getElementById("screenRewards"),
 };
 
 function showScreen(key){
@@ -1282,7 +1557,7 @@ function showScreen(key){
 
 navHome.onclick = () => { setActive(navHome); showScreen("home"); };
 navDuel.onclick = () => { setActive(navDuel); showScreen("duels"); };
-navReward.onclick = () => { setActive(navReward); toastMsg("Rewards: keyin ulaymiz ✅"); };
+navReward.onclick = () => { setActive(navReward); showScreen("rewards"); };
 navSupport.onclick = () => { setActive(navSupport); toastMsg("Support: keyin ulaymiz ✅"); };
 
 // Default
@@ -1382,10 +1657,66 @@ document.getElementById("btnStartFromDuels").onclick = () => {
 // First render
 renderDuels();
 
+
+// ===== Rewards: tabs =====
+const rwTabs = document.querySelectorAll(".rwTab");
+const rwPanes = {
+  daily: document.getElementById("rw_daily"),
+  weekly: document.getElementById("rw_weekly"),
+  winners: document.getElementById("rw_winners"),
+  rules: document.getElementById("rw_rules"),
+};
+
+rwTabs.forEach(btn=>{
+  btn.addEventListener("click", ()=>{
+    rwTabs.forEach(x=>x.classList.remove("active"));
+    btn.classList.add("active");
+    const key = btn.dataset.rwtab;
+
+    Object.values(rwPanes).forEach(p=>p.classList.add("hidden"));
+    rwPanes[key].classList.remove("hidden");
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+});
+
+// ===== Rewards: countdown to 00:00 (local time) =====
+function pad(n){ return String(n).padStart(2,"0"); }
+function updateCountdown(){
+  const el = document.getElementById("rw_timer");
+  if(!el) return;
+
+  const now = new Date();
+  const end = new Date();
+  end.setHours(24,0,0,0); // next 00:00
+
+  const diff = Math.max(0, end - now);
+  const h = Math.floor(diff / 3600000);
+  const m = Math.floor((diff % 3600000) / 60000);
+  const s = Math.floor((diff % 60000) / 1000);
+  el.textContent = `${pad(h)}:${pad(m)}:${pad(s)}`;
+}
+setInterval(updateCountdown, 1000);
+updateCountdown();
+
+// Rewards "Start Duel" -> Duel screen (agar showScreen bo‘lsa)
+const rwStart = document.getElementById("rw_startBtn");
+if(rwStart){
+  rwStart.onclick = () => {
+    // agar sendeda showScreen("duels") ishlayotgan bo‘lsa:
+    try {
+      setActive(navDuel);
+      showScreen("duels");
+    } catch(e){
+      toastMsg("Duelga o‘tish: keyin ulaymiz ✅");
+    }
+  };
+}
+    
     
   </script>
 </body>
 </html>
+
 
 
 
