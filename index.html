@@ -142,59 +142,6 @@
   border-bottom: 1px solid rgba(255,255,255,0.08);
   z-index: 1000;
 }
-    <!-- ===== DUELS SCREEN ===== -->
-<div id="screenDuels" class="screen">
-
-  <!-- Top tabs -->
-  <div class="topTabs">
-    <button class="tab active" data-tab="duels">Duellar</button>
-    <button class="tab" data-tab="rating">Reyting</button>
-    <button class="tab" data-tab="rewards">Mukofot</button>
-    <button class="tab" data-tab="ref">Referal</button>
-  </div>
-
-  <!-- Search + Filter -->
-  <div class="searchRow">
-    <div class="searchBox">
-      <span class="sIcon">🔎</span>
-      <input id="duelSearch" type="text" placeholder="Qidirish" />
-    </div>
-    <button id="btnFilter" class="filterBtn">⏷ Filter</button>
-  </div>
-
-  <!-- Big 1v1 banner -->
-  <div class="duelBanner">
-    <div class="bannerGlow"></div>
-    <div class="bannerTop">
-      <div class="avatarCircle">🙂</div>
-      <div class="bannerTitle">
-        <div class="vsText">1 vs 1</div>
-        <div class="duelText">DUEL</div>
-      </div>
-      <div class="avatarCircle">😎</div>
-    </div>
-
-    <div class="bannerNames">
-      <div class="bn">Siz</div>
-      <div class="bn">Anvar</div>
-    </div>
-
-    <button id="btnStartFromDuels" class="greenStart">DUELNI BOSHLASH</button>
-  </div>
-
-  <!-- Sub tabs -->
-  <div class="subTabs">
-    <button class="subtab active" data-sort="popular">Ommabop</button>
-    <button class="subtab" data-sort="trend">Trenddagi</button>
-    <button class="subtab" data-sort="new">Yangi</button>
-    <button class="subtab" data-sort="fast">Tezkor</button>
-  </div>
-
-  <!-- Duel list -->
-  <div id="duelList" class="duelList">
-    <!-- JS render qiladi -->
-  </div>
-</div>
     
 
 /* chap tomoni */
@@ -930,22 +877,11 @@
     </div>
   </div>
 
-  <!-- 2) Main menu (like your image) -->
-  <div id="app">
-    <div class="wrap">
+<div id="app">
+  <div class="wrap">
 
-      <div class="topbar">
-        <div class="brand">
-          <div class="logoMark">🧠</div>
-          <div><span style="color:var(--blue);">1</span>WISE</div>
-        </div>
-
-        <div class="walletPill" id="balancePill">
-          <span id="balanceText">25 000 so‘m</span>
-          <span class="bellDot"></span>
-        </div>
-      </div>
-
+    <!-- HOME SCREEN -->
+    <div id="screenHome" class="screen">
       <!-- Hero banner -->
       <div class="hero">
         <div class="brainGlow"></div>
@@ -1014,7 +950,55 @@
 
       <div style="height:18px;"></div>
     </div>
+
+    <!-- DUELS SCREEN -->
+    <div id="screenDuels" class="screen hidden">
+      <div class="topTabs">
+        <button class="tab active" data-tab="duels">Duellar</button>
+        <button class="tab" data-tab="rating">Reyting</button>
+        <button class="tab" data-tab="rewards">Mukofot</button>
+        <button class="tab" data-tab="ref">Referal</button>
+      </div>
+
+      <div class="searchRow">
+        <div class="searchBox">
+          <span class="sIcon">🔎</span>
+          <input id="duelSearch" type="text" placeholder="Qidirish" />
+        </div>
+        <button id="btnFilter" class="filterBtn">⏷ Filter</button>
+      </div>
+
+      <div class="duelBanner">
+        <div class="bannerGlow"></div>
+        <div class="bannerTop">
+          <div class="avatarCircle">🙂</div>
+          <div class="bannerTitle">
+            <div class="vsText">1 vs 1</div>
+            <div class="duelText">DUEL</div>
+          </div>
+          <div class="avatarCircle">😎</div>
+        </div>
+
+        <div class="bannerNames">
+          <div class="bn">Siz</div>
+          <div class="bn">Anvar</div>
+        </div>
+
+        <button id="btnStartFromDuels" class="greenStart">DUELNI BOSHLASH</button>
+      </div>
+
+      <div class="subTabs">
+        <button class="subtab active" data-sort="popular">Ommabop</button>
+        <button class="subtab" data-sort="trend">Trenddagi</button>
+        <button class="subtab" data-sort="new">Yangi</button>
+        <button class="subtab" data-sort="fast">Tezkor</button>
+      </div>
+
+      <div id="duelList" class="duelList"></div>
+    </div>
+
   </div>
+</div>
 
   <!-- Bottom nav (Profile -> Support) -->
   <div class="bottomNav" id="bottomNav" style="display:none;">
@@ -1284,8 +1268,26 @@
       el.classList.add("active");
     }
 
-    navHome.onclick = () => { setActive(navHome); toastMsg(STR[lang||"en"].toastDemo); };
-    navDuel.onclick = () => { setActive(navDuel); toastMsg(STR[lang||"en"].toastDemo); };
+// ===== SCREEN SWITCH =====
+const screens = {
+  home: document.getElementById("screenHome"),
+  duels: document.getElementById("screenDuels"),
+};
+
+function showScreen(key){
+  Object.values(screens).forEach(s => s.classList.add("hidden"));
+  screens[key].classList.remove("hidden");
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+navHome.onclick = () => { setActive(navHome); showScreen("home"); };
+navDuel.onclick = () => { setActive(navDuel); showScreen("duels"); };
+navReward.onclick = () => { setActive(navReward); toastMsg("Rewards: keyin ulaymiz ✅"); };
+navSupport.onclick = () => { setActive(navSupport); toastMsg("Support: keyin ulaymiz ✅"); };
+
+// Default
+showScreen("home");
+
     navReward.onclick = () => { setActive(navReward); toastMsg(STR[lang||"en"].toastDemo); };
     navSupport.onclick = () => { setActive(navSupport); toastMsg("Support: keyin ulaymiz ✅"); };
 
@@ -1384,6 +1386,7 @@ renderDuels();
   </script>
 </body>
 </html>
+
 
 
 
