@@ -485,6 +485,67 @@
 
 
 
+/* ===== VIP Snow (logo ustida) ===== */
+.logoWrap{
+  position: relative;
+  display:flex;
+  align-items:center;
+  gap:2px;
+}
+
+/* qotib qolgan snow cap */
+.logoWrap::before{
+  content:"";
+  position:absolute;
+  left:-2px;
+  right:-2px;
+  top:-6px;
+  height:10px;
+  border-radius: 999px;
+  background:
+    radial-gradient(10px 8px at 12% 80%, rgba(255,255,255,.95), transparent 60%),
+    radial-gradient(12px 10px at 38% 70%, rgba(255,255,255,.90), transparent 62%),
+    radial-gradient(10px 8px at 70% 78%, rgba(255,255,255,.92), transparent 60%),
+    radial-gradient(12px 10px at 92% 76%, rgba(255,255,255,.88), transparent 62%),
+    linear-gradient(to bottom, rgba(255,255,255,.82), rgba(255,255,255,.12));
+  filter: blur(.2px);
+  opacity:.55;          /* VIP: juda kuchli emas */
+  pointer-events:none;
+}
+
+/* tushayotgan qor konteyneri */
+.logoSnow{
+  position:absolute;
+  left:-6px;
+  right:-6px;
+  top:-14px;
+  height:28px;          /* faqat logo tepasida */
+  overflow:hidden;
+  pointer-events:none;
+}
+
+/* qor donalari */
+.logoSnow i{
+  position:absolute;
+  top:-10px;
+  width:3px;
+  height:3px;
+  border-radius:50%;
+  background: rgba(255,255,255,.85);
+  box-shadow: 0 0 6px rgba(255,255,255,.22);
+  opacity:.65;
+  animation: logoSnowFall linear infinite;
+}
+
+@keyframes logoSnowFall{
+  0%   { transform: translateY(-8px); opacity: 0; }
+  15%  { opacity: .65; }
+  100% { transform: translateY(34px); opacity: 0; }
+}
+
+    
+
+
 
   </style>
 </head>
@@ -494,9 +555,13 @@
  <!-- TOP BAR -->
 <div class="topbar">
   <div class="topbar-left">
-    <div class="logoWrap">
-      <span class="logoOne">1</span><span class="logoText">WISE</span>
-    </div>
+    <div class="logoWrap" id="logoWrap">
+  <span class="logoOne">1</span><span class="logoText">WISE</span>
+
+  <!-- VIP snow (faqat logo ustida) -->
+  <div class="logoSnow" aria-hidden="true"></div>
+</div>
+
   </div>
 
   <div class="topbar-center">
@@ -792,12 +857,49 @@ if (bell){
 
 
 
+
+ // ===== VIP Snow only on logo =====
+(function initLogoSnow(){
+  const snowBox = document.querySelector(".logoSnow");
+  if(!snowBox) return;
+
+  const COUNT = 9; // ozgina, VIP
+  snowBox.innerHTML = ""; // clean
+
+  for(let i=0;i<COUNT;i++){
+    const dot = document.createElement("i");
+
+    // random x
+    dot.style.left = (Math.random()*100) + "%";
+
+    // random size (2-4px)
+    const sz = 2 + Math.random()*2;
+    dot.style.width = sz + "px";
+    dot.style.height = sz + "px";
+
+    // random speed (2.8s - 5.2s)
+    const dur = (2.8 + Math.random()*2.4).toFixed(2);
+    dot.style.animationDuration = dur + "s";
+
+    // random delay
+    dot.style.animationDelay = (-Math.random()*dur) + "s";
+
+    // yengil “drift” effekt: opacity
+    dot.style.opacity = (0.35 + Math.random()*0.35).toFixed(2);
+
+    snowBox.appendChild(dot);
+  }
+})();
+   
+
+
     // default screen
     showScreen("home");
   
   </script>
 </body>
 </html>
+
 
 
 
