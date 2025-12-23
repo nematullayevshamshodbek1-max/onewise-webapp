@@ -126,6 +126,59 @@
       margin:0 auto;
       padding: 14px 14px 0;
     }
+    <!-- ===== DUELS SCREEN ===== -->
+<div id="screenDuels" class="screen">
+
+  <!-- Top tabs -->
+  <div class="topTabs">
+    <button class="tab active" data-tab="duels">Duellar</button>
+    <button class="tab" data-tab="rating">Reyting</button>
+    <button class="tab" data-tab="rewards">Mukofot</button>
+    <button class="tab" data-tab="ref">Referal</button>
+  </div>
+
+  <!-- Search + Filter -->
+  <div class="searchRow">
+    <div class="searchBox">
+      <span class="sIcon">🔎</span>
+      <input id="duelSearch" type="text" placeholder="Qidirish" />
+    </div>
+    <button id="btnFilter" class="filterBtn">⏷ Filter</button>
+  </div>
+
+  <!-- Big 1v1 banner -->
+  <div class="duelBanner">
+    <div class="bannerGlow"></div>
+    <div class="bannerTop">
+      <div class="avatarCircle">🙂</div>
+      <div class="bannerTitle">
+        <div class="vsText">1 vs 1</div>
+        <div class="duelText">DUEL</div>
+      </div>
+      <div class="avatarCircle">😎</div>
+    </div>
+
+    <div class="bannerNames">
+      <div class="bn">Siz</div>
+      <div class="bn">Anvar</div>
+    </div>
+
+    <button id="btnStartFromDuels" class="greenStart">DUELNI BOSHLASH</button>
+  </div>
+
+  <!-- Sub tabs -->
+  <div class="subTabs">
+    <button class="subtab active" data-sort="popular">Ommabop</button>
+    <button class="subtab" data-sort="trend">Trenddagi</button>
+    <button class="subtab" data-sort="new">Yangi</button>
+    <button class="subtab" data-sort="fast">Tezkor</button>
+  </div>
+
+  <!-- Duel list -->
+  <div id="duelList" class="duelList">
+    <!-- JS render qiladi -->
+  </div>
+</div>
 
 /* ===== TOP BAR ===== */
 .topbar{
@@ -198,59 +251,6 @@
   padding-top: 74px; /* TOP BAR balandligi */
 }
 
-<!-- ===== DUELS SCREEN ===== -->
-<div id="screenDuels" class="screen">
-
-  <!-- Top tabs -->
-  <div class="topTabs">
-    <button class="tab active" data-tab="duels">Duellar</button>
-    <button class="tab" data-tab="rating">Reyting</button>
-    <button class="tab" data-tab="rewards">Mukofot</button>
-    <button class="tab" data-tab="ref">Referal</button>
-  </div>
-
-  <!-- Search + Filter -->
-  <div class="searchRow">
-    <div class="searchBox">
-      <span class="sIcon">🔎</span>
-      <input id="duelSearch" type="text" placeholder="Qidirish" />
-    </div>
-    <button id="btnFilter" class="filterBtn">⏷ Filter</button>
-  </div>
-
-  <!-- Big 1v1 banner -->
-  <div class="duelBanner">
-    <div class="bannerGlow"></div>
-    <div class="bannerTop">
-      <div class="avatarCircle">🙂</div>
-      <div class="bannerTitle">
-        <div class="vsText">1 vs 1</div>
-        <div class="duelText">DUEL</div>
-      </div>
-      <div class="avatarCircle">😎</div>
-    </div>
-
-    <div class="bannerNames">
-      <div class="bn">Siz</div>
-      <div class="bn">Anvar</div>
-    </div>
-
-    <button id="btnStartFromDuels" class="greenStart">DUELNI BOSHLASH</button>
-  </div>
-
-  <!-- Sub tabs -->
-  <div class="subTabs">
-    <button class="subtab active" data-sort="popular">Ommabop</button>
-    <button class="subtab" data-sort="trend">Trenddagi</button>
-    <button class="subtab" data-sort="new">Yangi</button>
-    <button class="subtab" data-sort="fast">Tezkor</button>
-  </div>
-
-  <!-- Duel list -->
-  <div id="duelList" class="duelList">
-    <!-- JS render qiladi -->
-  </div>
-</div>
     
 
     .brand{
@@ -1383,6 +1383,7 @@ renderDuels();
   </script>
 </body>
 </html>
+
 
 
 
