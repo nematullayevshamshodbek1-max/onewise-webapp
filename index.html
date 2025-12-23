@@ -114,12 +114,13 @@
     }
 
     /* ===== App screen ===== */
-    #app{
-      position:fixed; inset:0;
-      display:none;
-      overflow:auto;
-      padding-bottom: 86px; /* bottom nav space */
-    }
+#app{
+  position:fixed; inset:0;
+  display:none;
+  overflow:auto;
+  padding-bottom: calc(110px + env(safe-area-inset-bottom)); /* OLD: 86px */
+}
+
     .wrap{
       max-width:520px;
       margin:0 auto;
@@ -369,27 +370,29 @@
     .pts span{ color: rgba(255,255,255,.55); font-weight:800; }
 
     /* bottom nav */
-    .bottomNav{
-      position:fixed;
-      left:0; right:0; bottom:0;
-      padding: 10px 12px 18px;
-      background: linear-gradient(180deg, rgba(5,7,13,0), rgba(5,7,13,0.88) 35%, rgba(5,7,13,0.96));
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-      z-index:500;
-    }
-    .navBar{
-      max-width:520px;
-      margin:0 auto;
-      display:flex;
-      justify-content:space-between;
-      gap:10px;
-      border:1px solid rgba(255,255,255,.08);
-      background: rgba(18,22,35,.70);
-      border-radius:18px;
-      padding:10px;
-      box-shadow: 0 14px 40px rgba(0,0,0,.45);
-    }
+.bottomNav{
+  position:fixed;
+  left:0; right:0; bottom:0;
+  padding: 8px 12px calc(10px + env(safe-area-inset-bottom));
+  background: linear-gradient(180deg, rgba(5,7,13,0), rgba(5,7,13,0.88) 35%, rgba(5,7,13,0.96));
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index:500;
+}
+
+.navBar{
+  max-width:520px;
+  margin:0 auto;
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  border:1px solid rgba(255,255,255,.08);
+  background: rgba(18,22,35,.70);
+  border-radius:18px;
+  padding:8px; /* OLD: 10px */
+  box-shadow: 0 14px 40px rgba(0,0,0,.45);
+}
+
     .navItem{
       flex:1;
       display:flex;
@@ -958,4 +961,5 @@ drawerClose.onclick = () => closeDrawer();
   </script>
 </body>
 </html>
+
 
