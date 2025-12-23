@@ -490,6 +490,19 @@
 
 
   </style>
+
+
+<style>
+.logoWrap {
+    position: relative;
+    overflow: hidden; /* Qor yozuvdan tashqariga chiqmaydi */
+    display: inline-block;
+    padding-bottom: 2px; /* Qor to'planishi uchun ozgina joy */
+}
+</style>
+
+
+  
 </head>
 
 <body>
@@ -818,93 +831,59 @@ if (depositBtn) {
 
 
 
-<canvas id="snowCanvas" style="position: fixed; pointer-events: none; z-index: 99999;"></canvas>
-
 <script>
 (function() {
-    const canvas = document.getElementById('snowCanvas');
-    const ctx = canvas.getContext('2d');
-    const part1 = document.querySelector('.logoOne');
-    const part2 = document.querySelector('.logoText');
-    
-    let flakes = [];
-    let staticFlakes = [];
-    let logoRect = { left: 0, top: 0, width: 0, height: 0 };
+    const logo = document.querySelector('.logoWrap');
+    if (!logo) return;
 
-    function updateLogoPosition() {
-        if (part1 && part2) {
-            const r1 = part1.getBoundingClientRect();
-            const r2 = part2.getBoundingClientRect();
-            // Ikkala qismni birlashtirgan umumiy maydonni hisoblaymiz
-            logoRect.left = Math.min(r1.left, r2.left);
-            logoRect.top = Math.min(r1.top, r2.top);
-            logoRect.right = Math.max(r1.right, r2.right);
-            logoRect.bottom = Math.max(r1.bottom, r2.bottom);
-            logoRect.width = logoRect.right - logoRect.left;
-            logoRect.height = logoRect.bottom - logoRect.top;
-
-            // Canvasni faqat logotip ustiga to'g'irlaymiz
-            canvas.style.left = logoRect.left + 'px';
-            canvas.style.top = (logoRect.top - 20) + 'px'; // Biroz teparoqdan boshlanishi uchun
-            canvas.width = logoRect.width;
-            canvas.height = logoRect.height + 20;
-        }
-    }
-
-    window.addEventListener('resize', updateLogoPosition);
-    updateLogoPosition();
-
-    class Flake {
-        constructor() { this.reset(); }
-        reset() {
-            this.x = Math.random() * canvas.width;
-            this.y = -5;
-            this.size = Math.random() * 1.5 + 0.5; // Kichikroq, chiroyli qorlar
-            this.speed = Math.random() * 0.4 + 0.2;
-        }
-        update() {
-            this.y += this.speed;
-            // Faqat yozuvning ustiga tushganda to'xtash (20px - bu tepadan olingan zaxira)
-            if (this.y > 18 && this.y < 23 && Math.random() > 0.8) {
-                staticFlakes.push({x: this.x, y: this.y, size: this.size});
-                this.reset();
-            }
-            if (this.y > canvas.height) this.reset();
-        }
-        draw() {
-            ctx.fillStyle = "white";
-            ctx.beginPath();
-            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-            ctx.fill();
-        }
-    }
-
-    // Kamroq qor (faqat logotip uchun 40 ta yetadi)
-    for (let i = 0; i < 40; i++) flakes.push(new Flake());
-
-    function loop() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        flakes.forEach(f => { f.update(); f.draw(); });
-        staticFlakes.forEach(sf => {
-            ctx.fillStyle = "white";
-            ctx.beginPath();
-            ctx.arc(sf.x, sf.y, sf.size, 0, Math.PI * 2);
-            ctx.fill();
+    function snow() {
+        const flake = document.createElement('div');
+        const size = (Math.random() * 3 + 1) + 'px';
+        
+        // Qor parchasi stili
+        Object.assign(flake.style, {
+            position: 'absolute',
+            top: '-5px',
+            left: Math.random() * 100 + '%',
+            width: size,
+            height: size,
+            backgroundColor: 'white',
+            borderRadius: '50%',
+            filter: 'blur(0.5px)',
+            opacity: Math.random() * 0.8 + 0.2,
+            pointerEvents: 'none' // Menyularni bosishga xalaqit bermaydi
         });
 
-        if (staticFlakes.length > 200) staticFlakes.shift();
-        requestAnimationFrame(loop);
+        logo.appendChild(flake);
+
+        // Pastga tushish animatsiyasi
+        const duration = Math.random() * 1500 + 1500;
+        const anim = flake.animate([
+            { transform: 'translateY(0)' },
+            { transform: `translateY(${logo.offsetHeight - 4}px)` }
+        ], { duration: duration, easing: 'linear' });
+
+        anim.onfinish = () => {
+            // Yozuv ustida to'planish (maksimum 40 ta qor parchasi)
+            if (logo.querySelectorAll('.s-flake').length < 40) {
+                flake.classList.add('s-flake');
+                flake.style.top = (logo.offsetHeight - 4) + 'px';
+                // 8 soniyadan keyin "erib" yo'qoladi va takrorlanadi
+                setTimeout(() => {
+                    flake.style.opacity = '0';
+                    setTimeout(() => flake.remove(), 1000);
+                }, 8000);
+            } else {
+                flake.remove();
+            }
+        };
     }
 
-    // Har 10 soniyada tozalab turish
-    setInterval(() => {
-        if (staticFlakes.length > 0) staticFlakes.splice(0, 5);
-        updateLogoPosition();
-    }, 10000);
-
-    loop();
+    // Qor yog'ish tezligi
+    setInterval(snow, 400);
 })();
 </script>
+
 
 
 
@@ -914,6 +893,7 @@ if (depositBtn) {
 
 </body>
 </html>
+
 
 
 
