@@ -816,91 +816,6 @@ if (depositBtn {
 
 
 
-<script>
-(function() {
-    // 1. Canvas yaratamiz va uni faqat logotip ichiga joylaymiz
-    const logoWrap = document.querySelector('.logoWrap');
-    if (!logoWrap) return;
-
-    // Logotip konteynerini tayyorlaymiz
-    logoWrap.style.position = 'relative';
-    logoWrap.style.overflow = 'visible'; // Qor tepadan tushishi uchun
-
-    const canvas = document.createElement('canvas');
-    canvas.id = 'snowCanvas';
-    // Canvas stili: tugmalarga xalaqit bermasligi uchun mutlaqo neytral
-    Object.assign(canvas.style, {
-        position: 'absolute',
-        top: '-50px', // Yozuvdan 50px tepadan boshlanadi
-        left: '0',
-        width: '100%',
-        height: (logoWrap.offsetHeight + 50) + 'px',
-        pointerEvents: 'none',
-        zIndex: '1' // Faqat yozuv atrofida turadi
-    });
-    
-    logoWrap.appendChild(canvas);
-    const ctx = canvas.getContext('2d');
-    
-    let flakes = [];
-    let staticFlakes = [];
-
-    function init() {
-        canvas.width = logoWrap.offsetWidth;
-        canvas.height = logoWrap.offsetHeight + 50;
-    }
-    window.addEventListener('resize', init);
-    init();
-
-    class Flake {
-        constructor() { this.reset(); }
-        reset() {
-            this.x = Math.random() * canvas.width;
-            this.y = 0; 
-            this.size = Math.random() * 1.5 + 0.5;
-            this.speed = Math.random() * 0.3 + 0.2;
-            this.opacity = Math.random() * 0.5 + 0.5;
-        }
-        update() {
-            this.y += this.speed;
-            // Yozuvning ustiga (50-pikselda) qo'nish mantiqi
-            if (this.y >= 50 && this.y <= 52) {
-                if (Math.random() > 0.4 && staticFlakes.length < 30) {
-                    staticFlakes.push({x: this.x, y: 50 + (Math.random()*3), size: this.size, opacity: this.opacity});
-                    this.reset();
-                }
-            }
-            if (this.y > canvas.height) this.reset();
-        }
-        draw() {
-            ctx.fillStyle = `rgba(255, 255, 255, ${this.opacity})`;
-            ctx.beginPath();
-            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-            ctx.fill();
-        }
-    }
-
-    for (let i = 0; i < 20; i++) flakes.push(new Flake());
-
-    function loop() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        flakes.forEach(f => { f.update(); f.draw(); });
-        staticFlakes.forEach(sf => {
-            ctx.fillStyle = `rgba(255, 255, 255, ${sf.opacity})`;
-            ctx.beginPath();
-            ctx.arc(sf.x, sf.y, sf.size, 0, Math.PI * 2);
-            ctx.fill();
-        });
-        requestAnimationFrame(loop);
-    }
-
-    setInterval(() => {
-        if (staticFlakes.length > 0) staticFlakes.splice(0, 3);
-    }, 10000);
-
-    loop();
-})();
-</script>
 
 
 
@@ -911,6 +826,7 @@ if (depositBtn {
 
 </body>
 </html>
+
 
 
 
