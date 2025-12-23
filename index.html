@@ -118,13 +118,18 @@
   position:fixed; inset:0;
   display:none;
   overflow:auto;
-  padding-bottom: calc(110px + env(safe-area-inset-bottom)); /* OLD: 86px */
+
+  /* TOP BAR balandligi */
+  padding-top: 74px;
+
+  /* BOTTOM NAV ustida qolmasin (kattaroq qildik) */
+  padding-bottom: calc(180px + env(safe-area-inset-bottom));
 }
 
     .wrap{
       max-width:520px;
       margin:0 auto;
-      padding: 14px 14px 0;
+      padding: 14px 14px 120px;
     }
 
 /* ===== TOP BAR ===== */
@@ -927,6 +932,7 @@
   background: rgba(255,255,255,0.04);
   overflow:hidden;
   box-shadow: 0 14px 40px rgba(0,0,0,.35);
+  margin-bottom: 40px;
 }
 .rwRow{
   display:flex;
@@ -1718,6 +1724,7 @@ if(rwStart){
   </script>
 </body>
 </html>
+
 
 
 
