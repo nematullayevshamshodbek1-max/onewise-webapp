@@ -406,6 +406,24 @@
 .navItem.active .material-symbols-rounded{
   color: var(--blue);
 }
+/* === FORCE: iconlarda hech qanday aylana/fon bo‘lmasin === */
+.navIcon{
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* active holatda ham */
+.navItem.active .navIcon{
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* xohlasang active icon faqat ko‘k bo‘lsin */
+.navItem.active .material-symbols-rounded{
+  color: var(--blue) !important;
+}
 
 
 
@@ -697,6 +715,7 @@
   </script>
 </body>
 </html>
+
 
 
 
