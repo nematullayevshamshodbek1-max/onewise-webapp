@@ -547,93 +547,97 @@
     document.getElementById("depositBtn").onclick = () => toastMsg("Deposit keyin ulanadi");
     document.getElementById("bellBtn").onclick = () => document.getElementById("bellBtn").classList.toggle("active");
 </script>
+
+
+
 <script>
 (function() {
-    // 1. Logotipni topamiz
-    const logoWrap = document.querySelector('.logoWrap');
-    if (!logoWrap) return;
-
-    // Logotip konteynerini tayyorlaymiz
-    logoWrap.style.position = 'relative';
-
-    const canvas = document.createElement('canvas');
-    canvas.id = 'snowCanvas';
+    // Sahifadagi barcha logotiplarni topamiz (ham asosiy, ham menyu ichidagilarni)
+    const logos = document.querySelectorAll('.logoWrap, .drawerBrand');
     
-    // Canvas stili: tugmalarga xalaqit bermasligi uchun pointer-events: none
-    Object.assign(canvas.style, {
-        position: 'absolute',
-        top: '-40px', 
-        left: '0',
-        width: '100%',
-        height: (logoWrap.offsetHeight + 40) + 'px',
-        pointerEvents: 'none',
-        zIndex: '100' 
-    });
-    
-    logoWrap.appendChild(canvas);
-    const ctx = canvas.getContext('2d');
-    
-    let flakes = [];
-    let staticFlakes = [];
-
-    function init() {
-        canvas.width = logoWrap.offsetWidth;
-        canvas.height = logoWrap.offsetHeight + 40;
-    }
-    window.addEventListener('resize', init);
-    init();
-
-    class Flake {
-        constructor() { this.reset(); }
-        reset() {
-            this.x = Math.random() * canvas.width;
-            this.y = 0; 
-            this.size = Math.random() * 1.5 + 0.5;
-            this.speed = Math.random() * 0.3 + 0.2;
-            this.opacity = Math.random() * 0.5 + 0.5;
-        }
-        update() {
-            this.y += this.speed;
-            // Yozuvning ustiga qo'nish (40-piksel atrofida)
-            if (this.y >= 38 && this.y <= 40) {
-                if (Math.random() > 0.5 && staticFlakes.length < 25) {
-                    staticFlakes.push({x: this.x, y: 38 + (Math.random()*2), size: this.size, opacity: this.opacity});
-                    this.reset();
-                }
-            }
-            if (this.y > canvas.height) this.reset();
-        }
-        draw() {
-            // To'g'rilangan rang sintaksisi
-            ctx.fillStyle = `rgba(255, 255, 255, ${this.opacity})`;
-            ctx.beginPath();
-            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-            ctx.fill();
-        }
-    }
-
-    for (let i = 0; i < 15; i++) flakes.push(new Flake());
-
-    function loop() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        flakes.forEach(f => { f.update(); f.draw(); });
-        staticFlakes.forEach(sf => {
-            ctx.fillStyle = `rgba(255, 255, 255, ${sf.opacity})`;
-            ctx.beginPath();
-            ctx.arc(sf.x, sf.y, sf.size, 0, Math.PI * 2);
-            ctx.fill();
+    logos.forEach(logo => {
+        // Har bir logotip uchun alohida konteyner tayyorlaymiz
+        logo.style.position = 'relative';
+        
+        const canvas = document.createElement('canvas');
+        Object.assign(canvas.style, {
+            position: 'absolute',
+            top: '-40px',
+            left: '0',
+            width: '100%',
+            pointerEvents: 'none',
+            zIndex: '100'
         });
-        requestAnimationFrame(loop);
-    }
+        
+        logo.appendChild(canvas);
+        const ctx = canvas.getContext('2d');
+        let flakes = [], staticFlakes = [];
 
-    // Har 10 soniyada qorlarni biroz eritib turish
-    setInterval(() => {
-        if (staticFlakes.length > 0) staticFlakes.shift();
-    }, 10000);
+        function init() {
+            canvas.width = logo.offsetWidth;
+            canvas.height = logo.offsetHeight + 40;
+            canvas.style.height = (logo.offsetHeight + 40) + 'px';
+        }
+        
+        window.addEventListener('resize', init);
+        // Menyu ochilganda o'lchamni to'g'ri olish uchun kichik kechikish bilan ishga tushiramiz
+        setTimeout(init, 100);
 
-    loop();
+        class Flake {
+            constructor() { this.reset(); }
+            reset() {
+                this.x = Math.random() * canvas.width;
+                this.y = 0; 
+                this.size = Math.random() * 1.5 + 0.5;
+                this.speed = Math.random() * 0.3 + 0.2;
+                this.opacity = Math.random() * 0.5 + 0.5;
+            }
+            update() {
+                this.y += this.speed;
+                // Logotip ustiga (40-pikselda) qo'nish
+                if (this.y >= 38 && this.y <= 40) {
+                    if (Math.random() > 0.5 && staticFlakes.length < 25) {
+                        staticFlakes.push({x: this.x, y: 38 + (Math.random()*2), size: this.size, opacity: this.opacity});
+                        this.reset();
+                    }
+                }
+                if (this.y > canvas.height) this.reset();
+            }
+            draw() {
+                ctx.fillStyle = `rgba(255, 255, 255, ${this.opacity})`;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        for (let i = 0; i < 15; i++) flakes.push(new Flake());
+
+        function loop() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            flakes.forEach(f => { f.update(); f.draw(); });
+            staticFlakes.forEach(sf => {
+                ctx.fillStyle = `rgba(255, 255, 255, ${sf.opacity})`;
+                ctx.beginPath();
+                ctx.arc(sf.x, sf.y, sf.size, 0, Math.PI * 2);
+                ctx.fill();
+            });
+            requestAnimationFrame(loop);
+        }
+
+        setInterval(() => {
+            if (staticFlakes.length > 0) staticFlakes.shift();
+        }, 10000);
+
+        loop();
+    });
 })();
 </script>
+
+
+
+  
 </body>
   </html>
+
 
