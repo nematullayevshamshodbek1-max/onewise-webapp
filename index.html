@@ -485,14 +485,6 @@
 
 
 
-/* ===== VIP Snow (logo ustida) ===== */
-.logoWrap{
-  position: relative;
-  display:flex;
-  align-items:center;
-  gap:2px;
-}
-    
     
 
 
@@ -508,27 +500,6 @@
     <div class="logoWrap" id="logoWrap">
   <span class="logoOne">1</span><span class="logoText">WISE</span>
 
-  <!-- VIP snow (faqat logo ustida) -->
-  <div class="logoSnow" aria-hidden="true"></div>
-</div>
-
-  </div>
-
-  <div class="topbar-center">
-    <span class="currency">UZS</span>
-    <span class="balance" id="topBalance">0.00</span>
-  </div>
-
-  <div class="topbar-right">
-    <button class="deposit-btn" id="depositBtn" type="button">Deposit</button>
-
-    <button class="bell" id="bellBtn" type="button" aria-label="Notifications">
-      <svg class="bellIcon" viewBox="0 0 24 24" aria-hidden="true">
-        <path d="M12 22a2.5 2.5 0 0 0 2.45-2h-4.9A2.5 2.5 0 0 0 12 22Zm7-6V11a7 7 0 0 0-5-6.71V3a2 2 0 1 0-4 0v1.29A7 7 0 0 0 5 11v5l-1.8 1.8a1 1 0 0 0 .7 1.7h16.2a1 1 0 0 0 .7-1.7L19 16Z"/>
-      </svg>
-    </button>
-  </div>
-</div>
 
 
 
@@ -808,39 +779,6 @@ if (bell){
 
 
 
- // ===== VIP Snow only on logo =====
-(function initLogoSnow(){
-  const snowBox = document.querySelector(".logoSnow");
-  if(!snowBox) return;
-
-  const COUNT = 9; // ozgina, VIP
-  snowBox.innerHTML = ""; // clean
-
-  for(let i=0;i<COUNT;i++){
-    const dot = document.createElement("i");
-
-    // random x
-    dot.style.left = (Math.random()*100) + "%";
-
-    // random size (2-4px)
-    const sz = 2 + Math.random()*2;
-    dot.style.width = sz + "px";
-    dot.style.height = sz + "px";
-
-    // random speed (2.8s - 5.2s)
-    const dur = (2.8 + Math.random()*2.4).toFixed(2);
-    dot.style.animationDuration = dur + "s";
-
-    // random delay
-    dot.style.animationDelay = (-Math.random()*dur) + "s";
-
-    // yengil “drift” effekt: opacity
-    dot.style.opacity = (0.35 + Math.random()*0.35).toFixed(2);
-
-    snowBox.appendChild(dot);
-  }
-})();
-   
 
 
     // default screen
@@ -849,6 +787,7 @@ if (bell){
   </script>
 </body>
 </html>
+
 
 
 
