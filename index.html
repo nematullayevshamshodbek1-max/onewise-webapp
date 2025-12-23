@@ -552,12 +552,12 @@
 
 <script>
 (function() {
-    // Sahifadagi barcha logotiplarni topamiz (ham asosiy, ham menyu ichidagilarni)
-    const logos = document.querySelectorAll('.logoWrap, .drawerBrand');
-    
-    logos.forEach(logo => {
-        // Har bir logotip uchun alohida konteyner tayyorlaymiz
-        logo.style.position = 'relative';
+    // Sahifadagi barcha logotiplarni topamiz
+    const targets = document.querySelectorAll('.logoWrap, .drawerBrand');
+
+    targets.forEach(target => {
+        // Har bir logotipni o'zini alohida konteyner qilamiz
+        target.style.position = 'relative';
         
         const canvas = document.createElement('canvas');
         Object.assign(canvas.style, {
@@ -565,36 +565,40 @@
             top: '-40px',
             left: '0',
             width: '100%',
+            height: (target.offsetHeight + 40) + 'px',
             pointerEvents: 'none',
             zIndex: '100'
         });
-        
-        logo.appendChild(canvas);
+
+        target.appendChild(canvas);
         const ctx = canvas.getContext('2d');
         let flakes = [], staticFlakes = [];
 
         function init() {
-            canvas.width = logo.offsetWidth;
-            canvas.height = logo.offsetHeight + 40;
-            canvas.style.height = (logo.offsetHeight + 40) + 'px';
+            canvas.width = target.offsetWidth;
+            canvas.height = target.offsetHeight + 40;
         }
-        
+
+        // Menyu ochilishi bilan o'lchamlarni to'g'irlash
         window.addEventListener('resize', init);
-        // Menyu ochilganda o'lchamni to'g'ri olish uchun kichik kechikish bilan ishga tushiramiz
-        setTimeout(init, 100);
+        // Menyu tugmasi bosilganda biroz kutib canvasni yangilaymiz
+        document.getElementById('navMenu').addEventListener('click', () => {
+            setTimeout(init, 300); 
+        });
+        init();
 
         class Flake {
             constructor() { this.reset(); }
             reset() {
                 this.x = Math.random() * canvas.width;
-                this.y = 0; 
+                this.y = 0;
                 this.size = Math.random() * 1.5 + 0.5;
                 this.speed = Math.random() * 0.3 + 0.2;
                 this.opacity = Math.random() * 0.5 + 0.5;
             }
             update() {
                 this.y += this.speed;
-                // Logotip ustiga (40-pikselda) qo'nish
+                // Yozuv ustiga qo'nish (40-piksel balandlikda)
                 if (this.y >= 38 && this.y <= 40) {
                     if (Math.random() > 0.5 && staticFlakes.length < 25) {
                         staticFlakes.push({x: this.x, y: 38 + (Math.random()*2), size: this.size, opacity: this.opacity});
@@ -624,11 +628,8 @@
             });
             requestAnimationFrame(loop);
         }
-
-        setInterval(() => {
-            if (staticFlakes.length > 0) staticFlakes.shift();
-        }, 10000);
-
+        
+        setInterval(() => { if (staticFlakes.length > 0) staticFlakes.shift(); }, 10000);
         loop();
     });
 })();
@@ -639,5 +640,6 @@
   
 </body>
   </html>
+
 
 
