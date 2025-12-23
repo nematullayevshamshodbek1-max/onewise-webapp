@@ -445,21 +445,27 @@
 .bottomNav .navItem.active:not(#navMenu){
   color: var(--blue) !important;
 }
-/* TOPBAR bell: dumaloq fonni o‘chir */
+/* Bell button - emoji emas, SVG */
 .bell{
-  width:auto !important;
-  height:auto !important;
   background: transparent !important;
-  border-radius: 0 !important;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size: 18px;
-  padding: 6px 8px; /* bosish oson bo‘lsin */
-  opacity: .9;
+  border: 0 !important;
+  padding: 6px 8px;
+  cursor: pointer;
+  color: rgba(255,255,255,.85); /* default rang */
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-/* Bell active (bosilganda) ko‘k */
+.bellIcon{
+  width: 22px;
+  height: 22px;
+  fill: currentColor;   /* MUHIM: rang CSS’dan olinadi */
+}
+
+.bell:active{ transform: scale(0.98); }
+
+/* Bosilganda ko‘k */
 .bell.active{
   color: var(--blue) !important;
 }
@@ -487,7 +493,12 @@
 
     <div class="topbar-right">
       <button class="deposit-btn" id="depositBtn">Deposit</button>
-      <div class="bell">🔔</div>
+     <button class="bell" id="bellBtn" type="button" aria-label="Notifications">
+  <svg class="bellIcon" viewBox="0 0 24 24" aria-hidden="true">
+    <path d="M12 22a2.5 2.5 0 0 0 2.45-2h-4.9A2.5 2.5 0 0 0 12 22Zm7-6V11a7 7 0 0 0-5-6.71V3a2 2 0 1 0-4 0v1.29A7 7 0 0 0 5 11v5l-1.8 1.8a1 1 0 0 0 .7 1.7h16.2a1 1 0 0 0 .7-1.7L19 16Z"/>
+  </svg>
+</button>
+
     </div>
   </div>
 
@@ -754,14 +765,15 @@ function closeDrawer(){
     // deposit demo
     document.getElementById("depositBtn").onclick = () => toastMsg("Deposit: keyin ulaymiz ✅");
 
-    // bell (top right)
-const bell = document.querySelector(".bell");
+// bell (top right)
+const bell = document.getElementById("bellBtn");
 if (bell){
   bell.onclick = () => {
-    bell.classList.toggle("active");   // ko‘k bo‘lib yoqilib/o‘chadi
+    bell.classList.toggle("active");
     toastMsg("Notifications: keyin ulaymiz ✅");
   };
 }
+
 
 
     // default screen
@@ -770,6 +782,7 @@ if (bell){
   </script>
 </body>
 </html>
+
 
 
 
