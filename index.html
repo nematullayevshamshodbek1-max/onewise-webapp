@@ -127,14 +127,77 @@
       padding: 14px 14px 0;
     }
 
-    /* top bar */
-    .topbar{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:12px;
-      padding: 4px 2px 10px;
-    }
+/* ===== TOP BAR ===== */
+.topbar{
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 64px;
+  padding: 0 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #0b0f1a;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  z-index: 1000;
+}
+
+/* chap tomoni */
+.topbar-left .logo{
+  font-weight: 800;
+  font-size: 20px;
+  letter-spacing: .5px;
+  color: #ffffff;
+}
+
+/* markazi */
+.topbar-center{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 12px;
+  color: #cfd6ff;
+}
+.topbar-center .balance{
+  font-size: 14px;
+  font-weight: 600;
+  color: #fff;
+}
+
+/* o‘ng tomoni */
+.topbar-right{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.deposit-btn{
+  background: linear-gradient(135deg,#00c853,#00e676);
+  border: none;
+  color: #003b1f;
+  font-weight: 700;
+  padding: 8px 14px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.bell{
+  width: 34px;
+  height: 34px;
+  background: rgba(255,255,255,.08);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+}
+
+/* ===== APP CONTENT pastga tushsin ===== */
+#app{
+  padding-top: 74px; /* TOP BAR balandligi */
+}
+
     .brand{
       display:flex;
       align-items:center;
@@ -544,6 +607,24 @@
   
 <body>
 
+<!-- TOP BAR -->
+<div class="topbar">
+  <div class="topbar-left">
+    <span class="logo">1WISE</span>
+  </div>
+
+  <div class="topbar-center">
+    <span class="currency">UZS</span>
+    <span class="balance">0.00</span>
+  </div>
+
+  <div class="topbar-right">
+    <button class="deposit-btn">Deposit</button>
+    <div class="bell">🔔</div>
+  </div>
+</div>
+
+  
   <!-- 1) First-run language selection -->
   <div id="langScreen">
     <div class="langBox">
@@ -961,5 +1042,6 @@ drawerClose.onclick = () => closeDrawer();
   </script>
 </body>
 </html>
+
 
 
