@@ -493,56 +493,73 @@
   gap:2px;
 }
 
-/* qotib qolgan snow cap */
+/* ===== Realistic snow cap on logo ===== */
+.logoWrap{
+  position: relative;
+  display:flex;
+  align-items:center;
+  gap:2px;
+}
+
+/* QALIN QOR (bortib turgan) */
 .logoWrap::before{
   content:"";
   position:absolute;
-  left:-2px;
-  right:-2px;
-  top:-6px;
-  height:10px;
+  left:-6px;
+  right:-6px;
+  top:-10px;
+  height:18px;
   border-radius: 999px;
-  background:
-    radial-gradient(10px 8px at 12% 80%, rgba(255,255,255,.95), transparent 60%),
-    radial-gradient(12px 10px at 38% 70%, rgba(255,255,255,.90), transparent 62%),
-    radial-gradient(10px 8px at 70% 78%, rgba(255,255,255,.92), transparent 60%),
-    radial-gradient(12px 10px at 92% 76%, rgba(255,255,255,.88), transparent 62%),
-    linear-gradient(to bottom, rgba(255,255,255,.82), rgba(255,255,255,.12));
-  filter: blur(.2px);
-  opacity:.55;          /* VIP: juda kuchli emas */
   pointer-events:none;
+
+  /* bortib turgan “bo‘laklar” */
+  background:
+    radial-gradient(16px 12px at 10% 85%, rgba(255,255,255,.96) 0 60%, transparent 62%),
+    radial-gradient(22px 16px at 30% 90%, rgba(255,255,255,.95) 0 62%, transparent 64%),
+    radial-gradient(18px 14px at 52% 88%, rgba(255,255,255,.94) 0 60%, transparent 62%),
+    radial-gradient(24px 18px at 74% 92%, rgba(255,255,255,.95) 0 62%, transparent 64%),
+    radial-gradient(16px 12px at 92% 85%, rgba(255,255,255,.94) 0 60%, transparent 62%),
+    linear-gradient(to bottom, rgba(255,255,255,.92), rgba(255,255,255,.22));
+
+  /* hajm va “yumshoqlik” */
+  filter:
+    drop-shadow(0 2px 2px rgba(0,0,0,.18))
+    blur(.2px);
+  opacity:.85;
 }
 
-/* tushayotgan qor konteyneri */
+/* QORNING PASTGA OSILGAN QISMI (real ko‘rinish uchun) */
+.logoWrap::after{
+  content:"";
+  position:absolute;
+  left:-4px;
+  right:-4px;
+  top:6px;           /* capning tagidan boshlansin */
+  height:10px;
+  pointer-events:none;
+
+  background:
+    radial-gradient(10px 8px at 18% 10%, rgba(255,255,255,.92) 0 55%, transparent 58%),
+    radial-gradient(12px 10px at 38% 0%, rgba(255,255,255,.90) 0 55%, transparent 58%),
+    radial-gradient(9px 7px  at 58% 15%, rgba(255,255,255,.90) 0 55%, transparent 58%),
+    radial-gradient(12px 10px at 78% 5%, rgba(255,255,255,.88) 0 55%, transparent 58%);
+
+  opacity:.55;
+  filter: blur(.15px);
+}
+
+
+
 .logoSnow{
   position:absolute;
   left:-6px;
   right:-6px;
-  top:-14px;
-  height:28px;          /* faqat logo tepasida */
+  top:-18px;   /* -14 o‘rniga -18, cap bilan uyg‘un */
+  height:30px;
   overflow:hidden;
   pointer-events:none;
 }
-
-/* qor donalari */
-.logoSnow i{
-  position:absolute;
-  top:-10px;
-  width:3px;
-  height:3px;
-  border-radius:50%;
-  background: rgba(255,255,255,.85);
-  box-shadow: 0 0 6px rgba(255,255,255,.22);
-  opacity:.65;
-  animation: logoSnowFall linear infinite;
-}
-
-@keyframes logoSnowFall{
-  0%   { transform: translateY(-8px); opacity: 0; }
-  15%  { opacity: .65; }
-  100% { transform: translateY(34px); opacity: 0; }
-}
-
+    
     
 
 
@@ -899,6 +916,7 @@ if (bell){
   </script>
 </body>
 </html>
+
 
 
 
