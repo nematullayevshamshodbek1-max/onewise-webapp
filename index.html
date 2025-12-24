@@ -615,12 +615,23 @@
             }
             update() {
                 this.y += this.speed;
-                // Yozuv ustiga qo'nish (40-piksel balandlikda)
-                if (this.y >= 38 && this.y <= 40) {
-                    if (Math.random() > 0.5 && staticFlakes.length < 25) {
-                        staticFlakes.push({x: this.x, y: 38 + (Math.random()*2), size: this.size, opacity: this.opacity});
-                        this.reset();
-                    }
+
+
+
+
+
+// Yangilangan variant (Qor biroz pastroqqa qo'nadi):
+if (this.y >= 44 && this.y <= 46) { // 38 ni 44 ga, 40 ni 46 ga o'zgartirdik
+    if (Math.random() > 0.5 && staticFlakes.length < 25) {
+        staticFlakes.push({x: this.x, y: 44 + (Math.random()*2), size: this.size, opacity: this.opacity});
+        this.reset();
+    }
+}
+
+
+
+
+              
                 }
                 if (this.y > canvas.height) this.reset();
             }
@@ -657,6 +668,7 @@
   
 </body>
   </html>
+
 
 
 
