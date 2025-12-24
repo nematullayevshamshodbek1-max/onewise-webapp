@@ -624,6 +624,124 @@
 
 
 
+
+
+
+.leaderboard-card {
+  background: var(--card);
+  border: 1px solid var(--stroke);
+  border-radius: 24px;
+  padding: 20px;
+  margin-top: 20px;
+}
+
+.l-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.l-title {
+  font-weight: 1000;
+  font-size: 14px;
+  letter-spacing: 0.5px;
+  color: var(--text);
+}
+
+.l-all-btn {
+  font-size: 11px;
+  font-weight: 900;
+  color: var(--blue);
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  cursor: pointer;
+}
+
+.l-all-btn .material-symbols-rounded { font-size: 16px; }
+
+.l-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.l-item {
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  transition: transform 0.2s;
+}
+
+.l-item:active { transform: scale(0.98); }
+
+.l-rank {
+  width: 30px;
+  display: flex;
+  justify-content: center;
+  margin-right: 12px;
+}
+
+.l-rank img { width: 28px; height: 28px; }
+
+.l-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid rgba(255,255,255,0.1);
+  margin-right: 12px;
+}
+
+.l-info {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.l-name {
+  font-weight: 800;
+  font-size: 14px;
+}
+
+.l-status {
+  font-size: 10px;
+  color: var(--muted);
+  font-weight: 600;
+}
+
+.l-score {
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+}
+
+.score-val {
+  font-weight: 1000;
+  font-size: 15px;
+  color: #00c853; /* Ball yashil rangda */
+}
+
+.score-label {
+  font-size: 9px;
+  font-weight: 900;
+  color: var(--muted);
+}
+
+/* Oltin o'rin uchun maxsus effekt */
+.gold {
+  background: linear-gradient(90deg, rgba(255, 215, 0, 0.05), transparent);
+  border: 1px solid rgba(255, 215, 0, 0.2);
+}
+    
+
+
+
+
     
   </style>
 </head>
@@ -740,6 +858,67 @@
   
       
 
+
+
+
+
+<div class="leaderboard-card">
+  <div class="l-header">
+    <span class="l-title">🏆 BUGUNGI TOP 3</span>
+    <div class="l-all-btn" onclick="setActive(document.getElementById('navReward')); showScreen('rewards');">
+      BARCHASI <span class="material-symbols-rounded">chevron_right</span>
+    </div>
+  </div>
+
+  <div class="l-list">
+    <div class="l-item gold">
+      <div class="l-rank">
+        <img src="https://img.icons8.com/color/48/gold-medal.png" alt="1">
+      </div>
+      <img src="https://randomuser.me/api/portraits/men/32.jpg" class="l-avatar">
+      <div class="l-info">
+        <span class="l-name">Sardor_IQ</span>
+        <span class="l-status">Yengilmas</span>
+      </div>
+      <div class="l-score">
+        <span class="score-val">12,450</span>
+        <span class="score-label">BALL</span>
+      </div>
+    </div>
+
+    <div class="l-item silver">
+      <div class="l-rank">
+        <img src="https://img.icons8.com/color/48/silver-medal.png" alt="2">
+      </div>
+      <img src="https://randomuser.me/api/portraits/women/44.jpg" class="l-avatar">
+      <div class="l-info">
+        <span class="l-name">Madina_Win</span>
+        <span class="l-status">Master</span>
+      </div>
+      <div class="l-score">
+        <span class="score-val">10,120</span>
+        <span class="score-label">BALL</span>
+      </div>
+    </div>
+
+    <div class="l-item bronze">
+      <div class="l-rank">
+        <img src="https://img.icons8.com/color/48/bronze-medal.png" alt="3">
+      </div>
+      <img src="https://randomuser.me/api/portraits/men/85.jpg" class="l-avatar">
+      <div class="l-info">
+        <span class="l-name">Bek_Rider</span>
+        <span class="l-status">Pro</span>
+      </div>
+      <div class="l-score">
+        <span class="score-val">9,800</span>
+        <span class="score-label">BALL</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+  
 
 
       
@@ -923,6 +1102,7 @@ if (this.y >= 44 && this.y <= 46) { // 38 ni 44 ga, 40 ni 46 ga o'zgartirdik
   
 </body>
   </html>
+
 
 
 
