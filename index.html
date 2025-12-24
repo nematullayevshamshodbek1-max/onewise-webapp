@@ -428,56 +428,56 @@
 
 
 
-/* Realistik Home Style */
-.main-banner {
+/* Realistik Grid va Overlays */
+.r-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(5,7,13,0.9), transparent);
+  z-index: 2;
+}
+
+.r-card img {
+  width: 100%; height: 100%; object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.r-card:active img { transform: scale(1.05); }
+
+/* IQ Duel Banner (Stikersiz, Real fon) */
+.iq-duel-banner {
   position: relative;
-  height: 180px;
+  height: 200px;
   border-radius: 24px;
   overflow: hidden;
-  margin-bottom: 15px;
-  border: 1px solid rgba(255,255,255,0.1);
+  margin-bottom: 20px;
+  border: 1px solid rgba(47,128,237,0.3);
+  cursor: pointer;
 }
-.b-bg-img {
+
+.iq-bg-img {
   width: 100%; height: 100%; object-fit: cover;
   position: absolute; top: 0; left: 0; z-index: 1;
 }
-.banner-overlay {
+
+.iq-overlay {
   position: absolute; inset: 0;
-  background: linear-gradient(90deg, #05070d 30%, transparent 100%);
-  z-index: 2; display: flex; align-items: center; padding: 20px;
-}
-.b-text h1 { margin: 5px 0; font-size: 24px; font-weight: 1000; color: #fff; }
-.b-tag { background: #ff9800; padding: 2px 8px; border-radius: 6px; font-size: 10px; font-weight: 900; }
-.b-action { 
-  background: var(--blue); border: none; color: #fff; padding: 8px 20px; 
-  border-radius: 10px; font-weight: 900; margin-top: 10px; box-shadow: 0 4px 15px rgba(47,128,237,0.4);
+  background: rgba(5, 7, 13, 0.6); /* Rasmni qorong'iroq qilish matn ko'rinishi uchun */
+  z-index: 2;
+  display: flex; align-items: center; justify-content: center;
+  text-align: center;
 }
 
-.real-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 15px; }
-.r-card { 
-  position: relative; height: 120px; border-radius: 20px; overflow: hidden; 
-  border: 1px solid rgba(255,255,255,0.1);
-}
-.r-card img { width: 100%; height: 100%; object-fit: cover; opacity: 0.6; }
-.r-info { position: absolute; bottom: 12px; left: 12px; z-index: 3; }
-.r-info h3 { margin: 0; font-size: 16px; font-weight: 900; }
-.r-info p { margin: 0; font-size: 11px; color: var(--muted); }
+.iq-txt-wrap h2 { font-weight: 1000; font-size: 26px; margin: 0; letter-spacing: 1px; color: #fff; }
+.iq-txt-wrap p { color: rgba(255,255,255,0.8); font-size: 14px; margin: 5px 0 15px; }
 
-.iq-duel-box {
-  background: linear-gradient(135deg, #1e3a8a, #05070d);
-  padding: 20px; border-radius: 24px; text-align: center; margin-bottom: 20px;
-  border: 1px solid var(--blue);
-}
-.iq-users { display: flex; align-items: center; justify-content: center; gap: 15px; margin-top: 15px; }
-.iq-users img { width: 50px; height: 50px; border-radius: 50%; border: 2px solid var(--blue); }
-.vs { font-weight: 1000; color: #ff9800; font-style: italic; }
+.iq-live-users { display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 15px; }
+.u-img { width: 45px; height: 45px; border-radius: 50%; border: 2px solid var(--blue); }
+.vs-text { font-weight: 900; color: #ff9800; font-size: 18px; }
 
-.live-leaderboard { background: var(--card); border-radius: 20px; padding: 15px; }
-.l-head { font-weight: 900; font-size: 13px; color: var(--muted); margin-bottom: 12px; }
-.l-row { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
-.l-user { display: flex; align-items: center; gap: 10px; font-weight: 700; }
-.l-user img { width: 30px; height: 30px; border-radius: 50%; }
-.l-win { color: #00c853; font-weight: 900; }    
+.iq-play-btn {
+  background: var(--blue); border: none; color: #fff; padding: 10px 25px;
+  border-radius: 12px; font-weight: 900; font-size: 13px;
+  box-shadow: 0 4px 20px rgba(47,128,237,0.5);
+}
 
 
 
@@ -554,43 +554,49 @@
 
   <div class="real-grid">
     <div class="r-card">
+      <div class="r-overlay"></div>
       <div class="r-info">
         <h3>Do'stlar</h3>
-        <p>Birga o'ynang</p>
+        <p>Taklif uchun bonus</p>
       </div>
-      <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=300&q=80" alt="Friends">
+      <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=300&q=80" alt="Real Friends">
     </div>
     
     <div class="r-card">
+      <div class="r-overlay"></div>
       <div class="r-info">
         <h3>Yutuqlar</h3>
-        <p>Haqiqiy pullar</p>
+        <p>Real cash out</p>
       </div>
-      <img src="https://images.unsplash.com/photo-1518458082568-4bf88ad25619?auto=format&fit=crop&w=300&q=80" alt="Cash">
+      <img src="https://images.unsplash.com/photo-1554224155-169743987554?auto=format&fit=crop&w=300&q=80" alt="Haqiqiy pullar">
     </div>
   </div>
 
-  <div class="iq-duel-box" onclick="setActive(document.getElementById('navDuel')); showScreen('duels');">
-    <div class="iq-content">
-      <h2>🧠 IQ BELLASHUV</h2>
-      <p>Haqiqiy raqib bilan 1ga 1 jang!</p>
-      <div class="iq-users">
-        <img src="https://randomuser.me/api/portraits/men/32.jpg">
-        <span class="vs">VS</span>
-        <img src="https://randomuser.me/api/portraits/women/44.jpg">
+  <div class="iq-duel-banner" onclick="setActive(document.getElementById('navDuel')); showScreen('duels');">
+    <div class="iq-overlay">
+      <div class="iq-txt-wrap">
+        <h2>IQ BELLASHUV</h2>
+        <p>1 vs 1 Haqiqiy raqiblar jangi</p>
+        <div class="iq-live-users">
+          <img src="https://randomuser.me/api/portraits/men/32.jpg" class="u-img">
+          <span class="vs-text">VS</span>
+          <img src="https://randomuser.me/api/portraits/women/44.jpg" class="u-img">
+        </div>
+        <button class="iq-play-btn">HOZIR QATNASHISH</button>
       </div>
     </div>
+    <img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=600&q=80" class="iq-bg-img">
   </div>
 
   <div class="live-leaderboard">
     <div class="l-head">🏆 BUGUNGI G'OLIBLAR</div>
     <div class="l-row">
-      <div class="l-user"><img src="https://randomuser.me/api/portraits/men/1.jpg"> <span>Sardor</span></div>
-      <div class="l-win">+1,250,000 UZS</div>
+      <div class="l-user"><img src="https://randomuser.me/api/portraits/men/12.jpg"> <span>Javohir</span></div>
+      <div class="l-win">+2,400,000 UZS</div>
     </div>
     <div class="l-row">
-      <div class="l-user"><img src="https://randomuser.me/api/portraits/women/2.jpg"> <span>Madina</span></div>
-      <div class="l-win">+840,000 UZS</div>
+      <div class="l-user"><img src="https://randomuser.me/api/portraits/women/24.jpg"> <span>Sabina</span></div>
+      <div class="l-win">+1,100,000 UZS</div>
     </div>
   </div>
 
@@ -777,6 +783,7 @@ if (this.y >= 44 && this.y <= 46) { // 38 ni 44 ga, 40 ni 46 ga o'zgartirdik
   
 </body>
   </html>
+
 
 
 
