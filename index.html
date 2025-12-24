@@ -197,7 +197,9 @@
 
     /* ===== Screens ===== */
     .screen{ display:block; }
-    .hidden{ display:none !important; }
+    .hidden {
+    display: none !important;
+}
 
     /* ===== Simple cards for now ===== */
     .card{
@@ -1180,7 +1182,17 @@
     document.getElementById("continueBtn").onclick = () => { localStorage.setItem("onewise_lang", selectedLang); location.reload(); };
 
     const screens = { home: document.getElementById("screenHome"), duels: document.getElementById("screenDuels"), rewards: document.getElementById("screenRewards"), support: document.getElementById("screenSupport") };
-    function showScreen(key){ Object.values(screens).forEach(s => s.classList.add("hidden")); screens[key].classList.remove("hidden"); }
+    function showScreen(screenId) {
+  // Barcha ekranlarni yashirish
+  const screens = document.querySelectorAll('.screen');
+  screens.forEach(s => s.classList.add('hidden'));
+
+  // Tanlangan ekranni ko'rsatish
+  const target = document.getElementById('screen' + screenId.charAt(0).toUpperCase() + screenId.slice(1));
+  if (target) {
+    target.classList.remove('hidden');
+  }
+}
 
     const navs = [document.getElementById("navHome"), document.getElementById("navDuel"), document.getElementById("navReward"), document.getElementById("navSupport")];
     function setActive(el){ navs.forEach(x => x.classList.remove("active")); el.classList.add("active"); }
@@ -1302,6 +1314,7 @@ if (this.y >= 44 && this.y <= 46) { // 38 ni 44 ga, 40 ni 46 ga o'zgartirdik
   
 </body>
   </html>
+
 
 
 
