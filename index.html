@@ -420,6 +420,73 @@
 .bell:active{ transform: scale(0.98); }
 .bell.active{ color: var(--blue) !important; }
 
+
+
+
+
+
+
+
+/* Realistik Home Style */
+.main-banner {
+  position: relative;
+  height: 180px;
+  border-radius: 24px;
+  overflow: hidden;
+  margin-bottom: 15px;
+  border: 1px solid rgba(255,255,255,0.1);
+}
+.b-bg-img {
+  width: 100%; height: 100%; object-fit: cover;
+  position: absolute; top: 0; left: 0; z-index: 1;
+}
+.banner-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(90deg, #05070d 30%, transparent 100%);
+  z-index: 2; display: flex; align-items: center; padding: 20px;
+}
+.b-text h1 { margin: 5px 0; font-size: 24px; font-weight: 1000; color: #fff; }
+.b-tag { background: #ff9800; padding: 2px 8px; border-radius: 6px; font-size: 10px; font-weight: 900; }
+.b-action { 
+  background: var(--blue); border: none; color: #fff; padding: 8px 20px; 
+  border-radius: 10px; font-weight: 900; margin-top: 10px; box-shadow: 0 4px 15px rgba(47,128,237,0.4);
+}
+
+.real-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 15px; }
+.r-card { 
+  position: relative; height: 120px; border-radius: 20px; overflow: hidden; 
+  border: 1px solid rgba(255,255,255,0.1); background: #1a1a1a;
+}
+.r-card img { width: 100%; height: 100%; object-fit: cover; z-index: 1; }
+.r-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(5,7,13,0.92) 20%, transparent 80%);
+  z-index: 2;
+}
+.r-info { position: absolute; bottom: 12px; left: 12px; z-index: 3; }
+.r-info h3 { margin: 0; font-size: 16px; font-weight: 900; color: #fff; }
+.r-info p { margin: 0; font-size: 11px; color: rgba(255,255,255,0.6); }
+
+.iq-duel-box {
+  background: linear-gradient(135deg, #1e3a8a, #05070d);
+  padding: 20px; border-radius: 24px; text-align: center; margin-bottom: 20px;
+  border: 1px solid var(--blue);
+}
+.iq-users { display: flex; align-items: center; justify-content: center; gap: 15px; margin-top: 15px; }
+.iq-users img { width: 50px; height: 50px; border-radius: 50%; border: 2px solid var(--blue); }
+.vs { font-weight: 1000; color: #ff9800; font-style: italic; }
+
+.live-leaderboard { background: var(--card); border-radius: 20px; padding: 15px; }
+.l-head { font-weight: 900; font-size: 13px; color: var(--muted); margin-bottom: 12px; }
+.l-row { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
+.l-user { display: flex; align-items: center; gap: 10px; font-weight: 700; }
+.l-user img { width: 30px; height: 30px; border-radius: 50%; }
+.l-win { color: #00c853; font-weight: 900; }
+
+
+
+    
+
   </style>
 </head>
 
@@ -473,7 +540,82 @@
 
   <div id="app">
     <div class="wrap">
-      <div id="screenHome" class="screen"><div class="card"><div class="h1">Home</div><p class="p">Bu bazaviy toza versiya. Endi xotirjam UI qo‘shamiz.</p></div></div>
+
+
+
+
+
+<div id="screenHome" class="screen">
+  
+  <div class="main-banner">
+    <div class="banner-overlay">
+      <div class="b-text">
+        <span class="b-tag">YANGI IMKONIYAT</span>
+        <h1>+500% BONUS</h1>
+        <p>Ilk depozit uchun maxsus sovg'a!</p>
+        <button class="b-action">OLISH</button>
+      </div>
+    </div>
+    <img src="https://images.unsplash.com/photo-1580519542036-c47de6196ba5?auto=format&fit=crop&w=600&q=80" class="b-bg-img">
+  </div>
+
+  <div class="real-grid">
+    <div class="r-card">
+      <div class="r-overlay"></div>
+      <div class="r-info">
+        <h3>Do'stlar</h3>
+        <p>Taklif uchun bonus</p>
+      </div>
+      <img src="https://images.unsplash.com/photo-1511632765486-a01980e01a18?auto=format&fit=crop&w=300&q=80" alt="Real Friends">
+    </div>
+    
+    <div class="r-card">
+      <div class="r-overlay"></div>
+      <div class="r-info">
+        <h3>Yutuqlar</h3>
+        <p>Real cash out</p>
+      </div>
+      <img src="https://images.pexels.com/photos/259027/pexels-photo-259027.jpeg?auto=compress&cs=tinysrgb&w=300" alt="Real Money">
+    </div>
+  </div>
+
+  <div class="iq-duel-banner" onclick="setActive(document.getElementById('navDuel')); showScreen('duels');">
+    <div class="iq-overlay">
+      <div class="iq-txt-wrap">
+        <h2>IQ BELLASHUV</h2>
+        <p>1 vs 1 Haqiqiy raqiblar jangi</p>
+        <div class="iq-live-users">
+          <img src="https://randomuser.me/api/portraits/men/32.jpg" class="u-img">
+          <span class="vs-text">VS</span>
+          <img src="https://randomuser.me/api/portraits/women/44.jpg" class="u-img">
+        </div>
+        <button class="iq-play-btn">HOZIR QATNASHISH</button>
+      </div>
+    </div>
+    <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=600&q=80" class="iq-bg-img">
+  </div>
+
+  <div class="live-leaderboard">
+    <div class="l-head">🏆 BUGUNGI G'OLIBLAR</div>
+    <div class="l-row">
+      <div class="l-user"><img src="https://randomuser.me/api/portraits/men/12.jpg"> <span>Javohir</span></div>
+      <div class="l-win">+2,400,000 UZS</div>
+    </div>
+    <div class="l-row">
+      <div class="l-user"><img src="https://randomuser.me/api/portraits/women/24.jpg"> <span>Sabina</span></div>
+      <div class="l-win">+1,100,000 UZS</div>
+    </div>
+  </div>
+
+</div>
+
+
+
+
+
+
+
+      
       <div id="screenDuels" class="screen hidden"><div class="card"><div class="h1">Duellar</div><p class="p">Bu yerga sening duel sahifangni joylaymiz.</p></div></div>
       <div id="screenRewards" class="screen hidden"><div class="card"><div class="h1">Mukofotlar</div><p class="p">Bu yerga sening mukofot UI’ngni joylaymiz.</p></div></div>
       <div id="screenSupport" class="screen hidden"><div class="card"><div class="h1">Support</div><p class="p">Keyin operator / chat ulaymiz.</p></div></div>
