@@ -466,12 +466,12 @@
 
 .iq-duel-banner {
     position: relative;
-    height: 250px;
+    height: 220px;
     border-radius: 28px;
     overflow: hidden;
     margin-top: 10px;
-    border: 1px solid rgba(47,128,237,0.5);
-    background: #000;
+    background-color: #0a0c12; /* Rasm yuklanguncha qora-ko'k fon bo'lib turadi */
+    z-index: 1;
 }
 
 .iq-bg-img {
@@ -481,15 +481,15 @@
     position: absolute;
     top: 0;
     left: 0;
-    z-index: 1;
-    filter: brightness(0.6) contrast(1.1); /* Rasmni dramatik qilish */
+    z-index: 1; /* Rasm eng pastki qatlamda */
+    display: block; /* Rasm blok element sifatida */
 }
 
 .iq-overlay {
     position: absolute;
     inset: 0;
-    z-index: 2;
-    background: linear-gradient(to right, rgba(5,7,13,0.9) 40%, transparent 100%);
+    z-index: 2; /* Overlay rasmning ustida bo'lishi kerak */
+    background: linear-gradient(90deg, rgba(5,7,13,0.95) 30%, rgba(5,7,13,0.4) 100%);
     display: flex;
     align-items: center;
     padding: 25px;
@@ -729,13 +729,13 @@
                 <div class="stat-line">
                     <div class="line-fill"></div>
                 </div>
-                <div class="stat-label">O'RTACHA JANG VAQTI: 45 SEKUND</div>
+                <div class="stat-label">O'RTACHA JANG VAQTI: 5 MINUT</div>
             </div>
 
             <button class="join-battle-btn">BOSHLASH</button>
         </div>
     </div>
-    <img src="https://images.unsplash.com/photo-1614850523296-e8c041de4398?auto=format&fit=crop&w=800&q=80" class="iq-bg-img">
+    <img src="https://images.pexels.com/photos/3165335/pexels-photo-3165335.jpeg?auto=compress&cs=tinysrgb&w=800" class="iq-bg-img">
 </div>
   
       
@@ -923,6 +923,7 @@ if (this.y >= 44 && this.y <= 46) { // 38 ni 44 ga, 40 ni 46 ga o'zgartirdik
   
 </body>
   </html>
+
 
 
 
