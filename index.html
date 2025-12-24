@@ -563,22 +563,61 @@
     font-size: 16px;
 }
 
+/* Tugmani kichraytirish va chiroyli qilish */
 .join-battle-btn {
     background: linear-gradient(135deg, #2F80ED, #1e40af);
     border: none;
     color: white;
-    padding: 12px 25px;
-    border-radius: 14px;
-    font-weight: 900;
-    font-size: 14px;
-    box-shadow: 0 6px 20px rgba(47,128,237,0.4);
+    padding: 8px 20px; /* Padding kamaytirildi */
+    border-radius: 10px;
+    font-weight: 800;
+    font-size: 12px; /* Font o'lchami kichraytirildi */
+    box-shadow: 0 4px 15px rgba(47,128,237,0.3);
+    cursor: pointer;
+    text-transform: uppercase;
 }
 
-@keyframes pulse {
-    0% { opacity: 1; }
-    50% { opacity: 0.3; }
-    100% { opacity: 1; }
-}  
+/* Profil rasmlari o'rniga yangi vizual qism */
+.battle-stats {
+    margin-bottom: 15px;
+    max-width: 200px;
+}
+
+.stat-line {
+    width: 100%;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    margin-bottom: 6px;
+    overflow: hidden;
+}
+
+.line-fill {
+    width: 65%;
+    height: 100%;
+    background: var(--blue);
+    border-radius: 10px;
+    box-shadow: 0 0 10px var(--blue);
+    animation: loadingEffect 2s infinite alternate;
+}
+
+.stat-label {
+    font-size: 9px;
+    font-weight: 700;
+    color: var(--muted);
+    letter-spacing: 0.5px;
+}
+
+@keyframes loadingEffect {
+    from { width: 30%; }
+    to { width: 80%; }
+}
+
+/* Banner sarlavhasini biroz kichraytirish (jiddiyroq ko'rinishi uchun) */
+.iq-content-box h2 {
+    font-size: 24px; /* 30px dan 24px ga tushdi */
+    margin-bottom: 5px;
+}
     
 
 
@@ -675,33 +714,29 @@
   </div>
 
 
+
+  
 <div class="iq-duel-banner" onclick="setActive(document.getElementById('navDuel')); showScreen('duels');">
     <div class="iq-overlay">
         <div class="iq-content-box">
             <div class="iq-status">
-                <span class="live-dot"></span> 1,240 ODAM ONLAYN
+                <span class="live-dot"></span> 1,240 FAOL O'YINCHI
             </div>
-            <h2>AQLIY JANG</h2>
-            <p>Bilimingni pulga aylantir! 1vs1 real vaqtda bellashuv</p>
+            <h2>BILIM JANGI</h2>
+            <p>Haqiqiy vaqtda raqiblar bilan bellashing va reytingingizni oshiring.</p>
             
-            <div class="battle-preview">
-                <div class="player">
-                    <img src="https://randomuser.me/api/portraits/men/46.jpg" alt="P1">
-                    <span>Siz</span>
+            <div class="battle-stats">
+                <div class="stat-line">
+                    <div class="line-fill"></div>
                 </div>
-                <div class="vs-circle">VS</div>
-                <div class="player">
-                    <img src="https://randomuser.me/api/portraits/women/50.jpg" alt="P2">
-                    <span>Raqib</span>
-                </div>
+                <div class="stat-label">O'RTACHA JANG VAQTI: 45 SEKUND</div>
             </div>
 
-            <button class="join-battle-btn">JANGNI BOSHLASH</button>
+            <button class="join-battle-btn">BOSHLASH</button>
         </div>
     </div>
-    <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=800&q=80" class="iq-bg-img">
+    <img src="https://images.unsplash.com/photo-1614850523296-e8c041de4398?auto=format&fit=crop&w=800&q=80" class="iq-bg-img">
 </div>
-
   
       
 
@@ -888,6 +923,7 @@ if (this.y >= 44 && this.y <= 46) { // 38 ni 44 ga, 40 ni 46 ga o'zgartirdik
   
 </body>
   </html>
+
 
 
 
