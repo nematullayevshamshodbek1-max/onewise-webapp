@@ -424,79 +424,7 @@
 
 
 
-/* Home Screen Custom Styles */
-#screenHome { padding-top: 5px; }
 
-/* Main Slider */
-.main-slider { position: relative; margin-bottom: 15px; }
-.slide {
-  border-radius: 24px;
-  padding: 20px;
-  height: 160px;
-  display: flex;
-  justify-content: space-between;
-  overflow: hidden;
-  position: relative;
-  border: 1px solid rgba(255,255,255,0.05);
-}
-.blue-gradient { background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%); }
-.slide-tag { font-weight: 900; font-size: 18px; margin-bottom: 10px; }
-.s-item { font-size: 13px; color: rgba(255,255,255,0.8); margin-bottom: 4px; font-weight: 600; }
-.slide-img { font-size: 80px; position: absolute; right: -10px; bottom: -10px; opacity: 0.5; filter: blur(2px); }
-.slide-dots { display: flex; justify-content: center; gap: 5px; margin-top: 8px; }
-.dot { width: 6px; height: 6px; background: rgba(255,255,255,0.2); border-radius: 50%; }
-.dot.active { width: 15px; border-radius: 10px; background: var(--blue); }
-
-/* Dual Cards */
-.dual-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 15px; }
-.mini-card { border-radius: 20px; padding: 15px; border: 1px solid rgba(255,255,255,0.05); }
-.green-bg { background: linear-gradient(135deg, #064e3b 0%, #065f46 100%); }
-.purple-bg { background: linear-gradient(135deg, #1e3a8a 0%, #312e81 100%); }
-.mini-title { font-weight: 800; font-size: 14px; color: #10b981; margin-bottom: 5px; }
-.purple-bg .mini-title { color: #60a5fa; }
-.mini-desc { font-size: 11px; color: rgba(255,255,255,0.7); }
-.mini-val { font-weight: 900; font-size: 15px; margin-top: 5px; }
-
-/* IQ Duel Banner */
-.duel-banner {
-  background: radial-gradient(circle at top right, #2563eb, #1e3a8a);
-  border-radius: 24px;
-  padding: 20px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
-  position: relative;
-  overflow: hidden;
-  box-shadow: 0 10px 30px rgba(37,99,235,0.2);
-}
-.db-title { font-weight: 1000; font-size: 20px; margin-bottom: 5px; }
-.db-stats { font-size: 13px; color: rgba(255,255,255,0.7); margin-bottom: 15px; }
-.db-btn {
-  background: #3b82f6;
-  border: none;
-  color: white;
-  padding: 10px 20px;
-  border-radius: 50px;
-  font-weight: 900;
-  font-size: 14px;
-}
-.db-brain { font-size: 100px; position: absolute; right: -20px; opacity: 0.3; }
-
-/* Leaderboard */
-.leaderboard-section { background: rgba(255,255,255,0.03); border-radius: 24px; padding: 15px; }
-.section-header { display: flex; justify-content: space-between; margin-bottom: 15px; font-weight: 800; }
-.section-header a { color: var(--muted); text-decoration: none; font-size: 12px; }
-.leader-item { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
-.leader-item:last-child { border: none; }
-.l-left { display: flex; align-items: center; gap: 12px; }
-.l-rank { width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 900; }
-.r1 { background: #fbbf24; color: #000; }
-.r2 { background: #94a3b8; color: #000; }
-.r3 { background: #b45309; color: #000; }
-.l-avatar { width: 35px; height: 35px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.1); }
-.l-name { font-weight: 700; font-size: 14px; }
-.l-score { font-weight: 800; color: rgba(255,255,255,0.6); font-size: 13px; }
 
 
 
@@ -557,84 +485,7 @@
     
 
 
-<div id="screenHome" class="screen">
-  
-  <div class="main-slider">
-    <div class="slide blue-gradient">
-      <div class="slide-content">
-        <div class="slide-tag">1WISE — IQ duellar</div>
-        <div class="slide-list">
-          <div class="s-item">👤 1 vs 1 bellashuv</div>
-          <div class="s-item">🏆 Har kuni mukofot</div>
-          <div class="s-item">⏳ Ochilish haftasi</div>
-        </div>
-      </div>
-      <div class="slide-img">🧠</div>
-    </div>
-    <div class="slide-dots">
-      <span class="dot active"></span><span class="dot"></span><span class="dot"></span>
-    </div>
-  </div>
-
-  <div class="dual-cards">
-    <div class="mini-card green-bg">
-      <div class="mini-title">Referal bonus</div>
-      <div class="mini-desc">👥 Do'stlarni taklif qil</div>
-      <div class="mini-val">+1 duel <small>har biriga</small></div>
-    </div>
-    <div class="mini-card purple-bg">
-      <div class="mini-title">Mukofotlar</div>
-      <div class="mini-desc">🏆 Bugungi 1-o'rin</div>
-      <div class="mini-val">2 000 000 <small>so'm</small></div>
-    </div>
-  </div>
-
-  <div class="duel-banner" onclick="setActive(document.getElementById('navDuel')); showScreen('duels');">
-    <div class="db-info">
-      <div class="db-title">🧠 IQ DUEL</div>
-      <div class="db-stats">👤 1 vs 1 | 🕒 10 savol</div>
-      <button class="db-btn">▶ Duelni boshlash</button>
-    </div>
-    <div class="db-brain">🧠</div>
-  </div>
-
-  <div class="leaderboard-section">
-    <div class="section-header">
-      <span>🏆 Bugungi TOP 3</span>
-      <a href="#" onclick="toastMsg('Tez kunda...')">Barchasi ></a>
-    </div>
-    
-    <div class="leader-list">
-      <div class="leader-item">
-        <div class="l-left">
-          <span class="l-rank r1">1</span>
-          <img src="https://ui-avatars.com/api/?name=Ali&background=random" class="l-avatar">
-          <span class="l-name">Ali</span>
-        </div>
-        <span class="l-score">60 ball</span>
-      </div>
-      
-      <div class="leader-item">
-        <div class="l-left">
-          <span class="l-rank r2">2</span>
-          <img src="https://ui-avatars.com/api/?name=Vali&background=random" class="l-avatar">
-          <span class="l-name">Vali</span>
-        </div>
-        <span class="l-score">45 ball</span>
-      </div>
-      
-      <div class="leader-item">
-        <div class="l-left">
-          <span class="l-rank r3">3</span>
-          <img src="https://ui-avatars.com/api/?name=Aziza&background=random" class="l-avatar">
-          <span class="l-name">Aziza</span>
-        </div>
-        <span class="l-score">40 ball</span>
-      </div>
-    </div>
-  </div>
-
-</div>
+<div id="screenHome" class="screen"><div class="card">
 
       
       
@@ -806,6 +657,7 @@
   
 </body>
   </html>
+
 
 
 
