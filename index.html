@@ -464,14 +464,121 @@
 .r-info p { margin: 0; font-size: 11px; color: var(--muted); }
 
 
- .iq-duel-box {
-  background: linear-gradient(135deg, #1e3a8a, #05070d);
-  padding: 20px; border-radius: 24px; text-align: center; margin-bottom: 20px;
-  border: 1px solid var(--blue);
+.iq-duel-banner {
+    position: relative;
+    height: 250px;
+    border-radius: 28px;
+    overflow: hidden;
+    margin-top: 10px;
+    border: 1px solid rgba(47,128,237,0.5);
+    background: #000;
 }
-.iq-users { display: flex; align-items: center; justify-content: center; gap: 15px; margin-top: 15px; }
-.iq-users img { width: 50px; height: 50px; border-radius: 50%; border: 2px solid var(--blue); }
-.vs { font-weight: 1000; color: #ff9800; font-style: italic; }   
+
+.iq-bg-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    filter: brightness(0.6) contrast(1.1); /* Rasmni dramatik qilish */
+}
+
+.iq-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    background: linear-gradient(to right, rgba(5,7,13,0.9) 40%, transparent 100%);
+    display: flex;
+    align-items: center;
+    padding: 25px;
+}
+
+.iq-content-box {
+    max-width: 70%;
+}
+
+.iq-status {
+    font-size: 10px;
+    font-weight: 900;
+    color: #00c853;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-bottom: 10px;
+}
+
+.live-dot {
+    width: 6px;
+    height: 6px;
+    background: #00c853;
+    border-radius: 50%;
+    animation: pulse 1.5s infinite;
+}
+
+.iq-content-box h2 {
+    font-size: 30px;
+    font-weight: 1000;
+    margin: 0;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: -1px;
+}
+
+.iq-content-box p {
+    font-size: 13px;
+    color: rgba(255,255,255,0.7);
+    margin: 8px 0 15px;
+    line-height: 1.3;
+}
+
+.battle-preview {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.player {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+}
+
+.player img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 2px solid var(--blue);
+}
+
+.player span { font-size: 10px; font-weight: 800; color: var(--muted); }
+
+.vs-circle {
+    font-weight: 1000;
+    color: #ff9800;
+    font-style: italic;
+    font-size: 16px;
+}
+
+.join-battle-btn {
+    background: linear-gradient(135deg, #2F80ED, #1e40af);
+    border: none;
+    color: white;
+    padding: 12px 25px;
+    border-radius: 14px;
+    font-weight: 900;
+    font-size: 14px;
+    box-shadow: 0 6px 20px rgba(47,128,237,0.4);
+}
+
+@keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.3; }
+    100% { opacity: 1; }
+}  
     
 
 
@@ -568,17 +675,32 @@
   </div>
 
 
-<div class="iq-duel-box" onclick="setActive(document.getElementById('navDuel')); showScreen('duels');">
-    <div class="iq-content">
-      <h2>🧠 IQ BELLASHUV</h2>
-      <p>Haqiqiy raqib bilan 1ga 1 jang!</p>
-      <div class="iq-users">
-        <img src="https://randomuser.me/api/portraits/men/32.jpg">
-        <span class="vs">VS</span>
-        <img src="https://randomuser.me/api/portraits/women/44.jpg">
-      </div>
+<div class="iq-duel-banner" onclick="setActive(document.getElementById('navDuel')); showScreen('duels');">
+    <div class="iq-overlay">
+        <div class="iq-content-box">
+            <div class="iq-status">
+                <span class="live-dot"></span> 1,240 ODAM ONLAYN
+            </div>
+            <h2>AQLIY JANG</h2>
+            <p>Bilimingni pulga aylantir! 1vs1 real vaqtda bellashuv</p>
+            
+            <div class="battle-preview">
+                <div class="player">
+                    <img src="https://randomuser.me/api/portraits/men/46.jpg" alt="P1">
+                    <span>Siz</span>
+                </div>
+                <div class="vs-circle">VS</div>
+                <div class="player">
+                    <img src="https://randomuser.me/api/portraits/women/50.jpg" alt="P2">
+                    <span>Raqib</span>
+                </div>
+            </div>
+
+            <button class="join-battle-btn">JANGNI BOSHLASH</button>
+        </div>
     </div>
-  </div>
+    <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=800&q=80" class="iq-bg-img">
+</div>
 
   
       
@@ -766,6 +888,7 @@ if (this.y >= 44 && this.y <= 46) { // 38 ni 44 ga, 40 ni 46 ga o'zgartirdik
   
 </body>
   </html>
+
 
 
 
