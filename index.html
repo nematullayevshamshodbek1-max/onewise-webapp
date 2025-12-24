@@ -756,12 +756,20 @@
 
 
 
-/* Duel bo'limi uchun maxsus stillar */
+/* --- DUEL SAHIFASI ASOSIY STILLARI --- */
+#screenDuels {
+    padding: 10px 15px;
+    background: transparent;
+    color: #fff;
+    font-family: 'Inter', sans-serif;
+}
+
+/* 1. Jonli Statistika (Tepada) */
 .duel-live-stats {
     display: flex;
     justify-content: space-between;
-    padding: 15px 5px;
-    margin-bottom: 10px;
+    padding: 10px 5px;
+    margin-bottom: 20px;
 }
 
 .d-stat-item {
@@ -770,76 +778,181 @@
     gap: 8px;
 }
 
-.d-num { font-size: 14px; font-weight: 900; color: #fff; display: block; }
-.d-lbl { font-size: 8px; font-weight: 700; color: var(--muted); letter-spacing: 1px; }
-
 .d-dot.pulse {
-    width: 6px; height: 6px; background: #00c853; border-radius: 50%;
-    box-shadow: 0 0 10px #00c853; animation: d-pulse 1.5s infinite;
+    width: 7px;
+    height: 7px;
+    background: #00c853;
+    border-radius: 50%;
+    box-shadow: 0 0 10px #00c853;
+    animation: d-pulse 1.8s infinite;
 }
 
-@keyframes d-pulse { 0% { opacity: 1; } 50% { opacity: 0.4; } 100% { opacity: 1; } }
+@keyframes d-pulse {
+    0% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.4); opacity: 0.5; }
+    100% { transform: scale(1); opacity: 1; }
+}
 
-/* Banner */
+.d-stat-txt { display: flex; flex-direction: column; }
+.d-num { font-size: 14px; font-weight: 900; line-height: 1; }
+.d-lbl { font-size: 8px; font-weight: 700; color: rgba(255,255,255,0.4); letter-spacing: 0.5px; margin-top: 3px; }
+
+/* 2. Asosiy Banner */
 .duel-main-card {
-    position: relative; height: 200px; border-radius: 24px;
-    overflow: hidden; margin-bottom: 25px;
-    border: 1px solid rgba(47, 128, 237, 0.3);
+    position: relative;
+    height: 220px;
+    border-radius: 28px;
+    overflow: hidden;
+    margin-bottom: 30px;
+    border: 1px solid rgba(47, 128, 237, 0.2);
+    background: #000;
 }
 
-.duel-bg-img { width: 100%; height: 100%; object-fit: cover; position: absolute; z-index: 1; }
+.duel-bg-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    filter: brightness(0.6);
+}
 
 .duel-overlay {
-    position: absolute; inset: 0; z-index: 2;
-    background: linear-gradient(to right, rgba(5,7,13,0.9), transparent);
-    display: flex; align-items: center; padding: 25px;
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    background: linear-gradient(90deg, rgba(5,7,13,0.95) 40%, transparent 100%);
+    display: flex;
+    align-items: center;
+    padding: 25px;
 }
 
-.duel-tag { font-size: 9px; font-weight: 900; color: var(--blue); letter-spacing: 2px; }
-.duel-info h2 { font-size: 26px; font-weight: 1000; margin: 5px 0; color: #fff; }
-.duel-info p { font-size: 12px; color: var(--muted); margin-bottom: 15px; }
+.duel-tag {
+    font-size: 9px;
+    font-weight: 900;
+    color: #2F80ED;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.duel-info h2 {
+    font-size: 28px;
+    font-weight: 1000;
+    margin: 8px 0;
+    letter-spacing: -1px;
+}
+
+.duel-info p {
+    font-size: 13px;
+    color: rgba(255,255,255,0.6);
+    margin-bottom: 15px;
+}
 
 .free-badge {
-    background: #00c853; color: #000; font-size: 10px;
-    font-weight: 900; padding: 4px 10px; border-radius: 6px;
+    background: #00c853;
+    color: #000;
+    font-size: 10px;
+    font-weight: 900;
+    padding: 5px 12px;
+    border-radius: 8px;
+    display: inline-block;
 }
 
 .start-duel-btn {
-    background: #fff; color: #000; border: none; padding: 10px 25px;
-    border-radius: 12px; font-weight: 900; cursor: pointer; margin-top: 15px;
+    background: #fff;
+    color: #000;
+    border: none;
+    padding: 12px 28px;
+    border-radius: 14px;
+    font-weight: 900;
+    font-size: 14px;
+    margin-top: 20px;
+    cursor: pointer;
+    box-shadow: 0 10px 20px rgba(255,255,255,0.1);
+    transition: transform 0.2s;
 }
 
-/* Kunlik Reyting */
+.start-duel-btn:active { transform: scale(0.95); }
+
+/* 3. Reyting Jadvali (Clean Style) */
 .rank-header {
-    display: flex; justify-content: space-between; align-items: center;
-    padding: 0 10px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 5px 15px;
 }
 
-.rank-header h3 { font-size: 14px; font-weight: 900; color: #fff; }
-.reset-timer { font-size: 10px; font-weight: 700; color: #ff9800; }
+.rank-header h3 { font-size: 13px; font-weight: 900; color: rgba(255,255,255,0.5); letter-spacing: 1px; }
+.reset-timer { font-size: 10px; font-weight: 800; color: #ff9800; }
 
-.rank-list { display: flex; flex-direction: column; gap: 8px; }
+.rank-list { display: flex; flex-direction: column; }
 
 .rank-row {
-    display: flex; align-items: center; padding: 12px 15px;
-    background: rgba(255,255,255,0.02); border-radius: 16px;
+    display: flex;
+    align-items: center;
+    padding: 15px 5px;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
 }
 
 .rank-row.current-user {
-    border: 1px solid rgba(47, 128, 237, 0.5);
     background: rgba(47, 128, 237, 0.05);
+    border-radius: 12px;
+    padding: 15px 15px;
+    border-bottom: none;
+    margin-bottom: 10px;
 }
 
-.r-pos { width: 30px; font-size: 14px; font-weight: 900; color: var(--muted); }
-.r-avatar-box { width: 35px; height: 35px; margin-right: 12px; }
+.r-pos {
+    width: 30px;
+    font-size: 16px;
+    font-weight: 1000;
+    font-style: italic;
+    color: rgba(255,255,255,0.3);
+}
+
+.r-avatar-box {
+    width: 40px;
+    height: 40px;
+    margin: 0 12px;
+    position: relative;
+}
+
 .r-avatar-box img, .r-initials {
-    width: 100%; height: 100%; border-radius: 10px; object-fit: cover;
+    width: 100%;
+    height: 100%;
+    border-radius: 12px;
+    object-fit: cover;
 }
-.r-initials { background: var(--blue); display: flex; align-items: center; justify-content: center; font-weight: 900; }
-.r-name { flex-grow: 1; font-size: 14px; font-weight: 600; color: #eee; }
-.r-pts { font-size: 15px; font-weight: 900; color: #fff; }
-.r-pts small { font-size: 9px; color: var(--muted); margin-left: 2px; }
 
+.r-initials {
+    background: #2F80ED;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 900;
+    font-size: 16px;
+}
+
+.r-name {
+    flex-grow: 1;
+    font-size: 14px;
+    font-weight: 700;
+    color: #eee;
+}
+
+.r-pts {
+    text-align: right;
+    font-size: 16px;
+    font-weight: 900;
+}
+
+.r-pts small {
+    font-size: 9px;
+    color: rgba(255,255,255,0.4);
+    margin-left: 3px;
+}
 
 
     
@@ -1020,10 +1133,10 @@
       
 
 
-<div id="screenDuels" class="screen hidden">
+<div id="screenDuels" class="screen">
     <div class="duel-live-stats">
         <div class="d-stat-item">
-            <span class="d-dot pulse"></span>
+            <div class="d-dot pulse"></div>
             <div class="d-stat-txt">
                 <span class="d-num">1,420</span>
                 <span class="d-lbl">ONLAYN</span>
@@ -1077,7 +1190,7 @@
             <div class="rank-row">
                 <span class="r-pos">1</span>
                 <div class="r-avatar-box">
-                    <img src="https://randomuser.me/api/portraits/men/1.jpg" alt="P1">
+                    <img src="https://randomuser.me/api/portraits/men/1.jpg">
                 </div>
                 <span class="r-name">Jasur_Winner</span>
                 <span class="r-pts">45 <small>PTS</small></span>
@@ -1086,19 +1199,10 @@
             <div class="rank-row">
                 <span class="r-pos">2</span>
                 <div class="r-avatar-box">
-                    <img src="https://randomuser.me/api/portraits/women/2.jpg" alt="P2">
+                    <img src="https://randomuser.me/api/portraits/women/2.jpg">
                 </div>
                 <span class="r-name">Elena_IQ</span>
                 <span class="r-pts">42 <small>PTS</small></span>
-            </div>
-
-            <div class="rank-row">
-                <span class="r-pos">3</span>
-                <div class="r-avatar-box">
-                    <img src="https://randomuser.me/api/portraits/men/3.jpg" alt="P3">
-                </div>
-                <span class="r-name">Bek_Rider</span>
-                <span class="r-pts">38 <small>PTS</small></span>
             </div>
         </div>
     </div>
@@ -1290,6 +1394,7 @@ if (this.y >= 44 && this.y <= 46) { // 38 ni 44 ga, 40 ni 46 ga o'zgartirdik
   
 </body>
   </html>
+
 
 
 
