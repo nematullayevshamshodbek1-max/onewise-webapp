@@ -989,45 +989,56 @@
 </div>
 
 
-<div class="footer-section">
-    <div class="f-card support-banner">
-        <div class="support-text-side">
-            <h4>Podderjka <span class="s-tag">24/7</span></h4>
-            <p style="font-size:12px; color:rgba(255,255,255,0.6); margin: 8px 0; line-height: 1.2;">
-                Svyajites s nami, esli u vas<br>ostalis voprosi
-            </p>
-            <button class="support-btn">Obratitsya v podderjku</button>
+<div class="footer-section" style="margin-top: 30px; padding: 0 10px 20px;">
+    
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+        <div class="logoWrap">
+            <span style="color: #2F80ED; font-weight: 1000; font-size: 22px;">1</span><span style="color: #fff; font-weight: 1000; font-size: 20px;">WISE</span>
         </div>
-        <img src="https://i.ibb.co/vYm6m8y/support-girl.png" style="position: absolute; right: -5px; bottom: 0; width: 130px; pointer-events: none;" alt="Support">
+        <div style="display: flex; gap: 8px;">
+            <span onclick="setLang('uz')" style="cursor:pointer; font-size: 12px; font-weight: 800; color: rgba(255,255,255,0.5);" id="lang_uz_btn">UZ</span>
+            <span onclick="setLang('ru')" style="cursor:pointer; font-size: 12px; font-weight: 800; color: rgba(255,255,255,0.5);" id="lang_ru_btn">RU</span>
+            <span onclick="setLang('en')" style="cursor:pointer; font-size: 12px; font-weight: 800; color: rgba(255,255,255,0.5);" id="lang_en_btn">EN</span>
+        </div>
     </div>
 
-    <div class="f-card info-row">
-        <span style="text-transform: uppercase; letter-spacing: 0.5px;">Kommercheskie predlojeniya</span>
-        <b style="font-family: monospace; font-size: 16px;">business@1wise.social</b>
+    <div class="f-card support-banner" style="position: relative; background: rgba(255,255,255,0.05); border-radius: 20px; padding: 20px; border: 1px solid rgba(255,255,255,0.08); overflow: hidden; min-height: 160px;">
+        <div style="position: relative; z-index: 2; width: 60%;">
+            <h4 style="margin: 0; font-size: 18px; font-weight: 900; display: flex; align-items: center; gap: 8px;">
+                <span id="txt_support">Podderjka</span> <span class="s-tag" style="background: #2F80ED; padding: 2px 8px; border-radius: 6px; font-size: 12px;">24/7</span>
+            </h4>
+            <p id="txt_support_desc" style="font-size:12px; color:rgba(255,255,255,0.6); margin: 8px 0; line-height: 1.3;">
+                Svyajites s nami, esli u vas ostalis voprosi
+            </p>
+            <button class="support-btn" style="background: #2F80ED; border: none; color: #fff; padding: 10px 20px; border-radius: 10px; font-weight: 800; margin-top: 10px; cursor: pointer;">
+                <span id="txt_support_btn">Obratitsya</span>
+            </button>
+        </div>
+        <img src="https://www.pngmart.com/files/15/Customer-Support-Girl-Transparent-PNG.png" style="position: absolute; right: -10px; bottom: 0; width: 140px; pointer-events: none; z-index: 1;" alt="Support">
     </div>
 
-    <div class="f-card info-row">
-        <span style="text-transform: uppercase; letter-spacing: 0.5px;">Partnerskaya programma</span>
-        <b style="font-family: monospace; font-size: 16px;">partners@1w.run</b>
+    <div class="soc-grid" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 15px;">
+        <div class="soc-item" style="background: #24A1DE; height: 45px; border-radius: 12px; display: flex; align-items: center; justify-content: center;">
+            <img src="https://cdn-icons-png.flaticon.com/512/2111/2111646.png" width="22" style="filter: brightness(0) invert(1);">
+        </div>
+        <div class="soc-item" style="background: linear-gradient(45deg, #f09433 0%, #dc2743 50%, #bc1888 100%); height: 45px; border-radius: 12px; display: flex; align-items: center; justify-content: center;">
+            <img src="https://cdn-icons-png.flaticon.com/512/174/174855.png" width="22" style="filter: brightness(0) invert(1);">
+        </div>
+        <div class="soc-item" style="background: #1877F2; height: 45px; border-radius: 12px; display: flex; align-items: center; justify-content: center;">
+            <img src="https://cdn-icons-png.flaticon.com/512/124/124010.png" width="22" style="filter: brightness(0) invert(1);">
+        </div>
+        <div class="soc-item" style="background: #FF0000; height: 45px; border-radius: 12px; display: flex; align-items: center; justify-content: center;">
+            <img src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png" width="22" style="filter: brightness(0) invert(1);">
+        </div>
     </div>
 
-    <div class="soc-grid">
-        <div class="soc-item" style="background: #24A1DE;"><img src="https://cdn-icons-png.flaticon.com/512/2111/2111646.png" width="20" style="filter: brightness(0) invert(1);"></div>
-        <div class="soc-item" style="background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);"><img src="https://cdn-icons-png.flaticon.com/512/174/174855.png" width="20" style="filter: brightness(0) invert(1);"></div>
-        <div class="soc-item" style="background: #0077FF;"><img src="https://cdn-icons-png.flaticon.com/512/145/145813.png" width="20" style="filter: brightness(0) invert(1);"></div>
-        <div class="soc-item" style="background: #FF0000;"><img src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png" width="20" style="filter: brightness(0) invert(1);"></div>
-    </div>
-
-    <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; margin-top: 20px; opacity: 0.4; filter: grayscale(1);">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Visa_Inc._logo.svg" height="12">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg" height="15">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg" height="15">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/4/46/Bitcoin.svg" height="15">
-    </div>
-
-    <div class="copy-text">
-        <p style="margin-bottom: 5px;">© 2025 1WISE.</p>
-        <span style="font-size: 22px; font-weight: 900; color: rgba(255,255,255,0.2);">18+</span>
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 25px; padding: 0 5px;">
+        <div style="font-size: 13px; font-weight: 700; color: rgba(255,255,255,0.3);">
+            © 2025 1WISE.
+        </div>
+        <div style="font-size: 20px; font-weight: 900; color: rgba(255,255,255,0.2); letter-spacing: 1px;">
+            18+
+        </div>
     </div>
 </div>
 
@@ -1200,6 +1211,48 @@ if (this.y >= 44 && this.y <= 46) { // 38 ni 44 ga, 40 ni 46 ga o'zgartirdik
         loop();
     });
 })();
+
+
+
+
+
+
+
+
+
+
+const footerTranslations = {
+    uz: { support: "Qo'llab-quvvatlash", desc: "Savollaringiz bo'lsa, bizga murojaat qiling", btn: "Bog'lanish" },
+    ru: { support: "Поддержка", desc: "Свяжитесь с нами, если у вас остались вопросы", btn: "Обратиться" },
+    en: { support: "Support", desc: "Contact us if you have any questions", btn: "Contact" }
+};
+
+function setLang(lang) {
+    const t = footerTranslations[lang];
+    // Footer matnlarini o'zgartirish
+    document.querySelectorAll('#txt_support').forEach(el => el.textContent = t.support);
+    document.querySelectorAll('#txt_support_desc').forEach(el => el.textContent = t.desc);
+    document.querySelectorAll('#txt_support_btn').forEach(el => el.textContent = t.btn);
+    
+    // Tugma rangini aktiv qilish
+    ['uz', 'ru', 'en'].forEach(l => {
+        const btn = document.getElementById(`lang_${l}_btn`);
+        if(btn) btn.style.color = (l === lang) ? '#2F80ED' : 'rgba(255,255,255,0.5)';
+    });
+    
+    // Agar kodingda asosiy tilni saqlash funksiyasi bo'lsa, uni ham chaqiramiz
+    localStorage.setItem("onewise_lang", lang);
+}
+
+// Sahifa yuklanganda oxirgi tanlangan tilni tekshirish
+document.addEventListener("DOMContentLoaded", () => {
+    let savedLang = localStorage.getItem("onewise_lang") || 'uz';
+    setLang(savedLang);
+});
+
+
+
+  
 </script>
 
 
