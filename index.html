@@ -1016,7 +1016,6 @@
 
 
 <div id="screenHome" class="screen">
-  
   <div class="main-banner">
     <div class="banner-overlay">
       <div class="b-text">
@@ -1047,10 +1046,7 @@
     </div>
   </div>
 
-
-
-  
-<div class="iq-duel-banner" onclick="setActive(document.getElementById('navDuel')); showScreen('duels');">
+  <div class="iq-duel-banner" onclick="showScreen('duels')">
     <div class="iq-overlay">
         <div class="iq-content-box">
             <div class="iq-status">
@@ -1058,82 +1054,40 @@
             </div>
             <h2>BILIM JANGI</h2>
             <p>Haqiqiy vaqtda raqiblar bilan bellashing va reytingingizni oshiring.</p>
-            
             <div class="battle-stats">
-                <div class="stat-line">
-                    <div class="line-fill"></div>
-                </div>
+                <div class="stat-line"><div class="line-fill"></div></div>
                 <div class="stat-label">O'RTACHA JANG VAQTI: 5 MINUT</div>
             </div>
-
             <button class="join-battle-btn">BOSHLASH</button>
         </div>
     </div>
     <img src="https://images.pexels.com/photos/3165335/pexels-photo-3165335.jpeg?auto=compress&cs=tinysrgb&w=800" class="iq-bg-img">
-</div>
-  
-      
+  </div>
 
-
-
-
-
-<div class="vip-stats-container">
-    
-
+  <div class="vip-stats-container">
     <div class="vip-header-simple">
         <span class="v-title">TOP G'OLIBLAR</span>
-        <div class="v-all" onclick="setActive(document.getElementById('navReward')); showScreen('rewards');">
+        <div class="v-all" onclick="showScreen('rewards')">
             BARCHASI <span class="material-symbols-rounded">chevron_right</span>
         </div>
     </div>
-
     <div class="vip-list-clean">
         <div class="v-row gold">
             <div class="v-rank">1</div>
             <div class="v-avatar-wrapper">
-                <img src="https://randomuser.me/api/portraits/men/32.jpg" class="v-avatar" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                <img src="https://randomuser.me/api/portraits/men/32.jpg" class="v-avatar">
                 <div class="v-placeholder">S</div>
             </div>
             <div class="v-name">Sardor Nematullaev</div>
             <div class="v-score">40 <small>PTS</small></div>
         </div>
-
-        <div class="v-row">
-            <div class="v-rank">2</div>
-            <div class="v-avatar-wrapper">
-                <img src="https://randomuser.me/api/portraits/women/44.jpg" class="v-avatar" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
-                <div class="v-placeholder">M</div>
-            </div>
-            <div class="v-name">Madina_Win</div>
-            <div class="v-score">30 <small>PTS</small></div>
         </div>
-
-        <div class="v-row">
-            <div class="v-rank">3</div>
-            <div class="v-avatar-wrapper">
-                <img src="https://randomuser.me/api/portraits/men/85.jpg" class="v-avatar" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
-                <div class="v-placeholder">B</div>
-            </div>
-            <div class="v-name">Bek_Rider</div>
-            <div class="v-score">20 <small>PTS</small></div>
-        </div>
-    </div>
-
     <div class="my-personal-rank">
         <span class="my-rank-label">SIZNING O'RNINGIZ: <span class="blue-txt">#1,452</span></span>
         <div class="my-score-view">10 PTS</div>
     </div>
-</div>
-
-  
-
-
-      
-      
-
-
-<div id="screenDuels" class="screen">
+  </div>
+</div> <div id="screenDuels" class="screen hidden">
     <div class="duel-live-stats">
         <div class="d-stat-item">
             <div class="d-dot pulse"></div>
@@ -1143,16 +1097,10 @@
             </div>
         </div>
         <div class="d-stat-item">
-            <div class="d-stat-txt">
-                <span class="d-num">856</span>
-                <span class="d-lbl">JANGDA</span>
-            </div>
+            <div class="d-stat-txt"><span class="d-num">856</span><span class="d-lbl">JANGDA</span></div>
         </div>
         <div class="d-stat-item">
-            <div class="d-stat-txt">
-                <span class="d-num">45.2K</span>
-                <span class="d-lbl">JAMI O'YINCHI</span>
-            </div>
+            <div class="d-stat-txt"><span class="d-num">45.2K</span><span class="d-lbl">JAMI O'YINCHI</span></div>
         </div>
     </div>
 
@@ -1161,52 +1109,12 @@
             <div class="duel-info">
                 <span class="duel-tag">KUNLIK TURNIR</span>
                 <h2>1 VS 1 BATTLE</h2>
-                <p>G'alaba qozon va +1 ball yig'ing</p>
-                <div class="entry-info">
-                    <span class="free-badge">7 KUN TEKIN</span>
-                </div>
                 <button class="start-duel-btn" onclick="startSearching()">DUELNI BOSHLASH</button>
             </div>
         </div>
         <img src="https://images.pexels.com/photos/735911/pexels-photo-735911.jpeg?auto=compress&cs=tinysrgb&w=800" class="duel-bg-img">
     </div>
-
-    <div class="daily-ranking">
-        <div class="rank-header">
-            <h3>BUGUNGI JANGCHILAR</h3>
-            <span class="reset-timer">QOLDI: 14:25:08</span>
-        </div>
-
-        <div class="rank-list">
-            <div class="rank-row current-user">
-                <span class="r-pos">142</span>
-                <div class="r-avatar-box">
-                    <div class="r-initials">S</div>
-                </div>
-                <span class="r-name">Siz (Shaxsiy)</span>
-                <span class="r-pts">12 <small>PTS</small></span>
-            </div>
-
-            <div class="rank-row">
-                <span class="r-pos">1</span>
-                <div class="r-avatar-box">
-                    <img src="https://randomuser.me/api/portraits/men/1.jpg">
-                </div>
-                <span class="r-name">Jasur_Winner</span>
-                <span class="r-pts">45 <small>PTS</small></span>
-            </div>
-
-            <div class="rank-row">
-                <span class="r-pos">2</span>
-                <div class="r-avatar-box">
-                    <img src="https://randomuser.me/api/portraits/women/2.jpg">
-                </div>
-                <span class="r-name">Elena_IQ</span>
-                <span class="r-pts">42 <small>PTS</small></span>
-            </div>
-        </div>
     </div>
-</div>
 
 
 
@@ -1394,6 +1302,7 @@ if (this.y >= 44 && this.y <= 46) { // 38 ni 44 ga, 40 ni 46 ga o'zgartirdik
   
 </body>
   </html>
+
 
 
 
