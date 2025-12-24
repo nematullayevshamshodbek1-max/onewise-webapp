@@ -644,6 +644,123 @@
 }
 
 
+
+
+
+
+
+
+.vip-stats-container {
+    margin-top: 10px;
+}
+
+.vip-header-simple {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+}
+
+.v-title {
+    font-size: 11px;
+    font-weight: 900;
+    letter-spacing: 1.5px;
+    color: var(--muted);
+}
+
+.v-all {
+    font-size: 10px;
+    font-weight: 800;
+    color: var(--blue);
+    cursor: pointer;
+}
+
+/* Ro'yxat dizayni (Ochiq va professional) */
+.vip-list-clean {
+    margin: 5px 0;
+}
+
+.v-row {
+    display: flex;
+    align-items: center;
+    padding: 12px 15px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.v-row:last-child {
+    border-bottom: none;
+}
+
+/* Raqamlar stili */
+.v-rank {
+    width: 25px;
+    font-size: 18px;
+    font-weight: 1000;
+    font-style: italic;
+    color: var(--muted);
+}
+.v-row.gold .v-rank { color: #FFD700; }
+/* Avatar va Placeholder */
+.v-avatar-wrapper {
+    width: 38px;
+    height: 38px;
+    margin: 0 12px;
+}
+
+.v-avatar {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+}
+.v-placeholder {
+    width: 100%;
+    height: 100%;
+    background: #2a2e3a;
+    border-radius: 50%;
+    display: none; /* Rasm bo'lsa yashirinadi */
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    color: var(--blue);
+}
+
+/* Ism va Ball */
+.v-name {
+    flex-grow: 1;
+    font-size: 14px;
+    font-weight: 700;
+    color: #eee;
+}
+
+.v-score {
+    font-size: 15px;
+    font-weight: 900;
+    color: #fff;
+}
+
+.v-score small {
+    font-size: 9px;
+    color: var(--muted);
+    margin-left: 2px;
+}
+
+/* Shaxsiy o'rin */
+.my-personal-rank {
+    padding: 20px 15px;
+    display: flex;
+    justify-content: space-between;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.my-rank-label { font-size: 11px; font-weight: 800; color: var(--muted); }
+.blue-txt { color: var(--blue); font-weight: 900; }
+.my-score-view { font-size: 12px; font-weight: 900; color: #fff; }
+
+
+
+
+    
     
 
   </style>
@@ -760,17 +877,51 @@
     <img src="https://images.pexels.com/photos/3165335/pexels-photo-3165335.jpeg?auto=compress&cs=tinysrgb&w=800" class="iq-bg-img">
 </div>
 
-  <div class="live-leaderboard">
-    <div class="l-head">🏆 BUGUNGI G'OLIBLAR</div>
-    <div class="l-row">
-      <div class="l-user"><img src="https://randomuser.me/api/portraits/men/12.jpg"> <span>Javohir</span></div>
-      <div class="l-win">+2,400,000 UZS</div>
+<div class="vip-stats-container">
+    <div class="vip-header-simple">
+        <span class="v-title">BUGUNGI TOP G'OLIBLAR</span>
+        <div class="v-all" onclick="setActive(document.getElementById('navReward')); showScreen('rewards');">
+            BARCHASI <span class="material-symbols-rounded">chevron_right</span>
+        </div>
     </div>
-    <div class="l-row">
-      <div class="l-user"><img src="https://randomuser.me/api/portraits/women/24.jpg"> <span>Sabina</span></div>
-      <div class="l-win">+1,100,000 UZS</div>
+
+    <div class="vip-list-clean">
+        <div class="v-row gold">
+            <div class="v-rank">1</div>
+            <div class="v-avatar-wrapper">
+                <img src="https://randomuser.me/api/portraits/men/32.jpg" class="v-avatar" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                <div class="v-placeholder">S</div>
+            </div>
+            <div class="v-name">Sardor Nematullaev</div>
+            <div class="v-score">40 <small>PTS</small></div>
+        </div>
+
+        <div class="v-row">
+            <div class="v-rank">2</div>
+            <div class="v-avatar-wrapper">
+                <img src="https://randomuser.me/api/portraits/women/44.jpg" class="v-avatar" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                <div class="v-placeholder">M</div>
+            </div>
+            <div class="v-name">Madina_Win</div>
+            <div class="v-score">30 <small>PTS</small></div>
+        </div>
+
+        <div class="v-row">
+            <div class="v-rank">3</div>
+            <div class="v-avatar-wrapper">
+                <img src="https://randomuser.me/api/portraits/men/85.jpg" class="v-avatar" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                <div class="v-placeholder">B</div>
+            </div>
+            <div class="v-name">Bek_Rider</div>
+            <div class="v-score">20 <small>PTS</small></div>
+        </div>
     </div>
-  </div>
+
+    <div class="my-personal-rank">
+        <span class="my-rank-label">SIZNING O'RNINGIZ: <span class="blue-txt">#1,452</span></span>
+        <div class="my-score-view">10 PTS</div>
+    </div>
+</div>
 
 </div>
 
