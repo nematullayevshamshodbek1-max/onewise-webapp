@@ -1029,79 +1029,73 @@
 </div>
 
 
-<div class="footer-section" style="margin-top: 20px; padding: 0 15px 15px; font-family: sans-serif;">
+<div class="footer-section" style="padding: 0 16px 20px; margin-top: 30px;">
     
-    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
-        <div class="logoWrap">
-            <span style="color: #2F80ED; font-weight: 1000; font-size: 20px;">1</span><span style="color: #fff; font-weight: 1000; font-size: 18px;">WISE</span>
+    <div style="display: flex; align-items: center; margin-bottom: 20px;">
+        <div class="logoWrap" style="display: flex; align-items: center;">
+            <span style="color: #2F80ED; font-weight: 1000; font-size: 24px;">1</span>
+            <span style="color: #fff; font-weight: 1000; font-size: 22px;">WISE</span>
         </div>
         
-        <select id="langSelect" onchange="changeAppLanguage(this.value)" style="background: rgba(255,255,255,0.1); color: #fff; border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; padding: 4px 8px; font-size: 12px; outline: none;">
-            <option value="uz">🇺🇿 UZ</option>
-            <option value="ru">🇷🇺 RU</option>
-            <option value="en">🇺🇸 EN</option>
-        </select>
-    </div>
+        <div style="width: 1px; height: 22px; background: rgba(255, 255, 255, 0.15); margin: 0 15px;"></div>
 
-
-
-
-
-
-
-
-
-<div class="real-support-card" style="
-    position: relative; 
-    background: #1a1c22; 
-    border-radius: 24px; 
-    padding: 24px; 
-    overflow: hidden; 
-    border: 1px solid rgba(255,255,255,0.05); 
-    margin: 20px 0; 
-    min-height: 180px;
-    display: flex;
-    align-items: center;
-">
-    
-    <div style="position: relative; z-index: 2; width: 60%;">
-        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
-            <h4 class="lang-txt" data-key="support_title" style="margin: 0; font-size: 20px; font-weight: 800; color: #fff;">Поддержка</h4>
-            <div style="background: #007bff; color: #fff; padding: 2px 10px; border-radius: 20px; font-size: 14px; font-weight: 800;">24/7</div>
+        <div style="flex-grow: 1;">
+            <select id="langSelect" onchange="changeAppLanguage(this.value)" style="background: transparent; color: #fff; border: none; outline: none; font-size: 14px; font-weight: 700; cursor: pointer;">
+                <option value="uz">🇺🇿 UZ</option>
+                <option value="ru">🇷🇺 RU</option>
+                <option value="en">🇺🇸 EN</option>
+            </select>
         </div>
-        
-        <p class="lang-txt" data-key="support_desc" style="color: #8a8d97; font-size: 14px; margin: 0 0 20px 0; line-height: 1.4; max-width: 180px;">
-            Свяжитесь с нами, если у вас остались вопросы
-        </p>
-        
-        <button class="support-btn-style lang-txt" data-key="support_btn" style="
-            background: #007bff; 
-            color: #fff; 
-            border: none; 
-            width: 100%; 
-            padding: 14px; 
-            border-radius: 16px; 
-            font-size: 15px; 
-            font-weight: 800; 
-            cursor: pointer;
-            position: relative;
-            z-index: 3;
-        ">
-            Обратиться в поддержку
-        </button>
     </div>
 
-    <img src="https://i.postimg.cc/BvydPftS/pngwing-com.png" class="b-bg-img" style="
-        position: absolute; 
-        right: -10px; 
-        bottom: -15px; 
-        height: 125%; 
-        width: auto; 
-        z-index: 1; 
-        pointer-events: none; 
-        object-fit: contain;
-    " alt="Operator">
-</div>
+    <div class="real-support-card" style="
+        position: relative; 
+        background: #1a1c22; 
+        border-radius: 24px; 
+        padding: 24px; 
+        overflow: hidden; 
+        border: 1px solid rgba(255,255,255,0.05); 
+        margin-bottom: 20px; 
+        min-height: 170px;
+        display: flex;
+        align-items: center;
+    ">
+        <div style="position: relative; z-index: 2; width: 60%;">
+            <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
+                <h4 class="lang-txt" data-key="support_title" style="margin: 0; font-size: 19px; font-weight: 800; color: #fff;">Поддержка</h4>
+                <div style="background: #2F80ED; color: #fff; padding: 2px 8px; border-radius: 6px; font-size: 12px; font-weight: 800;">24/7</div>
+            </div>
+            <p class="lang-txt" data-key="support_desc" style="color: #8a8d97; font-size: 13px; margin: 0 0 18px 0; line-height: 1.4;">
+                Свяжитесь с нами, если у вас остались вопросы
+            </p>
+            <button class="lang-txt" data-key="support_btn" style="
+                background: #2F80ED; 
+                color: #fff; 
+                border: none; 
+                width: 100%; 
+                padding: 12px; 
+                border-radius: 12px; 
+                font-size: 14px; 
+                font-weight: 800; 
+                cursor: pointer;
+                position: relative;
+                z-index: 3;
+            ">
+                Обратиться
+            </button>
+        </div>
+
+        <img src="https://i.postimg.cc/BvydPftS/pngwing-com.png" style="
+            position: absolute; 
+            right: -5px; 
+            bottom: -5px; 
+            height: 110%; 
+            width: auto; 
+            z-index: 1; 
+            pointer-events: none; 
+            object-fit: contain;
+        " alt="Support">
+    </div>
 
 
 
