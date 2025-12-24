@@ -1029,99 +1029,93 @@
 </div>
 
 
-<div class="footer-section" style="padding: 0 16px 20px; margin-top: 30px;">
+<div class="footer-section" style="padding: 0 16px 10px; margin-top: 25px; margin-bottom: 0;">
     
-    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; width: 100%;">
-    
-    <div class="logoWrap" style="display: flex; align-items: center; white-space: nowrap;">
-        <span style="color: #2F80ED; font-weight: 1000; font-size: 22px;">1</span>
-        <span style="color: #fff; font-weight: 1000; font-size: 20px;">WISE</span>
-    </div>
-    
-    <div style="flex-grow: 1; height: 1px; background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.15) 50%, rgba(255,255,255,0) 100%); margin: 0 10px;"></div>
-
-    <div style="white-space: nowrap;">
-        <select id="langSelect" onchange="changeAppLanguage(this.value)" style="background: transparent; color: #fff; border: none; outline: none; font-size: 13px; font-weight: 700; cursor: pointer; appearance: none;">
-            <option value="uz">🇺🇿 UZ</option>
-            <option value="ru">🇷🇺 RU</option>
-            <option value="en">🇺🇸 EN</option>
-        </select>
-    </div>
-</div>
-    </div>
-
-   <div class="real-support-card" style="
-    position: relative; 
-    background: #1a1c22; 
-    border-radius: 20px; 
-    padding: 15px 12px; /* Ikki yon tomonga yaqinroq bo'lishi uchun padding kamaytirildi */
-    overflow: hidden; 
-    border: 1px solid rgba(255,255,255,0.05); 
-    margin: 15px 0; 
-    min-height: 140px; /* Tepa-past masofasi ixchamlashtirildi */
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-">
-    
-    <div style="position: relative; z-index: 2; width: 65%; text-align: left;">
-        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
-            <h4 class="lang-txt" data-key="support_title" style="margin: 0; font-size: 18px; font-weight: 800; color: #fff;">Поддержка</h4>
-            <div style="background: #007bff; color: #fff; padding: 1px 8px; border-radius: 6px; font-size: 12px; font-weight: 800;">24/7</div>
+    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 15px; width: 100%;">
+        <div class="logoWrap" style="display: flex; align-items: center; white-space: nowrap;">
+            <span style="color: #2F80ED; font-weight: 1000; font-size: 22px;">1</span>
+            <span style="color: #fff; font-weight: 1000; font-size: 20px;">WISE</span>
         </div>
         
-        <p class="lang-txt" data-key="support_desc" style="color: #8a8d97; font-size: 12px; margin: 0 0 15px 0; line-height: 1.3; max-width: 170px;">
-            Свяжитесь с нами, если у вас остались вопросы
-        </p>
-        
-        <button class="lang-txt" data-key="support_btn" style="
-            background: #007bff; 
-            color: #fff; 
-            border: none; 
-            width: 100%; /* Tugma uzun bo'lishi uchun */
-            padding: 12px; 
-            border-radius: 12px; 
-            font-size: 14px; 
-            font-weight: 800; 
-            cursor: pointer;
-            position: relative;
-            z-index: 3;
-            box-shadow: 0 4px 12px rgba(0, 123, 255, 0.2);
-        ">
-            Обратиться в поддержку
-        </button>
+        <div style="flex-grow: 1; height: 1px; background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.12) 50%, rgba(255,255,255,0) 100%); margin: 0 12px;"></div>
+
+        <div style="white-space: nowrap;">
+            <select id="langSelect" onchange="changeAppLanguage(this.value)" style="background: transparent; color: #fff; border: none; outline: none; font-size: 13px; font-weight: 700; cursor: pointer;">
+                <option value="uz">🇺🇿 UZ</option>
+                <option value="ru">🇷🇺 RU</option>
+                <option value="en">🇺🇸 EN</option>
+            </select>
+        </div>
     </div>
 
-    <img src="https://i.postimg.cc/BvydPftS/pngwing-com.png" style="
-        position: absolute; 
-        right: -5px; 
-        bottom: -5px; 
-        height: 105%; /* IXCHAM: Banner ichida yaxshi turishi uchun */
-        width: auto; 
-        z-index: 1; 
-        pointer-events: none; 
-        object-fit: contain;
-    " alt="Operator">
+    <div class="real-support-card" style="
+        position: relative; 
+        background: #1a1c22; 
+        border-radius: 20px; 
+        padding: 15px; 
+        overflow: hidden; 
+        border: 1px solid rgba(255,255,255,0.05); 
+        margin-bottom: 15px; 
+        min-height: 135px;
+        display: flex;
+        align-items: center;
+    ">
+        <div style="position: relative; z-index: 2; width: 100%; text-align: left;">
+            <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
+                <h4 class="lang-txt" data-key="support_title" style="margin: 0; font-size: 18px; font-weight: 800; color: #fff;">Поддержка</h4>
+                <div style="background: #2F80ED; color: #fff; padding: 1px 8px; border-radius: 6px; font-size: 11px; font-weight: 800;">24/7</div>
+            </div>
+            <p class="lang-txt" data-key="support_desc" style="color: #8a8d97; font-size: 12px; margin: 0 0 12px 0; line-height: 1.3; max-width: 170px;">
+                Свяжитесь с нами, если у вас остались вопросы
+            </p>
+            <button class="lang-txt" data-key="support_btn" style="
+                background: #2F80ED; 
+                color: #fff; 
+                border: none; 
+                width: 100%; 
+                padding: 12px; 
+                border-radius: 12px; 
+                font-size: 14px; 
+                font-weight: 800; 
+                cursor: pointer;
+                position: relative;
+                z-index: 3;
+            ">
+                Обратиться
+            </button>
+        </div>
+        <img src="https://i.postimg.cc/BvydPftS/pngwing-com.png" style="
+            position: absolute; 
+            right: -5px; 
+            bottom: -5px; 
+            height: 110%; 
+            width: auto; 
+            z-index: 1; 
+            pointer-events: none; 
+            object-fit: contain;
+        " alt="Support">
+    </div>
+
+    <div style="display: flex; gap: 10px; margin-bottom: 15px;">
+        <a href="#" style="background: #24A1DE; width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; text-decoration: none;">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" width="20" style="filter: brightness(0) invert(1);">
+        </a>
+        <a href="#" style="background: linear-gradient(45deg, #f09433, #dc2743, #bc1888); width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; text-decoration: none;">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/e/e7/Instagram_logo_2016.svg" width="20" style="filter: brightness(0) invert(1);">
+        </a>
+        <a href="#" style="background: #1877F2; width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; text-decoration: none;">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/b/b8/2021_Facebook_icon.svg" width="20" style="filter: brightness(0) invert(1);">
+        </a>
+        <a href="#" style="background: #FF0000; width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; text-decoration: none;">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/0/09/YouTube_full-color_icon_%282017%29.svg" width="22" style="filter: brightness(0) invert(1);">
+        </a>
+    </div>
+
+    <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 10px; padding-bottom: 5px;">
+        <div style="font-size: 11px; color: rgba(255,255,255,0.3); font-weight: 600;">© 2025 1WISE.</div>
+        <div style="font-size: 16px; color: rgba(255,255,255,0.1); font-weight: 900;">18+</div>
+    </div>
 </div>
-
-
-
-  
-
-    <div style="display: flex; justify-content: center; gap: 15px; margin-top: 20px;">
-        <a href="#" style="text-decoration: none;">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" width="38" height="38" style="display: block;">
-        </a>
-        <a href="#" style="text-decoration: none;">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/e/e7/Instagram_logo_2016.svg" width="38" height="38" style="display: block;">
-        </a>
-        <a href="#" style="text-decoration: none;">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/b/b8/2021_Facebook_icon.svg" width="38" height="38" style="display: block;">
-        </a>
-        <a href="#" style="text-decoration: none;">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/0/09/YouTube_full-color_icon_%282017%29.svg" width="42" height="38" style="display: block;">
-        </a>
-    </div>
 
     <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 20px; padding-top: 15px; border-top: 1px solid rgba(255,255,255,0.05);">
         <div style="font-size: 11px; font-weight: 700; color: rgba(255,255,255,0.3);">
