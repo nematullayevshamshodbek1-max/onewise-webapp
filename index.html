@@ -1,1376 +1,193 @@
 <!doctype html>
-<html lang="en">
+<html lang="uz">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>1WISE</title>
+  <title>1WISE - Duellar</title>
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
-      <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet" />
-
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet" />
   <style>
     :root{
       --bg:#05070d;
       --stroke: rgba(255,255,255,0.10);
       --text:#ffffff;
-      --muted: rgba(255,255,255,0.72);
       --blue:#2F80ED;
-      --purple1:#6a4bff;
-      --purple2:#3c1cff;
       --card: rgba(255,255,255,0.06);
     }
-
     *{ box-sizing:border-box; }
     body{
-      margin:0;
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      color:var(--text);
-      background:
-        radial-gradient(1100px 600px at 70% -5%, rgba(47,128,237,.16), transparent 55%),
-        radial-gradient(900px 520px at 10% 40%, rgba(106,75,255,.10), transparent 55%),
-        radial-gradient(900px 520px at 60% 110%, rgba(47,128,237,.08), transparent 60%),
-        var(--bg);
-      min-height:100vh;
-      overflow:hidden;
+      margin:0; font-family: system-ui, sans-serif;
+      color:var(--text); background: var(--bg);
+      min-height:100vh; overflow:hidden;
     }
 
-    /* ===== TOP BAR (ONE ONLY) ===== */
+    /* TOP BAR */
     .topbar{
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      height: 64px;
-      padding: 0 14px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      background: #0b0f1a;
-      border-bottom: 1px solid rgba(255,255,255,0.08);
-      z-index: 900;
+      position: fixed; top: 0; left: 0; right: 0; height: 64px;
+      padding: 0 14px; display:flex; align-items:center; justify-content:space-between;
+      background: #0b0f1a; border-bottom: 1px solid var(--stroke); z-index: 900;
     }
-    .logo{
-      font-weight: 1000;
-      font-size: 20px;
-      letter-spacing: .5px;
-    }
-    .topbar-center{
-      display:flex;
-      flex-direction:column;
-      align-items:center;
-      font-size: 12px;
-      color: rgba(255,255,255,.75);
-      line-height:1.1;
-    }
-    .topbar-center .balance{
-      font-size: 14px;
-      font-weight: 900;
-      color:#fff;
-    }
-    .topbar-right{
-      display:flex;
-      align-items:center;
-      gap: 10px;
-    }
-/* ===== Deposit button ===== */
-.deposit-btn{
-  background: linear-gradient(135deg,#00c853,#00e676);
-  border: none;
-  color: #ffffff !important;   /* OQ MATN */
-  font-weight: 800;
-  padding: 8px 14px;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: transform .08s ease, box-shadow .08s ease, opacity .08s ease;
-  box-shadow: 0 6px 16px rgba(0,200,83,.35);
-}
-/* Bosilganda bilinishi */
-.deposit-btn:active{
-  transform: scale(0.96);
-  box-shadow: 0 3px 8px rgba(0,200,83,.35);
-  opacity: .9;
-}
-.deposit-btn:hover{
-  opacity: .95;
-}
-
-    .bell{
-      width: 34px;
-      height: 34px;
-      background: rgba(255,255,255,.08);
-      border-radius: 50%;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      font-size: 16px;
-      user-select:none;
+    .logoWrap{ display:flex; align-items:center; font-weight:1000; font-size: 20px; }
+    .logoOne{ color: var(--blue); }
+    .topbar-center{ text-align:center; font-size: 12px; }
+    .balance{ display:block; font-size: 14px; font-weight: 900; }
+    .deposit-btn{
+      background: linear-gradient(135deg,#00c853,#00e676); border:none; color:#fff;
+      font-weight:800; padding: 8px 14px; border-radius:10px; box-shadow: 0 6px 16px rgba(0,200,83,.3);
     }
 
-    /* ===== APP SCROLL CONTAINER ===== */
-#app{
-  position:fixed; inset:0;
-  display:none;
-  overflow:auto;
-  padding-top: 74px;
-  padding-bottom: calc(140px + env(safe-area-inset-bottom));
-}
-
-    .wrap{
-      max-width: 520px;
-      margin: 0 auto;
-      padding: 14px 14px 120px; /* extra bottom room */
-    }
-
-    /* ===== Language first-run screen ===== */
-    #langScreen{
-      position:fixed; inset:0;
-      display:none;
-      align-items:center;
-      justify-content:center;
-      padding:24px;
-      z-index:1100;
-    }
-    .langBox{
-      width:100%;
-      max-width:420px;
-      border-radius:22px;
-      padding:18px;
-      background: rgba(20, 20, 28, 0.62);
-      border:1px solid var(--stroke);
-      box-shadow: 0 20px 60px rgba(0,0,0,.55);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-    }
-    .langTitle{
-      text-align:center;
-      font-weight:1000;
-      font-size:22px;
-      margin:6px 0 14px;
-    }
-    .langItem{
-      display:flex;
-      align-items:center;
-      gap:12px;
-      padding:14px;
-      border-radius:14px;
-      border:1px solid rgba(255,255,255,0.10);
-      background: rgba(0,0,0,0.18);
-      cursor:pointer;
-      user-select:none;
-      margin-bottom:10px;
-      transition: transform .08s ease, border-color .08s ease;
-    }
-    .langItem:active{ transform: scale(0.99); }
-    .langItem.selected{
-      border-color: rgba(106,75,255,0.75);
-      background: rgba(106,75,255,0.10);
-      box-shadow: 0 0 0 3px rgba(106,75,255,0.14) inset;
-    }
-    .flag{
-      width:28px; height:20px;
-      border-radius:5px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      border:1px solid rgba(255,255,255,0.14);
-      background: rgba(255,255,255,0.08);
-      font-size:14px;
-    }
-    .langName{ font-size:16px; font-weight:900; }
-    .btnPrimary{
-      width:100%;
-      border:none;
-      border-radius:14px;
-      padding:14px;
-      font-weight:1000;
-      font-size:16px;
-      cursor:pointer;
-      color:#fff;
-      background: linear-gradient(180deg, var(--purple1), var(--purple2));
-      box-shadow: 0 10px 30px rgba(90,60,255,.35);
-      margin-top:6px;
-    }
-    .langHint{
-      text-align:center;
-      color: rgba(255,255,255,.62);
-      font-size:12px;
-      margin-top:12px;
-      line-height:1.35;
-    }
-
-    /* ===== Screens ===== */
+    /* APP CONTAINER */
+    #app{ position:fixed; inset:0; overflow:auto; padding-top: 74px; padding-bottom: 150px; }
+    .wrap{ max-width: 520px; margin: 0 auto; padding: 0 14px; }
     .screen{ display:block; }
-    .hidden {
-    display: none !important;
-}
+    .hidden{ display:none !important; }
 
-    /* ===== Simple cards for now ===== */
-    .card{
-      border:1px solid var(--stroke);
-      background: var(--card);
-      border-radius:18px;
-      padding:14px;
-      box-shadow: 0 14px 40px rgba(0,0,0,.35);
-    }
-    .h1{
-      font-weight:1000;
-      font-size:26px;
-      margin: 0 0 10px;
-    }
-    .p{
-      color: rgba(255,255,255,.75);
-      margin: 0;
-      line-height:1.45;
-      font-weight:700;
-    }
+    /* DUEL STYLES */
+    .duel-live-stats { display: flex; justify-content: space-between; margin-bottom: 20px; }
+    .d-stat-item { display: flex; align-items: center; gap: 8px; }
+    .pulse { width: 8px; height: 8px; background: #00c853; border-radius: 50%; animation: p 1.5s infinite; }
+    @keyframes p { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
+    .d-num { font-weight: 900; font-size: 14px; display: block; }
+    .d-lbl { font-size: 9px; opacity: 0.5; font-weight: 700; }
 
-    /* ===== Bottom nav ===== */
-.bottomNav{
-  position:fixed;
-  left:0; right:0; bottom:0;
-  padding: 0 0 calc(env(safe-area-inset-bottom)); 
-  background: rgba(11,15,26,0.96);
-  border-top: 1px solid rgba(255,255,255,0.08);
-  z-index:500;
-}
-
-.navBar{
-  max-width:none;
-  margin:0;
-  display:flex;
-  justify-content:space-between;
-  gap:0;
-  border:none;
-  background: transparent;
-  border-radius:0;
-  padding: 6px 6px;
-  box-shadow:none;
-}
-
-.navItem{
-  flex:1;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  gap:4px;
-  padding: 10px 2px;
-  border-radius:12px;
-  color: rgba(255,255,255,.62);
-  font-size: 11px;
-  font-weight: 900;
-  user-select:none;
-  cursor:pointer;
-}
-
-.navIcon{
-  width:30px;
-  height:30px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  background: transparent !important;
-  border: none !important;
-  font-size: 16px;
-}
-
-.navItem.active{
-  color: var(--blue) !important;
-}
-
-    /* ===== Drawer ===== */
-    #drawerOverlay{
-      position:fixed; inset:0;
-      background: rgba(0,0,0,.55);
-      backdrop-filter: blur(6px);
-      -webkit-backdrop-filter: blur(6px);
-      z-index: 2000;
-      display:none;
+    .duel-main-card {
+      position: relative; height: 180px; border-radius: 24px; overflow: hidden; margin-bottom: 25px;
     }
-    #drawer{
-      position:fixed; top:0; left:0;
-      height:100vh;
-      width: 72vw;
-      max-width: 360px;
-      min-width: 260px;
-      background: rgba(18,22,35,.92);
-      border-right: 1px solid rgba(255,255,255,.10);
-      box-shadow: 20px 0 60px rgba(0,0,0,.55);
-      transform: translateX(-105%);
-      transition: transform .22s ease;
-      z-index: 2001;
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      padding: 14px;
+    .duel-bg-img { width: 100%; height: 100%; object-fit: cover; position: absolute; opacity: 0.5; }
+    .duel-overlay {
+      position: absolute; inset: 0; z-index: 2; background: linear-gradient(to right, #000 30%, transparent);
+      padding: 20px; display: flex; align-items: center;
     }
-    #drawer.open{ transform: translateX(0); }
-    .drawerHeader{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      margin-bottom: 12px;
-    }
-    .drawerBrand{
-      font-weight: 1000;
-      font-size: 18px;
-      letter-spacing: .3px;
-    }
-    .drawerBrand .one{ color: var(--blue); }
-    .drawerClose{
-      border:1px solid rgba(255,255,255,.10);
-      background: rgba(255,255,255,.06);
-      color:#fff;
-      border-radius: 12px;
-      width: 38px;
-      height: 38px;
-      font-weight: 1000;
-      cursor:pointer;
-    }
-    .drawerBody{
-      display:flex;
-      flex-direction:column;
-      gap:10px;
-    }
-    .drawerItem{
-      padding: 12px 12px;
-      border-radius: 14px;
-      border:1px solid rgba(255,255,255,.08);
-      background: rgba(255,255,255,.04);
-      color: rgba(255,255,255,.90);
-      font-weight: 900;
-      cursor:pointer;
-      user-select:none;
-    }
-    .drawerItem:active{ transform: scale(.99); }
-
-    .toast{
-      position:fixed;
-      left:50%;
-      transform:translateX(-50%);
-      bottom:96px;
-      background: rgba(20,20,28,.78);
-      border:1px solid rgba(255,255,255,.12);
-      color:#fff;
-      padding:10px 12px;
-      border-radius:14px;
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      box-shadow: 0 14px 40px rgba(0,0,0,.45);
-      max-width: 520px;
-      width: calc(100% - 28px);
-      display:none;
-      white-space:pre-line;
-      font-size:13px;
-      z-index:900;
+    .start-duel-btn {
+      background: #fff; color: #000; border: none; padding: 10px 20px;
+      border-radius: 12px; font-weight: 900; cursor: pointer; margin-top: 15px;
     }
 
-.logoWrap{
-  display:flex;
-  align-items:center;
-  gap:2px;
-  font-weight:1000;
-  letter-spacing:.6px;
-  user-select:none;
-}
-.logoOne{
-  color: var(--blue);
-  font-size: 22px;
-  line-height: 1;
-}
-.logoText{
-  color:#fff;
-  font-size: 20px;
-  line-height: 1;
-}
-
-.material-symbols-rounded{
-  font-family: "Material Symbols Rounded" !important;
-  font-weight: normal;
-  font-style: normal;
-  font-size: 22px;
-  line-height: 1;
-  display: inline-block;
-  text-transform: none;
-  letter-spacing: normal;
-  word-wrap: normal;
-  white-space: nowrap;
-  direction: ltr;
-  -webkit-font-feature-settings: "liga";
-  -webkit-font-smoothing: antialiased;
-  font-variation-settings: 'FILL' 0, 'wght' 500, 'GRAD' 0, 'opsz' 24;
-}
-
-.navItem.active .material-symbols-rounded{
-  color: var(--blue) !important;
-  font-variation-settings: 'FILL' 1, 'wght' 600, 'GRAD' 0, 'opsz' 24;
-}
-
-.bell{
-  background: transparent !important;
-  border: 0 !important;
-  padding: 6px 8px;
-  cursor: pointer;
-  color: rgba(255,255,255,.85);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.bellIcon{
-  width: 22px;
-  height: 22px;
-  fill: currentColor;
-}
-
-.bell:active{ transform: scale(0.98); }
-.bell.active{ color: var(--blue) !important; }
-
-
-
-
-
-
-
-
-
-/* Realistik Home Style */
-.main-banner {
-  position: relative;
-  height: 180px;
-  border-radius: 24px;
-  overflow: hidden;
-  margin-bottom: 15px;
-  border: 1px solid rgba(255,255,255,0.1);
-}
-.b-bg-img {
-  width: 100%; height: 100%; object-fit: cover;
-  position: absolute; top: 0; left: 0; z-index: 1;
-}
-.banner-overlay {
-  position: absolute; inset: 0;
-  background: linear-gradient(90deg, #05070d 30%, transparent 100%);
-  z-index: 2; display: flex; align-items: center; padding: 20px;
-}
-.b-text h1 { margin: 5px 0; font-size: 24px; font-weight: 1000; color: #fff; }
-.b-tag { background: #ff9800; padding: 2px 8px; border-radius: 6px; font-size: 10px; font-weight: 900; }
-.b-action { 
-  background: var(--blue); border: none; color: #fff; padding: 8px 20px; 
-  border-radius: 10px; font-weight: 900; margin-top: 10px; box-shadow: 0 4px 15px rgba(47,128,237,0.4);
-}
-
-.real-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 15px; }
-.r-card { 
-  position: relative; height: 120px; border-radius: 20px; overflow: hidden; 
-  border: 1px solid rgba(255,255,255,0.1);
-}
-.r-card img { width: 100%; height: 100%; object-fit: cover; opacity: 0.6; }
-.r-info { position: absolute; bottom: 12px; left: 12px; z-index: 3; }
-.r-info h3 { margin: 0; font-size: 16px; font-weight: 900; }
-.r-info p { margin: 0; font-size: 11px; color: var(--muted); }
-
-
-.iq-duel-banner {
-    position: relative;
-    height: 220px;
-    border-radius: 28px;
-    overflow: hidden;
-    margin-top: 10px;
-    background-color: #0a0c12; /* Rasm yuklanguncha qora-ko'k fon bo'lib turadi */
-    z-index: 1;
-}
-
-.iq-bg-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 1; /* Rasm eng pastki qatlamda */
-    display: block; /* Rasm blok element sifatida */
-}
-
-.iq-overlay {
-    position: absolute;
-    inset: 0;
-    z-index: 2; /* Overlay rasmning ustida bo'lishi kerak */
-    background: linear-gradient(90deg, rgba(5,7,13,0.95) 30%, rgba(5,7,13,0.4) 100%);
-    display: flex;
-    align-items: center;
-    padding: 25px;
-}
-
-.iq-content-box {
-    max-width: 70%;
-}
-
-.iq-status {
-    font-size: 10px;
-    font-weight: 900;
-    color: #00c853;
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    margin-bottom: 10px;
-}
-
-.live-dot {
-    width: 6px;
-    height: 6px;
-    background: #00c853;
-    border-radius: 50%;
-    animation: pulse 1.5s infinite;
-}
-
-.iq-content-box h2 {
-    font-size: 30px;
-    font-weight: 1000;
-    margin: 0;
-    color: #fff;
-    text-transform: uppercase;
-    letter-spacing: -1px;
-}
-
-.iq-content-box p {
-    font-size: 13px;
-    color: rgba(255,255,255,0.7);
-    margin: 8px 0 15px;
-    line-height: 1.3;
-}
-
-.battle-preview {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    margin-bottom: 20px;
-}
-
-.player {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 5px;
-}
-
-.player img {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    border: 2px solid var(--blue);
-}
-
-.player span { font-size: 10px; font-weight: 800; color: var(--muted); }
-
-.vs-circle {
-    font-weight: 1000;
-    color: #ff9800;
-    font-style: italic;
-    font-size: 16px;
-}
-
-/* Tugmani kichraytirish va chiroyli qilish */
-.join-battle-btn {
-    background: linear-gradient(135deg, #2F80ED, #1e40af);
-    border: none;
-    color: white;
-    padding: 8px 20px; /* Padding kamaytirildi */
-    border-radius: 10px;
-    font-weight: 800;
-    font-size: 12px; /* Font o'lchami kichraytirildi */
-    box-shadow: 0 4px 15px rgba(47,128,237,0.3);
-    cursor: pointer;
-    text-transform: uppercase;
-}
-
-/* Profil rasmlari o'rniga yangi vizual qism */
-.battle-stats {
-    margin-bottom: 15px;
-    max-width: 200px;
-}
-
-.stat-line {
-    width: 100%;
-    height: 4px;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 10px;
-    margin-bottom: 6px;
-    overflow: hidden;
-}
-
-.line-fill {
-    width: 65%;
-    height: 100%;
-    background: var(--blue);
-    border-radius: 10px;
-    box-shadow: 0 0 10px var(--blue);
-    animation: loadingEffect 2s infinite alternate;
-}
-
-.stat-label {
-    font-size: 9px;
-    font-weight: 700;
-    color: var(--muted);
-    letter-spacing: 0.5px;
-}
-
-@keyframes loadingEffect {
-    from { width: 30%; }
-    to { width: 80%; }
-}
-
-/* Banner sarlavhasini biroz kichraytirish (jiddiyroq ko'rinishi uchun) */
-.iq-content-box h2 {
-    font-size: 24px; /* 30px dan 24px ga tushdi */
-    margin-bottom: 5px;
-}
-
-
-
-
-
-    
-
-
-
-
-
-.vip-stats-container {
-    margin-top: 15px;
-    background: transparent; /* Fon bilan bir xil */
-}
-
-/* Sarlavha stili */
-.vip-header-simple {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 15px;
-    margin-top: 10px;
-}
-
-.v-title {
-    font-size: 11px;
-    font-weight: 900;
-    letter-spacing: 1.5px;
-    color: var(--muted);
-    text-transform: uppercase;
-}
-
-.v-all {
-    font-size: 10px;
-    font-weight: 800;
-    color: var(--blue);
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-}
-
-/* Ro'yxat dizayni (Ochiq va professional) */
-.vip-list-clean {
-    margin: 5px 0;
-}
-
-.v-row {
-    display: flex;
-    align-items: center;
-    padding: 12px 15px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05); /* Nozik ajratuvchi chiziq */
-}
-
-.v-row:last-child {
-    border-bottom: none;
-}
-
-/* Raqamlar stili */
-.v-rank {
-    width: 25px;
-    font-size: 16px;
-    font-weight: 1000;
-    font-style: italic;
-    color: var(--muted);
-}
-
-.v-row.gold .v-rank { color: #FFD700; text-shadow: 0 0 10px rgba(255, 215, 0, 0.3); }
-
-/* Avatar va Placeholder */
-.v-avatar-wrapper {
-    width: 38px;
-    height: 38px;
-    margin: 0 12px;
-    position: relative;
-}
-
-.v-avatar {
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    object-fit: cover;
-}
-
-.v-placeholder {
-    width: 100%;
-    height: 100%;
-    background: #2a2e3a;
-    border-radius: 50%;
-    display: none; /* Rasm bo'lsa yashirinadi */
-    align-items: center;
-    justify-content: center;
-    font-weight: 800;
-    color: var(--blue);
-}
-
-/* Ism va Ball */
-.v-name {
-    flex-grow: 1;
-    font-size: 14px;
-    font-weight: 700;
-    color: #eee;
-}
-
-.v-score {
-    font-size: 16px;
-    font-weight: 900;
-    color: #fff;
-}
-
-.v-score small {
-    font-size: 9px;
-    color: var(--muted);
-    margin-left: 2px;
-}
-
-/* Shaxsiy o'rin */
-.my-personal-rank {
-    padding: 15px;
-    margin-top: 5px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-.my-rank-label { font-size: 11px; font-weight: 800; color: var(--muted); }
-.blue-txt { color: var(--blue); margin-left: 5px; }
-.my-score-view { font-size: 12px; font-weight: 900; color: #fff; }
-
-
-    
-
-
-
-
-
-
-/* --- DUEL SAHIFASI ASOSIY STILLARI --- */
-#screenDuels {
-    padding: 10px 15px;
-    background: transparent;
-    color: #fff;
-    font-family: 'Inter', sans-serif;
-}
-
-/* 1. Jonli Statistika (Tepada) */
-.duel-live-stats {
-    display: flex;
-    justify-content: space-between;
-    padding: 10px 5px;
-    margin-bottom: 20px;
-}
-
-.d-stat-item {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.d-dot.pulse {
-    width: 7px;
-    height: 7px;
-    background: #00c853;
-    border-radius: 50%;
-    box-shadow: 0 0 10px #00c853;
-    animation: d-pulse 1.8s infinite;
-}
-
-@keyframes d-pulse {
-    0% { transform: scale(1); opacity: 1; }
-    50% { transform: scale(1.4); opacity: 0.5; }
-    100% { transform: scale(1); opacity: 1; }
-}
-
-.d-stat-txt { display: flex; flex-direction: column; }
-.d-num { font-size: 14px; font-weight: 900; line-height: 1; }
-.d-lbl { font-size: 8px; font-weight: 700; color: rgba(255,255,255,0.4); letter-spacing: 0.5px; margin-top: 3px; }
-
-/* 2. Asosiy Banner */
-.duel-main-card {
-    position: relative;
-    height: 220px;
-    border-radius: 28px;
-    overflow: hidden;
-    margin-bottom: 30px;
-    border: 1px solid rgba(47, 128, 237, 0.2);
-    background: #000;
-}
-
-.duel-bg-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 1;
-    filter: brightness(0.6);
-}
-
-.duel-overlay {
-    position: absolute;
-    inset: 0;
-    z-index: 2;
-    background: linear-gradient(90deg, rgba(5,7,13,0.95) 40%, transparent 100%);
-    display: flex;
-    align-items: center;
-    padding: 25px;
-}
-
-.duel-tag {
-    font-size: 9px;
-    font-weight: 900;
-    color: #2F80ED;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-}
-
-.duel-info h2 {
-    font-size: 28px;
-    font-weight: 1000;
-    margin: 8px 0;
-    letter-spacing: -1px;
-}
-
-.duel-info p {
-    font-size: 13px;
-    color: rgba(255,255,255,0.6);
-    margin-bottom: 15px;
-}
-
-.free-badge {
-    background: #00c853;
-    color: #000;
-    font-size: 10px;
-    font-weight: 900;
-    padding: 5px 12px;
-    border-radius: 8px;
-    display: inline-block;
-}
-
-.start-duel-btn {
-    background: #fff;
-    color: #000;
-    border: none;
-    padding: 12px 28px;
-    border-radius: 14px;
-    font-weight: 900;
-    font-size: 14px;
-    margin-top: 20px;
-    cursor: pointer;
-    box-shadow: 0 10px 20px rgba(255,255,255,0.1);
-    transition: transform 0.2s;
-}
-
-.start-duel-btn:active { transform: scale(0.95); }
-
-/* 3. Reyting Jadvali (Clean Style) */
-.rank-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 5px 15px;
-}
-
-.rank-header h3 { font-size: 13px; font-weight: 900; color: rgba(255,255,255,0.5); letter-spacing: 1px; }
-.reset-timer { font-size: 10px; font-weight: 800; color: #ff9800; }
-
-.rank-list { display: flex; flex-direction: column; }
-
-.rank-row {
-    display: flex;
-    align-items: center;
-    padding: 15px 5px;
-    border-bottom: 1px solid rgba(255,255,255,0.05);
-}
-
-.rank-row.current-user {
-    background: rgba(47, 128, 237, 0.05);
-    border-radius: 12px;
-    padding: 15px 15px;
-    border-bottom: none;
-    margin-bottom: 10px;
-}
-
-.r-pos {
-    width: 30px;
-    font-size: 16px;
-    font-weight: 1000;
-    font-style: italic;
-    color: rgba(255,255,255,0.3);
-}
-
-.r-avatar-box {
-    width: 40px;
-    height: 40px;
-    margin: 0 12px;
-    position: relative;
-}
-
-.r-avatar-box img, .r-initials {
-    width: 100%;
-    height: 100%;
-    border-radius: 12px;
-    object-fit: cover;
-}
-
-.r-initials {
-    background: #2F80ED;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 900;
-    font-size: 16px;
-}
-
-.r-name {
-    flex-grow: 1;
-    font-size: 14px;
-    font-weight: 700;
-    color: #eee;
-}
-
-.r-pts {
-    text-align: right;
-    font-size: 16px;
-    font-weight: 900;
-}
-
-.r-pts small {
-    font-size: 9px;
-    color: rgba(255,255,255,0.4);
-    margin-left: 3px;
-}
-
-
-
-/* Ro'yxat qismi balandligi va skroll */
-.players-scroll-area {
-    max-height: 400px; /* Sahifa juda cho'zilib ketmasligi uchun */
-    overflow-y: auto;
-    padding-bottom: 80px; /* Sticky panel uchun joy */
-}
-
-/* Foydalanuvchi yopishqoq paneli */
-.user-sticky-rank {
-    position: fixed;
-    bottom: 70px; /* Bottom Nav dan tepada turishi uchun */
-    left: 20px;
-    right: 20px;
-    background: #2F80ED;
-    border-radius: 16px;
-    padding: 12px 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-    z-index: 100;
-}
-
-.u-rank-info { display: flex; align-items: center; gap: 12px; }
-.u-pos { font-weight: 1000; font-style: italic; font-size: 16px; }
-.u-avatar { width: 30px; height: 30px; border-radius: 8px; overflow: hidden; background: rgba(255,255,255,0.2); }
-.u-text { font-size: 11px; font-weight: 800; letter-spacing: 0.5px; }
-.u-pts-box { font-weight: 1000; font-size: 16px; }
-
-/* Skrollbarni chiroyli qilish */
-.players-scroll-area::-webkit-scrollbar { width: 4px; }
-.players-scroll-area::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 10px; }
-
-
-
-
-
-
-
-    
-
-
-    
+    /* RANKING LIST */
+    .rank-row {
+      display: flex; align-items: center; padding: 12px 0; border-bottom: 1px solid var(--stroke);
+    }
+    .r-pos { width: 30px; font-weight: 900; opacity: 0.4; font-style: italic; }
+    .r-avatar-box { width: 40px; height: 40px; border-radius: 10px; overflow: hidden; margin: 0 12px; }
+    .r-avatar-box img { width: 100%; height: 100%; object-fit: cover; }
+    .r-name { flex: 1; font-weight: 700; font-size: 14px; }
+    .r-pts { font-weight: 900; color: #fff; }
+    .r-pts small { color: var(--blue); margin-left: 2px; }
+
+    /* STICKY USER BAR */
+    .user-sticky-rank {
+      position: fixed; bottom: 85px; left: 14px; right: 14px;
+      background: var(--blue); border-radius: 16px; padding: 12px 18px;
+      display: flex; justify-content: space-between; align-items: center; z-index: 100;
+    }
+    .u-info { display: flex; align-items: center; gap: 10px; font-weight: 900; }
+
+    /* BOTTOM NAV */
+    .bottomNav{
+      position:fixed; left:0; right:0; bottom:0; background: #0b0f1a;
+      border-top: 1px solid var(--stroke); padding-bottom: env(safe-area-inset-bottom);
+    }
+    .navBar{ display:flex; justify-content:space-around; padding: 8px 0; }
+    .navItem{ text-align:center; font-size: 10px; font-weight: 900; color: rgba(255,255,255,0.5); cursor:pointer; }
+    .navItem.active { color: var(--blue); }
+    .navItem span { display: block; font-size: 24px; margin-bottom: 2px; }
+
+    /* HOME TOP WINNERS */
+    .v-row { display: flex; align-items: center; padding: 10px; background: var(--card); border-radius: 12px; margin-bottom: 8px; }
+    .gold { border: 1px solid #ffd700; background: rgba(255,215,0,0.05); }
   </style>
 </head>
-
 <body>
 
 <div class="topbar">
-  <div class="topbar-left">
-    <div class="logoWrap">
-      <span class="logoOne">1</span><span class="logoText">WISE</span>
-    </div>
-  </div>
-
-  <div class="topbar-center">
-    <span class="currency">UZS</span>
-    <span class="balance" id="topBalance">0.00</span>
-  </div>
-
-  <div class="topbar-right">
-    <button class="deposit-btn" id="depositBtn">Deposit</button>
-    <div class="bell" id="bellBtn">
-      <svg class="bellIcon" viewBox="0 0 24 24">
-        <path d="M12 22a2.5 2.5 0 0 0 2.45-2h-4.9A2.5 2.5 0 0 0 12 22Zm7-6V11a7 7 0 0 0-5-6.71V3a2 2 0 1 0-4 0v1.29A7 7 0 0 0 5 11v5l-1.8 1.8a1 1 0 0 0 .7 1.7h16.2a1 1 0 0 0 .7-1.7L19 16Z"/>
-      </svg>
-    </div>
-  </div>
+  <div class="logoWrap"><span class="logoOne">1</span>WISE</div>
+  <div class="topbar-center"><span class="currency">UZS</span><span class="balance">45,000.00</span></div>
+  <button class="deposit-btn">Deposit</button>
 </div>
 
-  <div id="langScreen">
-    <div class="langBox">
-      <div class="langTitle" id="langTitle">Choose language</div>
-      <div class="langItem" id="lang_en" data-lang="en"><div class="flag">🇺🇸</div><div class="langName">English</div></div>
-      <div class="langItem" id="lang_uz" data-lang="uz"><div class="flag">🇺🇿</div><div class="langName">O‘zbekcha</div></div>
-      <div class="langItem" id="lang_ru" data-lang="ru"><div class="flag">🇷🇺</div><div class="langName">Русский</div></div>
-      <button class="btnPrimary" id="continueBtn">Continue</button>
-      <div class="langHint" id="langHint">Language is asked only once.</div>
-    </div>
-  </div>
-
-  <div id="drawerOverlay"></div>
-  <div id="drawer">
-    <div class="drawerHeader">
-      <div class="drawerBrand"><span class="one">1</span>WISE</div>
-      <button id="drawerClose" class="drawerClose">✕</button>
-    </div>
-    <div class="drawerBody">
-      <div class="drawerItem" id="drawerRewards">🎁 Mukofotlar</div>
-      <div class="drawerItem" id="drawerLang">🌐 Language</div>
-      <div class="drawerItem" id="drawerSupport">💬 Support</div>
-    </div>
-  </div>
-
-  <div id="app">
-    <div class="wrap">
+<div id="app">
+  <div class="wrap">
     
-
-
-<div id="screenHome" class="screen">
-    <div class="vip-stats-container">
-        <div class="vip-header-simple">
-            <span class="v-title">TOP G'OLIBLAR</span>
-            <div class="v-all" onclick="showScreen('rewards')">
-                BARCHASI <span class="material-symbols-rounded">chevron_right</span>
-            </div>
-        </div>
-
-        <div class="vip-list-clean">
-            <div class="v-row gold">
-                <div class="v-rank">1</div>
-                <div class="v-avatar-wrapper">
-                    <img src="https://randomuser.me/api/portraits/men/32.jpg" class="v-avatar">
-                </div>
-                <div class="v-name">Sardor Nematullaev</div>
-                <div class="v-score">40 <small>PTS</small></div>
-            </div>
-            <div class="v-row">
-                <div class="v-rank">2</div>
-                <div class="v-avatar-wrapper">
-                    <img src="https://randomuser.me/api/portraits/women/44.jpg" class="v-avatar">
-                </div>
-                <div class="v-name">Madina_Win</div>
-                <div class="v-score">35 <small>PTS</small></div>
-            </div>
-            <div class="v-row">
-                <div class="v-rank">3</div>
-                <div class="v-avatar-wrapper">
-                    <img src="https://randomuser.me/api/portraits/men/85.jpg" class="v-avatar">
-                </div>
-                <div class="v-name">Bek_Rider</div>
-                <div class="v-score">30 <small>PTS</small></div>
-            </div>
-        </div>
-    </div>
-</div> <div id="screenDuels" class="screen hidden">
-    <div class="duel-live-stats">
-        <div class="d-stat-item">
-            <div class="d-dot pulse"></div>
-            <div class="d-stat-txt"><span class="d-num">1,420</span><span class="d-lbl">ONLAYN</span></div>
-        </div>
-        <div class="d-stat-item">
-            <div class="d-stat-txt"><span class="d-num">856</span><span class="d-lbl">JANGDA</span></div>
-        </div>
-        <div class="d-stat-item">
-            <div class="d-stat-txt"><span class="d-num">45.2K</span><span class="d-lbl">JAMI</span></div>
-        </div>
+    <div id="screenHome" class="screen">
+      <h2 style="font-weight: 900;">TOP G'OLIBLAR</h2>
+      <div class="v-row gold">
+        <div class="r-pos">1</div>
+        <div class="r-avatar-box"><img src="https://randomuser.me/api/portraits/men/32.jpg"></div>
+        <div class="r-name">Sardor Nematullaev</div>
+        <div class="r-pts">40 <small>PTS</small></div>
+      </div>
+      <div class="v-row">
+        <div class="r-pos">2</div>
+        <div class="r-avatar-box"><img src="https://randomuser.me/api/portraits/women/44.jpg"></div>
+        <div class="r-name">Madina_Win</div>
+        <div class="r-pts">35 <small>PTS</small></div>
+      </div>
+      <div class="v-row">
+        <div class="r-pos">3</div>
+        <div class="r-avatar-box"><img src="https://randomuser.me/api/portraits/men/85.jpg"></div>
+        <div class="r-name">Bek_Rider</div>
+        <div class="r-pts">30 <small>PTS</small></div>
+      </div>
     </div>
 
-    <div class="duel-main-card">
+    <div id="screenDuels" class="screen hidden">
+      <div class="duel-live-stats">
+        <div class="d-stat-item"><div class="pulse"></div><div><span class="d-num">1,420</span><span class="d-lbl">ONLAYN</span></div></div>
+        <div class="d-stat-item"><div><span class="d-num">856</span><span class="d-lbl">JANGDA</span></div></div>
+        <div class="d-stat-item"><div><span class="d-num">45.2K</span><span class="d-lbl">JAMI</span></div></div>
+      </div>
+
+      <div class="duel-main-card">
+        <img src="https://images.pexels.com/photos/3165335/pexels-photo-3165335.jpeg" class="duel-bg-img">
         <div class="duel-overlay">
-            <div class="duel-info">
-                <span class="duel-tag">KUNLIK TURNIR</span>
-                <h2>1 VS 1 BATTLE</h2>
-                <button class="start-duel-btn" onclick="startSearching()">DUELNI BOSHLASH</button>
-            </div>
+          <div>
+            <span style="font-size: 10px; font-weight: 900; color: var(--blue);">1 VS 1 BATTLE</span>
+            <h2 style="margin: 5px 0; font-weight: 900;">BILIM JANGI</h2>
+            <button class="start-duel-btn" onclick="alert('Raqib qidirilmoqda...')">DUELNI BOSHLASH</button>
+          </div>
         </div>
-        <img src="https://images.pexels.com/photos/735911/pexels-photo-735911.jpeg?auto=compress&cs=tinysrgb&w=800" class="duel-bg-img">
+      </div>
+
+      <h3 style="font-weight: 900; opacity: 0.6; font-size: 14px;">BARCHA O'YINCHILAR</h3>
+      <div class="rank-list">
+        <div class="rank-row"><span class="r-pos">1</span><div class="r-avatar-box"><img src="https://i.pravatar.cc/150?u=1"></div><span class="r-name">Jasur_Winner</span><span class="r-pts">45 <small>PTS</small></span></div>
+        <div class="rank-row"><span class="r-pos">2</span><div class="r-avatar-box"><img src="https://i.pravatar.cc/150?u=2"></div><span class="r-name">Elena_IQ</span><span class="r-pts">42 <small>PTS</small></span></div>
+        <div class="rank-row"><span class="r-pos">3</span><div class="r-avatar-box"><img src="https://i.pravatar.cc/150?u=3"></div><span class="r-name">Bek_Rider</span><span class="r-pts">38 <small>PTS</small></span></div>
+        <div class="rank-row"><span class="r-pos">4</span><div class="r-avatar-box"><img src="https://i.pravatar.cc/150?u=4"></div><span class="r-name">Aziz_99</span><span class="r-pts">35 <small>PTS</small></span></div>
+      </div>
+
+      <div class="user-sticky-rank">
+        <div class="u-info">
+          <span>#142</span>
+          <div style="width:24px; height:24px; background:rgba(255,255,255,0.2); border-radius:5px; text-align:center; line-height:24px;">S</div>
+          <span>SIZNING O'RNINGIZ</span>
+        </div>
+        <div style="font-weight: 900;">12 PTS</div>
+      </div>
     </div>
 
-    <div class="all-players-section">
-        <div class="rank-header">
-            <h3>BARCHA ISHTIROKCHILAR</h3>
-            <span class="reset-timer">RESET: 12:00</span>
-        </div>
-        
-        <div class="players-scroll-area">
-            <div class="rank-row"><span class="r-pos">1</span><div class="r-avatar-box"><img src="https://i.pravatar.cc/150?u=1"></div><span class="r-name">Jasur_Winner</span><span class="r-pts">45 <small>PTS</small></span></div>
-            <div class="rank-row"><span class="r-pos">2</span><div class="r-avatar-box"><img src="https://i.pravatar.cc/150?u=2"></div><span class="r-name">Elena_IQ</span><span class="r-pts">42 <small>PTS</small></span></div>
-            <div class="rank-row"><span class="r-pos">3</span><div class="r-avatar-box"><img src="https://i.pravatar.cc/150?u=3"></div><span class="r-name">Bek_Rider</span><span class="r-pts">38 <small>PTS</small></span></div>
-            <div class="rank-row"><span class="r-pos">4</span><div class="r-avatar-box"><img src="https://i.pravatar.cc/150?u=4"></div><span class="r-name">Aziz_99</span><span class="r-pts">35 <small>PTS</small></span></div>
-            <div class="rank-row"><span class="r-pos">5</span><div class="r-avatar-box"><img src="https://i.pravatar.cc/150?u=5"></div><span class="r-name">Kamola_Star</span><span class="r-pts">31 <small>PTS</small></span></div>
-        </div>
-    </div>
-
-    <div class="user-sticky-rank">
-        <div class="u-rank-info">
-            <span class="u-pos">#142</span>
-            <div class="u-avatar"><div class="v-placeholder">S</div></div>
-            <span class="u-text">SIZ SHU O'RINDASIZ</span>
-        </div>
-        <div class="u-pts-box">12 <small>PTS</small></div>
-    </div>
+  </div>
 </div>
 
-
-
-
-  
-  
-
-
-
-
-  
-      <div id="screenRewards" class="screen hidden"><div class="card"><div class="h1">Mukofotlar</div><p class="p">Bu yerga sening mukofot UI’ngni joylaymiz.</p></div></div>
-      <div id="screenSupport" class="screen hidden"><div class="card"><div class="h1">Support</div><p class="p">Keyin operator / chat ulaymiz.</p></div></div>
-    </div>
-  </div>
-
-<div class="bottomNav" id="bottomNav">
+<div class="bottomNav">
   <div class="navBar">
-    <div class="navItem" id="navMenu"><div class="navIcon"><span class="material-symbols-rounded">menu</span></div><div>Menyu</div></div>
-    <div class="navItem active" id="navHome"><div class="navIcon"><span class="material-symbols-rounded">home</span></div><div id="navHomeTxt">Home</div></div>
-    <div class="navItem" id="navDuel"><div class="navIcon"><span class="material-symbols-rounded">psychology</span></div><div id="navDuelTxt">Duel</div></div>
-    <div class="navItem" id="navReward"><div class="navIcon"><span class="material-symbols-rounded">emoji_events</span></div><div id="navRewardTxt">Rewards</div></div>
-    <div class="navItem" id="navSupport"><div class="navIcon"><span class="material-symbols-rounded">support_agent</span></div><div id="navSupportTxt">Support</div></div>
+    <div class="navItem active" id="navHome" onclick="showScreen('home')"><span class="material-symbols-rounded">home</span>Home</div>
+    <div class="navItem" id="navDuel" onclick="showScreen('duels')"><span class="material-symbols-rounded">psychology</span>Duel</div>
+    <div class="navItem"><span class="material-symbols-rounded">emoji_events</span>Yutuq</div>
+    <div class="navItem"><span class="material-symbols-rounded">person</span>Profil</div>
   </div>
 </div>
 
-<div class="toast" id="toast"></div>
-
 <script>
-    const tg = window.Telegram?.WebApp;
-    tg?.ready(); tg?.expand();
-
-    const toast = document.getElementById("toast");
-    function toastMsg(text){
-      toast.textContent = text; toast.style.display = "block";
-      setTimeout(()=> toast.style.display = "none", 1600);
-    }
-
-    const STR = {
-      en:{ choose:"Choose language", cont:"Continue", hint:"Language is asked only once." },
-      uz:{ choose:"Tilni tanlang", cont:"Davom etish", hint:"Til faqat bir marta so‘raladi." },
-      ru:{ choose:"Выберите язык", cont:"Продолжить", hint:"Язык спрашивается один раз." }
-    };
-
-    const langScreen = document.getElementById("langScreen"), app = document.getElementById("app"), bottomNav = document.getElementById("bottomNav");
-    let selectedLang = "en", lang = localStorage.getItem("onewise_lang");
-
-    function pickSelected(l){
-      selectedLang = l;
-      [lang_en, lang_uz, lang_ru].forEach(x => x.classList.remove("selected"));
-      document.getElementById("lang_"+l).classList.add("selected");
-      const s = STR[l];
-      document.getElementById("langTitle").textContent = s.choose;
-      document.getElementById("continueBtn").textContent = s.cont;
-      document.getElementById("langHint").textContent = s.hint;
-    }
-
-    if(!lang) { langScreen.style.display = "flex"; pickSelected("en"); } else { app.style.display = "block"; bottomNav.style.display = "block"; }
-
-    document.getElementById("lang_en").onclick = () => pickSelected("en");
-    document.getElementById("lang_uz").onclick = () => pickSelected("uz");
-    document.getElementById("lang_ru").onclick = () => pickSelected("ru");
-    document.getElementById("continueBtn").onclick = () => { localStorage.setItem("onewise_lang", selectedLang); location.reload(); };
-
-    const screens = { home: document.getElementById("screenHome"), duels: document.getElementById("screenDuels"), rewards: document.getElementById("screenRewards"), support: document.getElementById("screenSupport") };
-    function showScreen(screenId) {
-  // Barcha ekranlarni yashirish
-  const screens = document.querySelectorAll('.screen');
-  screens.forEach(s => s.classList.add('hidden'));
-
-  // Tanlangan ekranni ko'rsatish
-  const target = document.getElementById('screen' + screenId.charAt(0).toUpperCase() + screenId.slice(1));
-  if (target) {
-    target.classList.remove('hidden');
+  function showScreen(id) {
+    document.querySelectorAll('.screen').forEach(s => s.classList.add('hidden'));
+    document.getElementById('screen' + id.charAt(0).toUpperCase() + id.slice(1)).classList.remove('hidden');
+    
+    document.querySelectorAll('.navItem').forEach(n => n.classList.remove('active'));
+    if(id === 'home') document.getElementById('navHome').classList.add('active');
+    if(id === 'duels') document.getElementById('navDuel').classList.add('active');
   }
-}
-
-    const navs = [document.getElementById("navHome"), document.getElementById("navDuel"), document.getElementById("navReward"), document.getElementById("navSupport")];
-    function setActive(el){ navs.forEach(x => x.classList.remove("active")); el.classList.add("active"); }
-
-    document.getElementById("navHome").onclick = () => { setActive(document.getElementById("navHome")); showScreen("home"); };
-    document.getElementById("navDuel").onclick = () => { setActive(document.getElementById("navDuel")); showScreen("duels"); };
-    document.getElementById("navReward").onclick = () => { setActive(document.getElementById("navReward")); showScreen("rewards"); };
-    document.getElementById("navSupport").onclick = () => { setActive(document.getElementById("navSupport")); showScreen("support"); };
-
-    const drawer = document.getElementById("drawer"), overlay = document.getElementById("drawerOverlay");
-    document.getElementById("navMenu").onclick = () => { drawer.classList.add("open"); overlay.style.display = "block"; };
-    document.getElementById("drawerClose").onclick = () => { drawer.classList.remove("open"); overlay.style.display = "none"; };
-    overlay.onclick = () => { drawer.classList.remove("open"); overlay.style.display = "none"; };
-
-    document.getElementById("depositBtn").onclick = () => toastMsg("Deposit keyin ulanadi");
-    document.getElementById("bellBtn").onclick = () => document.getElementById("bellBtn").classList.toggle("active");
 </script>
 
-
-
-<script>
-(function() {
-    // Sahifadagi barcha logotiplarni topamiz
-    const targets = document.querySelectorAll('.logoWrap, .drawerBrand');
-
-    targets.forEach(target => {
-        // Har bir logotipni o'zini alohida konteyner qilamiz
-        target.style.position = 'relative';
-        
-        const canvas = document.createElement('canvas');
-        Object.assign(canvas.style, {
-            position: 'absolute',
-            top: '-40px',
-            left: '0',
-            width: '100%',
-            height: (target.offsetHeight + 40) + 'px',
-            pointerEvents: 'none',
-            zIndex: '100'
-        });
-
-        target.appendChild(canvas);
-        const ctx = canvas.getContext('2d');
-        let flakes = [], staticFlakes = [];
-
-        function init() {
-            canvas.width = target.offsetWidth;
-            canvas.height = target.offsetHeight + 40;
-        }
-
-        // Menyu ochilishi bilan o'lchamlarni to'g'irlash
-        window.addEventListener('resize', init);
-        // Menyu tugmasi bosilganda biroz kutib canvasni yangilaymiz
-        document.getElementById('navMenu').addEventListener('click', () => {
-            setTimeout(init, 300); 
-        });
-        init();
-
-        class Flake {
-            constructor() { this.reset(); }
-            reset() {
-                this.x = Math.random() * canvas.width;
-                this.y = 0;
-                this.size = Math.random() * 1.5 + 0.5;
-                this.speed = Math.random() * 0.3 + 0.2;
-                this.opacity = Math.random() * 0.5 + 0.5;
-            }
-            update() {
-                this.y += this.speed;
-
-
-
-
-
-// Yangilangan variant (Qor biroz pastroqqa qo'nadi):
-if (this.y >= 44 && this.y <= 46) { // 38 ni 44 ga, 40 ni 46 ga o'zgartirdik
-    if (Math.random() > 0.5 && staticFlakes.length < 25) {
-        staticFlakes.push({x: this.x, y: 44 + (Math.random()*2), size: this.size, opacity: this.opacity});
-        this.reset();
-    }
-}
-
-
-
-
-              
-                
-                if (this.y > canvas.height) this.reset();
-            }
-            draw() {
-                ctx.fillStyle = `rgba(255, 255, 255, ${this.opacity})`;
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.fill();
-            }
-        }
-
-        for (let i = 0; i < 15; i++) flakes.push(new Flake());
-
-        function loop() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            flakes.forEach(f => { f.update(); f.draw(); });
-            staticFlakes.forEach(sf => {
-                ctx.fillStyle = `rgba(255, 255, 255, ${sf.opacity})`;
-                ctx.beginPath();
-                ctx.arc(sf.x, sf.y, sf.size, 0, Math.PI * 2);
-                ctx.fill();
-            });
-            requestAnimationFrame(loop);
-        }
-        
-        setInterval(() => { if (staticFlakes.length > 0) staticFlakes.shift(); }, 10000);
-        loop();
-    });
-})();
-</script>
-
-
-
-  
 </body>
-  </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+</html>
