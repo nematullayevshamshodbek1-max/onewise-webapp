@@ -760,6 +760,40 @@
 
 
 
+
+
+/* Podderjka kartasi uchun maxsus uslublar */
+.real-support-card {
+    position: relative; 
+    background: #1a1c22; 
+    border-radius: 24px; 
+    padding: 24px; 
+    overflow: hidden; 
+    border: 1px solid rgba(255,255,255,0.05); 
+    margin: 20px 0; 
+    min-height: 180px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.support-btn-style {
+    background: #007bff; 
+    color: #fff; 
+    border: none; 
+    width: 100%; 
+    padding: 14px; 
+    border-radius: 16px; 
+    font-size: 15px; 
+    font-weight: 800; 
+    cursor: pointer; 
+    position: relative; 
+    z-index: 3;
+    box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
+}
+
+    
+
     
     
 
@@ -1009,25 +1043,34 @@
         </select>
     </div>
 
-    <div class="f-card support-banner" style="position: relative; background: linear-gradient(90deg, #0d121f 0%, #1c253d 100%); border-radius: 15px; padding: 18px; border: 1px solid rgba(255,255,255,0.08); overflow: hidden; min-height: 130px; display: flex; align-items: center;">
-        
-        <div style="position: relative; z-index: 2; width: 60%;">
-            <h4 style="margin: 0; font-size: 16px; font-weight: 900; color: #fff;">
-                <span class="lang-txt" data-key="support_title">Podderjka</span> 
-                <span style="background: #2F80ED; padding: 1px 6px; border-radius: 4px; font-size: 10px;">24/7</span>
-            </h4>
-            <p class="lang-txt" data-key="support_desc" style="font-size:11px; color:rgba(255,255,255,0.6); margin: 6px 0 12px; line-height: 1.3;">
-                Svyajites s nami po lyubim voprosam
-            </p>
-            <button class="support-btn" style="background: #2F80ED; border: none; color: #fff; padding: 8px 18px; border-radius: 8px; font-weight: 800; font-size: 12px; cursor: pointer;">
-                <span class="lang-txt" data-key="support_btn">Obratitsya</span>
-            </button>
+    <div class="real-support-card">
+    <div style="position: relative; z-index: 2; width: 60%;">
+        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
+            <h4 class="lang-txt" data-key="support_title" style="margin: 0; font-size: 20px; font-weight: 800; color: #fff;">Поддержка</h4>
+            <div style="background: #007bff; color: #fff; padding: 2px 10px; border-radius: 20px; font-size: 14px; font-weight: 800;">24/7</div>
         </div>
-
-        <img src="https://i.ibb.co/hR0f7p4/customer-service.png" 
-             style="position: absolute; right: 0; bottom: 0; width: 110px; pointer-events: none; z-index: 1;" 
-             onerror="this.src='https://cdn-icons-png.flaticon.com/512/4233/4233830.png'">
+        
+        <p class="lang-txt" data-key="support_desc" style="color: #8a8d97; font-size: 14px; margin: 0 0 20px 0; line-height: 1.4; max-width: 180px;">
+            Свяжитесь с нами, если у вас остались вопросы
+        </p>
+        
+        <button class="support-btn-style lang-txt" data-key="support_btn">
+            Обратиться в поддержку
+        </button>
     </div>
+
+    <img src="pngwing.com.jpg" style="
+        position: absolute; 
+        right: -10px; 
+        bottom: -20px; 
+        height: 120%; 
+        width: auto; 
+        z-index: 1; 
+        pointer-events: none; 
+        object-fit: contain;
+        filter: drop-shadow(-10px 5px 20px rgba(0,0,0,0.5));
+    " alt="Operator">
+</div>
 
     <div style="display: flex; justify-content: center; gap: 15px; margin-top: 20px;">
         <a href="#" style="text-decoration: none;">
