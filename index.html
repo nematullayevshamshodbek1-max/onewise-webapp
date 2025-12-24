@@ -957,6 +957,46 @@
 }
 
 
+
+/* Ro'yxat qismi balandligi va skroll */
+.players-scroll-area {
+    max-height: 400px; /* Sahifa juda cho'zilib ketmasligi uchun */
+    overflow-y: auto;
+    padding-bottom: 80px; /* Sticky panel uchun joy */
+}
+
+/* Foydalanuvchi yopishqoq paneli */
+.user-sticky-rank {
+    position: fixed;
+    bottom: 70px; /* Bottom Nav dan tepada turishi uchun */
+    left: 20px;
+    right: 20px;
+    background: #2F80ED;
+    border-radius: 16px;
+    padding: 12px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    z-index: 100;
+}
+
+.u-rank-info { display: flex; align-items: center; gap: 12px; }
+.u-pos { font-weight: 1000; font-style: italic; font-size: 16px; }
+.u-avatar { width: 30px; height: 30px; border-radius: 8px; overflow: hidden; background: rgba(255,255,255,0.2); }
+.u-text { font-size: 11px; font-weight: 800; letter-spacing: 0.5px; }
+.u-pts-box { font-weight: 1000; font-size: 16px; }
+
+/* Skrollbarni chiroyli qilish */
+.players-scroll-area::-webkit-scrollbar { width: 4px; }
+.players-scroll-area::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 10px; }
+
+
+
+
+
+
+
     
 
 
@@ -1018,91 +1058,52 @@
 
 
 <div id="screenHome" class="screen">
-  <div class="main-banner">
-    <div class="banner-overlay">
-      <div class="b-text">
-        <span class="b-tag">1WISE</span>
-        <h1>BELLASH</h1>
-        <p>1 vs 1</p>
-        <button class="b-action">OLISH</button>
-      </div>
-    </div>
-    <img src="https://images.unsplash.com/photo-1580519542036-c47de6196ba5?auto=format&fit=crop&w=600&q=80" class="b-bg-img">
-  </div>
-
-  <div class="real-grid">
-    <div class="r-card">
-      <div class="r-info">
-        <h3>Do'stlar</h3>
-        <p>Birga o'ynang</p>
-      </div>
-      <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=300&q=80" alt="Friends">
-    </div>
-    
-    <div class="r-card">
-      <div class="r-info">
-        <h3>Yutuqlar</h3>
-        <p>Haqiqiy pullar</p>
-      </div>
-      <img src="https://images.pexels.com/photos/259027/pexels-photo-259027.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Yutuqlar">
-    </div>
-  </div>
-
-  <div class="iq-duel-banner" onclick="showScreen('duels')">
-    <div class="iq-overlay">
-        <div class="iq-content-box">
-            <div class="iq-status">
-                <span class="live-dot"></span> 1,240 FAOL O'YINCHI
+    <div class="vip-stats-container">
+        <div class="vip-header-simple">
+            <span class="v-title">TOP G'OLIBLAR</span>
+            <div class="v-all" onclick="showScreen('rewards')">
+                BARCHASI <span class="material-symbols-rounded">chevron_right</span>
             </div>
-            <h2>BILIM JANGI</h2>
-            <p>Haqiqiy vaqtda raqiblar bilan bellashing va reytingingizni oshiring.</p>
-            <div class="battle-stats">
-                <div class="stat-line"><div class="line-fill"></div></div>
-                <div class="stat-label">O'RTACHA JANG VAQTI: 5 MINUT</div>
-            </div>
-            <button class="join-battle-btn">BOSHLASH</button>
         </div>
-    </div>
-    <img src="https://images.pexels.com/photos/3165335/pexels-photo-3165335.jpeg?auto=compress&cs=tinysrgb&w=800" class="iq-bg-img">
-  </div>
 
-  <div class="vip-stats-container">
-    <div class="vip-header-simple">
-        <span class="v-title">TOP G'OLIBLAR</span>
-        <div class="v-all" onclick="showScreen('rewards')">
-            BARCHASI <span class="material-symbols-rounded">chevron_right</span>
-        </div>
-    </div>
-    <div class="vip-list-clean">
-        <div class="v-row gold">
-            <div class="v-rank">1</div>
-            <div class="v-avatar-wrapper">
-                <img src="https://randomuser.me/api/portraits/men/32.jpg" class="v-avatar">
-                <div class="v-placeholder">S</div>
+        <div class="vip-list-clean">
+            <div class="v-row gold">
+                <div class="v-rank">1</div>
+                <div class="v-avatar-wrapper">
+                    <img src="https://randomuser.me/api/portraits/men/32.jpg" class="v-avatar">
+                </div>
+                <div class="v-name">Sardor Nematullaev</div>
+                <div class="v-score">40 <small>PTS</small></div>
             </div>
-            <div class="v-name">Sardor Nematullaev</div>
-            <div class="v-score">40 <small>PTS</small></div>
+            <div class="v-row">
+                <div class="v-rank">2</div>
+                <div class="v-avatar-wrapper">
+                    <img src="https://randomuser.me/api/portraits/women/44.jpg" class="v-avatar">
+                </div>
+                <div class="v-name">Madina_Win</div>
+                <div class="v-score">35 <small>PTS</small></div>
+            </div>
+            <div class="v-row">
+                <div class="v-rank">3</div>
+                <div class="v-avatar-wrapper">
+                    <img src="https://randomuser.me/api/portraits/men/85.jpg" class="v-avatar">
+                </div>
+                <div class="v-name">Bek_Rider</div>
+                <div class="v-score">30 <small>PTS</small></div>
+            </div>
         </div>
-        </div>
-    <div class="my-personal-rank">
-        <span class="my-rank-label">SIZNING O'RNINGIZ: <span class="blue-txt">#1,452</span></span>
-        <div class="my-score-view">10 PTS</div>
     </div>
-  </div>
 </div> <div id="screenDuels" class="screen hidden">
     <div class="duel-live-stats">
         <div class="d-stat-item">
             <div class="d-dot pulse"></div>
-            <div class="d-stat-txt">
-                <span class="d-num">1,420</span>
-                <span class="d-lbl">ONLAYN</span>
-            </div>
+            <div class="d-stat-txt"><span class="d-num">1,420</span><span class="d-lbl">ONLAYN</span></div>
         </div>
         <div class="d-stat-item">
             <div class="d-stat-txt"><span class="d-num">856</span><span class="d-lbl">JANGDA</span></div>
         </div>
         <div class="d-stat-item">
-            <div class="d-stat-txt"><span class="d-num">45.2K</span><span class="d-lbl">JAMI O'YINCHI</span></div>
+            <div class="d-stat-txt"><span class="d-num">45.2K</span><span class="d-lbl">JAMI</span></div>
         </div>
     </div>
 
@@ -1116,7 +1117,31 @@
         </div>
         <img src="https://images.pexels.com/photos/735911/pexels-photo-735911.jpeg?auto=compress&cs=tinysrgb&w=800" class="duel-bg-img">
     </div>
+
+    <div class="all-players-section">
+        <div class="rank-header">
+            <h3>BARCHA ISHTIROKCHILAR</h3>
+            <span class="reset-timer">RESET: 12:00</span>
+        </div>
+        
+        <div class="players-scroll-area">
+            <div class="rank-row"><span class="r-pos">1</span><div class="r-avatar-box"><img src="https://i.pravatar.cc/150?u=1"></div><span class="r-name">Jasur_Winner</span><span class="r-pts">45 <small>PTS</small></span></div>
+            <div class="rank-row"><span class="r-pos">2</span><div class="r-avatar-box"><img src="https://i.pravatar.cc/150?u=2"></div><span class="r-name">Elena_IQ</span><span class="r-pts">42 <small>PTS</small></span></div>
+            <div class="rank-row"><span class="r-pos">3</span><div class="r-avatar-box"><img src="https://i.pravatar.cc/150?u=3"></div><span class="r-name">Bek_Rider</span><span class="r-pts">38 <small>PTS</small></span></div>
+            <div class="rank-row"><span class="r-pos">4</span><div class="r-avatar-box"><img src="https://i.pravatar.cc/150?u=4"></div><span class="r-name">Aziz_99</span><span class="r-pts">35 <small>PTS</small></span></div>
+            <div class="rank-row"><span class="r-pos">5</span><div class="r-avatar-box"><img src="https://i.pravatar.cc/150?u=5"></div><span class="r-name">Kamola_Star</span><span class="r-pts">31 <small>PTS</small></span></div>
+        </div>
     </div>
+
+    <div class="user-sticky-rank">
+        <div class="u-rank-info">
+            <span class="u-pos">#142</span>
+            <div class="u-avatar"><div class="v-placeholder">S</div></div>
+            <span class="u-text">SIZ SHU O'RINDASIZ</span>
+        </div>
+        <div class="u-pts-box">12 <small>PTS</small></div>
+    </div>
+</div>
 
 
 
@@ -1314,6 +1339,7 @@ if (this.y >= 44 && this.y <= 46) { // 38 ni 44 ga, 40 ni 46 ga o'zgartirdik
   
 </body>
   </html>
+
 
 
 
