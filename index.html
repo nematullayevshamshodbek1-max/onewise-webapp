@@ -630,113 +630,123 @@
 
 
 .vip-stats-container {
-    margin-top: 25px;
+    margin-top: 15px;
+    background: transparent; /* Fon bilan bir xil */
 }
 
-/* Jonli ko'rsatkichlar bari */
-.live-info-bar {
-    display: flex;
-    gap: 20px;
-    padding: 0 15px;
-    margin-bottom: 15px;
-}
-
-.info-item {
-    display: flex;
-    align-items: baseline;
-    gap: 6px;
-}
-
-.info-val {
-    font-size: 16px;
-    font-weight: 900;
-    color: #fff;
-    font-variant-numeric: tabular-nums;
-}
-
-.info-lbl {
-    font-size: 10px;
-    font-weight: 700;
-    color: var(--muted);
-    letter-spacing: 1px;
-}
-
-.dot.pulse {
-    width: 6px;
-    height: 6px;
-    background: #00c853;
-    border-radius: 50%;
-    box-shadow: 0 0 8px #00c853;
-    animation: livePulse 1.5s infinite;
-}
-
-@keyframes livePulse {
-    0% { transform: scale(1); opacity: 1; }
-    50% { transform: scale(1.5); opacity: 0.5; }
-    100% { transform: scale(1); opacity: 1; }
-}
-
-/* Reyting jadvali */
-.vip-leaderboard {
-    background: rgba(255, 255, 255, 0.02);
-    border: 1px solid var(--stroke);
-    border-radius: 20px;
-    overflow: hidden;
-}
-
-.vip-header {
-    padding: 20px;
+/* Sarlavha stili */
+.vip-header-simple {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 1px solid var(--stroke);
+    padding: 10px 15px;
+    margin-top: 10px;
 }
 
-.vip-lbl { font-size: 10px; color: var(--muted); font-weight: 800; display: block; }
-.vip-main { font-size: 16px; font-weight: 900; color: #fff; }
+.v-title {
+    font-size: 11px;
+    font-weight: 900;
+    letter-spacing: 1.5px;
+    color: var(--muted);
+    text-transform: uppercase;
+}
 
-.vip-row {
+.v-all {
+    font-size: 10px;
+    font-weight: 800;
+    color: var(--blue);
     display: flex;
     align-items: center;
-    padding: 12px 20px;
-    border-bottom: 1px solid var(--stroke);
+    cursor: pointer;
 }
 
-.u-meta { display: flex; flex-direction: column; }
-.u-badge { font-size: 8px; color: var(--blue); font-weight: 900; letter-spacing: 0.5px; }
+/* Ro'yxat dizayni (Ochiq va professional) */
+.vip-list-clean {
+    margin: 5px 0;
+}
 
-.vip-avatar {
-    width: 34px; height: 34px;
-    border-radius: 10px;
+.v-row {
+    display: flex;
+    align-items: center;
+    padding: 12px 15px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05); /* Nozik ajratuvchi chiziq */
+}
+
+.v-row:last-child {
+    border-bottom: none;
+}
+
+/* Raqamlar stili */
+.v-rank {
+    width: 25px;
+    font-size: 16px;
+    font-weight: 1000;
+    font-style: italic;
+    color: var(--muted);
+}
+
+.v-row.gold .v-rank { color: #FFD700; text-shadow: 0 0 10px rgba(255, 215, 0, 0.3); }
+
+/* Avatar va Placeholder */
+.v-avatar-wrapper {
+    width: 38px;
+    height: 38px;
+    margin: 0 12px;
+    position: relative;
+}
+
+.v-avatar {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
     object-fit: cover;
 }
 
-.vip-score small { font-size: 9px; color: var(--muted); }
+.v-placeholder {
+    width: 100%;
+    height: 100%;
+    background: #2a2e3a;
+    border-radius: 50%;
+    display: none; /* Rasm bo'lsa yashirinadi */
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    color: var(--blue);
+}
 
-/* Shaxsiy karta (Sizning o'rningiz) */
-.my-status-card {
-    background: linear-gradient(90deg, #1a2133, #05070d);
-    padding: 15px 20px;
+/* Ism va Ball */
+.v-name {
+    flex-grow: 1;
+    font-size: 14px;
+    font-weight: 700;
+    color: #eee;
+}
+
+.v-score {
+    font-size: 16px;
+    font-weight: 900;
+    color: #fff;
+}
+
+.v-score small {
+    font-size: 9px;
+    color: var(--muted);
+    margin-left: 2px;
+}
+
+/* Shaxsiy o'rin */
+.my-personal-rank {
+    padding: 15px;
+    margin-top: 5px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-.my-rank { font-size: 18px; font-weight: 1000; color: var(--blue); }
-.my-text { font-size: 9px; font-weight: 800; color: var(--muted); }
-
-.my-action {
-    background: rgba(47, 128, 237, 0.1);
-    color: var(--blue);
-    padding: 6px 12px;
-    border-radius: 8px;
-    font-size: 11px;
-    font-weight: 900;
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    cursor: pointer;
-}
+.my-rank-label { font-size: 11px; font-weight: 800; color: var(--muted); }
+.blue-txt { color: var(--blue); margin-left: 5px; }
+.my-score-view { font-size: 12px; font-weight: 900; color: #fff; }
 
 
     
@@ -872,69 +882,53 @@
             <span class="info-lbl">ONLAYN</span>
         </div>
         <div class="info-item">
-            <span class="info-val">45,800+</span>
-            <span class="info-lbl">OBUNAChI</span>
+            <span class="info-val">45,800</span>
+            <span class="info-lbl">ISHTIROKCHI</span>
         </div>
     </div>
 
-    <div class="vip-leaderboard">
-        <div class="vip-header">
-            <div class="vip-title">
-                <span class="vip-lbl">BUGUNGI</span>
-                <span class="vip-main">TOP 3 G'OLIB</span>
+    <div class="vip-header-simple">
+        <span class="v-title">TOP G'OLIBLAR</span>
+        <div class="v-all" onclick="setActive(document.getElementById('navReward')); showScreen('rewards');">
+            BARCHASI <span class="material-symbols-rounded">chevron_right</span>
+        </div>
+    </div>
+
+    <div class="vip-list-clean">
+        <div class="v-row gold">
+            <div class="v-rank">1</div>
+            <div class="v-avatar-wrapper">
+                <img src="https://randomuser.me/api/portraits/men/32.jpg" class="v-avatar" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                <div class="v-placeholder">S</div>
             </div>
-            <div class="vip-link" onclick="setActive(document.getElementById('navReward')); showScreen('rewards');">
-                BARChASINI KO'RISH
-            </div>
+            <div class="v-name">Sardor Nematullaev</div>
+            <div class="v-score">40 <small>PTS</small></div>
         </div>
 
-        <div class="vip-list">
-            <div class="vip-row gold-edge">
-                <div class="vip-rank">01</div>
-                <div class="vip-user-info">
-                    <img src="https://randomuser.me/api/portraits/men/32.jpg" class="vip-avatar">
-                    <div class="u-meta">
-                        <span class="vip-username">Sardor Nematullaev</span>
-                        <span class="u-badge">YENGILMAS</span>
-                    </div>
-                </div>
-                <div class="vip-score">12,450 <small>BALL</small></div>
+        <div class="v-row">
+            <div class="v-rank">2</div>
+            <div class="v-avatar-wrapper">
+                <img src="https://randomuser.me/api/portraits/women/44.jpg" class="v-avatar" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                <div class="v-placeholder">M</div>
             </div>
-
-            <div class="vip-row">
-                <div class="vip-rank">02</div>
-                <div class="vip-user-info">
-                    <img src="https://randomuser.me/api/portraits/women/44.jpg" class="vip-avatar">
-                    <div class="u-meta">
-                        <span class="vip-username">Madina_Win</span>
-                        <span class="u-badge">MASTER</span>
-                    </div>
-                </div>
-                <div class="vip-score">10,120 <small>BALL</small></div>
-            </div>
-
-            <div class="vip-row">
-                <div class="vip-rank">03</div>
-                <div class="vip-user-info">
-                    <img src="https://randomuser.me/api/portraits/men/85.jpg" class="vip-avatar">
-                    <div class="u-meta">
-                        <span class="vip-username">Bek_Rider</span>
-                        <span class="u-badge">PRO</span>
-                    </div>
-                </div>
-                <div class="vip-score">9,800 <small>BALL</small></div>
-            </div>
+            <div class="v-name">Madina_Win</div>
+            <div class="v-score">30 <small>PTS</small></div>
         </div>
 
-        <div class="my-status-card">
-            <div class="my-info">
-                <div class="my-rank">#1,452</div>
-                <div class="my-text">SIZNING O'RNINGIZ</div>
+        <div class="v-row">
+            <div class="v-rank">3</div>
+            <div class="v-avatar-wrapper">
+                <img src="https://randomuser.me/api/portraits/men/85.jpg" class="v-avatar" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                <div class="v-placeholder">B</div>
             </div>
-            <div class="my-action" onclick="setActive(document.getElementById('navDuel')); showScreen('duels');">
-                KO'TARILISh <span class="material-symbols-rounded">trending_up</span>
-            </div>
+            <div class="v-name">Bek_Rider</div>
+            <div class="v-score">20 <small>PTS</small></div>
         </div>
+    </div>
+
+    <div class="my-personal-rank">
+        <span class="my-rank-label">SIZNING O'RNINGIZ: <span class="blue-txt">#1,452</span></span>
+        <div class="my-score-view">10 PTS</div>
     </div>
 </div>
 
@@ -1122,6 +1116,7 @@ if (this.y >= 44 && this.y <= 46) { // 38 ni 44 ga, 40 ni 46 ga o'zgartirdik
   
 </body>
   </html>
+
 
 
 
