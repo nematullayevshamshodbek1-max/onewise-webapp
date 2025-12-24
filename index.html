@@ -754,6 +754,97 @@
 
 
 
+
+
+/* Duel bo'limi uchun maxsus stillar */
+.duel-live-stats {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 5px;
+    margin-bottom: 10px;
+}
+
+.d-stat-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.d-num { font-size: 14px; font-weight: 900; color: #fff; display: block; }
+.d-lbl { font-size: 8px; font-weight: 700; color: var(--muted); letter-spacing: 1px; }
+
+.d-dot.pulse {
+    width: 6px; height: 6px; background: #00c853; border-radius: 50%;
+    box-shadow: 0 0 10px #00c853; animation: d-pulse 1.5s infinite;
+}
+
+@keyframes d-pulse { 0% { opacity: 1; } 50% { opacity: 0.4; } 100% { opacity: 1; } }
+
+/* Banner */
+.duel-main-card {
+    position: relative; height: 200px; border-radius: 24px;
+    overflow: hidden; margin-bottom: 25px;
+    border: 1px solid rgba(47, 128, 237, 0.3);
+}
+
+.duel-bg-img { width: 100%; height: 100%; object-fit: cover; position: absolute; z-index: 1; }
+
+.duel-overlay {
+    position: absolute; inset: 0; z-index: 2;
+    background: linear-gradient(to right, rgba(5,7,13,0.9), transparent);
+    display: flex; align-items: center; padding: 25px;
+}
+
+.duel-tag { font-size: 9px; font-weight: 900; color: var(--blue); letter-spacing: 2px; }
+.duel-info h2 { font-size: 26px; font-weight: 1000; margin: 5px 0; color: #fff; }
+.duel-info p { font-size: 12px; color: var(--muted); margin-bottom: 15px; }
+
+.free-badge {
+    background: #00c853; color: #000; font-size: 10px;
+    font-weight: 900; padding: 4px 10px; border-radius: 6px;
+}
+
+.start-duel-btn {
+    background: #fff; color: #000; border: none; padding: 10px 25px;
+    border-radius: 12px; font-weight: 900; cursor: pointer; margin-top: 15px;
+}
+
+/* Kunlik Reyting */
+.rank-header {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 0 10px 15px;
+}
+
+.rank-header h3 { font-size: 14px; font-weight: 900; color: #fff; }
+.reset-timer { font-size: 10px; font-weight: 700; color: #ff9800; }
+
+.rank-list { display: flex; flex-direction: column; gap: 8px; }
+
+.rank-row {
+    display: flex; align-items: center; padding: 12px 15px;
+    background: rgba(255,255,255,0.02); border-radius: 16px;
+}
+
+.rank-row.current-user {
+    border: 1px solid rgba(47, 128, 237, 0.5);
+    background: rgba(47, 128, 237, 0.05);
+}
+
+.r-pos { width: 30px; font-size: 14px; font-weight: 900; color: var(--muted); }
+.r-avatar-box { width: 35px; height: 35px; margin-right: 12px; }
+.r-avatar-box img, .r-initials {
+    width: 100%; height: 100%; border-radius: 10px; object-fit: cover;
+}
+.r-initials { background: var(--blue); display: flex; align-items: center; justify-content: center; font-weight: 900; }
+.r-name { flex-grow: 1; font-size: 14px; font-weight: 600; color: #eee; }
+.r-pts { font-size: 15px; font-weight: 900; color: #fff; }
+.r-pts small { font-size: 9px; color: var(--muted); margin-left: 2px; }
+
+
+
+    
+
+
     
   </style>
 </head>
@@ -928,8 +1019,87 @@
       
       
       
+<div id="screenDuels" class="screen">
+    <div class="duel-live-stats">
+        <div class="d-stat-item">
+            <span class="d-dot pulse"></span>
+            <div class="d-stat-txt">
+                <span class="d-num">1,420</span>
+                <span class="d-lbl">ONLAYN</span>
+            </div>
+        </div>
+        <div class="d-stat-item">
+            <div class="d-stat-txt">
+                <span class="d-num">856</span>
+                <span class="d-lbl">JANGDA</span>
+            </div>
+        </div>
+        <div class="d-stat-item">
+            <div class="d-stat-txt">
+                <span class="d-num">45.2K</span>
+                <span class="d-lbl">JAMI O'YINCHI</span>
+            </div>
+        </div>
+    </div>
 
-      <div id="screenDuels" class="screen hidden"><div class="card"><div class="h1">Duellar</div><p class="p">Bu yerga sening duel sahifangni joylaymiz.</p></div></div>
+    <div class="duel-main-card">
+        <div class="duel-overlay">
+            <div class="duel-info">
+                <span class="duel-tag">KUNLIK TURNIR</span>
+                <h2>1 VS 1 BATTLE</h2>
+                <p>G'alaba qozon va +1 ball yig'ing</p>
+                <div class="entry-info">
+                    <span class="free-badge">7 KUN TEKIN</span>
+                </div>
+                <button class="start-duel-btn" onclick="startSearching()">DUELNI BOSHLASH</button>
+            </div>
+        </div>
+        <img src="https://images.pexels.com/photos/735911/pexels-photo-735911.jpeg?auto=compress&cs=tinysrgb&w=800" class="duel-bg-img">
+    </div>
+
+    <div class="daily-ranking">
+        <div class="rank-header">
+            <h3>BUGUNGI JANGCHILAR</h3>
+            <span class="reset-timer">QOLDI: 14:25:08</span>
+        </div>
+
+        <div class="rank-list">
+            <div class="rank-row current-user">
+                <span class="r-pos">142</span>
+                <div class="r-avatar-box">
+                    <div class="r-initials">S</div>
+                </div>
+                <span class="r-name">Siz (Shaxsiy)</span>
+                <span class="r-pts">12 <small>PTS</small></span>
+            </div>
+
+            <div class="rank-row">
+                <span class="r-pos">1</span>
+                <div class="r-avatar-box">
+                    <img src="https://randomuser.me/api/portraits/men/1.jpg">
+                </div>
+                <span class="r-name">Jasur_Winner</span>
+                <span class="r-pts">45 <small>PTS</small></span>
+            </div>
+
+            <div class="rank-row">
+                <span class="r-pos">2</span>
+                <div class="r-avatar-box">
+                    <img src="https://randomuser.me/api/portraits/women/2.jpg">
+                </div>
+                <span class="r-name">Elena_IQ</span>
+                <span class="r-pts">42 <small>PTS</small></span>
+            </div>
+        </div>
+    </div>
+</div>
+
+  
+
+
+
+
+  
       <div id="screenRewards" class="screen hidden"><div class="card"><div class="h1">Mukofotlar</div><p class="p">Bu yerga sening mukofot UI’ngni joylaymiz.</p></div></div>
       <div id="screenSupport" class="screen hidden"><div class="card"><div class="h1">Support</div><p class="p">Keyin operator / chat ulaymiz.</p></div></div>
     </div>
@@ -1106,6 +1276,7 @@ if (this.y >= 44 && this.y <= 46) { // 38 ni 44 ga, 40 ni 46 ga o'zgartirdik
   
 </body>
   </html>
+
 
 
 
