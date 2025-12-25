@@ -115,7 +115,7 @@
     .wrap{
       max-width: 520px;
       margin: 0 auto;
-      padding: 14px 14px 95px; /* extra bottom room */
+      padding: 14px 14px 80px; /* extra bottom room */
     }
 
     /* ===== Language first-run screen ===== */
@@ -1145,82 +1145,8 @@
 
 
 
-  <div id="screenDuel" class="screen">
-    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 20px;">
-        <div style="background: rgba(47, 128, 237, 0.1); border: 1px solid rgba(47, 128, 237, 0.2); padding: 12px; border-radius: 16px; text-align: center;">
-            <div style="font-size: 10px; color: #2F80ED; font-weight: 800; text-transform: uppercase; margin-bottom: 4px;">Online</div>
-            <div style="font-size: 18px; font-weight: 900; color: #fff;">1,284</div>
-        </div>
-        <div style="background: rgba(106, 75, 255, 0.1); border: 1px solid rgba(106, 75, 255, 0.2); padding: 12px; border-radius: 16px; text-align: center;">
-            <div style="font-size: 10px; color: #6a4bff; font-weight: 800; text-transform: uppercase; margin-bottom: 4px;">In Duel</div>
-            <div style="font-size: 18px; font-weight: 900; color: #fff;">452</div>
-        </div>
-        <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.05); padding: 12px; border-radius: 16px; text-align: center;">
-            <div style="font-size: 10px; color: rgba(255,255,255,0.4); font-weight: 800; text-transform: uppercase; margin-bottom: 4px;">Total</div>
-            <div style="font-size: 18px; font-weight: 900; color: #fff;">15.4K</div>
-        </div>
-    </div>
-
-    <div class="real-card" style="background: linear-gradient(135deg, #6a4bff 0%, #3c1cff 100%); position: relative; overflow: hidden; margin-bottom: 25px; min-height: 160px; display: flex; align-items: center;">
-        <div style="position: relative; z-index: 2; width: 60%;">
-            <h2 style="margin: 0 0 8px 0; font-size: 22px; font-weight: 900;">BATTLE ARENA</h2>
-            <p style="margin: 0 0 15px 0; font-size: 13px; color: rgba(255,255,255,0.8); line-height: 1.4;">
-                Bilimingizni sinab ko'ring va sovrinlarni yutib oling!
-            </p>
-            <button style="background: #fff; color: #3c1cff; border: none; padding: 10px 20px; border-radius: 12px; font-weight: 800; font-size: 14px; cursor: pointer;">
-                Start Duel
-            </button>
-        </div>
-        <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&q=80&w=400" 
-             style="position: absolute; right: -20px; bottom: -10px; height: 120%; width: auto; z-index: 1; opacity: 0.8; transform: rotate(-5deg);">
-    </div>
-
-    <div style="margin-bottom: 15px; display: flex; justify-content: space-between; align-items: center;">
-        <h3 style="margin: 0; font-size: 18px; font-weight: 800;">TOP PLAYERS</h3>
-        <span style="font-size: 12px; color: #8a8d97;">All Time</span>
-    </div>
-
-    <div class="leaderboard-list" style="display: flex; flex-direction: column; gap: 10px;">
-        <div style="background: rgba(255,255,255,0.03); padding: 12px; border-radius: 16px; display: flex; align-items: center; gap: 12px; border: 1px solid rgba(255,255,255,0.05);">
-            <div style="font-size: 16px; font-weight: 900; color: #FFD700; width: 25px;">1</div>
-            <div style="width: 40px; height: 40px; border-radius: 12px; background: #2F80ED; display: flex; align-items: center; justify-content: center; font-weight: 800;">A</div>
-            <div style="flex-grow: 1;">
-                <div style="font-size: 14px; font-weight: 700;">Alex Crypto</div>
-                <div style="font-size: 12px; color: #8a8d97;">4,820 Points</div>
-            </div>
-            <div style="color: #2F80ED; font-weight: 800;">+24</div>
-        </div>
-        <div style="background: rgba(255,255,255,0.03); padding: 12px; border-radius: 16px; display: flex; align-items: center; gap: 12px; border: 1px solid rgba(255,255,255,0.05);">
-            <div style="font-size: 16px; font-weight: 900; color: #C0C0C0; width: 25px;">2</div>
-            <div style="width: 40px; height: 40px; border-radius: 12px; background: #6a4bff; display: flex; align-items: center; justify-content: center; font-weight: 800;">S</div>
-            <div style="flex-grow: 1;">
-                <div style="font-size: 14px; font-weight: 700;">Sardorbek</div>
-                <div style="font-size: 12px; color: #8a8d97;">4,150 Points</div>
-            </div>
-            <div style="color: #2F80ED; font-weight: 800;">+18</div>
-        </div>
-    </div>
-
-    <div style="background: #1a1c22; border: 1.5px solid #2F80ED; padding: 15px; border-radius: 20px; margin-top: 25px; display: flex; align-items: center; gap: 12px; box-shadow: 0 -10px 20px rgba(0,0,0,0.3);">
-        <div style="font-size: 16px; font-weight: 900; color: #fff; width: 25px;">84</div>
-        <div id="userDuelAvatar" style="width: 45px; height: 45px; border-radius: 14px; background: #333; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 18px;">U</div>
-        <div style="flex-grow: 1;">
-            <div id="userDuelName" style="font-size: 15px; font-weight: 800; color: #fff;">Your Profile</div>
-            <div style="font-size: 12px; color: #2F80ED; font-weight: 600;">842 Points</div>
-        </div>
-        <div style="text-align: right;">
-            <div style="font-size: 10px; color: #8a8d97; text-transform: uppercase;">Rank</div>
-            <div style="font-size: 16px; font-weight: 900; color: #fff;">Silver III</div>
-        </div>
-    </div>
-</div>  
-
-
-
-
-
-
-    
+      
+      <div id="screenDuels" class="screen hidden"><div class="card"><div class="h1">Duellar</div><p class="p">Bu yerga sening duel sahifangni joylaymiz.</p></div></div>
       <div id="screenRewards" class="screen hidden"><div class="card"><div class="h1">Mukofotlar</div><p class="p">Bu yerga sening mukofot UI’ngni joylaymiz.</p></div></div>
       <div id="screenSupport" class="screen hidden"><div class="card"><div class="h1">Support</div><p class="p">Keyin operator / chat ulaymiz.</p></div></div>
     </div>
@@ -1388,11 +1314,7 @@ if (this.y >= 44 && this.y <= 46) { // 38 ni 44 ga, 40 ni 46 ga o'zgartirdik
 
 
 
-const user = window.Telegram.WebApp.initDataUnsafe.user;
-if (user) {
-    document.getElementById('userDuelName').innerText = user.first_name;
-    document.getElementById('userDuelAvatar').innerText = user.first_name.charAt(0);
-}
+
 
 
 
