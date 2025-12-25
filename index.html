@@ -195,9 +195,23 @@
       line-height:1.35;
     }
 
-    /* ===== Screens ===== */
-    .screen{ display:block; }
-    .hidden{ display:none !important; }
+
+/* ===== Screens ===== */
+.screen { 
+    display: none; /* Odatiy holatda yopiq turadi */
+    padding: 20px 16px 0 !important; /* Oxirgi 0 pastdagi bo'shliqni yo'qotadi */
+    min-height: auto !important; /* 100vh bo'lsa, pastda majburiy joy qoladi, auto qiling */
+    overflow-y: auto;
+    position: relative;
+    box-sizing: border-box;
+}
+
+/* Faqat aktiv oyna ko'rinishi uchun */
+.screen.active { 
+    display: block; 
+}
+
+    
 
     /* ===== Simple cards for now ===== */
     .card{
