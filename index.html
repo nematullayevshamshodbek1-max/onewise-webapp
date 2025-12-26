@@ -104,19 +104,22 @@
     }
 
     /* ===== APP SCROLL CONTAINER ===== */
-#app{
-  position:fixed; inset:0;
-  display:none;
-  overflow:auto;
-  padding-top: 74px;
-  padding-bottom: env(safe-area-inset-bottom); /* 140px olib tashlandi */
+/* 1. App konteynerini to'g'rilaymiz */
+#app {
+  position: fixed; 
+  inset: 0;
+  display: none;
+  overflow: auto;
+  padding-top: 64px !important; /* Topbar balandligi */
+  background: transparent;
 }
 
-    .wrap{
-      max-width: 520px;
-      margin: 0 auto;
-      padding: 14px 14px 80px; /* extra bottom room */
-    }
+/* 2. Wrap ichidagi ortiqcha paddingni olib tashlaymiz */
+.wrap {
+  max-width: 520px;
+  margin: 0 auto;
+  padding: 0 14px 100px; /* Tepadagi 14px ni 0 qildik */
+}
 
     /* ===== Language first-run screen ===== */
     #langScreen{
@@ -197,7 +200,11 @@
 
 
 /* ===== Screens ===== */
-    .screen{ display:block; }
+   /* 3. Ekranlar tepadagi chiziqqa yopishib turishi uchun */
+.screen {
+  display: block;
+  padding-top: 10px; /* Faqatgina juda kichik estetika uchun */
+}
     .hidden{ display:none !important; }
 
     
@@ -866,49 +873,43 @@
 
 
 
-    /* Yuqoridagi bo'shliqni yo'qotish */
-#app {
-  padding-top: 64px !important; /* Topbar balandligi bilan bir xil */
-}
 
-.screen {
-  padding-top: 10px; /* Ekranlar ichidagi kichik joy */
-}
+
+
 
 /* Ro'yxat uchun toza dizayn (Homedagi kabi) */
 .clean-list {
   margin-top: 20px;
 }
 
+/* Ro'yxat chizig'i */
 .clean-row {
   display: flex;
   align-items: center;
-  padding: 12px 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08); /* Faqat pastki chiziq */
+  padding: 14px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
 }
 
 .clean-row:last-child {
   border-bottom: none;
 }
 
-/* Onlayn indikator animatsiyasi */
+/* Pulse animatsiyasi (Yashil nuqta uchun) */
 .pulse-dot {
-  width: 8px;
-  height: 8px;
+  width: 7px;
+  height: 7px;
   background-color: #00c853;
   border-radius: 50%;
-  display: inline-block;
   margin-right: 6px;
-  box-shadow: 0 0 0 rgba(0, 200, 83, 0.4);
-  animation: pulse-green 2s infinite;
+  box-shadow: 0 0 0 0 rgba(0, 200, 83, 0.7);
+  animation: pulse-green 1.5s infinite;
 }
 
 @keyframes pulse-green {
   0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(0, 200, 83, 0.7); }
-  70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(0, 200, 83, 0); }
+  70% { transform: scale(1.1); box-shadow: 0 0 0 6px rgba(0, 200, 83, 0); }
   100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(0, 200, 83, 0); }
 }
-
 
 
     
@@ -1189,83 +1190,54 @@
 
 
 
-      
-      <div id="screenDuels" class="screen hidden">
-    <div style="padding: 0 10px; margin-bottom: 20px;">
-        <div style="display: flex; justify-content: space-between; align-items: flex-end;">
-            <div>
-                <div style="font-size: 11px; color: var(--muted); font-weight: 800; letter-spacing: 1px;">JAMI FOYDALANUVCHILAR</div>
-                <div style="font-size: 24px; font-weight: 1000; color: #fff;">45,802 <span style="font-size: 12px; color: var(--blue);">+124 bugun</span></div>
-            </div>
-            <div style="text-align: right;">
-                <div style="font-size: 11px; color: var(--muted); font-weight: 800;">WEB APPDA</div>
-                <div style="font-size: 18px; font-weight: 900; color: #fff;">3,105</div>
-            </div>
+     <div id="screenDuels" class="screen hidden">
+    <div style="padding: 0 5px; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: flex-end;">
+        <div>
+            <div style="font-size: 10px; color: var(--muted); font-weight: 800; letter-spacing: 1px; text-transform: uppercase;">Jami foydalanuvchilar</div>
+            <div style="font-size: 26px; font-weight: 1000; color: #fff; line-height: 1;">45,802</div>
+        </div>
+        <div style="text-align: right;">
+            <div style="font-size: 10px; color: var(--muted); font-weight: 800; letter-spacing: 1px; text-transform: uppercase;">Onlayn</div>
+            <div style="font-size: 18px; font-weight: 900; color: var(--blue); line-height: 1;">3,105</div>
         </div>
     </div>
 
-    <div class="iq-duel-banner" style="height: 200px; border-radius: 20px;">
-        <div class="iq-overlay" style="background: linear-gradient(to right, rgba(5,7,13,0.9) 50%, transparent);">
+    <div class="iq-duel-banner" style="height: 190px; border-radius: 20px; margin-bottom: 25px;">
+        <div class="iq-overlay" style="background: linear-gradient(90deg, rgba(5,7,13,0.95) 45%, transparent);">
             <div class="iq-content-box">
-                <div style="margin-bottom: 12px; display: flex; align-items: center; background: rgba(0,0,0,0.3); width: fit-content; padding: 4px 10px; border-radius: 20px;">
+                <div style="display: flex; align-items: center; background: rgba(0,200,83,0.1); border: 1px solid rgba(0,200,83,0.2); width: fit-content; padding: 3px 10px; border-radius: 50px; margin-bottom: 15px;">
                     <span class="pulse-dot"></span>
-                    <span style="font-size: 11px; font-weight: 900; color: #00c853;">1,240 O'YINDA</span>
+                    <span style="font-size: 10px; font-weight: 1000; color: #00c853; letter-spacing: 0.5px;">1,240 FAOL DUEL</span>
                 </div>
-                <h2 style="font-size: 28px; line-height: 1;">BILIMLAR<br>JANGI</h2>
-                <p style="font-size: 12px; margin: 10px 0 15px;">Raqibingizni mag'lub eting va reytingni zabt eting.</p>
-                <button class="join-battle-btn" style="padding: 10px 25px;">DUELNI BOSHLASH</button>
+                <h2 style="font-size: 26px; line-height: 1.1; margin-bottom: 8px;">BILIMLAR<br>JANGI</h2>
+                <p style="font-size: 12px; color: rgba(255,255,255,0.6); margin-bottom: 18px;">Haqiqiy raqiblar bilan bellashing.</p>
+                <button class="join-battle-btn" style="background: var(--blue); padding: 10px 30px; border-radius: 12px;">BOSHLASH</button>
             </div>
         </div>
         <img src="https://images.pexels.com/photos/3165335/pexels-photo-3165335.jpeg?auto=compress&cs=tinysrgb&w=800" class="iq-bg-img">
     </div>
 
-    <div class="clean-list">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; padding: 0 5px;">
-            <span style="font-size: 13px; font-weight: 1000; color: var(--muted); letter-spacing: 0.5px;">GLOBAL REYTING</span>
-            <span style="font-size: 11px; font-weight: 800; color: var(--blue);">FILTR <span class="material-symbols-rounded" style="font-size: 14px; vertical-align: middle;">filter_list</span></span>
+    <div style="padding: 0 5px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+            <span style="font-size: 13px; font-weight: 1000; color: #fff;">TOP FOYDALANUVCHILAR</span>
+            <span style="font-size: 11px; color: var(--blue); font-weight: 800;">HAMMASI</span>
         </div>
 
-        <div id="globalLeaderboardList">
+        <div id="leaderboardContainer">
             <div class="clean-row">
-                <div style="width: 30px; font-size: 18px; font-weight: 1000; color: #FFD700; font-style: italic;">1</div>
-                <div style="width: 40px; height: 40px; margin: 0 12px; position: relative;">
-                    <img src="https://randomuser.me/api/portraits/men/32.jpg" style="width: 100%; height: 100%; border-radius: 50%; border: 2px solid #FFD700;">
+                <div style="width: 25px; font-size: 16px; font-weight: 1000; color: #FFD700;">1</div>
+                <div style="width: 38px; height: 38px; margin: 0 12px;">
+                    <img src="https://randomuser.me/api/portraits/men/32.jpg" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover; border: 1.5px solid #FFD700;">
                 </div>
                 <div style="flex-grow: 1;">
-                    <div style="font-size: 15px; font-weight: 800; color: #fff;">Sardor Nematullaev</div>
-                    <div style="font-size: 11px; color: var(--muted);">456 yutuq</div>
+                    <div style="font-size: 14px; font-weight: 800; color: #fff;">Sardor Nematullaev</div>
+                    <div style="font-size: 10px; color: var(--muted);">1,250 PTS</div>
                 </div>
-                <div style="text-align: right;">
-                    <div style="font-size: 16px; font-weight: 1000; color: #fff;">1,250</div>
-                    <div style="font-size: 9px; color: var(--blue); font-weight: 900;">PTS</div>
-                </div>
+                <div style="text-align: right; font-size: 12px; font-weight: 1000; color: #00c853;">TOP 1</div>
             </div>
 
-            <div class="clean-row">
-                <div style="width: 30px; font-size: 16px; font-weight: 1000; color: #C0C0C0; font-style: italic;">2</div>
-                <div style="width: 40px; height: 40px; margin: 0 12px;">
-                    <img src="https://randomuser.me/api/portraits/women/44.jpg" style="width: 100%; height: 100%; border-radius: 50%; border: 1px solid rgba(255,255,255,0.2);">
-                </div>
-                <div style="flex-grow: 1;">
-                    <div style="font-size: 15px; font-weight: 800; color: #eee;">Madina_Win</div>
-                    <div style="font-size: 11px; color: var(--muted);">312 yutuq</div>
-                </div>
-                <div style="text-align: right;">
-                    <div style="font-size: 16px; font-weight: 1000; color: #eee;">980</div>
-                    <div style="font-size: 9px; color: var(--muted); font-weight: 900;">PTS</div>
-                </div>
-            </div>
-
-            <div id="dynamicPlayers"></div>
+            <div id="otherPlayers"></div>
         </div>
-    </div>
-
-    <div style="margin-top: 30px; padding: 20px; border-radius: 15px; background: rgba(47,128,237,0.08); border: 1px dashed rgba(47,128,237,0.3); display: flex; justify-content: space-between; align-items: center;">
-        <div style="display: flex; align-items: center; gap: 10px;">
-            <span style="font-size: 12px; font-weight: 900; color: var(--muted);">SIZNING O'RNINGIZ:</span>
-            <span style="font-size: 16px; font-weight: 1000; color: var(--blue);">#1,452</span>
-        </div>
-        <div style="font-size: 14px; font-weight: 1000; color: #fff;">10 PTS</div>
     </div>
 </div>
 
@@ -1467,7 +1439,14 @@ document.getElementById("navDuel").addEventListener('click', loadDuelsData);
 
 
 
-
+// Har safar ekran almashganda tepaga scroll qilish va bo'shliqni tekshirish
+function showScreen(key) {
+    Object.values(screens).forEach(s => s.classList.add("hidden"));
+    screens[key].classList.remove("hidden");
+    
+    // App konteynerini tepaga qaytarish
+    document.getElementById("app").scrollTop = 0;
+}
   
 
   
