@@ -17,6 +17,7 @@
       --purple1:#6a4bff;
       --purple2:#3c1cff;
       --card: rgba(255,255,255,0.06);
+      --topbar-h: 64px;
     }
 
     *{ box-sizing:border-box; }
@@ -104,21 +105,18 @@
     }
 
     /* ===== APP SCROLL CONTAINER ===== */
-#app {
-  position: fixed;
-  inset: 0;
-  display: none;
-  overflow-y: auto; /* Faqat vertikal skrol bo'lishi uchun */
-  -webkit-overflow-scrolling: touch; /* iPhone'da silliq skrol uchun */
-  z-index: 1;
+#app{
+  position:fixed; inset:0;
+  display:none;
+  overflow:auto;
+  padding-top: calc(var(--topbar-h) + env(safe-area-inset-top));
+  padding-bottom: env(safe-area-inset-bottom);
 }
 
-   /* Eski holat: .wrap { max-width: 520px; margin: 0 auto; padding: 0px 0px 0px; } */
-
-.wrap {
+   .wrap{
   max-width: 520px;
   margin: 0 auto;
-  padding: 80px 16px 120px 16px; /* TEPADAN 80px, PASTDAN 120px joy tashlaydi */
+  padding: 8px 14px 80px;  /* 14 -> 8 (yoki 6 ham bo'ladi) */
 }
 
     /* ===== Language first-run screen ===== */
@@ -200,11 +198,7 @@
 
 
 /* ===== Screens ===== */
-  .screen {
-  display: block;
-  min-height: 100%;
-  padding-bottom: 20px; /* Har bir skrin oxirida qo'shimcha joy */
-}
+    .screen{ display:block; }
     .hidden{ display:none !important; }
 
     
@@ -871,6 +865,9 @@
 
 
 
+#screenDuels, #screenRewards, #screenSupport{
+  margin-top: -6px; /* juda ozgina ko‘taradi */
+}
 
 
 
