@@ -866,6 +866,50 @@
 
 
 
+    /* Yuqoridagi bo'shliqni yo'qotish */
+#app {
+  padding-top: 64px !important; /* Topbar balandligi bilan bir xil */
+}
+
+.screen {
+  padding-top: 10px; /* Ekranlar ichidagi kichik joy */
+}
+
+/* Ro'yxat uchun toza dizayn (Homedagi kabi) */
+.clean-list {
+  margin-top: 20px;
+}
+
+.clean-row {
+  display: flex;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08); /* Faqat pastki chiziq */
+}
+
+.clean-row:last-child {
+  border-bottom: none;
+}
+
+/* Onlayn indikator animatsiyasi */
+.pulse-dot {
+  width: 8px;
+  height: 8px;
+  background-color: #00c853;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 6px;
+  box-shadow: 0 0 0 rgba(0, 200, 83, 0.4);
+  animation: pulse-green 2s infinite;
+}
+
+@keyframes pulse-green {
+  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(0, 200, 83, 0.7); }
+  70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(0, 200, 83, 0); }
+  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(0, 200, 83, 0); }
+}
+
+
 
     
 
@@ -1147,84 +1191,82 @@
 
       
       <div id="screenDuels" class="screen hidden">
-  
-  <div class="real-grid">
-    <div class="r-card" style="height: 100px; background: rgba(47,128,237,0.1);">
-      <div class="r-info">
-        <h3 id="onlineUsers">1,240</h3>
-        <p>Onlayn foydalanuvchilar</p>
-      </div>
-    </div>
-    <div class="r-card" style="height: 100px; background: rgba(0,200,83,0.1);">
-      <div class="r-info">
-        <h3 id="activeDuels">342</h3>
-        <p>Faol duellar</p>
-      </div>
-    </div>
-  </div>
-
-  <div class="card" style="margin-bottom: 15px; padding: 12px; border-color: rgba(255,255,255,0.05);">
-    <div style="display: flex; justify-content: space-between; align-items: center;">
-      <span style="font-size: 12px; color: var(--muted); font-weight: 700;">JAMI QO'SHILGANLAR:</span>
-      <span style="font-size: 14px; font-weight: 1000; color: var(--blue);" id="totalUsers">45,802</span>
-    </div>
-  </div>
-
-  <div class="iq-duel-banner" style="height: 180px; margin-top: 0;">
-    <div class="iq-overlay" style="background: linear-gradient(90deg, rgba(5,7,13,0.9) 40%, transparent 100%);">
-        <div class="iq-content-box">
-            <h2>DUELNI BOSHLASH</h2>
-            <p>Tasodifiy raqib bilan o'z bilimingizni sinab ko'ring.</p>
-            <button class="join-battle-btn" onclick="toastMsg('Raqib qidirilmoqda...')">HOZIR BELLASHISH</button>
+    <div style="padding: 0 10px; margin-bottom: 20px;">
+        <div style="display: flex; justify-content: space-between; align-items: flex-end;">
+            <div>
+                <div style="font-size: 11px; color: var(--muted); font-weight: 800; letter-spacing: 1px;">JAMI FOYDALANUVCHILAR</div>
+                <div style="font-size: 24px; font-weight: 1000; color: #fff;">45,802 <span style="font-size: 12px; color: var(--blue);">+124 bugun</span></div>
+            </div>
+            <div style="text-align: right;">
+                <div style="font-size: 11px; color: var(--muted); font-weight: 800;">WEB APPDA</div>
+                <div style="font-size: 18px; font-weight: 900; color: #fff;">3,105</div>
+            </div>
         </div>
     </div>
-    <img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=600&q=80" class="iq-bg-img">
-  </div>
 
-  <div class="vip-stats-container" style="background: var(--card); border-radius: 24px; padding-top: 10px; margin-top: 20px; border: 1px solid var(--stroke);">
-    <div class="vip-header-simple">
-        <span class="v-title">GLOBAL REYTING</span>
-        <span class="v-all">BARCHA FOYDALANUVCHILAR</span>
+    <div class="iq-duel-banner" style="height: 200px; border-radius: 20px;">
+        <div class="iq-overlay" style="background: linear-gradient(to right, rgba(5,7,13,0.9) 50%, transparent);">
+            <div class="iq-content-box">
+                <div style="margin-bottom: 12px; display: flex; align-items: center; background: rgba(0,0,0,0.3); width: fit-content; padding: 4px 10px; border-radius: 20px;">
+                    <span class="pulse-dot"></span>
+                    <span style="font-size: 11px; font-weight: 900; color: #00c853;">1,240 O'YINDA</span>
+                </div>
+                <h2 style="font-size: 28px; line-height: 1;">BILIMLAR<br>JANGI</h2>
+                <p style="font-size: 12px; margin: 10px 0 15px;">Raqibingizni mag'lub eting va reytingni zabt eting.</p>
+                <button class="join-battle-btn" style="padding: 10px 25px;">DUELNI BOSHLASH</button>
+            </div>
+        </div>
+        <img src="https://images.pexels.com/photos/3165335/pexels-photo-3165335.jpeg?auto=compress&cs=tinysrgb&w=800" class="iq-bg-img">
     </div>
 
-    <div class="vip-list-clean" id="globalLeaderboard">
-        <div class="v-row gold">
-            <div class="v-rank">1</div>
-            <div class="v-avatar-wrapper">
-                <div class="v-placeholder" style="display: flex;">A</div>
-            </div>
-            <div class="v-name">Azizbek_King</div>
-            <div class="v-score">1,250 <small>PTS</small></div>
-        </div>
-        
-        <div class="v-row">
-            <div class="v-rank">2</div>
-            <div class="v-avatar-wrapper">
-                <div class="v-placeholder" style="display: flex;">S</div>
-            </div>
-            <div class="v-name">Sardor_Dev</div>
-            <div class="v-score">980 <small>PTS</small></div>
+    <div class="clean-list">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; padding: 0 5px;">
+            <span style="font-size: 13px; font-weight: 1000; color: var(--muted); letter-spacing: 0.5px;">GLOBAL REYTING</span>
+            <span style="font-size: 11px; font-weight: 800; color: var(--blue);">FILTR <span class="material-symbols-rounded" style="font-size: 14px; vertical-align: middle;">filter_list</span></span>
         </div>
 
-        <div class="v-row">
-            <div class="v-rank">3</div>
-            <div class="v-avatar-wrapper">
-                <div class="v-placeholder" style="display: flex;">D</div>
+        <div id="globalLeaderboardList">
+            <div class="clean-row">
+                <div style="width: 30px; font-size: 18px; font-weight: 1000; color: #FFD700; font-style: italic;">1</div>
+                <div style="width: 40px; height: 40px; margin: 0 12px; position: relative;">
+                    <img src="https://randomuser.me/api/portraits/men/32.jpg" style="width: 100%; height: 100%; border-radius: 50%; border: 2px solid #FFD700;">
+                </div>
+                <div style="flex-grow: 1;">
+                    <div style="font-size: 15px; font-weight: 800; color: #fff;">Sardor Nematullaev</div>
+                    <div style="font-size: 11px; color: var(--muted);">456 yutuq</div>
+                </div>
+                <div style="text-align: right;">
+                    <div style="font-size: 16px; font-weight: 1000; color: #fff;">1,250</div>
+                    <div style="font-size: 9px; color: var(--blue); font-weight: 900;">PTS</div>
+                </div>
             </div>
-            <div class="v-name">Diyor_Winner</div>
-            <div class="v-score">850 <small>PTS</small></div>
-        </div>
 
-        <div id="otherUsersList">
+            <div class="clean-row">
+                <div style="width: 30px; font-size: 16px; font-weight: 1000; color: #C0C0C0; font-style: italic;">2</div>
+                <div style="width: 40px; height: 40px; margin: 0 12px;">
+                    <img src="https://randomuser.me/api/portraits/women/44.jpg" style="width: 100%; height: 100%; border-radius: 50%; border: 1px solid rgba(255,255,255,0.2);">
+                </div>
+                <div style="flex-grow: 1;">
+                    <div style="font-size: 15px; font-weight: 800; color: #eee;">Madina_Win</div>
+                    <div style="font-size: 11px; color: var(--muted);">312 yutuq</div>
+                </div>
+                <div style="text-align: right;">
+                    <div style="font-size: 16px; font-weight: 1000; color: #eee;">980</div>
+                    <div style="font-size: 9px; color: var(--muted); font-weight: 900;">PTS</div>
+                </div>
             </div>
+
+            <div id="dynamicPlayers"></div>
+        </div>
     </div>
 
-    <div class="my-personal-rank" style="background: rgba(47,128,237,0.1); border-radius: 0 0 24px 24px;">
-        <span class="my-rank-label">SIZNING O'RNINGIZ: <span class="blue-txt">#1,452</span></span>
-        <div class="my-score-view">10 PTS</div>
+    <div style="margin-top: 30px; padding: 20px; border-radius: 15px; background: rgba(47,128,237,0.08); border: 1px dashed rgba(47,128,237,0.3); display: flex; justify-content: space-between; align-items: center;">
+        <div style="display: flex; align-items: center; gap: 10px;">
+            <span style="font-size: 12px; font-weight: 900; color: var(--muted);">SIZNING O'RNINGIZ:</span>
+            <span style="font-size: 16px; font-weight: 1000; color: var(--blue);">#1,452</span>
+        </div>
+        <div style="font-size: 14px; font-weight: 1000; color: #fff;">10 PTS</div>
     </div>
-  </div>
-
 </div>
 
     
@@ -1391,39 +1433,34 @@ if (this.y >= 44 && this.y <= 46) { // 38 ni 44 ga, 40 ni 46 ga o'zgartirdik
 
 
 
-// Duellar sahifasi uchun demo ma'lumotlar generatori
-function loadLeaderboard() {
-    const listContainer = document.getElementById('otherUsersList');
-    listContainer.innerHTML = ''; // Tozalash
-
-    // Tasodifiy foydalanuvchilar (Real loyihada bu API dan keladi)
+function loadDuelsData() {
+    const dynamicContainer = document.getElementById('dynamicPlayers');
     const players = [
-        { name: "Jasur_777", score: 720, rank: 4 },
-        { name: "Ali_Rich", score: 540, rank: 5 },
-        { name: "User_4829", score: 120, rank: 6 },
-        { name: "Noob_Master", score: 0, rank: 7 },
-        { name: "New_Player", score: 0, rank: 8 },
-        { name: "Bot_Wise", score: 0, rank: 9 }
+        { name: "Bek_Rider", score: 850, rank: 3, wins: 120 },
+        { name: "Jasur_777", score: 720, rank: 4, wins: 89 },
+        { name: "Noob_Master", score: 0, rank: 1450, wins: 0 },
+        { name: "New_User", score: 0, rank: 1451, wins: 0 }
     ];
 
-    players.forEach(player => {
-        const row = document.createElement('div');
-        row.className = 'v-row';
-        row.innerHTML = `
-            <div class="v-rank">${player.rank}</div>
-            <div class="v-avatar-wrapper">
-                <div class="v-placeholder" style="display: flex;">${player.name[0]}</div>
+    dynamicContainer.innerHTML = players.map(p => `
+        <div class="clean-row">
+            <div style="width: 30px; font-size: 14px; font-weight: 900; color: var(--muted);">${p.rank}</div>
+            <div style="width: 40px; height: 40px; margin: 0 12px; background: rgba(255,255,255,0.05); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; color: var(--blue);">
+                ${p.name[0]}
             </div>
-            <div class="v-name">${player.name}</div>
-            <div class="v-score">${player.score} <small>PTS</small></div>
-        `;
-        listContainer.appendChild(row);
-    });
+            <div style="flex-grow: 1;">
+                <div style="font-size: 14px; font-weight: 700; color: #ccc;">${p.name}</div>
+                <div style="font-size: 10px; color: rgba(255,255,255,0.3);">${p.wins} yutuq</div>
+            </div>
+            <div style="text-align: right;">
+                <div style="font-size: 14px; font-weight: 900; color: #aaa;">${p.score}</div>
+            </div>
+        </div>
+    `).join('');
 }
 
-// Sahifa yuklanganda reytingni to'ldirish
-loadLeaderboard();
-
+// Navigatsiya bosilganda yuklash
+document.getElementById("navDuel").addEventListener('click', loadDuelsData);
 
 
 
