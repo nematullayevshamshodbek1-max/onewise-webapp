@@ -1146,7 +1146,88 @@
 
 
       
-      <div id="screenDuels" class="screen hidden"><div class="card"><div class="h1">Duellar</div><p class="p">Bu yerga sening duel sahifangni joylaymiz.</p></div></div>
+      <div id="screenDuels" class="screen hidden">
+  
+  <div class="real-grid">
+    <div class="r-card" style="height: 100px; background: rgba(47,128,237,0.1);">
+      <div class="r-info">
+        <h3 id="onlineUsers">1,240</h3>
+        <p>Onlayn foydalanuvchilar</p>
+      </div>
+    </div>
+    <div class="r-card" style="height: 100px; background: rgba(0,200,83,0.1);">
+      <div class="r-info">
+        <h3 id="activeDuels">342</h3>
+        <p>Faol duellar</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-bottom: 15px; padding: 12px; border-color: rgba(255,255,255,0.05);">
+    <div style="display: flex; justify-content: space-between; align-items: center;">
+      <span style="font-size: 12px; color: var(--muted); font-weight: 700;">JAMI QO'SHILGANLAR:</span>
+      <span style="font-size: 14px; font-weight: 1000; color: var(--blue);" id="totalUsers">45,802</span>
+    </div>
+  </div>
+
+  <div class="iq-duel-banner" style="height: 180px; margin-top: 0;">
+    <div class="iq-overlay" style="background: linear-gradient(90deg, rgba(5,7,13,0.9) 40%, transparent 100%);">
+        <div class="iq-content-box">
+            <h2>DUELNI BOSHLASH</h2>
+            <p>Tasodifiy raqib bilan o'z bilimingizni sinab ko'ring.</p>
+            <button class="join-battle-btn" onclick="toastMsg('Raqib qidirilmoqda...')">HOZIR BELLASHISH</button>
+        </div>
+    </div>
+    <img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=600&q=80" class="iq-bg-img">
+  </div>
+
+  <div class="vip-stats-container" style="background: var(--card); border-radius: 24px; padding-top: 10px; margin-top: 20px; border: 1px solid var(--stroke);">
+    <div class="vip-header-simple">
+        <span class="v-title">GLOBAL REYTING</span>
+        <span class="v-all">BARCHA FOYDALANUVCHILAR</span>
+    </div>
+
+    <div class="vip-list-clean" id="globalLeaderboard">
+        <div class="v-row gold">
+            <div class="v-rank">1</div>
+            <div class="v-avatar-wrapper">
+                <div class="v-placeholder" style="display: flex;">A</div>
+            </div>
+            <div class="v-name">Azizbek_King</div>
+            <div class="v-score">1,250 <small>PTS</small></div>
+        </div>
+        
+        <div class="v-row">
+            <div class="v-rank">2</div>
+            <div class="v-avatar-wrapper">
+                <div class="v-placeholder" style="display: flex;">S</div>
+            </div>
+            <div class="v-name">Sardor_Dev</div>
+            <div class="v-score">980 <small>PTS</small></div>
+        </div>
+
+        <div class="v-row">
+            <div class="v-rank">3</div>
+            <div class="v-avatar-wrapper">
+                <div class="v-placeholder" style="display: flex;">D</div>
+            </div>
+            <div class="v-name">Diyor_Winner</div>
+            <div class="v-score">850 <small>PTS</small></div>
+        </div>
+
+        <div id="otherUsersList">
+            </div>
+    </div>
+
+    <div class="my-personal-rank" style="background: rgba(47,128,237,0.1); border-radius: 0 0 24px 24px;">
+        <span class="my-rank-label">SIZNING O'RNINGIZ: <span class="blue-txt">#1,452</span></span>
+        <div class="my-score-view">10 PTS</div>
+    </div>
+  </div>
+
+</div>
+
+    
       <div id="screenRewards" class="screen hidden"><div class="card"><div class="h1">Mukofotlar</div><p class="p">Bu yerga sening mukofot UI’ngni joylaymiz.</p></div></div>
       <div id="screenSupport" class="screen hidden"><div class="card"><div class="h1">Support</div><p class="p">Keyin operator / chat ulaymiz.</p></div></div>
     </div>
@@ -1310,7 +1391,38 @@ if (this.y >= 44 && this.y <= 46) { // 38 ni 44 ga, 40 ni 46 ga o'zgartirdik
 
 
 
+// Duellar sahifasi uchun demo ma'lumotlar generatori
+function loadLeaderboard() {
+    const listContainer = document.getElementById('otherUsersList');
+    listContainer.innerHTML = ''; // Tozalash
 
+    // Tasodifiy foydalanuvchilar (Real loyihada bu API dan keladi)
+    const players = [
+        { name: "Jasur_777", score: 720, rank: 4 },
+        { name: "Ali_Rich", score: 540, rank: 5 },
+        { name: "User_4829", score: 120, rank: 6 },
+        { name: "Noob_Master", score: 0, rank: 7 },
+        { name: "New_Player", score: 0, rank: 8 },
+        { name: "Bot_Wise", score: 0, rank: 9 }
+    ];
+
+    players.forEach(player => {
+        const row = document.createElement('div');
+        row.className = 'v-row';
+        row.innerHTML = `
+            <div class="v-rank">${player.rank}</div>
+            <div class="v-avatar-wrapper">
+                <div class="v-placeholder" style="display: flex;">${player.name[0]}</div>
+            </div>
+            <div class="v-name">${player.name}</div>
+            <div class="v-score">${player.score} <small>PTS</small></div>
+        `;
+        listContainer.appendChild(row);
+    });
+}
+
+// Sahifa yuklanganda reytingni to'ldirish
+loadLeaderboard();
 
 
 
