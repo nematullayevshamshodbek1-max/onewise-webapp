@@ -17,7 +17,6 @@
       --purple1:#6a4bff;
       --purple2:#3c1cff;
       --card: rgba(255,255,255,0.06);
-      --topbar-h: 64px;
     }
 
     *{ box-sizing:border-box; }
@@ -109,15 +108,15 @@
   position:fixed; inset:0;
   display:none;
   overflow:auto;
-  padding-top: calc(var(--topbar-h) + env(safe-area-inset-top));
-  padding-bottom: env(safe-area-inset-bottom);
+  padding-top: 74px;
+  padding-bottom: env(safe-area-inset-bottom); /* 140px olib tashlandi */
 }
 
-   .wrap{
-  max-width: 520px;
-  margin: 0 auto;
-  padding: 8px 14px 80px;  /* 14 -> 8 (yoki 6 ham bo'ladi) */
-}
+    .wrap{
+      max-width: 520px;
+      margin: 0 auto;
+      padding: 14px 14px 80px; /* extra bottom room */
+    }
 
     /* ===== Language first-run screen ===== */
     #langScreen{
@@ -865,9 +864,6 @@
 
 
 
-#screenDuels, #screenRewards, #screenSupport{
-  margin-top: -6px; /* juda ozgina ko‘taradi */
-}
 
 
 
