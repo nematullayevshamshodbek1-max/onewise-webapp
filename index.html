@@ -867,11 +867,117 @@
 
 
 
+    /* APP konteynerini tuzatish */
+#app {
+  position: fixed; 
+  inset: 0;
+  display: none;
+  overflow-y: auto; /* Faqat vertikal skroll */
+  overflow-x: hidden;
+  /* padding-top olib tashlandi, chunki har bir screen o'zi boshqaradi */
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+.wrap {
+  max-width: 520px;
+  margin: 0 auto;
+  padding: 0; /* padding-topni screen ichida beramiz */
+}
+
+/* Har bir sahifa uchun standart yuqori padding */
+.screen { 
+  display: block; 
+  padding: 74px 14px 100px; /* 74px - topbar uchun, 100px - bottom nav uchun */
+  min-height: 100vh;
+}
+
+/* Home screen uchun maxsus: agar banner tepaga yopishib turishi kerak bo'lsa */
+#screenHome {
+  padding-top: 74px; 
+}
+
+.hidden { display: none !important; }
+
+/* Sahifalar ichidagi card stili (ixtiyoriy, agar ishlatmoqchi bo'lsangiz) */
+.content-card {
+  border: 1px solid var(--stroke);
+  background: var(--card);
+  border-radius: 18px;
+  padding: 20px;
+  margin-bottom: 15px;
+}
+
     
 
 
     
   </style>
+  <div id="app">
+    <div class="wrap">
+
+      <div id="screenHome" class="screen">
+          <div class="main-banner">...</div>
+          </div>
+
+      <div id="screenDuels" class="screen hidden">
+          <h1 class="h1">Bilimlar jangi</h1>
+          <div class="iq-duel-banner" style="margin-top:0;"> <div class="iq-overlay">
+                  <div class="iq-content-box">
+                      <h2>TEZKOR JANG</h2>
+                      <p>Hozir raqib qidirilmoqda...</p>
+                      <button class="join-battle-btn">QIDIRISH</button>
+                  </div>
+              </div>
+              <img src="https://images.pexels.com/photos/3165335/pexels-photo-3165335.jpeg?auto=compress&cs=tinysrgb&w=800" class="iq-bg-img">
+          </div>
+          
+          <div class="content-card" style="margin-top: 20px;">
+              <h3>Mening statistikam</h3>
+              <p class="p">G'alabalar: 12 | Mag'lubiyatlar: 3</p>
+          </div>
+      </div>
+
+      <div id="screenRewards" class="screen hidden">
+          <h1 class="h1">Mukofotlar</h1>
+          <div class="real-grid">
+              <div class="r-card" style="height: 160px;">
+                  <div class="r-overlay"></div>
+                  <div class="r-info">
+                      <h3>Kunlik bonus</h3>
+                      <button class="b-action" style="padding: 4px 10px; font-size: 10px;">OLISH</button>
+                  </div>
+              </div>
+              <div class="r-card" style="height: 160px;">
+                  <div class="r-overlay"></div>
+                  <div class="r-info">
+                      <h3>Haftalik keshbek</h3>
+                      <p>15% qaytariladi</p>
+                  </div>
+              </div>
+          </div>
+      </div>
+
+      <div id="screenSupport" class="screen hidden">
+          <h1 class="h1">Yordam markazi</h1>
+          <div class="real-support-card" style="margin-top: 0;">
+              <div style="z-index:2; position:relative;">
+                  <h4>Operator onlayn</h4>
+                  <p class="p">O'rtacha javob vaqti: 2 daqiqa</p>
+                  <button class="support-btn-style">Chatni boshlash</button>
+              </div>
+          </div>
+          
+          <div class="content-card">
+              <h3>Ko'p beriladigan savollar</h3>
+              <details style="margin-bottom: 10px;">
+                  <summary style="font-weight: 800; cursor:pointer;">Pul chiqarish qancha vaqt oladi?</summary>
+                  <p class="p" style="font-size: 12px; padding-top: 5px;">Odatda 5 daqiqadan 24 soatgacha.</p>
+              </details>
+          </div>
+      </div>
+
+    </div>
+</div>
 </head>
 
 <body>
