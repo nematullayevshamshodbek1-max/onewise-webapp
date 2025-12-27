@@ -1152,23 +1152,70 @@ if (this.y >= 44 && this.y <= 46) { // 38 ni 44 ga, 40 ni 46 ga o'zgartirdik
 
 
 <script>
+    // 1. Lug'at - barcha yozuvlarni shu yerga qo'shasiz
+    const translations = {
+        'uz': {
+            'welcome': 'Xush kelibsiz',
+            'balance': 'Hisobingiz',
+            'settings': 'Sozlamalar'
+        },
+        'ru': {
+            'welcome': 'Добро пожаловать',
+            'balance': 'Ваш баланс',
+            'settings': 'Настройки'
+        },
+        'en': {
+            'welcome': 'Welcome',
+            'balance': 'Your balance',
+            'settings': 'Settings'
+        }
+    };
+
+    // 2. Sahifa yuklanganda tilni tekshirish
+    window.onload = function() {
+        const savedLang = localStorage.getItem('selectedLanguage') || 'uz'; // Saqlangan til yoki default UZ
+        const flagMap = {
+            'uz': 'https://flagcdn.com/w40/uz.png',
+            'ru': 'https://flagcdn.com/w40/ru.png',
+            'en': 'https://flagcdn.com/w40/us.png'
+        };
+        
+        changeLang(savedLang, savedLang.toUpperCase(), flagMap[savedLang]);
+    };
+
     function toggleDropdown() {
         const dropdown = document.getElementById('lang-dropdown');
         dropdown.style.display = dropdown.style.display === 'none' ? 'block' : 'none';
     }
 
     function changeLang(code, label, flagUrl) {
-        // Ekranda yangilash
+        // UI yangilash
         document.getElementById('selected-lang').innerText = label;
         document.getElementById('selected-flag').src = flagUrl;
         
-        // Asosiy funksiyani chaqirish
+        // Tilni localStorage'da saqlash
+        localStorage.setItem('selectedLanguage', code);
+        
+        // Saytdagi yozuvlarni almashtirish
+        applyTranslations(code);
+
+        document.getElementById('lang-dropdown').style.display = 'none';
+    }
+
+    // 3. Matnlarni o'zgartiruvchi funksiya
+    function applyTranslations(code) {
+        const langData = translations[code];
+        
+        // Saytingizdagi elementlarni ID orqali o'zgartirish
+        // Masalan: HTMLda <h1 id="welcome-text"></h1> bo'lsa
+        if(document.getElementById('welcome-text')) {
+            document.getElementById('welcome-text').innerText = langData['welcome'];
+        }
+        
+        // Agar sizda maxsus changeAppLanguage funksiyasi bo'lsa, uni ham chaqiramiz
         if (typeof changeAppLanguage === "function") {
             changeAppLanguage(code);
         }
-        
-        // Menyuni yopish
-        document.getElementById('lang-dropdown').style.display = 'none';
     }
 
     // Tashqariga bosilganda yopish
