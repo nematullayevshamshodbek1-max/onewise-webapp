@@ -109,13 +109,13 @@
   display:none;
   overflow:auto;
   padding-top: 74px;
-  padding-bottom: calc(55px + env(safe-area-inset-bottom));
+  padding-bottom: calc(140px + env(safe-area-inset-bottom));
 }
 
     .wrap{
       max-width: 520px;
       margin: 0 auto;
-      padding: 14px 14px 0px; /* extra bottom room */
+      padding: 14px 14px 120px; /* extra bottom room */
     }
 
     /* ===== Language first-run screen ===== */
@@ -124,7 +124,7 @@
       display:none;
       align-items:center;
       justify-content:center;
-      padding:24px 24px 0;
+      padding:24px;
       z-index:1100;
     }
     .langBox{
@@ -236,7 +236,7 @@
   justify-content:space-between;
   gap:0;
   border:none;
-  background: transparrent;
+  background: transparent;
   border-radius:0;
   padding: 6px 6px;
   box-shadow:none;
@@ -433,7 +433,7 @@
   height: 180px;
   border-radius: 24px;
   overflow: hidden;
-  margin-bottom: 0px;
+  margin-bottom: 15px;
   border: 1px solid rgba(255,255,255,0.1);
 }
 .b-bg-img {
@@ -748,7 +748,8 @@
 /* Shaxsiy o'rin */
 .my-personal-rank {
     padding: 20px 15px;
-
+    display: flex;
+    justify-content: space-between;
     border-top: 1px solid rgba(255, 255, 255, 0.05);
 }
 
@@ -759,15 +760,6 @@
 
 
 
-
-
-
-
-
-
-
-
-    
     
     
 
@@ -931,19 +923,9 @@
     </div>
 </div>
 
-
-
-
-
-
-
-      
-
-
-
-  
-
 </div>
+
+
 
 
 
@@ -1116,3 +1098,6 @@ if (this.y >= 44 && this.y <= 46) { // 38 ni 44 ga, 40 ni 46 ga o'zgartirdik
   
 </body>
   </html>
+
+
+
