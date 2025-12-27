@@ -1145,6 +1145,46 @@ if (this.y >= 44 && this.y <= 46) { // 38 ni 44 ga, 40 ni 46 ga o'zgartirdik
 
 
 
+
+
+
+
+
+
+<script>
+    function toggleDropdown() {
+        const dropdown = document.getElementById('lang-dropdown');
+        dropdown.style.display = dropdown.style.display === 'none' ? 'block' : 'none';
+    }
+
+    function changeLang(code, label, flagUrl) {
+        // Ekranda yangilash
+        document.getElementById('selected-lang').innerText = label;
+        document.getElementById('selected-flag').src = flagUrl;
+        
+        // Asosiy funksiyani chaqirish
+        if (typeof changeAppLanguage === "function") {
+            changeAppLanguage(code);
+        }
+        
+        // Menyuni yopish
+        document.getElementById('lang-dropdown').style.display = 'none';
+    }
+
+    // Tashqariga bosilganda yopish
+    window.onclick = function(event) {
+        if (!event.target.closest('#language-selector')) {
+            document.getElementById('lang-dropdown').style.display = 'none';
+        }
+    }
+</script>
+
+
+
+  
+
+
+
   
 </body>
   </html>
