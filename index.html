@@ -930,6 +930,36 @@
 
 
 
+<div style="background: #151515; border-radius: 15px; padding: 20px; color: #fff; font-family: sans-serif; max-width: 500px; margin: 20px auto; border: 1px solid #252525;">
+    
+    <h2 style="font-size: 20px; margin-bottom: 12px; font-weight: 700;">1wise Bilim Bellashuvida Ishtirok eting va Yuting</h2>
+    
+    <p style="font-size: 14px; color: #b3b3b3; line-height: 1.6; margin-bottom: 20px;">
+        <strong style="color: #fff;">1wise</strong> - bu bilim va tezlik birlashtirilgan halol platforma. Bu yerda siz 1vs1 duellarda o'z bilimingizni sinaysiz va har bir g'alaba uchun ball to'playsiz.
+    </p>
+
+    <div id="more-info" style="display: none; font-size: 14px; color: #b3b3b3; line-height: 1.6; margin-bottom: 20px;">
+        <hr style="border: 0; border-top: 1px solid #333; margin: 15px 0;">
+        <p>🏆 <strong>Reyting tizimi:</strong> Bir kun davomida eng ko'p ball to'plagan ishtirokchilar birinchi o'rin va qimmatbaho sovrinlar egasiga aylanishadi.</p>
+        <p>🎁 <strong>Bonus:</strong> Yangi foydalanuvchilar uchun dastlabki <strong>7 kunlik duellar mutlaqo tekin!</strong></p>
+        <p>⚡ <strong>Shartlar:</strong> 8-kundan boshlab bellashuvlarda qatnashish uchun kichik miqdorda kirish to'lovi amal qiladi. Bu sovrin jamg'armasini shakllantirishga yordam beradi.</p>
+    </div>
+
+    <button onclick="toggleDetails()" id="detail-btn" style="width: 100%; background: #2c2c2c; border: none; padding: 12px; border-radius: 10px; color: #fff; font-size: 16px; font-weight: 600; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; transition: 0.3s;">
+        <span id="btn-text">Batafsil</span>
+        <svg id="arrow-icon" width="14" height="9" viewBox="0 0 14 9" fill="none" style="transition: 0.3s;">
+            <path d="M1 1.5L7 7.5L13 1.5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+    </button>
+</div>
+
+
+
+
+
+
+
+  
         
    
 <div style="display: flex; align-items: center; width: 100%; background: transparent; margin-top: 30px; padding: 0 5px;">
@@ -1225,6 +1255,40 @@ if (this.y >= 44 && this.y <= 46) { // 38 ni 44 ga, 40 ni 46 ga o'zgartirdik
         }
     }
 </script>
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+    function toggleDetails() {
+        const info = document.getElementById('more-info');
+        const btnText = document.getElementById('btn-text');
+        const arrow = document.getElementById('arrow-icon');
+        
+        // Agar yopiq bo'lsa ochish, ochiq bo'lsa yopish
+        if (info.style.display === "none") {
+            info.style.display = "block";
+            // Tilga qarab matnni o'zgartirish (agar ko'p tilli bo'lsa translations'ga qo'shish mumkin)
+            btnText.innerText = "Yopish"; 
+            arrow.style.transform = "rotate(180deg)";
+        } else {
+            info.style.display = "none";
+            btnText.innerText = "Batafsil";
+            arrow.style.transform = "rotate(0deg)";
+        }
+    }
+</script>
+
+
+
 
 
 
