@@ -932,26 +932,26 @@
 
         
    
-<div style="display: flex; align-items: center; background-color: #1a1a1a; padding: 10px 20px; border-radius: 8px; font-family: sans-serif;">
+<div style="display: flex; align-items: center; width: 100%; background: transparent; margin-top: 30px; padding: 0 5px;">
     
-    <div style="display: flex; align-items: center; cursor: pointer;">
-        <span style="color: #2F80ED; font-weight: 1000; font-size: 22px; margin-right: 5px;">1</span>
-        <span style="color: #fff; font-weight: 1000; font-size: 20px; letter-spacing: 1px;">WISE</span>
+    <div style="display: flex; align-items: center; white-space: nowrap; cursor: pointer;">
+        <span style="color: #2F80ED; font-weight: 1000; font-size: 22px;">1</span>
+        <span style="color: #fff; font-weight: 1000; font-size: 20px; margin-left: 1px;">WISE</span>
     </div>
 
-    <div style="flex-grow: 1; height: 25px; border-right: 1px solid rgba(255, 255, 255, 0.15); margin: 0 20px;"></div>
+    <div style="flex-grow: 1; height: 1px; background: rgba(255, 255, 255, 0.2); margin: 0 8px;"></div>
 
-    <div id="language-selector" style="position: relative; color: #fff; cursor: pointer;">
-        <div onclick="toggleDropdown()" style="display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 700; background: rgba(255,255,255,0.05); padding: 5px 10px; border-radius: 4px;">
+    <div id="language-selector" style="position: relative; color: #fff; cursor: pointer; white-space: nowrap;">
+        <div onclick="toggleDropdown()" style="display: flex; align-items: center; gap: 4px; font-size: 13px; font-weight: 700;">
             <span id="selected-flag">🇺🇿</span>
             <span id="selected-lang">UZ</span>
-            <span style="font-size: 10px; color: #888;">▼</span>
+            <span style="font-size: 10px; color: #2F80ED;">▼</span>
         </div>
 
-        <div id="lang-dropdown" style="display: none; position: absolute; top: 35px; right: 0; background: #2b2b2b; border-radius: 5px; box-shadow: 0 10px 25px rgba(0,0,0,0.5); z-index: 100; min-width: 80px; overflow: hidden;">
-            <div onclick="changeLang('uz', '🇺🇿 UZ')" style="padding: 10px; hover: background: #3d3d3d; display: flex; gap: 8px; font-size: 13px; border-bottom: 1px solid #333;">🇺🇿 UZ</div>
-            <div onclick="changeLang('ru', '🇷🇺 RU')" style="padding: 10px; hover: background: #3d3d3d; display: flex; gap: 8px; font-size: 13px; border-bottom: 1px solid #333;">🇷🇺 RU</div>
-            <div onclick="changeLang('en', '🇺🇸 EN')" style="padding: 10px; hover: background: #3d3d3d; display: flex; gap: 8px; font-size: 13px;">🇺🇸 EN</div>
+        <div id="lang-dropdown" style="display: none; position: absolute; top: 25px; right: 0; background: #1e1e1e; border-radius: 4px; z-index: 100; min-width: 80px; box-shadow: 0 4px 15px rgba(0,0,0,0.5);">
+            <div onclick="changeLang('uz', '🇺🇿 UZ')" style="padding: 10px; font-size: 13px; border-bottom: 1px solid #333;">🇺🇿 UZ</div>
+            <div onclick="changeLang('ru', '🇷🇺 RU')" style="padding: 10px; font-size: 13px; border-bottom: 1px solid #333;">🇷🇺 RU</div>
+            <div onclick="changeLang('en', '🇺🇸 EN')" style="padding: 10px; font-size: 13px;">🇺🇸 EN</div>
         </div>
     </div>
 </div>
