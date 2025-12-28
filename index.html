@@ -1486,74 +1486,54 @@ if (this.y >= 44 && this.y <= 46) { // 38 ni 44 ga, 40 ni 46 ga o'zgartirdik
 
 
 <script>
+// --- 1. TESKARI SANOQ (TIMER) QISMI ---
+const deadline = new Date("2026-01-05T00:00:00").getTime(); 
 
+function updateCountdown() {
+    const now = new Date().getTime();
+    const t = deadline - now;
+    const dEl = document.getElementById("days");
+    const hEl = document.getElementById("hours");
+    const mEl = document.getElementById("minutes");
 
+    if (t >= 0 && dEl && hEl && mEl) {
+        let days = Math.floor(t / (1000 * 60 * 60 * 24));
+        let hours = Math.floor((t % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        let mins = Math.floor((t % (1000 * 60 * 60)) / (1000 * 60));
 
-// 1. Sanoq kodi (faqat kodni o'zi, <script> tegisiz)
-    const deadline = new Date("2026-01-05T00:00:00").getTime(); 
-
-    function updateCountdown() {
-        const now = new Date().getTime();
-        const t = deadline - now;
-        const dEl = document.getElementById("days");
-        const hEl = document.getElementById("hours");
-        const mEl = document.getElementById("minutes");
-
-        if (t >= 0 && dEl && hEl && mEl) {
-            let days = Math.floor(t / (1000 * 60 * 60 * 24));
-            let hours = Math.floor((t % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            let mins = Math.floor((t % (1000 * 60 * 60)) / (1000 * 60));
-
-            dEl.innerText = days < 10 ? "0" + days : days;
-            hEl.innerText = hours < 10 ? "0" + hours : hours;
-            mEl.innerText = mins < 10 ? "0" + mins : mins;
-        }
+        dEl.innerText = days < 10 ? "0" + days : days;
+        hEl.innerText = hours < 10 ? "0" + hours : hours;
+        mEl.innerText = mins < 10 ? "0" + mins : mins;
     }
-    setInterval(updateCountdown, 1000);
-    updateCountdown();
-
-    // 2. Banner almashinuvi kodi (bu yerda sizning eski kodingiz davom etadi)
-    let slideIndex = 1;
-    // ... qolgan funksiyalar (showSlides va h.k.) ...
+}
+setInterval(updateCountdown, 1000);
+updateCountdown();
 
 
-
-
-
-
-
-
-  
+// --- 2. BANNER ALMASHISH (CAROUSEL) QISMI ---
 let slideIndex = 1;
-let timer = null;
-const container = document.getElementById('banner-container');
+let bannerTimer = null;
 
-// 1. Avtomatik aylanishni boshlash
-function startTimer() {
-    timer = setInterval(() => {
-        plusSlides(1);
+function startBannerTimer() {
+    bannerTimer = setInterval(() => {
+        moveSlides(1);
     }, 4000);
 }
 
-// 2. To'xtatish (Ushlab turganda)
-function stopTimer() {
-    clearInterval(timer);
-}
-
-function plusSlides(n) {
+function moveSlides(n) {
     showSlides(slideIndex += n);
-}
-
-function currentSlide(n) {
-    showSlides(slideIndex = n);
 }
 
 function showSlides(n) {
     let i;
     let slides = document.getElementsByClassName("mySlide");
     let dots = document.getElementsByClassName("dot");
+    
+    if (slides.length === 0) return; // Bannerlar bo'lmasa ishlamaydi
+    
     if (n > slides.length) {slideIndex = 1}    
     if (n < 1) {slideIndex = slides.length}
+    
     for (i = 0; i < slides.length; i++) {
         slides[i].style.display = "none";  
     }
@@ -1561,37 +1541,39 @@ function showSlides(n) {
         dots[i].style.opacity = "0.3";
         dots[i].style.width = "10px";
     }
+    
     slides[slideIndex-1].style.display = "block";  
-    dots[slideIndex-1].style.opacity = "1";
-    dots[slideIndex-1].style.width = "20px";
+    if (dots[slideIndex-1]) {
+        dots[slideIndex-1].style.opacity = "1";
+        dots[slideIndex-1].style.width = "20px";
+    }
 }
 
-// --- SURISH (SWIPE) FUNKSIYASI ---
+// Surish (Swipe) va ushlab turganda to'xtash
+const container = document.getElementById('banner-container');
 let touchstartX = 0;
 let touchendX = 0;
 
-container.addEventListener('touchstart', e => {
-    touchstartX = e.changedTouches[0].screenX;
-    stopTimer(); // Ushlab turganda to'xtaydi
-}, false);
+if (container) {
+    container.addEventListener('touchstart', e => {
+        touchstartX = e.changedTouches[0].screenX;
+        clearInterval(bannerTimer); // To'xtatish
+    }, false);
 
-container.addEventListener('touchend', e => {
-    touchendX = e.changedTouches[0].screenX;
-    handleGesture();
-    startTimer(); // Qo'yib yuborganda davom etadi
-}, false);
-
-container.addEventListener('mousedown', () => stopTimer()); // Kompyuterda sichqoncha bosilganda
-container.addEventListener('mouseup', () => startTimer());   // Qo'yib yuborganda
-
-function handleGesture() {
-    if (touchendX < touchstartX - 50) plusSlides(1);  // Chapga sursa - keyingi
-    if (touchendX > touchstartX + 50) plusSlides(-1); // O'ngga sursa - oldingi
+    container.addEventListener('touchend', e => {
+        touchendX = e.changedTouches[0].screenX;
+        if (touchendX < touchstartX - 50) moveSlides(1);
+        if (touchendX > touchstartX + 50) moveSlides(-1);
+        startBannerTimer(); // Davom ettirish
+    }, false);
+    
+    container.addEventListener('mousedown', () => clearInterval(bannerTimer));
+    container.addEventListener('mouseup', () => startBannerTimer());
 }
 
-// Boshlash
+// Ishga tushirish
 showSlides(slideIndex);
-startTimer();
+startBannerTimer();
 </script>
 
 
