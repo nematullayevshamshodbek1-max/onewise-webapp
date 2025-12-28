@@ -833,7 +833,7 @@
 
 
 
-<div id="banner-container" style="position: relative; width: 100%; height: 160px; border-radius: 20px; overflow: hidden; margin-bottom: 28px; background: #070b15; box-shadow: 0 8px 20px rgba(0,0,0,0.4);">
+<div id="banner-container" style="position: relative; width: 100%; height: 160px; border-radius: 20px; overflow: hidden; margin-bottom: 25px; background: #070b15; box-shadow: 0 8px 20px rgba(0,0,0,0.4);">
     
     <a href="BU_YERGA_OYNA_LINKINI_YOZASIZ" class="mySlide fade" style="display: block; text-decoration: none;">
         <div style="position: absolute; z-index: 2; padding: 20px; width: 100%; height: 100%; background: linear-gradient(90deg, rgba(7,11,21,0.9) 0%, rgba(7,11,21,0) 60%);">
@@ -1442,23 +1442,74 @@ if (this.y >= 44 && this.y <= 46) { // 38 ni 44 ga, 40 ni 46 ga o'zgartirdik
 
 
 <script>
-let slideIndex = 0;
-function showSlides() {
+let slideIndex = 1;
+let timer = null;
+const container = document.getElementById('banner-container');
+
+// 1. Avtomatik aylanishni boshlash
+function startTimer() {
+    timer = setInterval(() => {
+        plusSlides(1);
+    }, 4000);
+}
+
+// 2. To'xtatish (Ushlab turganda)
+function stopTimer() {
+    clearInterval(timer);
+}
+
+function plusSlides(n) {
+    showSlides(slideIndex += n);
+}
+
+function currentSlide(n) {
+    showSlides(slideIndex = n);
+}
+
+function showSlides(n) {
+    let i;
     let slides = document.getElementsByClassName("mySlide");
     let dots = document.getElementsByClassName("dot");
-    for (let i = 0; i < slides.length; i++) slides[i].style.display = "none";  
-    slideIndex++;
-    if (slideIndex > slides.length) slideIndex = 1;    
-    for (let i = 0; i < dots.length; i++) {
+    if (n > slides.length) {slideIndex = 1}    
+    if (n < 1) {slideIndex = slides.length}
+    for (i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";  
+    }
+    for (i = 0; i < dots.length; i++) {
         dots[i].style.opacity = "0.3";
         dots[i].style.width = "10px";
     }
     slides[slideIndex-1].style.display = "block";  
     dots[slideIndex-1].style.opacity = "1";
     dots[slideIndex-1].style.width = "20px";
-    setTimeout(showSlides, 4000);
 }
-showSlides();
+
+// --- SURISH (SWIPE) FUNKSIYASI ---
+let touchstartX = 0;
+let touchendX = 0;
+
+container.addEventListener('touchstart', e => {
+    touchstartX = e.changedTouches[0].screenX;
+    stopTimer(); // Ushlab turganda to'xtaydi
+}, false);
+
+container.addEventListener('touchend', e => {
+    touchendX = e.changedTouches[0].screenX;
+    handleGesture();
+    startTimer(); // Qo'yib yuborganda davom etadi
+}, false);
+
+container.addEventListener('mousedown', () => stopTimer()); // Kompyuterda sichqoncha bosilganda
+container.addEventListener('mouseup', () => startTimer());   // Qo'yib yuborganda
+
+function handleGesture() {
+    if (touchendX < touchstartX - 50) plusSlides(1);  // Chapga sursa - keyingi
+    if (touchendX > touchstartX + 50) plusSlides(-1); // O'ngga sursa - oldingi
+}
+
+// Boshlash
+showSlides(slideIndex);
+startTimer();
 </script>
 
 
