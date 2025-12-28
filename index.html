@@ -761,9 +761,22 @@
 
 
     
-    
+
 
   </style>
+
+  
+  <style>
+/* Silliq o'tish animatsiyasi */
+.fade {
+  animation-name: fade;
+  animation-duration: 1.5s;
+}
+@keyframes fade {
+  from {opacity: .4} 
+  to {opacity: 1}
+}
+</style>
 </head>
 
 <body>
@@ -827,39 +840,42 @@
 
 
 
-<div class="main-banner" style="position: relative; width: 100%; height: 160px; border-radius: 20px; overflow: hidden; margin-bottom: 20px;">
+<div id="banner-container" style="position: relative; width: 100%; height: 170px; border-radius: 22px; overflow: hidden; margin: 15px 0; background: #000; box-shadow: 0 10px 25px rgba(0,0,0,0.5);">
     
-    <div class="banner-slide active" style="display: block; position: absolute; width: 100%; height: 100%; transition: 0.5s;">
-        <div style="position: absolute; z-index: 2; padding: 15px; background: linear-gradient(90deg, rgba(26,28,34,0.95) 0%, rgba(26,28,34,0.4) 100%); width: 100%; height: 100%;">
-            <span style="background: #ffc107; color: #000; padding: 2px 8px; border-radius: 4px; font-size: 10px; font-weight: 800;">TOP 1 REYTING</span>
-            <h2 style="color: #fff; margin: 8px 0; font-size: 20px;">BUGUN KIM G'OLIB?</h2>
-            <p style="color: #ccc; font-size: 11px; line-height: 1.4; max-width: 180px;">00:00 holatiga ko'ra eng ko'p ball to'plang va sovrinni yuting!</p>
+    <div class="mySlide fade" style="display: block; position: relative; width: 100%; height: 100%;">
+        <div style="position: absolute; z-index: 2; padding: 20px; width: 100%; height: 100%; background: linear-gradient(90deg, rgba(7,11,21,0.9) 0%, rgba(7,11,21,0) 70%);">
+            <span style="background: linear-gradient(90deg, #ffb300, #ff8c00); color: #000; padding: 3px 10px; border-radius: 7px; font-size: 11px; font-weight: 900; text-transform: uppercase;">Top 1 Reyting</span>
+            <h2 style="color: #fff; margin: 10px 0 5px 0; font-size: 22px; font-weight: 900; letter-spacing: 0.5px;">BUGUN KIM G'OLIB?</h2>
+            <p style="color: #aeb4c2; font-size: 12px; margin: 0; max-width: 190px; line-height: 1.4;">Har kuni 00:00 da eng ko'p ball to'plang va sovrinni yuting!</p>
+            <button style="margin-top: 15px; background: #007bff; color: #fff; border: none; padding: 9px 22px; border-radius: 10px; font-size: 13px; font-weight: 800; cursor: pointer; box-shadow: 0 4px 15px rgba(0,123,255,0.3);">ISHTIROK ETISH</button>
         </div>
-        <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=600&q=80" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.6;">
+        <img src="https://images.unsplash.com/photo-1635324733260-bd3607f90a9a?q=80&w=600&auto=format&fit=crop" style="width: 100%; height: 100%; object-fit: cover; filter: brightness(0.8);">
     </div>
 
-    <div class="banner-slide" style="display: none; position: absolute; width: 100%; height: 100%; transition: 0.5s;">
-        <div style="position: absolute; z-index: 2; padding: 15px; background: linear-gradient(90deg, rgba(26,28,34,0.95) 0%, rgba(26,28,34,0.4) 100%); width: 100%; height: 100%;">
-            <span style="background: #007bff; color: #fff; padding: 2px 8px; border-radius: 4px; font-size: 10px; font-weight: 800;">KUNLIK SOVRIN</span>
-            <h2 style="color: #fff; margin: 8px 0; font-size: 20px;">YANGI KUN - YANGI YUTUQ</h2>
-            <p style="color: #ccc; font-size: 11px; line-height: 1.4; max-width: 180px;">Bugungi sovrin nimaligini bilasizmi? Uni yutib olish o'z qo'lingizda!</p>
+    <div class="mySlide fade" style="display: none; position: relative; width: 100%; height: 100%;">
+        <div style="position: absolute; z-index: 2; padding: 20px; width: 100%; height: 100%; background: linear-gradient(90deg, rgba(7,11,21,0.9) 0%, rgba(7,11,21,0) 70%);">
+            <span style="background: linear-gradient(90deg, #00c853, #b2ff59); color: #000; padding: 3px 10px; border-radius: 7px; font-size: 11px; font-weight: 900; text-transform: uppercase;">Kunlik Sovrin</span>
+            <h2 style="color: #fff; margin: 10px 0 5px 0; font-size: 22px; font-weight: 900; letter-spacing: 0.5px;">YANGI KUN - YANGI YUTUQ</h2>
+            <p style="color: #aeb4c2; font-size: 12px; margin: 0; max-width: 190px; line-height: 1.4;">Bugungi maxsus sovrin nimaligini bilasizmi? Uni yutish imkonini qo'ldan boy bermang!</p>
+            <button style="margin-top: 15px; background: #00c853; color: #fff; border: none; padding: 9px 22px; border-radius: 10px; font-size: 13px; font-weight: 800; cursor: pointer;">KO'RISH</button>
         </div>
-        <img src="https://images.unsplash.com/photo-1513151233558-d860c5398176?auto=format&fit=crop&w=600&q=80" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.6;">
+        <img src="https://images.unsplash.com/photo-1614850523296-d8c1af93d400?q=80&w=600&auto=format&fit=crop" style="width: 100%; height: 100%; object-fit: cover; filter: brightness(0.8);">
     </div>
 
-    <div class="banner-slide" style="display: none; position: absolute; width: 100%; height: 100%; transition: 0.5s;">
-        <div style="position: absolute; z-index: 2; padding: 15px; background: linear-gradient(90deg, rgba(26,28,34,0.95) 0%, rgba(26,28,34,0.4) 100%); width: 100%; height: 100%;">
-            <span style="background: #28a745; color: #fff; padding: 2px 8px; border-radius: 4px; font-size: 10px; font-weight: 800;">LIMITLAR</span>
-            <h2 style="color: #fff; margin: 8px 0; font-size: 20px;">KO'PROQ DO'ST - KO'PROQ IMKON</h2>
-            <p style="color: #ccc; font-size: 11px; line-height: 1.4; max-width: 180px;">Do'stlarni chaqiring va bepul duellar limitini oshiring!</p>
+    <div class="mySlide fade" style="display: none; position: relative; width: 100%; height: 100%;">
+        <div style="position: absolute; z-index: 2; padding: 20px; width: 100%; height: 100%; background: linear-gradient(90deg, rgba(7,11,21,0.9) 0%, rgba(7,11,21,0) 70%);">
+            <span style="background: linear-gradient(90deg, #007bff, #00d4ff); color: #fff; padding: 3px 10px; border-radius: 7px; font-size: 11px; font-weight: 900; text-transform: uppercase;">Limitlar</span>
+            <h2 style="color: #fff; margin: 10px 0 5px 0; font-size: 22px; font-weight: 900; letter-spacing: 0.5px;">DO'STLARNI CHAQIRING</h2>
+            <p style="color: #aeb4c2; font-size: 12px; margin: 0; max-width: 190px; line-height: 1.4;">Har bir taklif qilingan do'st uchun qo'shimcha duel limitlariga ega bo'ling!</p>
+            <button style="margin-top: 15px; background: #fff; color: #000; border: none; padding: 9px 22px; border-radius: 10px; font-size: 13px; font-weight: 800; cursor: pointer;">TAKLIF QILISH</button>
         </div>
-        <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=600&q=80" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.6;">
+        <img src="https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?q=80&w=600&auto=format&fit=crop" style="width: 100%; height: 100%; object-fit: cover; filter: brightness(0.8);">
     </div>
 
-    <div style="position: absolute; bottom: 12px; left: 15px; z-index: 3; display: flex; gap: 4px;">
-        <div class="dot active" style="width: 16px; height: 3px; background: #fff; border-radius: 2px; opacity: 1;"></div>
-        <div class="dot" style="width: 8px; height: 3px; background: #fff; border-radius: 2px; opacity: 0.3;"></div>
-        <div class="dot" style="width: 8px; height: 3px; background: #fff; border-radius: 2px; opacity: 0.3;"></div>
+    <div style="position: absolute; bottom: 15px; left: 20px; z-index: 3; display: flex; gap: 6px;">
+        <span class="dot" style="height: 4px; width: 25px; background-color: #bbb; border-radius: 10px; display: inline-block; transition: 0.6s ease; opacity: 0.3;"></span>
+        <span class="dot" style="height: 4px; width: 12px; background-color: #bbb; border-radius: 10px; display: inline-block; transition: 0.6s ease; opacity: 0.3;"></span>
+        <span class="dot" style="height: 4px; width: 12px; background-color: #bbb; border-radius: 10px; display: inline-block; transition: 0.6s ease; opacity: 0.3;"></span>
     </div>
 </div>
 
@@ -1433,6 +1449,34 @@ if (this.y >= 44 && this.y <= 46) { // 38 ni 44 ga, 40 ni 46 ga o'zgartirdik
 
 
   
+
+
+
+<script>
+let slideIndex = 0;
+showSlides();
+
+function showSlides() {
+  let i;
+  let slides = document.getElementsByClassName("mySlide");
+  let dots = document.getElementsByClassName("dot");
+  for (i = 0; i < slides.length; i++) {
+    slides[i].style.display = "none";  
+  }
+  slideIndex++;
+  if (slideIndex > slides.length) {slideIndex = 1}    
+  for (i = 0; i < dots.length; i++) {
+    dots[i].style.opacity = "0.3";
+    dots[i].style.width = "12px";
+    dots[i].style.backgroundColor = "#bbb";
+  }
+  slides[slideIndex-1].style.display = "block";  
+  dots[slideIndex-1].style.opacity = "1";
+  dots[slideIndex-1].style.width = "25px";
+  dots[slideIndex-1].style.backgroundColor = "#007bff";
+  setTimeout(showSlides, 4000); // 4 soniyada almashadi
+}
+</script>
 
 
 
