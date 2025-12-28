@@ -842,22 +842,27 @@
         <h2 style="color: #fff; margin: 5px 0 2px 0; font-size: 18px; font-weight: 900;">7 KUN BEPUL DUEL!</h2>
         <p style="color: #aeb4c2; font-size: 10px; margin-bottom: 8px; line-height: 1.2;">Bilimingizni sovrinlarga almashtiring. Bu imkoniyatni qo'ldan boy bermang!</p>
 
-        <div style="display: flex; gap: 8px; margin-top: 5px;">
-            <div style="text-align: center;">
-                <div id="days" style="background: rgba(255,255,255,0.15); color: #fff; padding: 4px 8px; border-radius: 6px; font-size: 14px; font-weight: 900; min-width: 25px;">07</div>
-                <div style="color: #8a8d97; font-size: 8px; margin-top: 2px;">KUN</div>
-            </div>
-            <div style="color: #fff; font-weight: 900; margin-top: 5px;">:</div>
-            <div style="text-align: center;">
-                <div id="hours" style="background: rgba(255,255,255,0.15); color: #fff; padding: 4px 8px; border-radius: 6px; font-size: 14px; font-weight: 900; min-width: 25px;">00</div>
-                <div style="color: #8a8d97; font-size: 8px; margin-top: 2px;">SOAT</div>
-            </div>
-            <div style="color: #fff; font-weight: 900; margin-top: 5px;">:</div>
-            <div style="text-align: center;">
-                <div id="minutes" style="background: rgba(255,255,255,0.15); color: #fff; padding: 4px 8px; border-radius: 6px; font-size: 14px; font-weight: 900; min-width: 25px;">00</div>
-                <div style="color: #8a8d97; font-size: 8px; margin-top: 2px;">DAQIQA</div>
-            </div>
-        </div>
+       <div style="display: flex; gap: 8px; margin-top: 5px;">
+    <div style="text-align: center;">
+        <div id="days" style="background: rgba(255,255,255,0.15); color: #fff; padding: 4px 8px; border-radius: 6px; font-size: 14px; font-weight: 900; min-width: 25px;">00</div>
+        <div style="color: #8a8d97; font-size: 8px; margin-top: 2px;">KUN</div>
+    </div>
+    <div style="color: #fff; font-weight: 900; margin-top: 5px;">:</div>
+    <div style="text-align: center;">
+        <div id="hours" style="background: rgba(255,255,255,0.15); color: #fff; padding: 4px 8px; border-radius: 6px; font-size: 14px; font-weight: 900; min-width: 25px;">00</div>
+        <div style="color: #8a8d97; font-size: 8px; margin-top: 2px;">SOAT</div>
+    </div>
+    <div style="color: #fff; font-weight: 900; margin-top: 5px;">:</div>
+    <div style="text-align: center;">
+        <div id="minutes" style="background: rgba(255,255,255,0.15); color: #fff; padding: 4px 8px; border-radius: 6px; font-size: 14px; font-weight: 900; min-width: 25px;">00</div>
+        <div style="color: #8a8d97; font-size: 8px; margin-top: 2px;">MIN</div>
+    </div>
+    <div style="color: #fff; font-weight: 900; margin-top: 5px;">:</div>
+    <div style="text-align: center;">
+        <div id="seconds" style="background: #ff0055; color: #fff; padding: 4px 8px; border-radius: 6px; font-size: 14px; font-weight: 900; min-width: 25px;">00</div>
+        <div style="color: #8a8d97; font-size: 8px; margin-top: 2px;">SON</div>
+    </div>
+</div>
     </div>
     
     <img src="https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=600&auto=format&fit=crop" style="width: 100%; height: 160px; object-fit: cover; filter: brightness(0.5) saturate(1.5);">
@@ -1486,27 +1491,37 @@ if (this.y >= 44 && this.y <= 46) { // 38 ni 44 ga, 40 ni 46 ga o'zgartirdik
 
 
 <script>
-// --- 1. TESKARI SANOQ (TIMER) QISMI ---
+// --- 1. YANGILANGAN SANOQ (KUN, SOAT, MIN, SON) ---
 const deadline = new Date("2026-01-05T00:00:00").getTime(); 
 
 function updateCountdown() {
     const now = new Date().getTime();
     const t = deadline - now;
+
     const dEl = document.getElementById("days");
     const hEl = document.getElementById("hours");
     const mEl = document.getElementById("minutes");
+    const sEl = document.getElementById("seconds");
 
-    if (t >= 0 && dEl && hEl && mEl) {
+    if (t >= 0) {
         let days = Math.floor(t / (1000 * 60 * 60 * 24));
         let hours = Math.floor((t % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
         let mins = Math.floor((t % (1000 * 60 * 60)) / (1000 * 60));
+        let secs = Math.floor((t % (1000 * 60)) / 1000); // Soniya qo'shildi
 
-        dEl.innerText = days < 10 ? "0" + days : days;
-        hEl.innerText = hours < 10 ? "0" + hours : hours;
-        mEl.innerText = mins < 10 ? "0" + mins : mins;
+        if(dEl) dEl.innerText = days < 10 ? "0" + days : days;
+        if(hEl) hEl.innerText = hours < 10 ? "0" + hours : hours;
+        if(mEl) mEl.innerText = mins < 10 ? "0" + mins : mins;
+        if(sEl) sEl.innerText = secs < 10 ? "0" + secs : secs;
+    } else {
+        // Vaqt tugasa hammasini 00 qilish
+        if(dEl) dEl.innerText = "00";
+        if(hEl) hEl.innerText = "00";
+        if(mEl) mEl.innerText = "00";
+        if(sEl) sEl.innerText = "00";
     }
 }
-setInterval(updateCountdown, 1000);
+setInterval(updateCountdown, 1000); // Endi har soniyada yangilanadi
 updateCountdown();
 
 
