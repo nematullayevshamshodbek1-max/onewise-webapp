@@ -1489,31 +1489,32 @@ if (this.y >= 44 && this.y <= 46) { // 38 ni 44 ga, 40 ni 46 ga o'zgartirdik
 
 
 
-// 1. SANOQ KODI (Siz yuborgan qism)
-    const deadline = new Date("2026-01-04T00:00:00").getTime(); 
+// 1. Sanoq kodi (faqat kodni o'zi, <script> tegisiz)
+    const deadline = new Date("2026-01-05T00:00:00").getTime(); 
 
     function updateCountdown() {
         const now = new Date().getTime();
         const t = deadline - now;
+        const dEl = document.getElementById("days");
+        const hEl = document.getElementById("hours");
+        const mEl = document.getElementById("minutes");
 
-        if (t >= 0) {
+        if (t >= 0 && dEl && hEl && mEl) {
             let days = Math.floor(t / (1000 * 60 * 60 * 24));
             let hours = Math.floor((t % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
             let mins = Math.floor((t % (1000 * 60 * 60)) / (1000 * 60));
 
-            if(document.getElementById("days")) {
-                document.getElementById("days").innerText = days < 10 ? "0" + days : days;
-                document.getElementById("hours").innerText = hours < 10 ? "0" + hours : hours;
-                document.getElementById("minutes").innerText = mins < 10 ? "0" + mins : mins;
-            }
+            dEl.innerText = days < 10 ? "0" + days : days;
+            hEl.innerText = hours < 10 ? "0" + hours : hours;
+            mEl.innerText = mins < 10 ? "0" + mins : mins;
         }
     }
     setInterval(updateCountdown, 1000);
     updateCountdown();
 
-    // 2. BANNER ALMASHISH KODI (Oldingi kodlar shu yerda davom etadi)
-    let slideIndex = 0;
-    // ... showSlides() va boshqa banner funksiyalari ...
+    // 2. Banner almashinuvi kodi (bu yerda sizning eski kodingiz davom etadi)
+    let slideIndex = 1;
+    // ... qolgan funksiyalar (showSlides va h.k.) ...
 
 
 
