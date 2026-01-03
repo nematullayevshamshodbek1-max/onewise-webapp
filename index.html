@@ -20,18 +20,14 @@
     }
 
     *{ box-sizing:border-box; }
-    body{
-      margin:0;
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      color:var(--text);
-      background:
-        radial-gradient(1100px 600px at 70% -5%, rgba(47,128,237,.16), transparent 55%),
-        radial-gradient(900px 520px at 10% 40%, rgba(106,75,255,.10), transparent 55%),
-        radial-gradient(900px 520px at 60% 110%, rgba(47,128,237,.08), transparent 60%),
-        var(--bg);
-      min-height:100vh;
-      overflow:hidden;
-    }
+    body {
+  margin: 0;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  color: var(--text);
+  background: var(--bg); /* Faqat shu qoladi, tepasidagi gradientlar o'chiriladi */
+  min-height: 100vh;
+  overflow: hidden;
+}
 
     /* ===== TOP BAR (ONE ONLY) ===== */
     .topbar{
