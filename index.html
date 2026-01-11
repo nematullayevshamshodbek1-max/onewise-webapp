@@ -1454,12 +1454,13 @@ if (this.y >= 44 && this.y <= 46) { // 38 ni 44 ga, 40 ni 46 ga o'zgartirdik
 
 
 
-  function changeLang(code, label, flagUrl) {
-    // 1. Tepada ko'rinib turgan bayroq va yozuvni o'zgartiradi
+ // 2. Tilni o'zgartirish funksiyasi
+function changeLang(code, label, flagUrl) {
+    // Bayroq va yozuvni o'zgartirish
     document.getElementById('selected-lang').innerText = label;
     document.getElementById('selected-flag').src = flagUrl;
     
-    // 2. Lug'atdan foydalanib hamma matnlarni o'zgartiradi
+    // Matnlarni almashtirish (Avtomatik)
     const langData = translations[code];
     document.querySelectorAll('.lang-txt').forEach(el => {
         const key = el.getAttribute('data-key');
@@ -1468,15 +1469,9 @@ if (this.y >= 44 && this.y <= 46) { // 38 ni 44 ga, 40 ni 46 ga o'zgartirdik
         }
     });
 
-    // 3. Pastki menyu matnlarini o'zgartirish (ID bo'yicha)
-    if(document.getElementById('navHomeTxt')) 
-        document.getElementById('navHomeTxt').innerText = langData['nav_home'];
-
-    // Dropdownni yopish
+    // Saqlash va yopish
+    localStorage.setItem('selectedLanguage', code);
     document.getElementById('lang-dropdown').style.display = 'none';
-    
-    // Tanlangan tilni eslab qolish
-    localStorage.setItem('myLang', code);
 }
 </script>
 
