@@ -843,18 +843,18 @@
 
 
     
-    <h2 style="color: #fff; margin: 5px 0 2px 0; font-size: 18px; font-weight: 900;">7 KUN BEPUL DUEL!</h2>
+    <h2 style="color: #fff; margin: 5px 0 2px 0; font-size: 18px; font-weight: 900;" class="lang-txt" data-key="banner_7day_title">7 KUN BEPUL DUEL!</h2>
         <p style="color: #aeb4c2; font-size: 10px; margin-bottom: 8px; line-height: 1.2;">Bilimingizni sovrinlarga almashtiring. Bu imkoniyatni qo'ldan boy bermang!</p>
 
        <div style="display: flex; gap: 8px; margin-top: 5px;">
     <div style="text-align: center;">
         <div id="days" style="background: rgba(255,255,255,0.15); color: #fff; padding: 4px 8px; border-radius: 6px; font-size: 14px; font-weight: 900; min-width: 25px;">00</div>
-        <div style="color: #8a8d97; font-size: 8px; margin-top: 2px;">KUN</div>
+        <div style="color: #8a8d97; font-size: 8px; margin-top: 2px;" class="lang-txt" data-key="days">KUN</div>
     </div>
     <div style="color: #fff; font-weight: 900; margin-top: 5px;">:</div>
     <div style="text-align: center;">
         <div id="hours" style="background: rgba(255,255,255,0.15); color: #fff; padding: 4px 8px; border-radius: 6px; font-size: 14px; font-weight: 900; min-width: 25px;">00</div>
-        <div style="color: #8a8d97; font-size: 8px; margin-top: 2px;">SOAT</div>
+        <div style="color: #8a8d97; font-size: 8px; margin-top: 2px;" class="lang-txt" data-key="hours">SOAT</div>
     </div>
     <div style="color: #fff; font-weight: 900; margin-top: 5px;">:</div>
     <div style="text-align: center;">
@@ -876,7 +876,7 @@
     <a href="BU_YERGA_OYNA_LINKINI_YOZASIZ" class="mySlide fade" style="display: block; text-decoration: none;">
   <div style="position: absolute; z-index: 2; padding: 15px; width: 60%; height: 100%;">
             
-    <h2 style="color: #fff; margin: 8px 0 4px 0; font-size: 20px; font-weight: 900;">BUGUN KIM G'OLIB?</h2>
+    <h2 style="color: #fff; margin: 8px 0 4px 0; font-size: 20px; font-weight: 900;" class="lang-txt" data-key="top_winners">BUGUN KIM G'OLIB?</h2>
             <p style="color: #aeb4c2; font-size: 11px; margin: 0; max-width: 180px; line-height: 1.3;">00:00 da eng ko'p ball to'plang va sovrinni yuting!</p>
         </div>
 <img src="https://i.postimg.cc/DyVqN5kK/kimmmmm.jpg" style="width: 100%; height: 160px; object-fit: cover; filter: brightness(0.5);">    </a>
@@ -1227,6 +1227,40 @@
 <div class="toast" id="toast"></div>
 
 <script>
+
+const translations = {
+    'uz': {
+        'banner_7day_title': '7 KUN BEPUL DUEL!',
+        'days': 'KUN',
+        'hours': 'SOAT',
+        'top_winners': 'BUGUNGI TOP G\'OLIBLAR',
+        'nav_home': 'Asosiy'
+    },
+    'ru': {
+        'banner_7day_title': '7 ДНЕЙ БЕСПЛАТНО!',
+        'days': 'ДНЕЙ',
+        'hours': 'ЧАС',
+        'top_winners': 'ТОП ПОБЕДИТЕЛИ',
+        'nav_home': 'Главная'
+    },
+    'en': {
+        'banner_7day_title': '7 DAYS FREE DUEL!',
+        'days': 'DAYS',
+        'hours': 'HOUR',
+        'top_winners': 'TOP WINNERS',
+        'nav_home': 'Home'
+    }
+};
+
+
+
+
+
+
+
+
+
+  
     const tg = window.Telegram?.WebApp;
     tg?.ready(); tg?.expand();
 
@@ -1413,42 +1447,37 @@ if (this.y >= 44 && this.y <= 46) { // 38 ni 44 ga, 40 ni 46 ga o'zgartirdik
         dropdown.style.display = dropdown.style.display === 'none' ? 'block' : 'none';
     }
 
-    function changeLang(code, label, flagUrl) {
-        // UI yangilash
-        document.getElementById('selected-lang').innerText = label;
-        document.getElementById('selected-flag').src = flagUrl;
-        
-        // Tilni localStorage'da saqlash
-        localStorage.setItem('selectedLanguage', code);
-        
-        // Saytdagi yozuvlarni almashtirish
-        applyTranslations(code);
 
-        document.getElementById('lang-dropdown').style.display = 'none';
-    }
 
-    // 3. Matnlarni o'zgartiruvchi funksiya
-    function applyTranslations(code) {
-        const langData = translations[code];
-        
-        // Saytingizdagi elementlarni ID orqali o'zgartirish
-        // Masalan: HTMLda <h1 id="welcome-text"></h1> bo'lsa
-        if(document.getElementById('welcome-text')) {
-            document.getElementById('welcome-text').innerText = langData['welcome'];
-        }
-        
-        // Agar sizda maxsus changeAppLanguage funksiyasi bo'lsa, uni ham chaqiramiz
-        if (typeof changeAppLanguage === "function") {
-            changeAppLanguage(code);
-        }
-    }
 
-    // Tashqariga bosilganda yopish
-    window.onclick = function(event) {
-        if (!event.target.closest('#language-selector')) {
-            document.getElementById('lang-dropdown').style.display = 'none';
+
+
+
+
+  function changeLang(code, label, flagUrl) {
+    // 1. Tepada ko'rinib turgan bayroq va yozuvni o'zgartiradi
+    document.getElementById('selected-lang').innerText = label;
+    document.getElementById('selected-flag').src = flagUrl;
+    
+    // 2. Lug'atdan foydalanib hamma matnlarni o'zgartiradi
+    const langData = translations[code];
+    document.querySelectorAll('.lang-txt').forEach(el => {
+        const key = el.getAttribute('data-key');
+        if (langData[key]) {
+            el.innerText = langData[key];
         }
-    }
+    });
+
+    // 3. Pastki menyu matnlarini o'zgartirish (ID bo'yicha)
+    if(document.getElementById('navHomeTxt')) 
+        document.getElementById('navHomeTxt').innerText = langData['nav_home'];
+
+    // Dropdownni yopish
+    document.getElementById('lang-dropdown').style.display = 'none';
+    
+    // Tanlangan tilni eslab qolish
+    localStorage.setItem('myLang', code);
+}
 </script>
 
 
