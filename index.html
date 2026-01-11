@@ -1453,51 +1453,43 @@ if (this.y >= 44 && this.y <= 46) { // 38 ni 44 ga, 40 ni 46 ga o'zgartirdik
 
 
 
-
-// 2. Tilni qo'llash funksiyasi (Hamma matnni o'zgartiradi)
-function applyTranslations(code) {
-    const langData = translations[code];
-    if (!langData) return;
-
-    // Klass orqali barcha oddiy matnlarni o'zgartirish
-    document.querySelectorAll('.lang-txt').forEach(el => {
-        const key = el.getAttribute('data-key');
-        if (langData[key]) {
-            el.innerText = langData[key];
-        }
-    });
-
-    // Pastki menyuni ID orqali o'zgartirish
-    if(document.getElementById('navHomeTxt')) document.getElementById('navHomeTxt').innerText = langData['nav_home'];
-    if(document.getElementById('navDuelTxt')) document.getElementById('navDuelTxt').innerText = langData['nav_duel'];
-}
-
-// 3. Tilni tanlash funksiyasi (Bosilganda ishlaydigan joyi)
 function changeLang(code, label, flagUrl) {
-    // UI ni yangilash (Bayroq va yozuv)
-    const selLang = document.getElementById('selected-lang');
-    const selFlag = document.getElementById('selected-flag');
-    
-    if(selLang) selLang.innerText = label;
-    if(selFlag) selFlag.src = flagUrl;
-    
-    // Matnlarni almashtirish
-    applyTranslations(code);
+        // UI yangilash
+        document.getElementById('selected-lang').innerText = label;
+        document.getElementById('selected-flag').src = flagUrl;
+        
+        // Tilni localStorage'da saqlash
+        localStorage.setItem('selectedLanguage', code);
+        
+        // Saytdagi yozuvlarni almashtirish
+        applyTranslations(code);
 
-    // Tanlovni saqlash
-    localStorage.setItem('selectedLanguage', code);
+        document.getElementById('lang-dropdown').style.display = 'none';
+    }
 
-    // Dropdownni yopish
-    const dropdown = document.getElementById('lang-dropdown');
-    if(dropdown) dropdown.style.display = 'none';
-}
+    // 3. Matnlarni o'zgartiruvchi funksiya
+    function applyTranslations(code) {
+        const langData = translations[code];
+        
+        // Saytingizdagi elementlarni ID orqali o'zgartirish
+        // Masalan: HTMLda <h1 id="welcome-text"></h1> bo'lsa
+        if(document.getElementById('welcome-text')) {
+            document.getElementById('welcome-text').innerText = langData['welcome'];
+        }
+        
+        // Agar sizda maxsus changeAppLanguage funksiyasi bo'lsa, uni ham chaqiramiz
+        if (typeof changeAppLanguage === "function") {
+            changeAppLanguage(code);
+        }
+    }
 
-// 4. Sahifa yuklanganda saqlangan tilni yoqish
-window.addEventListener('DOMContentLoaded', () => {
-    const savedLang = localStorage.getItem('selectedLanguage') || 'uz';
-    // Sahifa ochilganda avtomatik tarjima qilish
-    applyTranslations(savedLang);
-});
+    // Tashqariga bosilganda yopish
+    window.onclick = function(event) {
+        if (!event.target.closest('#language-selector')) {
+            document.getElementById('lang-dropdown').style.display = 'none';
+        }
+    }
+
 </script>
 
 
