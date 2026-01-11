@@ -1454,14 +1454,12 @@ if (this.y >= 44 && this.y <= 46) { // 38 ni 44 ga, 40 ni 46 ga o'zgartirdik
 
 
 
- // 2. Tilni o'zgartirish funksiyasi
-function changeLang(code, label, flagUrl) {
-    // Bayroq va yozuvni o'zgartirish
-    document.getElementById('selected-lang').innerText = label;
-    document.getElementById('selected-flag').src = flagUrl;
-    
-    // Matnlarni almashtirish (Avtomatik)
+// 2. Tilni qo'llash funksiyasi (Hamma matnni o'zgartiradi)
+function applyTranslations(code) {
     const langData = translations[code];
+    if (!langData) return;
+
+    // Klass orqali barcha oddiy matnlarni o'zgartirish
     document.querySelectorAll('.lang-txt').forEach(el => {
         const key = el.getAttribute('data-key');
         if (langData[key]) {
@@ -1469,10 +1467,37 @@ function changeLang(code, label, flagUrl) {
         }
     });
 
-    // Saqlash va yopish
-    localStorage.setItem('selectedLanguage', code);
-    document.getElementById('lang-dropdown').style.display = 'none';
+    // Pastki menyuni ID orqali o'zgartirish
+    if(document.getElementById('navHomeTxt')) document.getElementById('navHomeTxt').innerText = langData['nav_home'];
+    if(document.getElementById('navDuelTxt')) document.getElementById('navDuelTxt').innerText = langData['nav_duel'];
 }
+
+// 3. Tilni tanlash funksiyasi (Bosilganda ishlaydigan joyi)
+function changeLang(code, label, flagUrl) {
+    // UI ni yangilash (Bayroq va yozuv)
+    const selLang = document.getElementById('selected-lang');
+    const selFlag = document.getElementById('selected-flag');
+    
+    if(selLang) selLang.innerText = label;
+    if(selFlag) selFlag.src = flagUrl;
+    
+    // Matnlarni almashtirish
+    applyTranslations(code);
+
+    // Tanlovni saqlash
+    localStorage.setItem('selectedLanguage', code);
+
+    // Dropdownni yopish
+    const dropdown = document.getElementById('lang-dropdown');
+    if(dropdown) dropdown.style.display = 'none';
+}
+
+// 4. Sahifa yuklanganda saqlangan tilni yoqish
+window.addEventListener('DOMContentLoaded', () => {
+    const savedLang = localStorage.getItem('selectedLanguage') || 'uz';
+    // Sahifa ochilganda avtomatik tarjima qilish
+    applyTranslations(savedLang);
+});
 </script>
 
 
