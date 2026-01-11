@@ -1600,27 +1600,6 @@ startBannerTimer();
 
 
 
-  const translations = {
-    uz: {
-        friends_title: "Do'stlar",
-        friends_bonus: "Taklif uchun bonus",
-        prizes_title: "Yutuqlar",
-        prizes_text: "Ishonch bo'lsa mukofot sizni kutadi!",
-        // Yangi sahifalar uchun matnlarni shu yerga qo'shib borasiz
-    },
-    ru: {
-        friends_title: "Друзья",
-        friends_bonus: "Бонус за приглашение",
-        prizes_title: "Призы",
-        prizes_text: "Если есть доверие, награда ждет вас!",
-    },
-    en: {
-        friends_title: "Friends",
-        friends_bonus: "Referral bonus",
-        prizes_title: "Prizes",
-        prizes_text: "With trust, a reward awaits you!",
-    }
-};
 
 
 
@@ -1628,48 +1607,6 @@ startBannerTimer();
 
 
 
-
-  function changeLang(lang, label, flagSrc) {
-    // 1. Vizual qismni yangilash (Sizning kodingizga mos)
-    document.getElementById('selected-lang').innerText = label;
-    document.getElementById('selected-flag').src = flagSrc;
-    document.getElementById('lang-dropdown').style.display = 'none';
-
-    // 2. Tanlangan tilni brauzer xotirasiga saqlash
-    localStorage.setItem('selectedLanguage', lang);
-
-    // 3. Sahifadagi barcha matnlarni o'zgartirish
-    applyTranslations(lang);
-}
-
-function applyTranslations(lang) {
-    const elements = document.querySelectorAll('[data-lang-key]');
-    elements.forEach(el => {
-        const key = el.getAttribute('data-lang-key');
-        if (translations[lang] && translations[lang][key]) {
-            el.innerText = translations[lang][key];
-        }
-    });
-}
-
-// Sahifa yuklanganda oxirgi tanlangan tilni tekshirish
-window.onload = () => {
-    const savedLang = localStorage.getItem('selectedLanguage') || 'uz';
-    // Bayroq va yozuvni moslash (agar xotirada bo'lsa)
-    const labels = { 'uz': 'UZ', 'ru': 'RU', 'en': 'EN' };
-    const flags = { 
-        'uz': 'https://flagcdn.com/w40/uz.png', 
-        'ru': 'https://flagcdn.com/w40/ru.png', 
-        'en': 'https://flagcdn.com/w40/us.png' 
-    };
-    
-    changeLang(savedLang, labels[savedLang], flags[savedLang]);
-};
-
-function toggleDropdown() {
-    const dropdown = document.getElementById('lang-dropdown');
-    dropdown.style.display = dropdown.style.display === 'none' ? 'block' : 'none';
-}
 </script>
 
 
