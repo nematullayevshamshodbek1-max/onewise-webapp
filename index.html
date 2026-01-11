@@ -1228,29 +1228,7 @@
 
 <script>
 
-const translations = {
-    'uz': {
-        'banner_7day_title': '7 KUN BEPUL DUEL!',
-        'days': 'KUN',
-        'hours': 'SOAT',
-        'top_winners': 'BUGUNGI TOP G\'OLIBLAR',
-        'nav_home': 'Asosiy'
-    },
-    'ru': {
-        'banner_7day_title': '7 ДНЕЙ БЕСПЛАТНО!',
-        'days': 'ДНЕЙ',
-        'hours': 'ЧАС',
-        'top_winners': 'ТОП ПОБЕДИТЕЛИ',
-        'nav_home': 'Главная'
-    },
-    'en': {
-        'banner_7day_title': '7 DAYS FREE DUEL!',
-        'days': 'DAYS',
-        'hours': 'HOUR',
-        'top_winners': 'TOP WINNERS',
-        'nav_home': 'Home'
-    }
-};
+
 
 
 
@@ -1411,24 +1389,39 @@ if (this.y >= 44 && this.y <= 46) { // 38 ni 44 ga, 40 ni 46 ga o'zgartirdik
 
 
 <script>
-    // 1. Lug'at - barcha yozuvlarni shu yerga qo'shasiz
-    const translations = {
-        'uz': {
-            'welcome': 'Xush kelibsiz',
-            'balance': 'Hisobingiz',
-            'settings': 'Sozlamalar'
-        },
-        'ru': {
-            'welcome': 'Добро пожаловать',
-            'balance': 'Ваш баланс',
-            'settings': 'Настройки'
-        },
-        'en': {
-            'welcome': 'Welcome',
-            'balance': 'Your balance',
-            'settings': 'Settings'
-        }
-    };
+// 1. Lug'atni boyitilgan varianti
+const translations = {
+    'uz': {
+        'banner_7day_title': '7 KUN BEPUL DUEL!',
+        'nav_home': 'Asosiy',
+        'nav_duel': 'Duel',
+        'nav_rewards': 'Mukofotlar',
+        'nav_support': 'Yordam',
+        'days': 'KUN',
+        'hours': 'SOAT'
+    },
+    'ru': {
+        'banner_7day_title': '7 ДНЕЙ БЕСПЛАТНО!',
+        'nav_home': 'Главная',
+        'nav_duel': 'Дуэль',
+        'nav_rewards': 'Награды',
+        'nav_support': 'Поддержка',
+        'days': 'ДНЕЙ',
+        'hours': 'ЧАС'
+    },
+    'en': {
+        'banner_7day_title': '7 DAYS FREE!',
+        'nav_home': 'Home',
+        'nav_duel': 'Duel',
+        'nav_rewards': 'Rewards',
+        'nav_support': 'Support',
+        'days': 'DAYS',
+        'hours': 'HOUR'
+    }
+};
+  
+
+  
 
     // 2. Sahifa yuklanganda tilni tekshirish
     window.onload = function() {
@@ -1450,46 +1443,54 @@ if (this.y >= 44 && this.y <= 46) { // 38 ni 44 ga, 40 ni 46 ga o'zgartirdik
 
 
 
+  
 
 
 
+// 2. Tilni qo'llash funksiyasi (Hamma matnni o'zgartiradi)
+function applyTranslations(code) {
+    const langData = translations[code];
+    if (!langData) return;
+
+    // Klass orqali barcha oddiy matnlarni o'zgartirish
+    document.querySelectorAll('.lang-txt').forEach(el => {
+        const key = el.getAttribute('data-key');
+        if (langData[key]) {
+            el.innerText = langData[key];
+        }
+    });
+
+    // Pastki menyuni ID orqali o'zgartirish
+    if(document.getElementById('navHomeTxt')) document.getElementById('navHomeTxt').innerText = langData['nav_home'];
+    if(document.getElementById('navDuelTxt')) document.getElementById('navDuelTxt').innerText = langData['nav_duel'];
+}
+
+// 3. Tilni tanlash funksiyasi (Bosilganda ishlaydigan joyi)
 function changeLang(code, label, flagUrl) {
-        // UI yangilash
-        document.getElementById('selected-lang').innerText = label;
-        document.getElementById('selected-flag').src = flagUrl;
-        
-        // Tilni localStorage'da saqlash
-        localStorage.setItem('selectedLanguage', code);
-        
-        // Saytdagi yozuvlarni almashtirish
-        applyTranslations(code);
+    // UI ni yangilash (Bayroq va yozuv)
+    const selLang = document.getElementById('selected-lang');
+    const selFlag = document.getElementById('selected-flag');
+    
+    if(selLang) selLang.innerText = label;
+    if(selFlag) selFlag.src = flagUrl;
+    
+    // Matnlarni almashtirish
+    applyTranslations(code);
 
-        document.getElementById('lang-dropdown').style.display = 'none';
-    }
+    // Tanlovni saqlash
+    localStorage.setItem('selectedLanguage', code);
 
-    // 3. Matnlarni o'zgartiruvchi funksiya
-    function applyTranslations(code) {
-        const langData = translations[code];
-        
-        // Saytingizdagi elementlarni ID orqali o'zgartirish
-        // Masalan: HTMLda <h1 id="welcome-text"></h1> bo'lsa
-        if(document.getElementById('welcome-text')) {
-            document.getElementById('welcome-text').innerText = langData['welcome'];
-        }
-        
-        // Agar sizda maxsus changeAppLanguage funksiyasi bo'lsa, uni ham chaqiramiz
-        if (typeof changeAppLanguage === "function") {
-            changeAppLanguage(code);
-        }
-    }
+    // Dropdownni yopish
+    const dropdown = document.getElementById('lang-dropdown');
+    if(dropdown) dropdown.style.display = 'none';
+}
 
-    // Tashqariga bosilganda yopish
-    window.onclick = function(event) {
-        if (!event.target.closest('#language-selector')) {
-            document.getElementById('lang-dropdown').style.display = 'none';
-        }
-    }
-
+// 4. Sahifa yuklanganda saqlangan tilni yoqish
+window.addEventListener('DOMContentLoaded', () => {
+    const savedLang = localStorage.getItem('selectedLanguage') || 'uz';
+    // Sahifa ochilganda avtomatik tarjima qilish
+    applyTranslations(savedLang);
+});
 </script>
 
 
