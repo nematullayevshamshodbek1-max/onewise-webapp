@@ -828,97 +828,42 @@
 
 
 
-
-
-  /* Asosiy fon va joylashuv */
-.duel-container {
-    /* Rasmga o'xshash yorqin ko'k fonni yaratish */
-    background: radial-gradient(circle at center, #001f40 0%, #000a1a 100%);
-    position: relative;
-    width: 100%; /* Kengligini o'zingiz xohlagancha sozlang */
-    max-width: 600px; /* Maksimal kenglik, rasmga o'xshatish uchun */
-    height: 350px; /* Balandlikni sozlang */
-    border-radius: 15px; /* Yumaloq burchaklar */
-    overflow: hidden; /* Fon elementlarini cheklash uchun */
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); /* Chuqurlik effekti */
-    margin: 50px auto; /* Sahifada markazga joylashtirish */
+body {
+    /* Fon rasmini o'rnatish */
+    background-image: url('https://i.postimg.cc/PJN3PRXT/1vs111.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    margin: 0;
+    height: 100vh;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
-/* Yulduzlar va chaqmoqlar effektini taqlid qilish uchun (murakkabroq bo'lishi mumkin) */
-/* Oddiyroq yorug'lik effekti */
-.duel-container::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 200%;
-    height: 200%;
-    background: radial-gradient(circle, rgba(0, 150, 255, 0.2) 0%, transparent 70%);
-    transform: translate(-50%, -50%);
-    z-index: 1;
-}
-
-.duel-content {
-    position: relative;
-    z-index: 2; /* Matn va tugmani fon ustiga chiqarish */
-    text-align: center;
-    padding: 20px;
-}
-
-/* "1 vs 1" matni */
-.vs-text {
-    font-size: 30px;
+.start-duel-btn {
+    margin-top: 200px; /* Rasmning "VS" yozuvidan pastga tushirish uchun */
+    padding: 12px 35px;
+    font-size: 20px;
     font-weight: bold;
-    color: #ffd700; /* Oltin rang */
-    display: block;
-    margin-bottom: -10px; /* DUEL matniga yaqinlashtirish */
-    text-shadow: 0 0 10px rgba(255, 215, 0, 0.8); /* Yorug'lik effekti */
-}
-
-/* "DUEL" sarlavhasi */
-.duel-title {
-    font-size: 80px;
-    font-weight: 900; /* Juda qalin */
-    color: #ffd700; /* Oltin rang */
-    margin: 0;
-    line-height: 1;
-    /* Oltin/3D effekti */
-    text-shadow: 
-        0 1px 0 #8d6e1b, 
-        0 2px 0 #7b6217, 
-        0 3px 0 #695614, 
-        0 4px 0 #574a11, 
-        0 0 20px rgba(255, 215, 0, 0.7); /* Yorqinlik */
-    font-family: Arial, sans-serif; /* Rasmga o'xshash qalin shrift tanlang */
-}
-
-/* "START DUEL" tugmasi */
-.start-button {
-    background: linear-gradient(to top, #00994d, #00cc66); /* Yashil gradyan */
     color: white;
-    font-size: 24px;
-    font-weight: bold;
-    padding: 15px 40px;
-    border: none;
-    border-radius: 30px; /* Katta yumaloq burchaklar */
+    background: linear-gradient(to right, #1e3a8a, #3b82f6); /* To'q ko'k gradient */
+    border: 2px solid #ffffff;
+    border-radius: 8px;
     cursor: pointer;
-    margin-top: 30px;
-    transition: background 0.3s, transform 0.1s;
-    box-shadow: 0 5px 15px rgba(0, 204, 102, 0.6), 0 2px 4px rgba(0, 0, 0, 0.4); /* Yorqin soya */
     text-transform: uppercase;
+    transition: 0.3s;
+    box-shadow: 0 0 15px rgba(59, 130, 246, 0.5);
 }
 
-.start-button:hover {
-    background: linear-gradient(to top, #00aa55, #00e673);
-    box-shadow: 0 7px 20px rgba(0, 204, 102, 0.8);
+.start-duel-btn:hover {
+    background: linear-gradient(to right, #3b82f6, #1e3a8a);
+    transform: scale(1.05);
+    box-shadow: 0 0 25px rgba(59, 130, 246, 0.8);
 }
 
-.start-button:active {
-    transform: scale(0.98); /* Bosish effekti */
-}
+
 </style>
 </head>
 
@@ -1370,13 +1315,11 @@
 </div>
 
 
-        <div class="duel-container">
-    <div class="duel-content">
-        <span class="vs-text">1 vs 1</span>
-        <h1 class="duel-title">DUEL</h1>
-        <button class="start-button">START DUEL</button>
-    </div>
+
+        <div class="main-container">
+    <button class="start-duel-btn" onclick="startDuel()">Duelni boshlash</button>
 </div>
+     
       
       </div>
 
@@ -1841,15 +1784,14 @@ function tabClick(el) {
 
 
 
-  
+
+
+  function startDuel() {
+    console.log("Duel boshlandi!");
+    // Bu yerga duel boshlanganda bajariladigan kodni yozasiz
+}
 </script>
-<script>
-    document.querySelector('.start-button').addEventListener('click', function() {
-        alert("Duel boshlandi! (Haqiqiy o'yin logikasi shu yerga yoziladi)");
-        // Sahifani o'zgartirish yoki boshqa funksiyalarni chaqirish
-        // window.location.href = 'duel_sahifasi.html';
-    });
-</script>
+
 
 
   
