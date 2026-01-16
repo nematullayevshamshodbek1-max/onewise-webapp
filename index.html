@@ -900,7 +900,7 @@ opacity: .95;
     font-family: sans-serif;
 }
 
-.mini-tab2.active {
+.mini-tab2.active2 {
     background-color: #007bff;
     color: #fff;
 }
@@ -912,8 +912,8 @@ opacity: .95;
 }
 
 /* Faol tugma yonidagi chiziqni berkitish */
-.mini-tab2.active + .mini-divider2, 
-.mini-divider2:has(+ .mini-tab2.active) {
+.mini-tab2.active2 + .mini-divider2, 
+.mini-divider2:has(+ .mini-tab2.active2) {
     opacity: 0;
 }
 
@@ -1375,7 +1375,7 @@ opacity: .95;
 
 
 <div class="mini-tab-wrapper2">
-    <div class="mini-tab active2" onclick="tabClick2(this)">Ommabop</div>
+    <div class="mini-tab2 active2" onclick="tabClick2(this)">Ommabop</div>
     <div class="mini-divider2"></div>
     <div class="mini-tab2" onclick="tabClick2(this)">Trenddagi</div>
     <div class="mini-divider2"></div>
@@ -1849,8 +1849,8 @@ function tabClick(el) {
 
 function tabClick2(el) {
     const parent = el.parentElement;
-    parent.querySelectorAll('.mini-tab2').forEach(t => t.classList.remove('active'));
-    el.classList.add('active');
+    parent.querySelectorAll('.mini-tab2').forEach(t => t.classList.remove('active2'));
+    el.classList.add('active2');
 }
 
 
