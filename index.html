@@ -770,6 +770,56 @@
 <style>
 .fade { animation: fadeAnim 1s ease-in-out; }
 @keyframes fadeAnim { from {opacity: 0.5} to {opacity: 1} }
+
+
+
+
+
+
+
+
+
+
+
+
+
+  .custom-tab-menu {
+    background-color: #121212; /* To'q fon */
+    display: inline-flex;
+    align-items: center;
+    padding: 6px;
+    border-radius: 40px;
+    font-family: 'Arial', sans-serif;
+}
+
+.tab-btn {
+    color: #a0a0a0;
+    padding: 10px 22px;
+    border-radius: 30px;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 500;
+    transition: 0.3s;
+    user-select: none;
+}
+
+.tab-btn.active {
+    background-color: #007bff; /* Ko'k rang */
+    color: #ffffff;
+}
+
+.tab-line {
+    width: 1px;
+    height: 18px;
+    background-color: #333;
+    margin: 0 4px;
+}
+
+/* Faol tugma yonidagi chiziqni yo'qotish (chiroyli ko'rinish uchun) */
+.tab-btn.active + .tab-line, 
+.tab-line:has(+ .tab-btn.active) {
+    opacity: 0;
+}
 </style>
 </head>
 
@@ -1208,7 +1258,15 @@
 
 
       
-      <div id="screenDuels" class="screen hidden"><div class="card"><div class="h1">Duellar</div><p class="p">Bu yerga sening duel sahifangni joylaymiz.</p></div></div>
+      <div id="screenDuels" class="screen hidden"><div class="card"><div class="h1">Duellar</div><div class="custom-tab-menu">
+    <div class="tab-btn active" onclick="switchTab(this)">Duellar</div>
+    <div class="tab-line"></div>
+    <div class="tab-btn" onclick="switchTab(this)">Reyting</div>
+    <div class="tab-line"></div>
+    <div class="tab-btn" onclick="switchTab(this)">Mukofot</div>
+    <div class="tab-line"></div>
+    <div class="tab-btn" onclick="switchTab(this)">Referal</div>
+</div></div></div>
       <div id="screenRewards" class="screen hidden"><div class="card"><div class="h1">Mukofotlar</div><p class="p">Bu yerga sening mukofot UI’ngni joylaymiz.</p></div></div>
       <div id="screenSupport" class="screen hidden"><div class="card"><div class="h1">Support</div><p class="p">Keyin operator / chat ulaymiz.</p></div></div>
     </div>
@@ -1652,6 +1710,22 @@ startBannerTimer();
 
 
 
+
+
+
+
+
+  function switchTab(selectedElement) {
+    // Barcha tugmalardan 'active' klassini olib tashlash
+    const allTabs = document.querySelectorAll('.tab-btn');
+    allTabs.forEach(tab => tab.classList.remove('active'));
+
+    // Faqat bosilgan tugmaga 'active' klassini qo'shish
+    selectedElement.classList.add('active');
+    
+    // Bu yerga kerakli bo'limni yuklash kodini yozishingiz mumkin
+    console.log("Tanlandi:", selectedElement.innerText);
+}
 </script>
 
 
