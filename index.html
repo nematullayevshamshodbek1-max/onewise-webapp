@@ -874,6 +874,49 @@ opacity: .95;
   opacity: .9;
 }
 
+
+
+
+
+  .mini-tab-wrapper2 {
+    display: flex;
+    align-items: center;
+    background: #111; /* To'q fon */
+    padding: 3px;
+    border-radius: 25px;
+    width: 100%; /* Konteynerga teng bo'ladi */
+    box-sizing: border-box;
+}
+.mini-tab2 {
+    flex: 1; /* Hamma tugmalar bir xil kenglikda bo'ladi */
+    color: #999;
+    text-align: center;
+    font-size: 13px; /* Kichikroq shrift */
+    padding: 6px 0;
+    cursor: pointer;
+    border-radius: 20px;
+    transition: 0.2s;
+    user-select: none;
+    font-family: sans-serif;
+}
+
+.mini-tab2.active {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.mini-divider2 {
+    width: 1px;
+    height: 12px;
+    background-color: #333;
+}
+
+/* Faol tugma yonidagi chiziqni berkitish */
+.mini-tab2.active + .mini-divider2, 
+.mini-divider2:has(+ .mini-tab2.active) {
+    opacity: 0;
+}
+
 </style>
 </head>
 
@@ -1326,9 +1369,21 @@ opacity: .95;
 
 
 <div class="duel-container">
-    <img src="https://i.postimg.cc/PJN3PRXT/1vs111.jpg" alt="Duel Background" class="duel-bg-img">
-    
-<button class="duel-start-btn" onclick="startDuel()">BOSHLASH</button></div>
+    <img src="https://i.postimg.cc/PJN3PRXT/1vs111.jpg" alt="Duel Background" class="duel-bg-img"> 
+    <button class="duel-start-btn" onclick="startDuel()">BOSHLASH</button>
+</div>
+
+
+<div class="mini-tab-wrapper2">
+    <div class="mini-tab active2" onclick="tabClick2(this)">Ommabop</div>
+    <div class="mini-divider2"></div>
+    <div class="mini-tab2" onclick="tabClick2(this)">Trenddagi</div>
+    <div class="mini-divider2"></div>
+    <div class="mini-tab2" onclick="tabClick2(this)">Yangi</div>
+    <div class="mini-divider2"></div>
+    <div class="mini-tab2" onclick="tabClick2(this)">Tezkor</div>
+</div>
+        
       
       </div>
 
@@ -1792,7 +1847,11 @@ function tabClick(el) {
 
 
 
-
+function tabClick2(el) {
+    const parent = el.parentElement;
+    parent.querySelectorAll('.mini-tab2').forEach(t => t.classList.remove('active'));
+    el.classList.add('active');
+}
 
 
 
