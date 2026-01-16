@@ -783,41 +783,43 @@
 
 
 
-  .custom-tab-menu {
-    background-color: #121212; /* To'q fon */
-    display: inline-flex;
+ .mini-tab-wrapper {
+    display: flex;
     align-items: center;
-    padding: 6px;
-    border-radius: 40px;
-    font-family: 'Arial', sans-serif;
+    background: #111; /* To'q fon */
+    padding: 3px;
+    border-radius: 25px;
+    width: 100%; /* Konteynerga teng bo'ladi */
+    box-sizing: border-box;
 }
 
-.tab-btn {
-    color: #a0a0a0;
-    padding: 10px 20px;
-    border-radius: 30px;
+.mini-tab {
+    flex: 1; /* Hamma tugmalar bir xil kenglikda bo'ladi */
+    color: #999;
+    text-align: center;
+    font-size: 13px; /* Kichikroq shrift */
+    padding: 6px 0;
     cursor: pointer;
-    font-size: 15px;
-    font-weight: 500;
-    transition: 0.3s;
+    border-radius: 20px;
+    transition: 0.2s;
     user-select: none;
+    font-family: sans-serif;
 }
 
-.tab-btn.active {
-    background-color: #007bff; /* Ko'k rang */
-    color: #ffffff;
+.mini-tab.active {
+    background-color: #007bff;
+    color: #fff;
 }
 
-.tab-line {
+.mini-divider {
     width: 1px;
-    height: 18px;
+    height: 12px;
     background-color: #333;
-    margin: 0 4px;
 }
 
-/* Faol tugma yonidagi chiziqni yo'qotish (chiroyli ko'rinish uchun) */
-.tab-btn.active + .tab-line, 
-.tab-line:has(+ .tab-btn.active) {
+/* Faol tugma yonidagi chiziqni berkitish */
+.mini-tab.active + .mini-divider, 
+.mini-divider:has(+ .mini-tab.active) {
     opacity: 0;
 }
 </style>
