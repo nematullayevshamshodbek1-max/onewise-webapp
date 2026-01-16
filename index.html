@@ -828,41 +828,44 @@
 
 
 
-body {
-    /* Fon rasmini o'rnatish */
-    background-image: url('https://i.postimg.cc/PJN3PRXT/1vs111.jpg');
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
-    margin: 0;
-    height: 100vh;
+.duel-container {
+    position: relative;
+    width: 100%;
+    max-width: 800px; /* Rasmingiz o'lchamiga qarab o'zgartiring */
+    margin: 0 auto;
     display: flex;
-    flex-direction: column;
     justify-content: center;
-    align-items: center;
 }
 
-.start-duel-btn {
-    margin-top: 200px; /* Rasmning "VS" yozuvidan pastga tushirish uchun */
-    padding: 12px 35px;
+.duel-bg-img {
+    width: 100%;
+    display: block;
+    border-radius: 10px; /* Chetlarini biroz yumaloq qilish (ixtiyoriy) */
+}
+
+.duel-start-btn {
+    position: absolute;
+    bottom: 20px; /* Rasmni pastki qismidan masofa */
+    padding: 15px 40px;
     font-size: 20px;
     font-weight: bold;
     color: white;
-    background: linear-gradient(to right, #1e3a8a, #3b82f6); /* To'q ko'k gradient */
-    border: 2px solid #ffffff;
-    border-radius: 8px;
+    background: linear-gradient(45deg, #d32f2f, #f44336); /* Duelga mos qizil rang */
+    border: none;
+    border-radius: 50px;
     cursor: pointer;
-    text-transform: uppercase;
-    transition: 0.3s;
-    box-shadow: 0 0 15px rgba(59, 130, 246, 0.5);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    transition: transform 0.2s, background 0.3s;
 }
 
-.start-duel-btn:hover {
-    background: linear-gradient(to right, #3b82f6, #1e3a8a);
-    transform: scale(1.05);
-    box-shadow: 0 0 25px rgba(59, 130, 246, 0.8);
+.duel-start-btn:hover {
+    transform: scale(1.1);
+    background: linear-gradient(45deg, #f44336, #ff5252);
 }
 
+.duel-start-btn:active {
+    transform: scale(0.95);
+}
 
 </style>
 </head>
@@ -1315,11 +1318,11 @@ body {
 </div>
 
 
-
-        <div class="main-container">
-    <button class="start-duel-btn" onclick="startDuel()">Duelni boshlash</button>
+<div class="duel-container">
+    <img src="https://i.postimg.cc/PJN3PRXT/1vs111.jpg" alt="Duel Background" class="duel-bg-img">
+    
+    <button class="duel-start-btn" onclick="startDuel()">Duelni boshlash</button>
 </div>
-     
       
       </div>
 
@@ -1786,10 +1789,7 @@ function tabClick(el) {
 
 
 
-  function startDuel() {
-    console.log("Duel boshlandi!");
-    // Bu yerga duel boshlanganda bajariladigan kodni yozasiz
-}
+
 </script>
 
 
