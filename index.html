@@ -1024,7 +1024,7 @@ opacity: .95;
 
 /* Shaxsiy o'rin */
 .my-personal-rank2 {
-    padding: 10px 15px;
+    padding: 15px 15px;
     display: flex;
     justify-content: space-between;
 }
@@ -1033,6 +1033,35 @@ opacity: .95;
 .blue-txt2 { color: var(--blue); font-weight: 900; }
 .my-score-view2 { font-size: 12px; font-weight: 900; color: #fff; }
 
+
+
+
+
+
+
+
+
+
+
+
+.v-all2 {
+    font-size: 10px;
+    font-weight: 800;
+    color: var(--blue);
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: 0.2s;
+}
+
+.v-all2:hover {
+    opacity: 0.8;
+}
+
+/* Silliq ochilish effekti uchun (ixtiyoriy) */
+.extra-rows {
+    border-top: 1px solid rgba(255, 255, 255, 0.03);
+}
+  
 </style>
 </head>
 
@@ -1540,6 +1569,26 @@ opacity: .95;
         </div>
     </div>
 
+
+<div class="extra-rows" style="display: none;">
+            <div class="v-row2">
+                <div class="v-rank2">4</div>
+                <div class="v-avatar-wrapper2">
+                    <img src="https://randomuser.me/api/portraits/men/10.jpg" class="v-avatar2" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                    <div class="v-placeholder2">A</div>
+                </div>
+                <div class="v-name2">Ali_Coder</div>
+                <div class="v-score2">15 <small>PTS</small></div>
+            </div>
+            </div>
+    </div>
+
+    <div class="v-toggle-container" style="padding: 0 15px;">
+        <span id="toggleBtn" class="v-all2" onclick="toggleVipList()">...BARCHASI</span>
+    </div>
+
+
+  
     <div class="my-personal-rank2">
         <span class="my-rank-label2">SIZNING O'RNINGIZ: <span class="blue-txt2">#1,452</span></span>
         <div class="my-score-view2">10 PTS</div>
@@ -2017,6 +2066,22 @@ function tabClick2(el) {
 
 
 
+
+
+
+
+  function toggleVipList() {
+    const extraRows = document.querySelector('.extra-rows');
+    const btn = document.getElementById('toggleBtn');
+
+    if (extraRows.style.display === "none") {
+        extraRows.style.display = "block";
+        btn.innerHTML = "...QISQARTIRISH";
+    } else {
+        extraRows.style.display = "none";
+        btn.innerHTML = "...BARCHASI";
+    }
+}
 </script>
 
 
