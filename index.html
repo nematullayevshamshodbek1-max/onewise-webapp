@@ -1597,11 +1597,193 @@ opacity: .95;
 
 
 
+
+
+
+<div style="border-radius: 15px; padding-top: 20px; color: #fff; font-family: sans-serif; max-width: 500px; margin: 20px auto;">
+    
+    <h2 style="font-size: 20px; margin-bottom: 12px; font-weight: 700;">1wise Bilim Bellashuvida Ishtirok eting va Yuting</h2>
+    
+    <p style="font-size: 14px; color: #b3b3b3; line-height: 1.6; margin-bottom: 20px;">
+        <strong style="color: #fff;">1wise</strong> - bu bilim va tezlik birlashtirilgan halol platforma. Bu yerda siz 1vs1 duellarda o'z bilimingizni sinaysiz va har bir g'alaba uchun ball to'playsiz.
+    </p>
+
+    <div id="more-info2" style="display: none; font-size: 14px; color: #b3b3b3; line-height: 1.6; margin-bottom: 20px;">
+        <hr style="border: 0; border-top: 1px solid #333; margin: 15px 0;">
+        <p>🏆 <strong>Reyting tizimi:</strong> Bir kun davomida eng ko'p ball to'plagan ishtirokchilar birinchi o'rin va qimmatbaho sovrinlar egasiga aylanishadi.</p>
+        <p>🎁 <strong>Bonus:</strong> Yangi foydalanuvchilar uchun dastlabki <strong>7 kunlik duellar mutlaqo tekin!</strong></p>
+        <p>⚡ <strong>Shartlar:</strong> 8-kundan boshlab bellashuvlarda qatnashish uchun kichik miqdorda kirish to'lovi amal qiladi. Bu sovrin jamg'armasini shakllantirishga yordam beradi.</p>
+    </div>
+
+    <button onclick="toggleDetails2()" id="detail-btn2" style="width: 100%; background: #2c2c2c; border: none; padding: 12px; border-radius: 10px; color: #fff; font-size: 16px; font-weight: 600; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; transition: 0.3s;">
+        <span id="btn-text2">Batafsil</span>
+        <svg id="arrow-icon2" width="14" height="9" viewBox="0 0 14 9" fill="none" style="transition: 0.3s;">
+            <path d="M1 1.5L7 7.5L13 1.5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+    </button>
+</div>
+
+
+
+
+
+
+
+  
+        
+   
+<div style="display: flex; align-items: center; width: 100%; background: transparent; margin-top: 30px; padding: 0;">
+    
+    <div style="display: flex; align-items: center; white-space: nowrap; cursor: pointer;">
+        <span style="color: #2F80ED; font-weight: 1000; font-size: 22px;">1</span>
+        <span style="color: #fff; font-weight: 1000; font-size: 20px; margin-left: 1px;">WISE</span>
+    </div>
+
+    <div style="flex-grow: 1; height: 1px; background: rgba(255, 255, 255, 0.2); margin: 0 8px;"></div>
+
+   <div id="language-selector" style="position: relative; cursor: pointer; user-select: none;">
+        <div onclick="toggleDropdown()" style="display: flex; align-items: center; gap: 8px; background: #2c2c2c; padding: 6px 12px; border-radius: 12px; min-width: 75px; justify-content: space-between;">
+            <div style="display: flex; align-items: center; gap: 8px;">
+                <img id="selected-flag" src="https://flagcdn.com/w40/uz.png" style="width: 20px; height: 20px; border-radius: 50%; object-fit: cover;">
+                <span id="selected-lang" style="color: #fff; font-size: 14px; font-weight: 600;">UZ</span>
+            </div>
+            <svg width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M1 1.5L6 6.5L11 1.5" stroke="#999" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+        </div>
+
+        <div id="lang-dropdown" style="display: none; position: absolute; top: 40px; right: 0; background: #2c2c2c; border-radius: 12px; z-index: 100; min-width: 100px; overflow: hidden; box-shadow: 0 10px 20px rgba(0,0,0,0.4);">
+            <div onclick="changeLang('uz', 'UZ', 'https://flagcdn.com/w40/uz.png')" style="padding: 12px; color: #fff; font-size: 14px; border-bottom: 1px solid #3d3d3d; display: flex; align-items: center; gap: 8px;">
+                <img src="https://flagcdn.com/w40/uz.png" style="width: 18px; height: 18px; border-radius: 50%;"> UZ
+            </div>
+            <div onclick="changeLang('ru', 'RU', 'https://flagcdn.com/w40/ru.png')" style="padding: 12px; color: #fff; font-size: 14px; border-bottom: 1px solid #3d3d3d; display: flex; align-items: center; gap: 8px;">
+                <img src="https://flagcdn.com/w40/ru.png" style="width: 18px; height: 18px; border-radius: 50%;"> RU
+            </div>
+            <div onclick="changeLang('en', 'EN', 'https://flagcdn.com/w40/us.png')" style="padding: 12px; color: #fff; font-size: 14px; display: flex; align-items: center; gap: 8px;">
+                <img src="https://flagcdn.com/w40/us.png" style="width: 18px; height: 18px; border-radius: 50%;"> EN
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+<div class="real-support-card" style="
+    position: relative; 
+    background: #1a1c22; 
+    border-radius: 20px; 
+    padding: 16px 14px; 
+    overflow: hidden; 
+    border: 1px solid rgba(255,255,255,0.05); 
+    margin: 15px 0; 
+    min-height: 140px; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+">
+    
+    <div style="
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        width: 100%;
+        height: 100%;
+        background: radial-gradient(circle at 100% 100%, rgba(0, 123, 255, 0.5) 0%, rgba(0, 123, 255, 0.2) 30%, rgba(0, 123, 255, 0) 70%);
+        z-index: 1;
+        pointer-events: none;
+    "></div>
+
+    <div style="position: relative; z-index: 3; width: 65%; text-align: left;">
+        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
+            <h4 class="lang-txt" data-key="support_title" style="margin: 0; font-size: 18px; font-weight: 800; color: #fff;">Поддержка</h4>
+            <div style="background: #007bff; color: #fff; padding: 1px 10px; border-radius: 6px; font-size: 12px; font-weight: 800;">24/7</div>
+        </div>
+        
+        <p class="lang-txt" data-key="support_desc" style="color: #8a8d97; font-size: 12px; margin: 0 0 15px 0; line-height: 1.3; max-width: 170px;">
+            Свяжитесь с нами, если у вас остались вопросы
+        </p>        
+
+        <button class="lang-txt" data-key="support_btn" style="
+            background: #007bff; 
+            color: #fff; 
+            border: none; 
+            width: 115%; 
+            padding: 11px; 
+            border-radius: 12px; 
+            font-size: 14px; 
+            font-weight: 800; 
+            cursor: pointer;
+            position: relative;
+            z-index: 4;
+            box-shadow: 0 4px 12px rgba(0, 123, 255, 0.2);
+        ">
+            Обратиться в поддержку
+        </button>
+    </div>
+
+    <img src="https://i.postimg.cc/BvydPftS/pngwing-com.png" style="
+        position: absolute; 
+        right: -5px; 
+        bottom: -10px; 
+        height: 105%; 
+        width: auto; 
+        z-index: 2; 
+        pointer-events: none; 
+        object-fit: contain;
+    " alt="Operator"> 
+</div>
+
+
+
+
+<div style="display: flex; justify-content: flex-start; gap: 8px; margin-top: 28px; background: transparent;">
+    
+    <a href="#" style="text-decoration: none;">
+        <div style="width: 34px; height: 34px; background-color: #24A1DE; border-radius: 8px; display: flex; align-items: center; justify-content: center;">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="#FFFFFF" xmlns="http://www.w3.org/2000/svg">
+                <path d="M19.92 5.94L16.43 20.35c-.22.99-.81 1.24-1.64.77l-5.31-3.91-2.56 2.46c-.28.28-.52.52-.8.52l.38-5.38L16.3 5.39c.43-.38-.09-.59-.66-.21L5.85 11.3 1.13 9.82c-1.03-.32-1.05-1.03.21-1.53l18.45-7.11c.85-.31 1.6.21 1.33 1.34z" fill="#FFFFFF"/>
+            </svg>
+        </div>
+    </a>
+    
+    <a href="#" style="text-decoration: none;">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/e/e7/Instagram_logo_2016.svg" width="34" height="34" style="display: block; border-radius: 8px;">
+    </a>
+
+</div>
+
+
+        
+  
+
+  
+<div style="display: flex; justify-content: space-between; align-items: center; width: 100%; margin-top: 20px; padding: 0px 0; background: transparent;">
+    
+    <div style="font-size: 11px; font-weight: 700; color: rgba(255,255,255,0.3); letter-spacing: 0.5px;">
+        © 2025 1WISE.
+    </div>
+
+    <div style="font-size: 20px; font-weight: 900; color: rgba(255,255,255,0.15); font-family: sans-serif;">
+        18+
+    </div>
+</div>
+
+        
+
       
       
       </div>
 
 
+
+
+
+      
       
       <div id="screenRewards" class="screen hidden"><div class="card"><div class="h1">Mukofotlar</div><p class="p">Bu yerga sening mukofot UI’ngni joylaymiz.</p></div></div>
       <div id="screenSupport" class="screen hidden"><div class="card"><div class="h1">Support</div><p class="p">Keyin operator / chat ulaymiz.</p></div></div>
@@ -2089,6 +2271,31 @@ function tabClick2(el) {
 
 
 
+
+
+
+<script>
+    function toggleDetails2() {
+        const info = document.getElementById('more-info2');
+        const btnText = document.getElementById('btn-text2');
+        const arrow = document.getElementById('arrow-icon2');
+        
+        // Agar yopiq bo'lsa ochish, ochiq bo'lsa yopish
+        if (info.style.display === "none") {
+            info.style.display = "block";
+            // Tilga qarab matnni o'zgartirish (agar ko'p tilli bo'lsa translations'ga qo'shish mumkin)
+            btnText.innerText = "Yopish"; 
+            arrow.style.transform = "rotate(180deg)";
+        } else {
+            info.style.display = "none";
+            btnText.innerText = "Batafsil";
+            arrow.style.transform = "rotate(0deg)";
+        }
+    }
+</script>
+
+
+  
   
 </body>
   </html>
