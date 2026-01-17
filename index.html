@@ -2111,7 +2111,7 @@ const translations2 = {
 
     // 2. Sahifa yuklanganda tilni tekshirish
     window.onload = function() {
-        const savedLang2 = localStorage.getItem('selectedLanguage') || 'uz'; // Saqlangan til yoki default UZ
+        const savedLang = localStorage.getItem('selectedLanguage') || 'uz'; // Saqlangan til yoki default UZ
         const flagMap = {
             'uz': 'https://flagcdn.com/w40/uz.png',
             'ru': 'https://flagcdn.com/w40/ru.png',
@@ -2167,8 +2167,8 @@ function changeLang2(code, label, flagUrl) {
     localStorage.setItem('selectedLanguage', code);
 
     // Dropdownni yopish
-    const dropdown = document.getElementById('lang-dropdown2');
-    if(dropdown) dropdown.style.display = 'none';
+    const dropdown2 = document.getElementById('lang-dropdown2');
+    if(dropdown2) dropdown2.style.display = 'none';
 }
 
 // 4. Sahifa yuklanganda saqlangan tilni yoqish
