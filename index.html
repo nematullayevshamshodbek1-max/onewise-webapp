@@ -2102,7 +2102,25 @@ window.addEventListener('DOMContentLoaded', () => {
         }
     }
 </script>
-
+<script>
+    function toggleDetails2() {
+        const info2 = document.getElementById('more-info2');
+        const btnText2 = document.getElementById('btn-text2');
+        const arrow2 = document.getElementById('arrow-icon2');
+        
+        // Agar yopiq bo'lsa ochish, ochiq bo'lsa yopish
+        if (info2.style.display === "none") {
+            info2.style.display = "block";
+            // Tilga qarab matnni o'zgartirish (agar ko'p tilli bo'lsa translations'ga qo'shish mumkin)
+            btnText2.innerText = "Yopish"; 
+            arrow2.style.transform = "rotate(180deg)";
+        } else {
+            info2.style.display = "none";
+            btnText2.innerText = "Batafsil";
+            arrow2.style.transform = "rotate(0deg)";
+        }
+    }
+</script>
 
 
 
@@ -2290,25 +2308,7 @@ function tabClick2(el) {
 
 
 
-<script>
-    function toggleDetails2() {
-        const info = document.getElementById('more-info2');
-        const btnText = document.getElementById('btn-text2');
-        const arrow = document.getElementById('arrow-icon2');
-        
-        // Agar yopiq bo'lsa ochish, ochiq bo'lsa yopish
-        if (info.style.display === "none") {
-            info.style.display = "block";
-            // Tilga qarab matnni o'zgartirish (agar ko'p tilli bo'lsa translations'ga qo'shish mumkin)
-            btnText.innerText = "Yopish"; 
-            arrow.style.transform = "rotate(180deg)";
-        } else {
-            info.style.display = "none";
-            btnText.innerText = "Batafsil";
-            arrow.style.transform = "rotate(0deg)";
-        }
-    }
-</script>
+
 
 
   
