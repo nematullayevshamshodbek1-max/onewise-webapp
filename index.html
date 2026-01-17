@@ -1539,7 +1539,7 @@ opacity: .95;
 
         
    <div class="vip-stats-container2">
-    <div class="vip-list-clean2" id="vipList">
+    <div class="vip-list-clean2" id="vipList2">
         <div class="v-row2 gold2">
             <div class="v-rank2">1</div>
             <div class="v-avatar-wrapper2">
@@ -1570,7 +1570,7 @@ opacity: .95;
             <div class="v-score2">20 <small>PTS</small></div>
         </div>
 
-        <div class="extra-rows" style="display: none;">
+        <div class="extra-rows2" style="display: none;">
             <div class="v-row2">
                 <div class="v-rank2">4</div>
                 <div class="v-avatar-wrapper2">
@@ -1583,8 +1583,8 @@ opacity: .95;
             </div>
     </div>
 
-    <div class="v-toggle-container" style="padding: 0 15px;">
-        <span id="toggleBtn" class="v-all2" onclick="toggleVipList()">...BARCHASI</span>
+    <div class="v-toggle-container2" style="padding: 0 15px;">
+        <span id="toggleBtn2" class="v-all2" onclick="toggleVipList2()">...BARCHASI</span>
     </div>
 
     <div class="my-personal-rank2">
@@ -1641,25 +1641,25 @@ opacity: .95;
 
     <div style="flex-grow: 1; height: 1px; background: rgba(255, 255, 255, 0.2); margin: 0 8px;"></div>
 
-   <div id="language-selector" style="position: relative; cursor: pointer; user-select: none;">
-        <div onclick="toggleDropdown()" style="display: flex; align-items: center; gap: 8px; background: #2c2c2c; padding: 6px 12px; border-radius: 12px; min-width: 75px; justify-content: space-between;">
+   <div id="language-selector2" style="position: relative; cursor: pointer; user-select: none;">
+        <div onclick="toggleDropdown2()" style="display: flex; align-items: center; gap: 8px; background: #2c2c2c; padding: 6px 12px; border-radius: 12px; min-width: 75px; justify-content: space-between;">
             <div style="display: flex; align-items: center; gap: 8px;">
-                <img id="selected-flag" src="https://flagcdn.com/w40/uz.png" style="width: 20px; height: 20px; border-radius: 50%; object-fit: cover;">
-                <span id="selected-lang" style="color: #fff; font-size: 14px; font-weight: 600;">UZ</span>
+                <img id="selected-flag2" src="https://flagcdn.com/w40/uz.png" style="width: 20px; height: 20px; border-radius: 50%; object-fit: cover;">
+                <span id="selected-lang2" style="color: #fff; font-size: 14px; font-weight: 600;">UZ</span>
             </div>
             <svg width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M1 1.5L6 6.5L11 1.5" stroke="#999" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
         </div>
 
-        <div id="lang-dropdown" style="display: none; position: absolute; top: 40px; right: 0; background: #2c2c2c; border-radius: 12px; z-index: 100; min-width: 100px; overflow: hidden; box-shadow: 0 10px 20px rgba(0,0,0,0.4);">
-            <div onclick="changeLang('uz', 'UZ', 'https://flagcdn.com/w40/uz.png')" style="padding: 12px; color: #fff; font-size: 14px; border-bottom: 1px solid #3d3d3d; display: flex; align-items: center; gap: 8px;">
+        <div id="lang-dropdown2" style="display: none; position: absolute; top: 40px; right: 0; background: #2c2c2c; border-radius: 12px; z-index: 100; min-width: 100px; overflow: hidden; box-shadow: 0 10px 20px rgba(0,0,0,0.4);">
+            <div onclick="changeLang2('uz', 'UZ', 'https://flagcdn.com/w40/uz.png')" style="padding: 12px; color: #fff; font-size: 14px; border-bottom: 1px solid #3d3d3d; display: flex; align-items: center; gap: 8px;">
                 <img src="https://flagcdn.com/w40/uz.png" style="width: 18px; height: 18px; border-radius: 50%;"> UZ
             </div>
-            <div onclick="changeLang('ru', 'RU', 'https://flagcdn.com/w40/ru.png')" style="padding: 12px; color: #fff; font-size: 14px; border-bottom: 1px solid #3d3d3d; display: flex; align-items: center; gap: 8px;">
+            <div onclick="changeLang2('ru', 'RU', 'https://flagcdn.com/w40/ru.png')" style="padding: 12px; color: #fff; font-size: 14px; border-bottom: 1px solid #3d3d3d; display: flex; align-items: center; gap: 8px;">
                 <img src="https://flagcdn.com/w40/ru.png" style="width: 18px; height: 18px; border-radius: 50%;"> RU
             </div>
-            <div onclick="changeLang('en', 'EN', 'https://flagcdn.com/w40/us.png')" style="padding: 12px; color: #fff; font-size: 14px; display: flex; align-items: center; gap: 8px;">
+            <div onclick="changeLang2('en', 'EN', 'https://flagcdn.com/w40/us.png')" style="padding: 12px; color: #fff; font-size: 14px; display: flex; align-items: center; gap: 8px;">
                 <img src="https://flagcdn.com/w40/us.png" style="width: 18px; height: 18px; border-radius: 50%;"> EN
             </div>
         </div>
@@ -2264,6 +2264,22 @@ function tabClick2(el) {
         btn.innerHTML = "...QISQARTIRISH";
     } else {
         extraRows.style.display = "none";
+        btn.innerHTML = "...BARCHASI";
+    }
+}
+
+
+
+
+    function toggleVipList2() {
+    const extraRows2 = document.querySelector('.extra-rows2');
+    const btn = document.getElementById('toggleBtn2');
+
+    if (extraRows2.style.display === "none") {
+        extraRows2.style.display = "block";
+        btn.innerHTML = "...QISQARTIRISH";
+    } else {
+        extraRows2.style.display = "none";
         btn.innerHTML = "...BARCHASI";
     }
 }
