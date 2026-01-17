@@ -2112,7 +2112,7 @@ const translations2 = {
     // 2. Sahifa yuklanganda tilni tekshirish
     window.onload = function() {
         const savedLang2 = localStorage.getItem('selectedLanguage') || 'uz'; // Saqlangan til yoki default UZ
-        const flagMap2 = {
+        const flagMap = {
             'uz': 'https://flagcdn.com/w40/uz.png',
             'ru': 'https://flagcdn.com/w40/ru.png',
             'en': 'https://flagcdn.com/w40/us.png'
@@ -2154,11 +2154,11 @@ function applyTranslations2(code) {
 // 3. Tilni tanlash funksiyasi (Bosilganda ishlaydigan joyi)
 function changeLang2(code, label, flagUrl) {
     // UI ni yangilash (Bayroq va yozuv)
-    const selLang = document.getElementById('selected-lang2');
-    const selFlag = document.getElementById('selected-flag2');
+    const selLang2 = document.getElementById('selected-lang2');
+    const selFlag2 = document.getElementById('selected-flag2');
     
-    if(selLang) selLang.innerText = label;
-    if(selFlag) selFlag.src = flagUrl;
+    if(selLang2) selLang2.innerText = label;
+    if(selFlag2) selFlag2.src = flagUrl;
     
     // Matnlarni almashtirish
     applyTranslations2(code);
