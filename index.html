@@ -2091,6 +2091,33 @@ window.addEventListener('DOMContentLoaded', () => {
     if (selLang) selLang.innerText = savedLang.toUpperCase();
     if (selFlag) selFlag.src = flagMap[savedLang];
 });
+
+
+
+
+
+  // Boshqa oynada til o'zgarganda bu oyna ham o'zini yangilaydi
+window.addEventListener('storage', (event) => {
+    if (event.key === 'selectedLanguage') {
+        const newLang = event.newValue || 'uz';
+        
+        // 1. Matnlarni tarjima qilish
+        applyTranslations(newLang);
+        
+        // 2. Selektorni (bayroq va yozuvni) yangilash
+        const flagMap = {
+            'uz': 'https://flagcdn.com/w40/uz.png',
+            'ru': 'https://flagcdn.com/w40/ru.png',
+            'en': 'https://flagcdn.com/w40/us.png'
+        };
+
+        const selLang = document.getElementById('selected-lang');
+        const selFlag = document.getElementById('selected-flag');
+        
+        if (selLang) selLang.innerText = newLang.toUpperCase();
+        if (selFlag) selFlag.src = flagMap[newLang];
+    }
+});
 </script>
   <script>
 // 1. Lug'atni boyitilgan varianti
@@ -2220,6 +2247,33 @@ window.addEventListener('DOMContentLoaded', () => {
     
     if (selLang2) selLang2.innerText = savedLang.toUpperCase();
     if (selFlag2) selFlag2.src = flagMap[savedLang];
+});
+
+
+
+
+
+    // Boshqa oynada til o'zgarganda Duel oynasi ham o'zini yangilaydi
+window.addEventListener('storage', (event) => {
+    if (event.key === 'selectedLanguage') {
+        const newLang = event.newValue || 'uz';
+        
+        // 1. Duel matnlarini tarjima qilish
+        applyTranslations2(newLang);
+        
+        // 2. Duel selektorini (2-raqamlilar) yangilash
+        const flagMap = {
+            'uz': 'https://flagcdn.com/w40/uz.png',
+            'ru': 'https://flagcdn.com/w40/ru.png',
+            'en': 'https://flagcdn.com/w40/us.png'
+        };
+
+        const selLang2 = document.getElementById('selected-lang2');
+        const selFlag2 = document.getElementById('selected-flag2');
+        
+        if (selLang2) selLang2.innerText = newLang.toUpperCase();
+        if (selFlag2) selFlag2.src = flagMap[newLang];
+    }
 });
 </script>
 
