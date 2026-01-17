@@ -1642,7 +1642,7 @@ opacity: .95;
     <div style="flex-grow: 1; height: 1px; background: rgba(255, 255, 255, 0.2); margin: 0 8px;"></div>
 
    <div id="language-selector2" style="position: relative; cursor: pointer; user-select: none;">
-        <div onclick="toggleDropdown2()" style="display: flex; align-items: center; gap: 8px; background: #2c2c2c; padding: 6px 12px; border-radius: 12px; min-width: 75px; justify-content: space-between;">
+        <div onclick="toggleDropdown()" style="display: flex; align-items: center; gap: 8px; background: #2c2c2c; padding: 6px 12px; border-radius: 12px; min-width: 75px; justify-content: space-between;">
             <div style="display: flex; align-items: center; gap: 8px;">
                 <img id="selected-flag2" src="https://flagcdn.com/w40/uz.png" style="width: 20px; height: 20px; border-radius: 50%; object-fit: cover;">
                 <span id="selected-lang2" style="color: #fff; font-size: 14px; font-weight: 600;">UZ</span>
@@ -2169,7 +2169,7 @@ const translations2 = {
         changeLang(savedLang, savedLang.toUpperCase(), flagMap[savedLang]);
     };
 
-    function toggleDropdown2() {
+    function toggleDropdown() {
         const dropdown2 = document.getElementById('lang-dropdown2');
         dropdown2.style.display = dropdown2.style.display === 'none' ? 'block' : 'none';
     }
