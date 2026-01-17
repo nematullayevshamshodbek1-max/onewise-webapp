@@ -2070,6 +2070,27 @@ window.addEventListener('DOMContentLoaded', () => {
     // Sahifa ochilganda avtomatik tarjima qilish
     applyTranslations(savedLang);
 });
+
+
+  window.addEventListener('DOMContentLoaded', () => {
+    const savedLang = localStorage.getItem('selectedLanguage') || 'uz';
+    
+    // Matnlarni tarjima qiladi
+    applyTranslations(savedLang);
+    
+    // SELEKTORNI (bayroq va yozuvni) to'g'rilash
+    const flagMap = {
+        'uz': 'https://flagcdn.com/w40/uz.png',
+        'ru': 'https://flagcdn.com/w40/ru.png',
+        'en': 'https://flagcdn.com/w40/us.png'
+    };
+
+    const selLang = document.getElementById('selected-lang');
+    const selFlag = document.getElementById('selected-flag');
+    
+    if (selLang) selLang.innerText = savedLang.toUpperCase();
+    if (selFlag) selFlag.src = flagMap[savedLang];
+});
 </script>
   <script>
 // 1. Lug'atni boyitilgan varianti
@@ -2176,6 +2197,29 @@ window.addEventListener('DOMContentLoaded', () => {
     const savedLang = localStorage.getItem('selectedLanguage') || 'uz';
     // Sahifa ochilganda avtomatik tarjima qilish
     applyTranslations2(savedLang);
+});
+
+
+
+
+    window.addEventListener('DOMContentLoaded', () => {
+    const savedLang = localStorage.getItem('selectedLanguage') || 'uz';
+    
+    // Duel matnlarini tarjima qiladi
+    applyTranslations2(savedLang);
+    
+    // DUEL SELEKTORINI (bayroq va yozuvni) to'g'rilash
+    const flagMap = {
+        'uz': 'https://flagcdn.com/w40/uz.png',
+        'ru': 'https://flagcdn.com/w40/ru.png',
+        'en': 'https://flagcdn.com/w40/us.png'
+    };
+
+    const selLang2 = document.getElementById('selected-lang2');
+    const selFlag2 = document.getElementById('selected-flag2');
+    
+    if (selLang2) selLang2.innerText = savedLang.toUpperCase();
+    if (selFlag2) selFlag2.src = flagMap[savedLang];
 });
 </script>
 
