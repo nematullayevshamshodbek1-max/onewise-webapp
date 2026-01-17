@@ -2071,6 +2071,113 @@ window.addEventListener('DOMContentLoaded', () => {
     applyTranslations(savedLang);
 });
 </script>
+  <script>
+// 1. Lug'atni boyitilgan varianti
+const translations2 = {
+    'uz': {
+        'deposit': 'Pul solish',
+        'banner_7day_title': '7 KUN BEPUL DUEL!',
+        'nav_home': 'Asosiy',
+        'nav_duel': 'Duel',
+        'nav_rewards': 'Mukofotlar',
+        'nav_support': 'Yordam',
+        'days': 'KUN',
+        'hours': 'SOAT'
+    },
+    'ru': {
+        'deposit': 'Пополнить',
+        'banner_7day_title': '7 ДНЕЙ БЕСПЛАТНО!',
+        'nav_home': 'Главная',
+        'nav_duel': 'Дуэль',
+        'nav_rewards': 'Награды',
+        'nav_support': 'Поддержка',
+        'days': 'ДНЕЙ',
+        'hours': 'ЧАС'
+    },
+    'en': {
+        'deposit': 'Deposit',
+        'banner_7day_title': '7 DAYS FREE!',
+        'nav_home': 'Home',
+        'nav_duel': 'Duel',
+        'nav_rewards': 'Rewards',
+        'nav_support': 'Support',
+        'days': 'DAYS',
+        'hours': 'HOUR'
+    }
+};
+  
+
+  
+
+    // 2. Sahifa yuklanganda tilni tekshirish
+    window.onload = function() {
+        const savedLang2 = localStorage.getItem('selectedLanguage') || 'uz'; // Saqlangan til yoki default UZ
+        const flagMap2 = {
+            'uz': 'https://flagcdn.com/w40/uz.png',
+            'ru': 'https://flagcdn.com/w40/ru.png',
+            'en': 'https://flagcdn.com/w40/us.png'
+        };
+        
+        changeLang2(savedLang2, savedLang2.toUpperCase(), flagMap2[savedLang2]);
+    };
+
+    function toggleDropdown2() {
+        const dropdown2 = document.getElementById('lang-dropdown2');
+        dropdown2.style.display = dropdown2.style.display === 'none' ? 'block' : 'none';
+    }
+
+
+
+
+  
+
+
+
+// 2. Tilni qo'llash funksiyasi (Hamma matnni o'zgartiradi)
+function applyTranslations2(code) {
+    const langData = translations2[code];
+    if (!langData) return;
+
+    // Klass orqali barcha oddiy matnlarni o'zgartirish
+    document.querySelectorAll('.lang-txt').forEach(el => {
+        const key = el.getAttribute('data-key');
+        if (langData[key]) {
+            el.innerText = langData[key];
+        }
+    });
+
+    // Pastki menyuni ID orqali o'zgartirish
+    if(document.getElementById('navHomeTxt')) document.getElementById('navHomeTxt').innerText = langData['nav_home'];
+    if(document.getElementById('navDuelTxt')) document.getElementById('navDuelTxt').innerText = langData['nav_duel'];
+}
+
+// 3. Tilni tanlash funksiyasi (Bosilganda ishlaydigan joyi)
+function changeLang2(code, label, flagUrl) {
+    // UI ni yangilash (Bayroq va yozuv)
+    const selLang = document.getElementById('selected-lang2');
+    const selFlag = document.getElementById('selected-flag2');
+    
+    if(selLang) selLang.innerText = label;
+    if(selFlag) selFlag.src = flagUrl;
+    
+    // Matnlarni almashtirish
+    applyTranslations2(code);
+
+    // Tanlovni saqlash
+    localStorage.setItem('selectedLanguage', code);
+
+    // Dropdownni yopish
+    const dropdown = document.getElementById('lang-dropdown2');
+    if(dropdown) dropdown.style.display = 'none';
+}
+
+// 4. Sahifa yuklanganda saqlangan tilni yoqish
+window.addEventListener('DOMContentLoaded', () => {
+    const savedLang = localStorage.getItem('selectedLanguage') || 'uz';
+    // Sahifa ochilganda avtomatik tarjima qilish
+    applyTranslations2(savedLang);
+});
+</script>
 
 
 
