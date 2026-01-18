@@ -2200,7 +2200,7 @@ function applyTranslations2(code) {
 }
 
 // 3. Tilni tanlash funksiyasi (Bosilganda ishlaydigan joyi)
-function changeLang2(code, label, flagUrl) {
+function changeLang(code, label, flagUrl) {
     // UI ni yangilash (Bayroq va yozuv)
     const selLang2 = document.getElementById('selected-lang2');
     const selFlag2 = document.getElementById('selected-flag2');
@@ -2215,8 +2215,8 @@ function changeLang2(code, label, flagUrl) {
     localStorage.setItem('selectedLanguage', code);
 
     // Dropdownni yopish
-    const dropdown2 = document.getElementById('lang-dropdown2');
-    if(dropdown2) dropdown2.style.display = 'none';
+    const dropdown = document.getElementById('lang-dropdown2');
+    if(dropdown) dropdown.style.display = 'none';
 }
 
 // 4. Sahifa yuklanganda saqlangan tilni yoqish
