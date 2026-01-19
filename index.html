@@ -832,6 +832,8 @@
 
 
 
+
+  
 .duel-container {
     position: relative;
     width: 100%;
@@ -875,6 +877,55 @@ opacity: .95;
 }
 
 
+
+  
+.duel-container2 {
+    position: relative;
+    width: 100%;
+  height: 150px;
+    max-width: 800px; /* Rasmingiz o'lchamiga qarab o'zgartiring */
+    margin: 10px auto;
+    display: flex;
+    justify-content: center;
+}
+
+.duel-bg-img2 {
+    
+    width: 100%;
+    display: block;
+    border-radius: 10px; /* Chetlarini biroz yumaloq qilish (ixtiyoriy) */
+}
+
+.duel-start-btn2 {
+    position: absolute;
+    bottom: 10px; /* Rasmni pastki qismidan masofa */
+    padding: 8px 20px;
+    font-size: 15px;
+    font-weight: bold;
+    color: white;
+    background: linear-gradient(45deg, #1e3a8a, #3b82f6); /* To'q ko'k va yorqin ko'k gradient */
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    transition: transform 0.2s, background 0.3s;
+}
+
+.duel-start-btn2:hover {
+opacity: .95;
+}
+
+/* Bosilganda bilinishi */
+.duel-start-btn2:active{
+  transform: scale(0.96);
+  opacity: .9;
+}
+
+
+
+
+
+  
 
 
 
@@ -1820,7 +1871,24 @@ opacity: .95;
 
       
       
-      <div id="screenRewards" class="screen hidden"><div class="card"><div class="h1">Mukofotlar</div><p class="p">Bu yerga sening mukofot UI’ngni joylaymiz.</p></div></div>
+      <div id="screenRewards" class="screen hidden">
+
+<div class="duel-container2">
+    <img src="https://i.postimg.cc/vHRRtrD9/sovrin2.jpg" alt="Duel Background" class="duel-bg-img2"> 
+    <button class="duel-start-btn2" onclick="startDuel()">BOSHLASH</button>
+</div>
+
+
+
+
+        
+      </div>
+
+
+
+
+
+      
       <div id="screenSupport" class="screen hidden"><div class="card"><div class="h1">Support</div><p class="p">Keyin operator / chat ulaymiz.</p></div></div>
     </div>
   </div>
