@@ -972,11 +972,13 @@ filter: brightness(1.1);
 
   
 .duel-container2 {
+
     position: relative;
     width: 100%;
   height: 200px;
     max-width: 800px; /* Rasmingiz o'lchamiga qarab o'zgartiring */
-    margin: 10px auto;
+ 
+  margin: -20px auto 10px;
     display: flex;
     justify-content: center;
 }
@@ -1959,10 +1961,6 @@ filter: brightness(1.1);
 
 <div class="toast" id="toast"></div>
 
-<script>
-
-
-
 
 
 
@@ -1972,6 +1970,8 @@ filter: brightness(1.1);
 
 
   
+
+<script>
     const tg = window.Telegram?.WebApp;
     tg?.ready(); tg?.expand();
 
@@ -2587,6 +2587,8 @@ showSlides(slideIndex);
 startBannerTimer();
 
 
+
+  
 function tabClick(el) {
     const parent = el.parentElement;
     parent.querySelectorAll('.mini-tab').forEach(t => t.classList.remove('active'));
@@ -2598,6 +2600,15 @@ function tabClick2(el) {
     parent.querySelectorAll('.mini-tab2').forEach(t => t.classList.remove('active2'));
     el.classList.add('active2');
 }
+  function tabClick3(el) {
+    const parent = el.parentElement;
+    parent.querySelectorAll('.mini-tab3').forEach(t => t.classList.remove('active3'));
+    el.classList.add('active3');
+}
+
+
+
+  
 
 
   
