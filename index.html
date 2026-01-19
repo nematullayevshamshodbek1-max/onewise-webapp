@@ -378,7 +378,7 @@
   font-style: normal;
   font-size: 22px;
   line-height: 1;
-  display: inline-block;
+display: flex;         /* inline-block o'rniga flex yaxshi ishlaydi */
   text-transform: none;
   letter-spacing: normal;
   word-wrap: normal;
@@ -669,6 +669,10 @@ opacity: .95;
     font-weight: 800;
     color: var(--blue);
     cursor: pointer;
+  /* Yangi qo'shiladigan qismlar: */
+    display: flex;         /* Ichidagi elementlarni flex qilish */
+    align-items: center;    /* Vertikal markazga keltirish */
+    gap: 4px;              /* Yozuv va ikonka orasidagi masofa */
 }
 
 /* Ro'yxat dizayni (Ochiq va professional) */
@@ -1346,7 +1350,7 @@ filter: brightness(1.1);
     <div class="vip-header-simple">
         <span class="v-title">BUGUNGI TOP G'OLIBLAR</span>
         <div class="v-all" onclick="setActive(document.getElementById('navReward')); showScreen('rewards');">
-            <span class="barchasi">BARCHASI</span>
+       BARCHASI
           <span class="material-symbols-rounded">chevron_right</span>
         </div>
     </div>
