@@ -75,12 +75,10 @@
   border-radius: 10px;
   cursor: pointer;
   transition: transform .08s ease, box-shadow .08s ease, opacity .08s ease;
-  box-shadow: 0 6px 16px rgba(0,200,83,.35);
 }
 /* Bosilganda bilinishi */
 .deposit-btn:active{
   transform: scale(0.96);
-  box-shadow: 0 3px 8px rgba(0,200,83,.35);
   opacity: .9;
 }
 .deposit-btn:hover{
@@ -588,11 +586,17 @@
     border-radius: 10px;
     font-weight: 800;
     font-size: 12px; /* Font o'lchami kichraytirildi */
-    box-shadow: 0 4px 15px rgba(47,128,237,0.3);
     cursor: pointer;
     text-transform: uppercase;
 }
-
+    /* Bosilganda bilinishi */
+.join-battle-btn:active{
+  transform: scale(0.96);
+  opacity: .9;
+}
+    .join-battle-btn:hover{
+    opacity: .95;
+    }
 /* Profil rasmlari o'rniga yangi vizual qism */
 .battle-stats {
     margin-bottom: 15px;
@@ -754,14 +758,345 @@
 
     
 
+.r-info h3 {
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* O'ngga, pastga, yoyilish va rang */
+  margin-bottom: 5px;
+  color: #ffffff; /* Matn oq bo'lsa soya yaxshi ko'rinadi */
+}
 
+.r-info p {
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
+  color: #ffffff;
+}
   </style>
 
   
 <style>
 .fade { animation: fadeAnim 1s ease-in-out; }
 @keyframes fadeAnim { from {opacity: 0.5} to {opacity: 1} }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.mini-tab-wrapper {
+    display: flex;
+    align-items: center;
+    background: #111; /* To'q fon */
+    padding: 3px;
+    border-radius: 25px;
+    width: 100%; /* Konteynerga teng bo'ladi */
+    box-sizing: border-box;
+}
+.mini-tab {
+    flex: 1; /* Hamma tugmalar bir xil kenglikda bo'ladi */
+    color: #999;
+    text-align: center;
+    font-size: 13px; /* Kichikroq shrift */
+    padding: 6px 0;
+    cursor: pointer;
+    border-radius: 20px;
+    transition: 0.2s;
+    user-select: none;
+    font-family: sans-serif;
+}
+
+.mini-tab.active {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.mini-divider {
+    width: 1px;
+    height: 12px;
+    background-color: #333;
+}
+
+/* Faol tugma yonidagi chiziqni berkitish */
+.mini-tab.active + .mini-divider, 
+.mini-divider:has(+ .mini-tab.active) {
+    opacity: 0;
+}
+
+
+
+
+
+
+.duel-container {
+    position: relative;
+    width: 100%;
+  height: 150px;
+    max-width: 800px; /* Rasmingiz o'lchamiga qarab o'zgartiring */
+    margin: 10px auto;
+    display: flex;
+    justify-content: center;
+}
+
+.duel-bg-img {
+    
+    width: 100%;
+    display: block;
+    border-radius: 10px; /* Chetlarini biroz yumaloq qilish (ixtiyoriy) */
+}
+
+.duel-start-btn {
+    position: absolute;
+    bottom: 10px; /* Rasmni pastki qismidan masofa */
+    padding: 8px 20px;
+    font-size: 15px;
+    font-weight: bold;
+    color: white;
+    background: linear-gradient(45deg, #1e3a8a, #3b82f6); /* To'q ko'k va yorqin ko'k gradient */
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    transition: transform 0.2s, background 0.3s;
+}
+
+.duel-start-btn:hover {
+opacity: .95;
+}
+
+/* Bosilganda bilinishi */
+.duel-start-btn:active{
+  transform: scale(0.96);
+  opacity: .9;
+}
+
+
+
+
+
+  .mini-tab-wrapper2 {
+    display: flex;
+    align-items: center;
+    background: #111; /* To'q fon */
+    padding: 3px;
+    border-radius: 25px;
+    width: 100%; /* Konteynerga teng bo'ladi */
+    box-sizing: border-box;
+}
+.mini-tab2 {
+    flex: 1; /* Hamma tugmalar bir xil kenglikda bo'ladi */
+    color: #999;
+    text-align: center;
+    font-size: 13px; /* Kichikroq shrift */
+    padding: 6px 0;
+    cursor: pointer;
+    border-radius: 20px;
+    transition: 0.2s;
+    user-select: none;
+    font-family: sans-serif;
+}
+
+.mini-tab2.active2 {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.mini-divider2 {
+    width: 1px;
+    height: 12px;
+    background-color: #333;
+}
+
+/* Faol tugma yonidagi chiziqni berkitish */
+.mini-tab2.active2 + .mini-divider2, 
+.mini-divider2:has(+ .mini-tab2.active2) {
+    opacity: 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+  .vip-stats-container2 {
+    margin-top: 10px;
+}
+
+.vip-header-simple2 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+}
+
+.v-title2 {
+    font-size: 11px;
+    font-weight: 900;
+    letter-spacing: 1.5px;
+    color: var(--muted);
+}
+
+.v-all2 {
+    font-size: 10px;
+    font-weight: 800;
+    color: var(--blue);
+    cursor: pointer;
+}
+
+/* Ro'yxat dizayni (Ochiq va professional) */
+.vip-list-clean2 {
+    margin: 5px 0;
+}
+
+.v-row2 {
+    display: flex;
+    align-items: center;
+    padding: 12px 15px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.v-row:last-child2 {
+    border-bottom: none;
+}
+
+/* Raqamlar stili */
+.v-rank2 {
+    width: 25px;
+    font-size: 18px;
+    font-weight: 1000;
+    font-style: italic;
+    color: var(--muted);
+}
+.v-row2.gold2 .v-rank2 { color: #FFD700; }
+/* Avatar va Placeholder */
+.v-avatar-wrapper2 {
+    width: 38px;
+    height: 38px;
+    margin: 0 12px;
+}
+
+.v-avatar2 {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+}
+.v-placeholder2 {
+    width: 100%;
+    height: 100%;
+    background: #2a2e3a;
+    border-radius: 50%;
+    display: none; /* Rasm bo'lsa yashirinadi */
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    color: var(--blue);
+}
+
+/* Ism va Ball */
+.v-name2 {
+    flex-grow: 1;
+    font-size: 14px;
+    font-weight: 700;
+    color: #eee;
+}
+
+.v-score2 {
+    font-size: 15px;
+    font-weight: 900;
+    color: #fff;
+}
+
+.v-score small2 {
+    font-size: 9px;
+    color: var(--muted);
+    margin-left: 2px;
+}
+
+/* Shaxsiy o'rin */
+.my-personal-rank2 {
+    padding: 15px 15px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.my-rank-label2 { font-size: 11px; font-weight: 800; color: var(--muted); }
+.blue-txt2 { color: var(--blue); font-weight: 900; }
+.my-score-view2 { font-size: 12px; font-weight: 900; color: #fff; }
+
+
+
+
+
+
+
+
+
+
+
+
+.v-all2 {
+    font-size: 10px;
+    font-weight: 800;
+    color: var(--blue);
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: 0.2s;
+}
+
+.v-all2:hover {
+    opacity: 0.8;
+}
+
+
+  
 </style>
+
+
+
+
+
+<style>
+    /* Kursor borganda yorqinroq bo'lishi */
+    #supportBtn:hover {
+        background: #1a8cff !important; /* Bir oz ochroq ko'k */
+        box-shadow: 0 6px 16px rgba(0, 123, 255, 0.4) !important;
+        transform: translateY(-1px); /* Bir oz tepaga ko'tariladi */
+    }
+
+    /* Bosilganda xiralashishi va kichrayishi */
+    #supportBtn:active {
+        background: #0056b3 !important; /* To'qroq/xiraroq ko'k */
+        transform: scale(0.96); /* Bir oz kichrayish effekti */
+        box-shadow: 0 2px 8px rgba(0, 123, 255, 0.2) !important;
+    }
+
+   /* Kursor borganda yorqinroq bo'lishi */
+    #supportBtn2:hover {
+        background: #1a8cff !important; /* Bir oz ochroq ko'k */
+        box-shadow: 0 6px 16px rgba(0, 123, 255, 0.4) !important;
+        transform: translateY(-1px); /* Bir oz tepaga ko'tariladi */
+    }
+
+    /* Bosilganda xiralashishi va kichrayishi */
+    #supportBtn2:active {
+        background: #0056b3 !important; /* To'qroq/xiraroq ko'k */
+        transform: scale(0.96); /* Bir oz kichrayish effekti */
+        box-shadow: 0 2px 8px rgba(0, 123, 255, 0.2) !important;
+    }
+</style>
+
+
+  
 </head>
 
 <body>
@@ -779,7 +1114,7 @@
   </div>
 
   <div class="topbar-right">
-    <button class="deposit-btn" id="depositBtn">Deposit</button>
+    <button class="deposit-btn lang-txt" id="depositBtn" data-key="deposit">Deposit</button>
     <div class="bell" id="bellBtn">
       <svg class="bellIcon" viewBox="0 0 24 24">
         <path d="M12 22a2.5 2.5 0 0 0 2.45-2h-4.9A2.5 2.5 0 0 0 12 22Zm7-6V11a7 7 0 0 0-5-6.71V3a2 2 0 1 0-4 0v1.29A7 7 0 0 0 5 11v5l-1.8 1.8a1 1 0 0 0 .7 1.7h16.2a1 1 0 0 0 .7-1.7L19 16Z"/>
@@ -834,18 +1169,18 @@
 
 
     
-    <h2 style="color: #fff; margin: 5px 0 2px 0; font-size: 18px; font-weight: 900;">7 KUN BEPUL DUEL!</h2>
+    <h2 style="color: #fff; margin: 5px 0 2px 0; font-size: 18px; font-weight: 900;" class="lang-txt" data-key="banner_7day_title">7 KUN BEPUL DUEL!</h2>
         <p style="color: #aeb4c2; font-size: 10px; margin-bottom: 8px; line-height: 1.2;">Bilimingizni sovrinlarga almashtiring. Bu imkoniyatni qo'ldan boy bermang!</p>
 
        <div style="display: flex; gap: 8px; margin-top: 5px;">
     <div style="text-align: center;">
         <div id="days" style="background: rgba(255,255,255,0.15); color: #fff; padding: 4px 8px; border-radius: 6px; font-size: 14px; font-weight: 900; min-width: 25px;">00</div>
-        <div style="color: #8a8d97; font-size: 8px; margin-top: 2px;">KUN</div>
+        <div style="color: #8a8d97; font-size: 8px; margin-top: 2px;" class="lang-txt" data-key="days">KUN</div>
     </div>
     <div style="color: #fff; font-weight: 900; margin-top: 5px;">:</div>
     <div style="text-align: center;">
         <div id="hours" style="background: rgba(255,255,255,0.15); color: #fff; padding: 4px 8px; border-radius: 6px; font-size: 14px; font-weight: 900; min-width: 25px;">00</div>
-        <div style="color: #8a8d97; font-size: 8px; margin-top: 2px;">SOAT</div>
+        <div style="color: #8a8d97; font-size: 8px; margin-top: 2px;" class="lang-txt" data-key="hours">SOAT</div>
     </div>
     <div style="color: #fff; font-weight: 900; margin-top: 5px;">:</div>
     <div style="text-align: center;">
@@ -867,7 +1202,7 @@
     <a href="BU_YERGA_OYNA_LINKINI_YOZASIZ" class="mySlide fade" style="display: block; text-decoration: none;">
   <div style="position: absolute; z-index: 2; padding: 15px; width: 60%; height: 100%;">
             
-    <h2 style="color: #fff; margin: 8px 0 4px 0; font-size: 20px; font-weight: 900;">BUGUN KIM G'OLIB?</h2>
+    <h2 style="color: #fff; margin: 8px 0 4px 0; font-size: 20px; font-weight: 900;" class="lang-txt" data-key="top_winners">BUGUN KIM G'OLIB?</h2>
             <p style="color: #aeb4c2; font-size: 11px; margin: 0; max-width: 180px; line-height: 1.3;">00:00 da eng ko'p ball to'plang va sovrinni yuting!</p>
         </div>
 <img src="https://i.postimg.cc/DyVqN5kK/kimmmmm.jpg" style="width: 100%; height: 160px; object-fit: cover; filter: brightness(0.5);">    </a>
@@ -932,7 +1267,7 @@
         <h3>Yutuqlar</h3>
         <p>Ishonch bolsa mukofot sizni kutadi!</p>
       </div>
-      <img src="https://i.postimg.cc/DzmCgVwC/money.jpg" alt="Real Money">
+      <img src="https://i.postimg.cc/hjR2BxT3/money.jpg" alt="Real Money">
     </div>
   </div>
 
@@ -955,9 +1290,13 @@
             <button class="join-battle-btn">BOSHLASH</button>
         </div>
     </div>
-    <img src="https://images.pexels.com/photos/3165335/pexels-photo-3165335.jpeg?auto=compress&cs=tinysrgb&w=800" class="iq-bg-img">
+    <img src="https://i.postimg.cc/CL29D1Wm/usuvchi.jpg" class="iq-bg-img">
 </div>
 
+
+
+
+  
 <div class="vip-stats-container">
     <div class="vip-header-simple">
         <span class="v-title">BUGUNGI TOP G'OLIBLAR</span>
@@ -1119,7 +1458,7 @@
             Свяжитесь с нами, если у вас остались вопросы
         </p>        
 
-        <button class="lang-txt" data-key="support_btn" style="
+        <button id="supportBtn" class="lang-txt" data-key="support_btn" style="
             background: #007bff; 
             color: #fff; 
             border: none; 
@@ -1199,7 +1538,294 @@
 
 
       
-      <div id="screenDuels" class="screen hidden"><div class="card"><div class="h1">Duellar</div><p class="p">Bu yerga sening duel sahifangni joylaymiz.</p></div></div>
+      <div id="screenDuels" class="screen hidden">
+ 
+<div class="mini-tab-wrapper">
+    <div class="mini-tab active" onclick="tabClick(this)">Duellar</div>
+    <div class="mini-divider"></div>
+    <div class="mini-tab" onclick="tabClick(this)">Reyting</div>
+    <div class="mini-divider"></div>
+    <div class="mini-tab" onclick="tabClick(this)">Mukofot</div>
+    <div class="mini-divider"></div>
+    <div class="mini-tab" onclick="tabClick(this)">Referal</div>
+</div>
+
+
+<div class="duel-container">
+    <img src="https://i.postimg.cc/PJN3PRXT/1vs111.jpg" alt="Duel Background" class="duel-bg-img"> 
+    <button class="duel-start-btn" onclick="startDuel()">BOSHLASH</button>
+</div>
+
+
+<div class="mini-tab-wrapper2">
+    <div class="mini-tab2 active2" onclick="tabClick2(this)">Ommabop</div>
+    <div class="mini-divider2"></div>
+    <div class="mini-tab2" onclick="tabClick2(this)">Trenddagi</div>
+    <div class="mini-divider2"></div>
+    <div class="mini-tab2" onclick="tabClick2(this)">Yangi</div>
+    <div class="mini-divider2"></div>
+    <div class="mini-tab2" onclick="tabClick2(this)">Tezkor</div>
+</div>
+
+
+
+
+
+
+
+
+        
+   <div class="vip-stats-container2">
+    <div class="vip-list-clean2" id="vipList2">
+        <div class="v-row2 gold2">
+            <div class="v-rank2">1</div>
+            <div class="v-avatar-wrapper2">
+                <img src="https://randomuser.me/api/portraits/men/32.jpg" class="v-avatar2" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                <div class="v-placeholder2">S</div>
+            </div>
+            <div class="v-name2">Sardor Nematullaev</div>
+            <div class="v-score2">40 <small>PTS</small></div>
+        </div>
+
+        <div class="v-row2">
+            <div class="v-rank2">2</div>
+            <div class="v-avatar-wrapper2">
+                <img src="https://randomuser.me/api/portraits/women/44.jpg" class="v-avatar2" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                <div class="v-placeholder2">M</div>
+            </div>
+            <div class="v-name2">Madina_Win</div>
+            <div class="v-score2">30 <small>PTS</small></div>
+        </div>
+
+        <div class="v-row2">
+            <div class="v-rank2">3</div>
+            <div class="v-avatar-wrapper2">
+                <img src="https://randomuser.me/api/portraits/men/85.jpg" class="v-avatar2" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                <div class="v-placeholder2">B</div>
+            </div>
+            <div class="v-name2">Bek_Rider</div>
+            <div class="v-score2">20 <small>PTS</small></div>
+        </div>
+
+        <div class="extra-rows2" style="display: none;">
+            <div class="v-row2">
+                <div class="v-rank2">4</div>
+                <div class="v-avatar-wrapper2">
+                    <img src="https://randomuser.me/api/portraits/men/10.jpg" class="v-avatar2" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                    <div class="v-placeholder2">A</div>
+                </div>
+                <div class="v-name2">Ali_Coder</div>
+                <div class="v-score2">15 <small>PTS</small></div>
+            </div>
+            </div>
+    </div>
+
+    <div class="v-toggle-container2" style="padding: 0 15px;">
+        <span id="toggleBtn2" class="v-all2" onclick="toggleVipList2()">...BARCHASI</span>
+    </div>
+
+    <div class="my-personal-rank2">
+        <span class="my-rank-label2">SIZNING O'RNINGIZ: <span class="blue-txt2">#1,452</span></span>
+        <div class="my-score-view2">10 PTS</div>
+    </div>
+</div>     
+
+
+
+
+
+
+
+
+<div style="border-radius: 15px; padding-top: 20px; color: #fff; font-family: sans-serif; max-width: 500px; margin: 20px auto;">
+    
+    <h2 style="font-size: 20px; margin-bottom: 12px; font-weight: 700;">1wise Bilim Bellashuvida Ishtirok eting va Yuting</h2>
+    
+    <p style="font-size: 14px; color: #b3b3b3; line-height: 1.6; margin-bottom: 20px;">
+        <strong style="color: #fff;">1wise</strong> - bu bilim va tezlik birlashtirilgan halol platforma. Bu yerda siz 1vs1 duellarda o'z bilimingizni sinaysiz va har bir g'alaba uchun ball to'playsiz.
+    </p>
+
+    <div id="more-info2" style="display: none; font-size: 14px; color: #b3b3b3; line-height: 1.6; margin-bottom: 20px;">
+        <hr style="border: 0; border-top: 1px solid #333; margin: 15px 0;">
+        <p>🏆 <strong>Reyting tizimi:</strong> Bir kun davomida eng ko'p ball to'plagan ishtirokchilar birinchi o'rin va qimmatbaho sovrinlar egasiga aylanishadi.</p>
+        <p>🎁 <strong>Bonus:</strong> Yangi foydalanuvchilar uchun dastlabki <strong>7 kunlik duellar mutlaqo tekin!</strong></p>
+        <p>⚡ <strong>Shartlar:</strong> 8-kundan boshlab bellashuvlarda qatnashish uchun kichik miqdorda kirish to'lovi amal qiladi. Bu sovrin jamg'armasini shakllantirishga yordam beradi.</p>
+    </div>
+
+    <button onclick="toggleDetails2()" id="detail-btn2" style="width: 100%; background: #2c2c2c; border: none; padding: 12px; border-radius: 10px; color: #fff; font-size: 16px; font-weight: 600; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; transition: 0.3s;">
+        <span id="btn-text2">Batafsil</span>
+        <svg id="arrow-icon2" width="14" height="9" viewBox="0 0 14 9" fill="none" style="transition: 0.3s;">
+            <path d="M1 1.5L7 7.5L13 1.5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+    </button>
+</div>
+
+
+
+
+
+
+
+  
+        
+   
+<div style="display: flex; align-items: center; width: 100%; background: transparent; margin-top: 30px; padding: 0;">
+    
+    <div style="display: flex; align-items: center; white-space: nowrap; cursor: pointer;">
+        <span style="color: #2F80ED; font-weight: 1000; font-size: 22px;">1</span>
+        <span style="color: #fff; font-weight: 1000; font-size: 20px; margin-left: 1px;">WISE</span>
+    </div>
+
+    <div style="flex-grow: 1; height: 1px; background: rgba(255, 255, 255, 0.2); margin: 0 8px;"></div>
+
+   <div id="language-selector2" style="position: relative; cursor: pointer; user-select: none;">
+        <div onclick="toggleDropdown2()" style="display: flex; align-items: center; gap: 8px; background: #2c2c2c; padding: 6px 12px; border-radius: 12px; min-width: 75px; justify-content: space-between;">
+            <div style="display: flex; align-items: center; gap: 8px;">
+                <img id="selected-flag2" src="https://flagcdn.com/w40/uz.png" style="width: 20px; height: 20px; border-radius: 50%; object-fit: cover;">
+                <span id="selected-lang2" style="color: #fff; font-size: 14px; font-weight: 600;">UZ</span>
+            </div>
+            <svg width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M1 1.5L6 6.5L11 1.5" stroke="#999" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+        </div>
+
+        <div id="lang-dropdown2" style="display: none; position: absolute; top: 40px; right: 0; background: #2c2c2c; border-radius: 12px; z-index: 100; min-width: 100px; overflow: hidden; box-shadow: 0 10px 20px rgba(0,0,0,0.4);">
+            <div onclick="changeLang2('uz', 'UZ', 'https://flagcdn.com/w40/uz.png')" style="padding: 12px; color: #fff; font-size: 14px; border-bottom: 1px solid #3d3d3d; display: flex; align-items: center; gap: 8px;">
+                <img src="https://flagcdn.com/w40/uz.png" style="width: 18px; height: 18px; border-radius: 50%;"> UZ
+            </div>
+            <div onclick="changeLang2('ru', 'RU', 'https://flagcdn.com/w40/ru.png')" style="padding: 12px; color: #fff; font-size: 14px; border-bottom: 1px solid #3d3d3d; display: flex; align-items: center; gap: 8px;">
+                <img src="https://flagcdn.com/w40/ru.png" style="width: 18px; height: 18px; border-radius: 50%;"> RU
+            </div>
+            <div onclick="changeLang2('en', 'EN', 'https://flagcdn.com/w40/us.png')" style="padding: 12px; color: #fff; font-size: 14px; display: flex; align-items: center; gap: 8px;">
+                <img src="https://flagcdn.com/w40/us.png" style="width: 18px; height: 18px; border-radius: 50%;"> EN
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+<div class="real-support-card2" style="
+    position: relative; 
+    background: #1a1c22; 
+    border-radius: 20px; 
+    padding: 16px 14px; 
+    overflow: hidden; 
+    border: 1px solid rgba(255,255,255,0.05); 
+    margin: 15px 0; 
+    min-height: 140px; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+">
+    
+    <div style="
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        width: 100%;
+        height: 100%;
+        background: radial-gradient(circle at 100% 100%, rgba(0, 123, 255, 0.5) 0%, rgba(0, 123, 255, 0.2) 30%, rgba(0, 123, 255, 0) 70%);
+        z-index: 1;
+        pointer-events: none;
+    "></div>
+
+    <div style="position: relative; z-index: 3; width: 65%; text-align: left;">
+        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
+            <h4 class="lang-txt2" data-key="support_title2" style="margin: 0; font-size: 18px; font-weight: 800; color: #fff;">Поддержка</h4>
+            <div style="background: #007bff; color: #fff; padding: 1px 10px; border-radius: 6px; font-size: 12px; font-weight: 800;">24/7</div>
+        </div>
+        
+        <p class="lang-txt2" data-key="support_desc2" style="color: #8a8d97; font-size: 12px; margin: 0 0 15px 0; line-height: 1.3; max-width: 170px;">
+            Свяжитесь с нами, если у вас остались вопросы
+        </p>        
+
+        <button id="supportBtn2" class="lang-txt2" data-key="support_btn2" style="
+            background: #007bff; 
+            color: #fff; 
+            border: none; 
+            width: 115%; 
+            padding: 11px; 
+            border-radius: 12px; 
+            font-size: 14px; 
+            font-weight: 800; 
+            cursor: pointer;
+            position: relative;
+            z-index: 4;
+            box-shadow: 0 4px 12px rgba(0, 123, 255, 0.2);
+        ">
+            Обратиться в поддержку
+        </button>
+    </div>
+
+    <img src="https://i.postimg.cc/BvydPftS/pngwing-com.png" style="
+        position: absolute; 
+        right: -5px; 
+        bottom: -10px; 
+        height: 105%; 
+        width: auto; 
+        z-index: 2; 
+        pointer-events: none; 
+        object-fit: contain;
+    " alt="Operator"> 
+</div>
+
+
+
+
+
+
+        
+
+<div style="display: flex; justify-content: flex-start; gap: 8px; margin-top: 28px; background: transparent;">
+    
+    <a href="#" style="text-decoration: none;">
+        <div style="width: 34px; height: 34px; background-color: #24A1DE; border-radius: 8px; display: flex; align-items: center; justify-content: center;">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="#FFFFFF" xmlns="http://www.w3.org/2000/svg">
+                <path d="M19.92 5.94L16.43 20.35c-.22.99-.81 1.24-1.64.77l-5.31-3.91-2.56 2.46c-.28.28-.52.52-.8.52l.38-5.38L16.3 5.39c.43-.38-.09-.59-.66-.21L5.85 11.3 1.13 9.82c-1.03-.32-1.05-1.03.21-1.53l18.45-7.11c.85-.31 1.6.21 1.33 1.34z" fill="#FFFFFF"/>
+            </svg>
+        </div>
+    </a>
+    
+    <a href="#" style="text-decoration: none;">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/e/e7/Instagram_logo_2016.svg" width="34" height="34" style="display: block; border-radius: 8px;">
+    </a>
+
+</div>
+
+
+        
+  
+
+  
+<div style="display: flex; justify-content: space-between; align-items: center; width: 100%; margin-top: 20px; padding: 0px 0; background: transparent;">
+    
+    <div style="font-size: 11px; font-weight: 700; color: rgba(255,255,255,0.3); letter-spacing: 0.5px;">
+        © 2025 1WISE.
+    </div>
+
+    <div style="font-size: 20px; font-weight: 900; color: rgba(255,255,255,0.15); font-family: sans-serif;">
+        18+
+    </div>
+</div>
+
+        
+
+      
+      
+      </div>
+
+
+
+
+
+      
+      
       <div id="screenRewards" class="screen hidden"><div class="card"><div class="h1">Mukofotlar</div><p class="p">Bu yerga sening mukofot UI’ngni joylaymiz.</p></div></div>
       <div id="screenSupport" class="screen hidden"><div class="card"><div class="h1">Support</div><p class="p">Keyin operator / chat ulaymiz.</p></div></div>
     </div>
@@ -1218,6 +1844,18 @@
 <div class="toast" id="toast"></div>
 
 <script>
+
+
+
+
+
+
+
+
+
+
+
+  
     const tg = window.Telegram?.WebApp;
     tg?.ready(); tg?.expand();
 
@@ -1368,24 +2006,42 @@ if (this.y >= 44 && this.y <= 46) { // 38 ni 44 ga, 40 ni 46 ga o'zgartirdik
 
 
 <script>
-    // 1. Lug'at - barcha yozuvlarni shu yerga qo'shasiz
-    const translations = {
-        'uz': {
-            'welcome': 'Xush kelibsiz',
-            'balance': 'Hisobingiz',
-            'settings': 'Sozlamalar'
-        },
-        'ru': {
-            'welcome': 'Добро пожаловать',
-            'balance': 'Ваш баланс',
-            'settings': 'Настройки'
-        },
-        'en': {
-            'welcome': 'Welcome',
-            'balance': 'Your balance',
-            'settings': 'Settings'
-        }
-    };
+// 1. Lug'atni boyitilgan varianti
+const translations = {
+    'uz': {
+        'deposit': 'Pul solish',
+        'banner_7day_title': '7 KUN BEPUL DUEL!',
+        'nav_home': 'Asosiy',
+        'nav_duel': 'Duel',
+        'nav_rewards': 'Mukofotlar',
+        'nav_support': 'Yordam',
+        'days': 'KUN',
+        'hours': 'SOAT'
+    },
+    'ru': {
+        'deposit': 'Пополнить',
+        'banner_7day_title': '7 ДНЕЙ БЕСПЛАТНО!',
+        'nav_home': 'Главная',
+        'nav_duel': 'Дуэль',
+        'nav_rewards': 'Награды',
+        'nav_support': 'Поддержка',
+        'days': 'ДНЕЙ',
+        'hours': 'ЧАС'
+    },
+    'en': {
+        'deposit': 'Deposit',
+        'banner_7day_title': '7 DAYS FREE!',
+        'nav_home': 'Home',
+        'nav_duel': 'Duel',
+        'nav_rewards': 'Rewards',
+        'nav_support': 'Support',
+        'days': 'DAYS',
+        'hours': 'HOUR'
+    }
+};
+  
+
+  
 
     // 2. Sahifa yuklanganda tilni tekshirish
     window.onload = function() {
@@ -1404,42 +2060,262 @@ if (this.y >= 44 && this.y <= 46) { // 38 ni 44 ga, 40 ni 46 ga o'zgartirdik
         dropdown.style.display = dropdown.style.display === 'none' ? 'block' : 'none';
     }
 
-    function changeLang(code, label, flagUrl) {
-        // UI yangilash
-        document.getElementById('selected-lang').innerText = label;
-        document.getElementById('selected-flag').src = flagUrl;
-        
-        // Tilni localStorage'da saqlash
-        localStorage.setItem('selectedLanguage', code);
-        
-        // Saytdagi yozuvlarni almashtirish
-        applyTranslations(code);
 
-        document.getElementById('lang-dropdown').style.display = 'none';
+
+
+  
+
+
+
+// 2. Tilni qo'llash funksiyasi (Hamma matnni o'zgartiradi)
+function applyTranslations(code) {
+    const langData = translations[code];
+    if (!langData) return;
+
+    // Klass orqali barcha oddiy matnlarni o'zgartirish
+    document.querySelectorAll('.lang-txt').forEach(el => {
+        const key = el.getAttribute('data-key');
+        if (langData[key]) {
+            el.innerText = langData[key];
+        }
+    });
+
+    // Pastki menyuni ID orqali o'zgartirish
+    if(document.getElementById('navHomeTxt')) document.getElementById('navHomeTxt').innerText = langData['nav_home'];
+    if(document.getElementById('navDuelTxt')) document.getElementById('navDuelTxt').innerText = langData['nav_duel'];
+}
+
+// 3. Tilni tanlash funksiyasi (Bosilganda ishlaydigan joyi)
+function changeLang(code, label, flagUrl) {
+    // UI ni yangilash (Bayroq va yozuv)
+    const selLang = document.getElementById('selected-lang');
+    const selFlag = document.getElementById('selected-flag');
+    
+    if(selLang) selLang.innerText = label;
+    if(selFlag) selFlag.src = flagUrl;
+    
+    // Matnlarni almashtirish
+    applyTranslations(code);
+
+    // Tanlovni saqlash
+    localStorage.setItem('selectedLanguage', code);
+
+    // Dropdownni yopish
+    const dropdown = document.getElementById('lang-dropdown');
+    if(dropdown) dropdown.style.display = 'none';
+}
+
+// 4. Sahifa yuklanganda saqlangan tilni yoqish
+window.addEventListener('DOMContentLoaded', () => {
+    const savedLang = localStorage.getItem('selectedLanguage') || 'uz';
+    // Sahifa ochilganda avtomatik tarjima qilish
+    applyTranslations(savedLang);
+});
+
+
+  window.addEventListener('DOMContentLoaded', () => {
+    const savedLang = localStorage.getItem('selectedLanguage') || 'uz';
+    
+    // Matnlarni tarjima qiladi
+    applyTranslations(savedLang);
+    
+    // SELEKTORNI (bayroq va yozuvni) to'g'rilash
+    const flagMap = {
+        'uz': 'https://flagcdn.com/w40/uz.png',
+        'ru': 'https://flagcdn.com/w40/ru.png',
+        'en': 'https://flagcdn.com/w40/us.png'
+    };
+
+    const selLang = document.getElementById('selected-lang');
+    const selFlag = document.getElementById('selected-flag');
+    
+    if (selLang) selLang.innerText = savedLang.toUpperCase();
+    if (selFlag) selFlag.src = flagMap[savedLang];
+});
+
+
+
+
+
+  // Boshqa oynada til o'zgarganda bu oyna ham o'zini yangilaydi
+window.addEventListener('storage', (event) => {
+    if (event.key === 'selectedLanguage') {
+        const newLang = event.newValue || 'uz';
+        
+        // 1. Matnlarni tarjima qilish
+        applyTranslations(newLang);
+        
+        // 2. Selektorni (bayroq va yozuvni) yangilash
+        const flagMap = {
+            'uz': 'https://flagcdn.com/w40/uz.png',
+            'ru': 'https://flagcdn.com/w40/ru.png',
+            'en': 'https://flagcdn.com/w40/us.png'
+        };
+
+        const selLang = document.getElementById('selected-lang');
+        const selFlag = document.getElementById('selected-flag');
+        
+        if (selLang) selLang.innerText = newLang.toUpperCase();
+        if (selFlag) selFlag.src = flagMap[newLang];
+    }
+});
+</script>
+  <script>
+// 1. Lug'atni boyitilgan varianti
+const translations2 = {
+    'uz': {
+        'deposit': 'Pul solish',
+        'banner_7day_title': '7 KUN BEPUL DUEL!',
+        'nav_home': 'Asosiy',
+        'nav_duel': 'Duel',
+        'nav_rewards': 'Mukofotlar',
+        'nav_support': 'Yordam',
+        'days': 'KUN',
+        'hours': 'SOAT'
+    },
+    'ru': {
+        'deposit': 'Пополнить',
+        'banner_7day_title': '7 ДНЕЙ БЕСПЛАТНО!',
+        'nav_home': 'Главная',
+        'nav_duel': 'Дуэль',
+        'nav_rewards': 'Награды',
+        'nav_support': 'Поддержка',
+        'days': 'ДНЕЙ',
+        'hours': 'ЧАС'
+    },
+    'en': {
+        'deposit': 'Deposit',
+        'banner_7day_title': '7 DAYS FREE!',
+        'nav_home': 'Home',
+        'nav_duel': 'Duel',
+        'nav_rewards': 'Rewards',
+        'nav_support': 'Support',
+        'days': 'DAYS',
+        'hours': 'HOUR'
+    }
+};
+  
+
+  
+
+    // 2. Sahifa yuklanganda tilni tekshirish
+    window.onload = function() {
+        const savedLang = localStorage.getItem('selectedLanguage') || 'uz'; // Saqlangan til yoki default UZ
+        const flagMap = {
+            'uz': 'https://flagcdn.com/w40/uz.png',
+            'ru': 'https://flagcdn.com/w40/ru.png',
+            'en': 'https://flagcdn.com/w40/us.png'
+        };
+        
+        changeLang(savedLang, savedLang.toUpperCase(), flagMap[savedLang]);
+    };
+
+    function toggleDropdown2() {
+        const dropdown = document.getElementById('lang-dropdown2');
+        dropdown.style.display = dropdown.style.display === 'none' ? 'block' : 'none';
     }
 
-    // 3. Matnlarni o'zgartiruvchi funksiya
-    function applyTranslations(code) {
-        const langData = translations[code];
-        
-        // Saytingizdagi elementlarni ID orqali o'zgartirish
-        // Masalan: HTMLda <h1 id="welcome-text"></h1> bo'lsa
-        if(document.getElementById('welcome-text')) {
-            document.getElementById('welcome-text').innerText = langData['welcome'];
-        }
-        
-        // Agar sizda maxsus changeAppLanguage funksiyasi bo'lsa, uni ham chaqiramiz
-        if (typeof changeAppLanguage === "function") {
-            changeAppLanguage(code);
-        }
-    }
 
-    // Tashqariga bosilganda yopish
-    window.onclick = function(event) {
-        if (!event.target.closest('#language-selector')) {
-            document.getElementById('lang-dropdown').style.display = 'none';
+
+
+  
+
+
+
+// 2. Tilni qo'llash funksiyasi (Hamma matnni o'zgartiradi)
+function applyTranslations2(code) {
+    const langData = translations2[code];
+    if (!langData) return;
+
+    // Klass orqali barcha oddiy matnlarni o'zgartirish
+    document.querySelectorAll('.lang-txt').forEach(el => {
+        const key = el.getAttribute('data-key');
+        if (langData[key]) {
+            el.innerText = langData[key];
         }
+    });
+
+    // Pastki menyuni ID orqali o'zgartirish
+    if(document.getElementById('navHomeTxt')) document.getElementById('navHomeTxt').innerText = langData['nav_home'];
+    if(document.getElementById('navDuelTxt')) document.getElementById('navDuelTxt').innerText = langData['nav_duel'];
+}
+
+// 3. Tilni tanlash funksiyasi (Bosilganda ishlaydigan joyi)
+function changeLang2(code, label, flagUrl) {
+    // UI ni yangilash (Bayroq va yozuv)
+    const selLang2 = document.getElementById('selected-lang2');
+    const selFlag2 = document.getElementById('selected-flag2');
+    
+    if(selLang2) selLang2.innerText = label;
+    if(selFlag2) selFlag2.src = flagUrl;
+    
+    // Matnlarni almashtirish
+    applyTranslations2(code);
+
+    // Tanlovni saqlash
+    localStorage.setItem('selectedLanguage', code);
+
+    // Dropdownni yopish
+    const dropdown = document.getElementById('lang-dropdown2');
+    if(dropdown) dropdown.style.display = 'none';
+}
+
+// 4. Sahifa yuklanganda saqlangan tilni yoqish
+window.addEventListener('DOMContentLoaded', () => {
+    const savedLang = localStorage.getItem('selectedLanguage') || 'uz';
+    // Sahifa ochilganda avtomatik tarjima qilish
+    applyTranslations2(savedLang);
+});
+
+
+
+
+    window.addEventListener('DOMContentLoaded', () => {
+    const savedLang = localStorage.getItem('selectedLanguage') || 'uz';
+    
+    // Duel matnlarini tarjima qiladi
+    applyTranslations2(savedLang);
+    
+    // DUEL SELEKTORINI (bayroq va yozuvni) to'g'rilash
+    const flagMap = {
+        'uz': 'https://flagcdn.com/w40/uz.png',
+        'ru': 'https://flagcdn.com/w40/ru.png',
+        'en': 'https://flagcdn.com/w40/us.png'
+    };
+
+    const selLang2 = document.getElementById('selected-lang2');
+    const selFlag2 = document.getElementById('selected-flag2');
+    
+    if (selLang2) selLang2.innerText = savedLang.toUpperCase();
+    if (selFlag2) selFlag2.src = flagMap[savedLang];
+});
+
+
+
+
+
+    // Boshqa oynada til o'zgarganda Duel oynasi ham o'zini yangilaydi
+window.addEventListener('storage', (event) => {
+    if (event.key === 'selectedLanguage') {
+        const newLang = event.newValue || 'uz';
+        
+        // 1. Duel matnlarini tarjima qilish
+        applyTranslations2(newLang);
+        
+        // 2. Duel selektorini (2-raqamlilar) yangilash
+        const flagMap = {
+            'uz': 'https://flagcdn.com/w40/uz.png',
+            'ru': 'https://flagcdn.com/w40/ru.png',
+            'en': 'https://flagcdn.com/w40/us.png'
+        };
+
+        const selLang2 = document.getElementById('selected-lang2');
+        const selFlag2 = document.getElementById('selected-flag2');
+        
+        if (selLang2) selLang2.innerText = newLang.toUpperCase();
+        if (selFlag2) selFlag2.src = flagMap[newLang];
     }
+});
 </script>
 
 
@@ -1452,6 +2328,8 @@ if (this.y >= 44 && this.y <= 46) { // 38 ni 44 ga, 40 ni 46 ga o'zgartirdik
 
 
 
+
+  
 
 <script>
     function toggleDetails() {
@@ -1472,19 +2350,29 @@ if (this.y >= 44 && this.y <= 46) { // 38 ni 44 ga, 40 ni 46 ga o'zgartirdik
         }
     }
 </script>
-
-
-
-
-
-
-  
-
-
+<script>
+    function toggleDetails2() {
+        const info2 = document.getElementById('more-info2');
+        const btnText2 = document.getElementById('btn-text2');
+        const arrow2 = document.getElementById('arrow-icon2');
+        
+        // Agar yopiq bo'lsa ochish, ochiq bo'lsa yopish
+        if (info2.style.display === "none") {
+            info2.style.display = "block";
+            // Tilga qarab matnni o'zgartirish (agar ko'p tilli bo'lsa translations'ga qo'shish mumkin)
+            btnText2.innerText = "Yopish"; 
+            arrow2.style.transform = "rotate(180deg)";
+        } else {
+            info2.style.display = "none";
+            btnText2.innerText = "Batafsil";
+            arrow2.style.transform = "rotate(0deg)";
+        }
+    }
+</script>
 
 <script>
 // --- 1. YANGILANGAN SANOQ (KUN, SOAT, MIN, SON) ---
-const deadline = new Date("2026-01-05T00:00:00").getTime(); 
+const deadline = new Date("2026-01-18T00:00:00").getTime(); 
 
 function updateCountdown() {
     const now = new Date().getTime();
@@ -1581,10 +2469,58 @@ if (container) {
 // Ishga tushirish
 showSlides(slideIndex);
 startBannerTimer();
+
+
+function tabClick(el) {
+    const parent = el.parentElement;
+    parent.querySelectorAll('.mini-tab').forEach(t => t.classList.remove('active'));
+    el.classList.add('active');
+}
+
+function tabClick2(el) {
+    const parent = el.parentElement;
+    parent.querySelectorAll('.mini-tab2').forEach(t => t.classList.remove('active2'));
+    el.classList.add('active2');
+}
+
+
+  
+  function toggleVipList() {
+    const extraRows = document.querySelector('.extra-rows');
+    const btn = document.getElementById('toggleBtn');
+
+    if (extraRows.style.display === "none") {
+        extraRows.style.display = "block";
+        btn.innerHTML = "...QISQARTIRISH";
+    } else {
+        extraRows.style.display = "none";
+        btn.innerHTML = "...BARCHASI";
+    }
+}
+
+    function toggleVipList2() {
+    const extraRows2 = document.querySelector('.extra-rows2');
+    const btn = document.getElementById('toggleBtn2');
+
+    if (extraRows2.style.display === "none") {
+        extraRows2.style.display = "block";
+        btn.innerHTML = "...QISQARTIRISH";
+    } else {
+        extraRows2.style.display = "none";
+        btn.innerHTML = "...BARCHASI";
+    }
+}
 </script>
 
 
 
+
+
+
+
+
+
+  
   
 </body>
   </html>
