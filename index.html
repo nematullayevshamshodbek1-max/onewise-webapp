@@ -1014,6 +1014,53 @@ filter: brightness(1.1);
 
   opacity: .95;
 }
+  /* Sizning eski CSS kodingiz o'zgarishsiz qoladi, faqat pastdagilar qo'shiladi */
+
+.duel-content2 {
+    position: absolute;
+    left: 20px;
+    top: 15px;
+    color: white;
+    text-align: left;
+    font-family: sans-serif;
+    pointer-events: none; /* Tugmani bosishga xalaqit bermasligi uchun */
+}
+
+.reward-title {
+    font-size: 14px;
+    font-weight: 500;
+    opacity: 0.9;
+}
+
+.rank-info {
+    font-size: 20px;
+    font-weight: bold;
+    margin: 5px 0;
+}
+
+.rank-info span {
+    font-size: 24px;
+}
+
+.description {
+    font-size: 12px;
+    line-height: 1.4;
+    opacity: 0.8;
+    margin-bottom: 10px;
+}
+
+.timer-box {
+    font-size: 14px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+#countdown {
+    font-family: monospace;
+    font-size: 16px;
+}
 
 
 
@@ -1923,6 +1970,17 @@ filter: brightness(1.1);
 
 <div class="duel-container2">
     <img src="https://i.postimg.cc/1X7nTD3s/reword.jpg" alt="Duel Background" class="duel-bg-img2"> 
+    
+    <div class="duel-content2">
+        <div class="reward-title">🏆 Bugungi mukofot</div>
+        <div class="rank-info">1-o'rin — <br><span>2 000 000 so'm</span></div>
+        <p class="description">Kunlik 1-o'rinni oling va <br>2 000 000 so'm mukofotini yutib oling!</p>
+        
+        <div class="timer-box">
+            <span class="clock-icon">🕒</span> Qolgan vaqt: <span id="countdown">09:29:17</span>
+        </div>
+    </div>
+
     <button class="duel-start-btn2" onclick="startDuel()">BOSHLASH</button>
 </div>
 
@@ -2637,6 +2695,44 @@ function tabClick2(el) {
         btn.innerHTML = "...BARCHASI";
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  function startTimer(duration, display) {
+    var timer = duration, hours, minutes, seconds;
+    setInterval(function () {
+        hours = parseInt(timer / 3600, 10);
+        minutes = parseInt((timer % 3600) / 60, 10);
+        seconds = parseInt(timer % 60, 10);
+
+        hours = hours < 10 ? "0" + hours : hours;
+        minutes = minutes < 10 ? "0" + minutes : minutes;
+        seconds = seconds < 10 ? "0" + seconds : seconds;
+
+        display.textContent = hours + ":" + minutes + ":" + seconds;
+
+        if (--timer < 0) {
+            timer = 0;
+        }
+    }, 1000);
+}
+
+window.onload = function () {
+    var nineHours = 9 * 3600 + 29 * 60 + 17; // Rasmdagi vaqt (9:29:17)
+    var display = document.querySelector('#countdown');
+    startTimer(nineHours, display);
+};
 </script>
 
 
