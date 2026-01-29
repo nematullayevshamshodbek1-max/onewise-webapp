@@ -1383,6 +1383,98 @@ filter: brightness(1.1);
     #supportBtn3:active {
        opacity: .95;
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+  .support-container {
+    width: 100%;
+    max-width: 450px; /* Mobil kenglik */
+}
+
+.support {
+    margin-bottom: 20px;
+    font-size: 24px;
+    font-weight: 600;
+    color: #1a1a1a;
+}
+
+.grid-row {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.support-card {
+    background-color: #f1f3f5; /* Kartochka foni */
+    border-radius: 15px;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-decoration: none;
+    color: inherit;
+    transition: 0.3s;
+}
+
+.support-card:hover {
+    background-color: #e9ecef;
+}
+
+.half {
+    flex: 1;
+    flex-direction: column;
+    align-items: flex-start;
+    position: relative;
+}
+
+.full {
+    margin-bottom: 15px;
+}
+
+.label {
+    font-size: 13px;
+    color: #6c757d;
+    display: block;
+    margin-bottom: 8px;
+}
+
+.main-text {
+    font-size: 15px;
+    color: #1a1a1a;
+    line-height: 1.4;
+}
+
+.icon-box {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 18px;
+}
+
+/* Ranglar */
+.blue-bg { background-color: #007bff; }
+.telegram-bg { background-color: #0088cc; }
+
+/* Mobil qurilmalarda ixtiyoriy ikonka joylashuvi */
+.half .icon-box {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
 </style>
 
 
@@ -2392,9 +2484,61 @@ filter: brightness(1.1);
 
 
       
-      <div id="screenSupport" class="screen hidden"><div class="card"><div class="h1">Support</div><p class="p">Keyin operator / chat ulaymiz.</p></div></div>
+      <div id="screenSupport" class="screen hidden">
+      <div class="support-container">
+    <h2 class="support">Поддержка 24/7</h2>
+
+    <div class="grid-row">
+        <div class="support-card half">
+            <div class="card-content">
+                <span class="label">Онлайн чат</span>
+                <p class="main-text">Ответ <br> <strong>в течение 2 мин.</strong></p>
+            </div>
+            <div class="icon-box blue-bg">
+                <i class="fa-solid fa-comment"></i>
+            </div>
+        </div>
+
+        <div class="support-card half">
+            <div class="card-content">
+                <span class="label">Telegram</span>
+                <p class="main-text"><strong>@FAQ_1win_bot</strong></p>
+            </div>
+            <div class="icon-box telegram-bg">
+                <i class="fa-brands fa-telegram"></i>
+            </div>
+        </div>
     </div>
-  </div>
+
+    <div class="support-card full">
+        <div class="card-content">
+            <span class="label">Для звонков по миру</span>
+            <p class="main-text"><strong>+7 (495) 088 88-99</strong></p>
+        </div>
+        <div class="icon-box blue-bg">
+            <i class="fa-solid fa-phone"></i>
+        </div>
+    </div>
+
+    <div class="support-card full">
+        <div class="card-content">
+            <span class="label">Техническая поддержка</span>
+            <p class="main-text"><strong>support@1win.social</strong></p>
+        </div>
+    </div>
+
+    <div class="support-card full">
+        <div class="card-content">
+            <span class="label">Служба безопасности</span>
+            <p class="main-text"><strong>security@1win.social</strong></p>
+        </div>
+    </div>
+</div>
+
+
+        
+      </div>
+
 
 <div class="bottomNav" id="bottomNav">
   <div class="navBar">
